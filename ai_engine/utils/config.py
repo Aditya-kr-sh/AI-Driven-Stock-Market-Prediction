@@ -4,6 +4,7 @@ from typing import List
 import torch
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
+from ai_engine.data.tickers import NIFTY_50_TICKERS
 
 # Base Directory of the workspace (stockproject/)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -39,6 +40,16 @@ class Settings(BaseSettings):
         default=f"sqlite:///{BASE_DIR}/stock_market.db",
         description="SQLAlchemy database URI (SQLite default, PostgreSQL compatible)"
     )
+    
+    # Raw and processed data storage folders
+    DATA_RAW_DIR: Path = BASE_DIR / "data" / "raw"
+    DATA_PROCESSED_DIR: Path = BASE_DIR / "data" / "processed"
+
+    # =========================================================================
+    # Storage Format Options
+    # =========================================================================
+    # Supports "csv" or "parquet"
+    STORAGE_FORMAT: str = Field(default="csv", description="File storage format (csv or parquet)")
 
     # =========================================================================
     # Reproducibility
@@ -57,13 +68,10 @@ class Settings(BaseSettings):
     # =========================================================================
     # Yahoo Finance & Data Settings
     # =========================================================================
+    # Imports list of all 50 tickers directly from the tickers module
     TICKERS: List[str] = Field(
-        default=[
-            "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "INFY.NS",
-            "BHARTIAIRTEL.NS", "ITC.NS", "SBIN.NS", "LT.NS", "HINDUNILVR.NS",
-            "TATAMOTORS.NS", "AXISBANK.NS", "KOTAKBANK.NS", "SUNPHARMA.NS", "NTPC.NS"
-        ],
-        description="Representative NIFTY 50 stock tickers"
+        default=NIFTY_50_TICKERS,
+        description="Centralized NIFTY 50 stock tickers list"
     )
     DEFAULT_START_DATE: str = Field(default="2018-01-01", description="yfinance start date")
     DEFAULT_END_DATE: str = Field(default="2026-01-01", description="yfinance end date")
