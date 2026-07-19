@@ -12,6 +12,7 @@ from datetime import datetime
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from ai_engine.data import DataLoader, DataStorage, NIFTY_50_TICKERS
+from ai_engine.utils.config import settings
 from ai_engine.utils.logging import logger
 
 def format_bytes(size_bytes: int) -> str:
@@ -60,8 +61,8 @@ def run_download_pipeline():
             
     print("\nProcessing complete. Gathering storage statistics...")
     
-    # Compute folder size
-    raw_dir = Path("d:/stockproject/data/raw")
+    # Compute folder size using Storage directory settings
+    raw_dir = storage.raw_dir
     total_size_bytes = sum(f.stat().st_size for f in raw_dir.glob("*") if f.is_file())
     formatted_size = format_bytes(total_size_bytes)
     
@@ -99,7 +100,7 @@ Successful Tickers  : {', '.join(successful[:10])}... (and {max(0, len(successfu
     print(summary_report)
     
     # Write report to docs folder for tracking
-    report_path = Path("d:/stockproject/docs/ingestion_report.txt")
+    report_path = settings.BASE_PATH / "docs" / "ingestion_report.txt"
     try:
         report_path.parent.mkdir(parents=True, exist_ok=True)
         with open(report_path, "w", encoding="utf-8") as f:

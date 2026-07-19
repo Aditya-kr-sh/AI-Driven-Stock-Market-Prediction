@@ -192,7 +192,10 @@ class DataLoader:
                 if df is None or df.empty:
                     attempts += 1
                     last_error_msg = "yfinance returned an empty DataFrame (invalid ticker or missing data)."
-                    logger.warning(f"Download attempt {attempts}/{self.retry_limit} failed for {ticker}: {last_error_msg}")
+                    logger.warning(
+                        f"Download attempt {attempts}/{self.retry_limit} failed for ticker '{ticker}' "
+                        f"at timestamp {datetime.utcnow().isoformat()}Z. Exception: {last_error_msg}"
+                    )
                     if attempts < self.retry_limit:
                         time.sleep(self.retry_delay * attempts)
                     continue
@@ -209,7 +212,10 @@ class DataLoader:
             except Exception as e:
                 attempts += 1
                 last_error_msg = str(e)
-                logger.warning(f"Download attempt {attempts}/{self.retry_limit} encountered error for {ticker}: {e}")
+                logger.warning(
+                    f"Download attempt {attempts}/{self.retry_limit} failed for ticker '{ticker}' "
+                    f"at timestamp {datetime.utcnow().isoformat()}Z. Exception: {last_error_msg}"
+                )
                 if attempts < self.retry_limit:
                     time.sleep(self.retry_delay * attempts)
 

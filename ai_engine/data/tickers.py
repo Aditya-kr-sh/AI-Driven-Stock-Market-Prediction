@@ -37,6 +37,8 @@ NIFTY_50_TICKERS: List[str] = [
     "JSWSTEEL.NS",
     "KOTAKBANK.NS",
     "LT.NS",
+    # LTIMindtree transitioned its stock ticker from 'LTIM' to 'LTM' (effective Feb 27, 2026)
+    # to align with its unified brand transition.
     "LTM.NS",
     "M&M.NS",
     "MARUTI.NS",
@@ -49,6 +51,8 @@ NIFTY_50_TICKERS: List[str] = [
     "SBIN.NS",
     "SUNPHARMA.NS",
     "TATACONSUM.NS",
+    # Tata Motors restructured its business, listing the passenger vehicle segment
+    # under the trading ticker 'TMCV' on the NSE.
     "TMCV.NS",
     "TATASTEEL.NS",
     "TCS.NS",
