@@ -28,6 +28,32 @@ class DataLoader:
         self.retry_limit = retry_limit
         self.retry_delay = retry_delay
 
+    def download_ticker(
+        self,
+        ticker: str,
+        start: Optional[str] = None,
+        end: Optional[str] = None,
+        force_download: bool = False
+    ) -> StockDataset:
+        """
+        Downloads stock data for a single stock.
+        
+        Args:
+            ticker: Yahoo Finance ticker symbol (e.g. 'RELIANCE.NS').
+            start: Start date string.
+            end: End date string.
+            force_download: Bypass cache check and redownload.
+            
+        Returns:
+            StockDataset object.
+        """
+        return self.get_ticker_data(
+            ticker=ticker,
+            start_date=start,
+            end_date=end,
+            force_download=force_download
+        )
+
     def get_ticker_data(
         self,
         ticker: str,
