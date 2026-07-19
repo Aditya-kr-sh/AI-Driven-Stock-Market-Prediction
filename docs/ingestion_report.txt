@@ -1,0 +1,19 @@
+
+=========================================================================
+                    DATA INGESTION PIPELINE REPORT
+=========================================================================
+Execution Date      : 2026-07-19 10:29:41
+Date Range Requested: 2010-01-01 to 2026-07-19
+Storage Directory   : d:\stockproject\data\raw
+File Storage Format : CSV (.csv + .metadata.json)
+
+Ingestion Metrics:
+-----------------
+Total Tickers      : 50
+Successful Downloads: 50 / 50 (100.0%)
+Failed Downloads    : 0 / 50
+Total Records Saved : 194,656 rows
+Raw Cache Directory Size: 17.87 MB
+
+Successful Tickers  : ADANIENT.NS, ADANIPORTS.NS, APOLLOHOSP.NS, ASIANPAINT.NS, AXISBANK.NS, BAJAJ-AUTO.NS, BAJFINANCE.NS, BAJAJFINSV.NS, BEL.NS, BHARTIARTL.NS... (and 40 more)
+=========================================================================
