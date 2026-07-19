@@ -246,3 +246,42 @@ def compute_rolling_volatility(
             out[i] = float(np.std(window) * np.sqrt(trading_days))
 
     return out
+
+
+def compute_obv(close: np.ndarray, volume: np.ndarray) -> np.ndarray:
+    """Calculate On-Balance Volume (OBV) cumulative technical indicator."""
+    n = len(close)
+    out = np.empty(n, dtype=np.float64)
+    if n == 0:
+        return out
+    out[0] = volume[0]
+    for i in range(1, n):
+        if close[i] > close[i - 1]:
+            out[i] = out[i - 1] + volume[i]
+        elif close[i] < close[i - 1]:
+            out[i] = out[i - 1] - volume[i]
+        else:
+            out[i] = out[i - 1]
+    return out
+
+
+def compute_momentum(values: np.ndarray, period: int = 10) -> np.ndarray:
+    """Calculate price Momentum over a given period."""
+    n = len(values)
+    out = np.empty(n, dtype=np.float64)
+    out[:period] = np.nan
+    for i in range(period, n):
+        out[i] = float(values[i] - values[i - period])
+    return out
+
+
+def compute_rolling_std(values: np.ndarray, period: int = 20) -> np.ndarray:
+    """Calculate simple rolling standard deviation."""
+    n = len(values)
+    out = np.empty(n, dtype=np.float64)
+    out[:period - 1] = np.nan
+    for i in range(period - 1, n):
+        window = values[i - period + 1 : i + 1]
+        out[i] = float(np.std(window))
+    return out
+

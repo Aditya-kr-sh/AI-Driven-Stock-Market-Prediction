@@ -1,17 +1,20 @@
 """
-Ingestion script to download, validate, and cache historical stock data for all NIFTY 50 tickers.
-Saves datasets in CSV format under data/raw/ and generates a summary execution report.
+Ingestion script to download, validate, and cache historical stock data for market registries.
+Saves datasets in CSV format under data/stocks/ and generates download_report.csv.
 """
 
 import sys
 import os
+import argparse
 from pathlib import Path
 from datetime import datetime
+import pandas as pd
 
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from ai_engine.data import DataLoader, DataStorage, NIFTY_50_TICKERS
+from ai_engine.data import DataLoader, DataStorage
+from ai_engine.data.tickers import load_registry
 from ai_engine.utils.config import settings
 from ai_engine.utils.logging import logger
 
@@ -24,90 +27,135 @@ def format_bytes(size_bytes: int) -> str:
     return f"{size_bytes:.2f} TB"
 
 def run_download_pipeline():
-    logger.info("Initializing historical NIFTY 50 data download pipeline...")
+    parser = argparse.ArgumentParser(description="Multi-Market Stock Index Downloader & Preprocessing Ingestion Pipeline")
+    parser.add_argument(
+        "--index",
+        type=str,
+        default="nifty50",
+        help="Target index name (nifty50, nifty100, nifty200, nifty500, sp500, nasdaq100, dowjones30) or path to custom JSON file."
+    )
+    parser.add_argument(
+        "--start",
+        type=str,
+        default="2015-01-01",
+        help="Start date for historical stock prices (YYYY-MM-DD)."
+    )
+    parser.add_argument(
+        "--end",
+        type=str,
+        default=datetime.now().strftime("%Y-%m-%d"),
+        help="End date for historical stock prices (YYYY-MM-DD)."
+    )
+    parser.add_argument(
+        "--interval",
+        type=str,
+        default="1d",
+        choices=["1d", "1h", "30m", "15m", "5m", "1m"],
+        help="yFinance frequency interval settings."
+    )
     
-    # 1. Define bounds
-    start_date = "2010-01-01"
-    end_date = datetime.now().strftime("%Y-%m-%d")
+    args = parser.parse_args()
     
-    logger.info(f"Target date range: {start_date} to {end_date}")
+    logger.info("Initializing multi-index data ingestion pipeline...")
+    logger.info(f"Configuration: Index={args.index} | Range={args.start} to {args.end} | Interval={args.interval}")
     
+    # 1. Load constituents registry
+    try:
+        tickers = load_registry(args.index)
+        logger.info(f"Loaded registry. Constituent count: {len(tickers)}")
+    except Exception as e:
+        logger.error(f"Failed to load registry: {e}")
+        sys.exit(1)
+        
     # Force storage format to CSV for raw data
     storage = DataStorage(file_format="csv")
-    loader = DataLoader(storage=storage)
+    loader = DataLoader(storage=storage, index_name=args.index)
     
     successful = []
     failed = {}
+    report_rows = []
     total_rows = 0
 
-    logger.info(f"Preparing download for {len(NIFTY_50_TICKERS)} tickers...")
-    
-    # Download sequential loop to capture granular metrics for the summary report
-    for i, ticker in enumerate(NIFTY_50_TICKERS, start=1):
-        print(f"[{i}/{len(NIFTY_50_TICKERS)}] Processing {ticker}...", end="\r")
+    # Download constituent loop
+    for i, ticker in enumerate(tickers, start=1):
+        print(f"[{i}/{len(tickers)}] Querying {ticker}...", end="\r")
         try:
-            # get_ticker_data handles cache hits internally
             dataset = loader.get_ticker_data(
                 ticker=ticker,
-                start_date=start_date,
-                end_date=end_date,
-                force_download=False
+                start_date=args.start,
+                end_date=args.end,
+                force_download=True,
+                interval=args.interval
             )
+            
+            # Count missing values
+            df = dataset.df
+            missing_cells = df.isnull().sum().sum()
+            row_count = len(df)
+            
             successful.append(ticker)
-            total_rows += len(dataset)
+            total_rows += row_count
+            
+            report_rows.append({
+                "Ticker": ticker,
+                "Downloaded Rows": row_count,
+                "Missing Values": missing_cells,
+                "Status": "SUCCESS"
+            })
         except Exception as e:
             failed[ticker] = str(e)
-            logger.error(f"Failed to process {ticker}: {e}")
+            logger.error(f"Failed to ingest symbol '{ticker}': {e}")
+            report_rows.append({
+                "Ticker": ticker,
+                "Downloaded Rows": 0,
+                "Missing Values": 0,
+                "Status": f"FAILED ({str(e)})"
+            })
             
-    print("\nProcessing complete. Gathering storage statistics...")
+    print("\nData loading complete. Writing download reports...")
     
-    # Compute folder size using Storage directory settings
+    # Write download_report.csv
+    report_df = pd.DataFrame(report_rows)
+    report_csv_path = settings.BASE_PATH / "download_report.csv"
+    report_df.to_csv(report_csv_path, index=False)
+    logger.info(f"Saved tabular download report to: {report_csv_path.absolute()}")
+    
+    # Compute folder size of storage directory
     raw_dir = storage.raw_dir
-    total_size_bytes = sum(f.stat().st_size for f in raw_dir.glob("*") if f.is_file())
+    total_size_bytes = sum(f.stat().st_size for f in raw_dir.glob("*.csv") if f.is_file())
     formatted_size = format_bytes(total_size_bytes)
     
-    # =========================================================================
-    # SUMMARY REPORT
-    # =========================================================================
+    # Write detailed txt execution report
     summary_report = f"""
 =========================================================================
-                    DATA INGESTION PIPELINE REPORT
+                    DATA INGESTION PIPELINE SUMMARY
 =========================================================================
-Execution Date      : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-Date Range Requested: {start_date} to {end_date}
+Execution Timestamp : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+Index Target        : {args.index}
+Date Range Query    : {args.start} to {args.end} (Interval: {args.interval})
 Storage Directory   : {raw_dir.absolute()}
-File Storage Format : CSV (.csv + .metadata.json)
 
 Ingestion Metrics:
 -----------------
-Total Tickers      : {len(NIFTY_50_TICKERS)}
-Successful Downloads: {len(successful)} / {len(NIFTY_50_TICKERS)} ({len(successful)/len(NIFTY_50_TICKERS)*100:.1f}%)
-Failed Downloads    : {len(failed)} / {len(NIFTY_50_TICKERS)}
-Total Records Saved : {total_rows:,} rows
-Raw Cache Directory Size: {formatted_size}
-
-Successful Tickers  : {', '.join(successful[:10])}... (and {max(0, len(successful)-10)} more)
+Total Tickers Checked : {len(tickers)}
+Successful Downloads  : {len(successful)} / {len(tickers)} ({len(successful)/len(tickers)*100:.1f}%)
+Failed Downloads      : {len(failed)} / {len(tickers)}
+Total Records Saved   : {total_rows:,} rows
+Raw Cache Folder Size : {formatted_size}
+Report Location       : {report_csv_path}
+=========================================================================
 """
-    
-    if failed:
-        summary_report += "\nFailed Tickers & Root Cause:\n"
-        for ticker, error in failed.items():
-            summary_report += f"- {ticker}: {error}\n"
-            
-    summary_report += "========================================================================="
-    
-    # Output report to console
     print(summary_report)
     
-    # Write report to docs folder for tracking
-    report_path = settings.BASE_PATH / "docs" / "ingestion_report.txt"
+    # Write summary txt report to docs folder
+    summary_txt_path = settings.BASE_PATH / "docs" / "ingestion_report.txt"
     try:
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(report_path, "w", encoding="utf-8") as f:
+        summary_txt_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(summary_txt_path, "w", encoding="utf-8") as f:
             f.write(summary_report)
-        logger.info(f"Pipeline report saved to: {report_path}")
+        logger.info(f"Saved summary execution report to: {summary_txt_path.absolute()}")
     except Exception as e:
-        logger.error(f"Failed to save pipeline report: {e}")
+        logger.error(f"Failed to save text summary report: {e}")
 
 if __name__ == "__main__":
     run_download_pipeline()

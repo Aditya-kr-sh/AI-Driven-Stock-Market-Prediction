@@ -10,7 +10,7 @@ import pandas as pd
 import yfinance as yf
 from tqdm import tqdm
 from ai_engine.utils.logging import logger
-from ai_engine.data.tickers import is_valid_nifty_50_ticker
+from ai_engine.data.tickers import load_registry
 from ai_engine.data.cleaner import DataCleaner
 from ai_engine.data.storage import DataStorage
 from ai_engine.data.dataset import StockDataset
@@ -22,10 +22,17 @@ class DataLoader:
     data from yfinance with retries, and coordinates cleaning and storing.
     """
 
-    def __init__(self, storage: Optional[DataStorage] = None, retry_limit: int = 3, retry_delay: float = 2.0):
+    def __init__(
+        self,
+        storage: Optional[DataStorage] = None,
+        retry_limit: int = 3,
+        retry_delay: float = 2.0,
+        index_name: str = "nifty50"
+    ):
         self.storage = storage or DataStorage()
         self.retry_limit = retry_limit
         self.retry_delay = retry_delay
+        self.index_name = index_name
         
         # Lazy import to break circular dependency at startup
         from ai_engine.utils.config import settings
@@ -36,7 +43,8 @@ class DataLoader:
         ticker: str,
         start: Optional[str] = None,
         end: Optional[str] = None,
-        force_download: bool = False
+        force_download: bool = False,
+        interval: str = "1d"
     ) -> StockDataset:
         """
         Downloads stock data for a single stock.
@@ -46,6 +54,7 @@ class DataLoader:
             start: Start date string.
             end: End date string.
             force_download: Bypass cache check and redownload.
+            interval: Data frequency interval (e.g. '1d', '1h', '30m', '15m', '5m', '1m').
             
         Returns:
             StockDataset object.
@@ -54,7 +63,8 @@ class DataLoader:
             ticker=ticker,
             start_date=start,
             end_date=end,
-            force_download=force_download
+            force_download=force_download,
+            interval=interval
         )
 
     def get_ticker_data(
@@ -62,7 +72,8 @@ class DataLoader:
         ticker: str,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-        force_download: bool = False
+        force_download: bool = False,
+        interval: str = "1d"
     ) -> StockDataset:
         """
         Retrieves historical stock data for a given ticker.
@@ -73,6 +84,7 @@ class DataLoader:
             start_date: Start date string (YYYY-MM-DD), defaults to settings default.
             end_date: End date string (YYYY-MM-DD), defaults to settings default.
             force_download: If True, bypasses cache and downloads a fresh copy.
+            interval: Data frequency interval (e.g. '1d', '1h', '30m', '15m', '5m', '1m').
             
         Returns:
             A populated StockDataset object.
@@ -85,9 +97,15 @@ class DataLoader:
         start = start_date or self.settings.DEFAULT_START_DATE
         end = end_date or self.settings.DEFAULT_END_DATE
 
-        # Log warning if ticker is not in central NIFTY 50 list
-        if not is_valid_nifty_50_ticker(ticker):
-            logger.warning(f"Ticker '{ticker}' is not present in the centralized NIFTY 50 tickers list.")
+        # Validate index registry inclusion dynamically
+        try:
+            valid_tickers = load_registry(self.index_name)
+            clean_t = ticker.split(".")[0]
+            clean_registry = [vt.split(".")[0] for vt in valid_tickers]
+            if ticker not in valid_tickers and clean_t not in clean_registry:
+                logger.warning(f"Ticker '{ticker}' is not present in the index registry '{self.index_name}'.")
+        except Exception as e:
+            logger.warning(f"Could not check registry '{self.index_name}': {e}")
 
         # Validate date formats
         try:
@@ -106,9 +124,10 @@ class DataLoader:
                 metadata = self.storage.load_raw_metadata(ticker)
                 cached_start_dt = pd.to_datetime(metadata["start_date"])
                 cached_end_dt = pd.to_datetime(metadata["end_date"])
+                cached_interval = metadata.get("interval", "1d")
                 
-                # Check if the cached dataset covers the requested range
-                if req_start_dt >= cached_start_dt and req_end_dt <= cached_end_dt:
+                # Check if the cached dataset covers the requested range and matches the frequency interval
+                if req_start_dt >= cached_start_dt and req_end_dt <= cached_end_dt and cached_interval == interval:
                     logger.info(f"Cache Hit for {ticker}. Loading local dataset.")
                     df = self.storage.load_raw(ticker)
                     
@@ -120,20 +139,19 @@ class DataLoader:
                     else:
                         logger.warning(f"Cached data exists but filtering to [{start} : {end}] returned empty. Forcing redownload.")
                 else:
-                    logger.info(f"Cache Miss for {ticker}: requested range [{start} to {end}] exceeds cached range [{metadata['start_date']} to {metadata['end_date']}]. Fetching fresh data.")
+                    logger.info(f"Cache Miss for {ticker}. Fetching fresh data.")
             except Exception as e:
                 logger.error(f"Error checking cache for {ticker}: {e}. Falling back to download.")
 
         # 2. Download from Yahoo Finance with retries
-        logger.info(f"Downloading data for {ticker} from Yahoo Finance. Range: {start} to {end}")
-        df = self._download_with_retry(ticker, start, end)
+        logger.info(f"Downloading data for {ticker} from Yahoo Finance (Interval: {interval}). Range: {start} to {end}")
+        df = self._download_with_retry(ticker, start, end, interval)
 
         # 3. Clean and Validate
         cleaned_df = DataCleaner.clean_dataframe(df)
 
         # 4. Save to Storage
-        # Note: Save the full downloaded range to cache. Update dates in metadata.
-        self.storage.save_raw(cleaned_df, ticker, start, end)
+        self.storage.save_raw(cleaned_df, ticker, start, end, interval)
         metadata = self.storage.load_raw_metadata(ticker)
 
         return StockDataset(ticker, cleaned_df, metadata)
@@ -143,38 +161,82 @@ class DataLoader:
         tickers: List[str],
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-        force_download: bool = False
+        force_download: bool = False,
+        interval: str = "1d"
     ) -> Dict[str, StockDataset]:
         """
-        Downloads or retrieves cache data for multiple tickers sequentially.
-        Displays terminal progress bars using tqdm.
+        Downloads or retrieves cache data for multiple tickers in parallel where available.
         
         Args:
             tickers: List of stock ticker symbols.
             start_date: Start date string.
             end_date: End date string.
             force_download: Force downloading even if cached locally.
+            interval: Data frequency interval.
             
         Returns:
             Dict mapping ticker symbols to StockDataset objects.
         """
         results: Dict[str, StockDataset] = {}
-        logger.info(f"Starting batch data load for {len(tickers)} tickers.")
+        logger.info(f"Starting batch data load for {len(tickers)} tickers (Interval: {interval}).")
         
-        for ticker in tqdm(tickers, desc="Loading Stock Datasets", unit="ticker"):
-            try:
-                results[ticker] = self.get_ticker_data(
-                    ticker=ticker,
-                    start_date=start_date,
-                    end_date=end_date,
-                    force_download=force_download
-                )
-            except Exception as e:
-                logger.error(f"Failed to load dataset for ticker '{ticker}': {e}")
-                
+        # Segment tickers to run parallel cache loading separately from sequential downloads
+        cached_tickers = []
+        download_tickers = []
+        
+        if not force_download:
+            for ticker in tickers:
+                if self.storage.raw_exists(ticker.strip().upper()):
+                    cached_tickers.append(ticker)
+                else:
+                    download_tickers.append(ticker)
+        else:
+            download_tickers = tickers
+
+        # 1. Load cached files in parallel (using ThreadPoolExecutor)
+        if cached_tickers:
+            logger.info(f"Loading {len(cached_tickers)} cached tickers in parallel...")
+            import concurrent.futures
+            import os
+            max_workers = min(16, os.cpu_count() or 4)
+            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+                future_to_ticker = {
+                    executor.submit(
+                        self.get_ticker_data,
+                        ticker=ticker,
+                        start_date=start_date,
+                        end_date=end_date,
+                        force_download=False,
+                        interval=interval
+                    ): ticker for ticker in cached_tickers
+                }
+                for future in tqdm(concurrent.futures.as_completed(future_to_ticker), total=len(cached_tickers), desc="Loading Cache", unit="ticker"):
+                    ticker = future_to_ticker[future]
+                    try:
+                        results[ticker] = future.result()
+                    except Exception as e:
+                        logger.error(f"Failed loading cache for '{ticker}': {e}")
+                        # Move to download queue as fallback
+                        download_tickers.append(ticker)
+
+        # 2. Download remaining tickers sequentially
+        if download_tickers:
+            logger.info(f"Downloading {len(download_tickers)} tickers sequentially...")
+            for ticker in tqdm(download_tickers, desc="Downloading Tickers", unit="ticker"):
+                try:
+                    results[ticker] = self.get_ticker_data(
+                        ticker=ticker,
+                        start_date=start_date,
+                        end_date=end_date,
+                        force_download=True,
+                        interval=interval
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to load dataset for ticker '{ticker}': {e}")
+                    
         return results
 
-    def _download_with_retry(self, ticker: str, start: str, end: str) -> pd.DataFrame:
+    def _download_with_retry(self, ticker: str, start: str, end: str, interval: str = "1d") -> pd.DataFrame:
         """Downloads data from yfinance implementing exponential backoff retry loops."""
         attempts = 0
         last_error_msg = ""
@@ -186,6 +248,7 @@ class DataLoader:
                     tickers=ticker,
                     start=start,
                     end=end,
+                    interval=interval,
                     progress=False,
                     auto_adjust=False,
                     threads=False

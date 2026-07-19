@@ -138,11 +138,12 @@ class XGBoostPredictor(BasePredictor):
             with open(scaler_path, "rb") as f:
                 self.scaler = pickle.load(f)
                 
-        # 3. Load metadata companion (optional helper attributes check)
+        # 3. Load companion metadata
         meta_path = filepath + ".metadata.json"
         if os.path.exists(meta_path):
             with open(meta_path, "r", encoding="utf-8") as f:
                 metadata = json.load(f)
+                self.hyperparameters = metadata.get("hyperparameters", {})
                 self.feature_order = metadata.get("features")
                 self.target_col = metadata.get("target_column")
                 self.seq_length = metadata.get("sequence_length", 1)

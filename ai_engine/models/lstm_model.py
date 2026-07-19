@@ -142,10 +142,10 @@ class LSTMPredictor(BasePredictor):
         return preds.cpu().numpy()
 
     def save(self, filepath: str) -> None:
-        """Saves model weights, fitted scaler, and companion metadata."""
+        """Serializes weights, scaler, and metadata configuration to files."""
         if self.model is None:
-            raise RuntimeError("Cannot save an untrained model.")
-            
+            raise ValueError("Cannot save model: not trained yet.")
+        
         os.makedirs(os.path.dirname(os.path.abspath(filepath)), exist_ok=True)
         
         # 1. Save binary PyTorch weights checkpoint

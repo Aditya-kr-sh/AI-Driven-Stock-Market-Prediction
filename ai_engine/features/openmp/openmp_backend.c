@@ -3188,6 +3188,9 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_dou
 /* ObjectToMemviewSlice.proto */
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_double(PyObject *, int writable_flag);
 
+/* MemviewDtypeToObject.proto */
+static CYTHON_INLINE PyObject *__pyx_memview_get_double__const__(const char *itemp);
+
 /* RealImag.proto */
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -3614,9 +3617,18 @@ static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED 
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_set_openmp_threads(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_num_threads); /* proto */
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bollinger_bands_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, double __pyx_v_num_std, int __pyx_v_num_threads); /* proto */
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling_volatility_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_returns, int __pyx_v_period, int __pyx_v_trading_days, int __pyx_v_num_threads); /* proto */
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_6compute_atr_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_high, __Pyx_memviewslice __pyx_v_low, __Pyx_memviewslice __pyx_v_close, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_sma_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_ema_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, CYTHON_UNUSED int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_6compute_rsi_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_8compute_macd_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_fast_period, int __pyx_v_slow_period, int __pyx_v_signal_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_10compute_bollinger_bands_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, double __pyx_v_num_std, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_12compute_atr_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_high, __Pyx_memviewslice __pyx_v_low, __Pyx_memviewslice __pyx_v_close, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_14compute_obv_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, __Pyx_memviewslice __pyx_v_volume, CYTHON_UNUSED int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_16compute_momentum_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_18compute_daily_returns_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_20compute_log_returns_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_22compute_rolling_std_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_24compute_rolling_volatility_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_returns, int __pyx_v_period, int __pyx_v_trading_days, int __pyx_v_num_threads); /* proto */
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3670,8 +3682,8 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_slice[1];
   PyObject *__pyx_tuple[1];
-  PyObject *__pyx_codeobj_tab[4];
-  PyObject *__pyx_string_tab[161];
+  PyObject *__pyx_codeobj_tab[13];
+  PyObject *__pyx_string_tab[224];
   PyObject *__pyx_number_tab[4];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
@@ -3765,115 +3777,178 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_abc __pyx_string_tab[49]
 #define __pyx_n_u_ai_engine_features_openmp_backen __pyx_string_tab[50]
 #define __pyx_n_u_allocate_buffer __pyx_string_tab[51]
-#define __pyx_n_u_annotate __pyx_string_tab[52]
-#define __pyx_n_u_annualize_factor __pyx_string_tab[53]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[54]
-#define __pyx_n_u_atr __pyx_string_tab[55]
-#define __pyx_n_u_atr_arr __pyx_string_tab[56]
-#define __pyx_n_u_atr_val __pyx_string_tab[57]
-#define __pyx_n_u_base __pyx_string_tab[58]
-#define __pyx_n_u_c __pyx_string_tab[59]
-#define __pyx_n_u_class __pyx_string_tab[60]
-#define __pyx_n_u_class_getitem __pyx_string_tab[61]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[62]
-#define __pyx_n_u_close __pyx_string_tab[63]
-#define __pyx_n_u_compute_atr_omp __pyx_string_tab[64]
-#define __pyx_n_u_compute_bollinger_bands_omp __pyx_string_tab[65]
-#define __pyx_n_u_compute_rolling_volatility_omp __pyx_string_tab[66]
-#define __pyx_n_u_contains_nan __pyx_string_tab[67]
-#define __pyx_n_u_count __pyx_string_tab[68]
-#define __pyx_n_u_dict __pyx_string_tab[69]
-#define __pyx_n_u_dtype __pyx_string_tab[70]
-#define __pyx_n_u_dtype_is_object __pyx_string_tab[71]
-#define __pyx_n_u_empty __pyx_string_tab[72]
-#define __pyx_n_u_encode __pyx_string_tab[73]
-#define __pyx_n_u_enumerate __pyx_string_tab[74]
-#define __pyx_n_u_error __pyx_string_tab[75]
-#define __pyx_n_u_flags __pyx_string_tab[76]
-#define __pyx_n_u_float64 __pyx_string_tab[77]
-#define __pyx_n_u_format __pyx_string_tab[78]
-#define __pyx_n_u_fortran __pyx_string_tab[79]
-#define __pyx_n_u_func __pyx_string_tab[80]
-#define __pyx_n_u_getstate __pyx_string_tab[81]
-#define __pyx_n_u_high __pyx_string_tab[82]
-#define __pyx_n_u_i __pyx_string_tab[83]
-#define __pyx_n_u_id __pyx_string_tab[84]
-#define __pyx_n_u_import __pyx_string_tab[85]
-#define __pyx_n_u_index __pyx_string_tab[86]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[87]
-#define __pyx_n_u_items __pyx_string_tab[88]
-#define __pyx_n_u_itemsize __pyx_string_tab[89]
-#define __pyx_n_u_k __pyx_string_tab[90]
-#define __pyx_n_u_low __pyx_string_tab[91]
-#define __pyx_n_u_lower_band __pyx_string_tab[92]
-#define __pyx_n_u_lower_band_arr __pyx_string_tab[93]
-#define __pyx_n_u_main __pyx_string_tab[94]
-#define __pyx_n_u_max_val __pyx_string_tab[95]
-#define __pyx_n_u_mean_val __pyx_string_tab[96]
-#define __pyx_n_u_memview __pyx_string_tab[97]
-#define __pyx_n_u_middle_band __pyx_string_tab[98]
-#define __pyx_n_u_middle_band_arr __pyx_string_tab[99]
-#define __pyx_n_u_mode __pyx_string_tab[100]
-#define __pyx_n_u_module __pyx_string_tab[101]
-#define __pyx_n_u_n __pyx_string_tab[102]
-#define __pyx_n_u_name __pyx_string_tab[103]
-#define __pyx_n_u_name_2 __pyx_string_tab[104]
-#define __pyx_n_u_nan __pyx_string_tab[105]
-#define __pyx_n_u_ndim __pyx_string_tab[106]
-#define __pyx_n_u_new __pyx_string_tab[107]
-#define __pyx_n_u_np __pyx_string_tab[108]
-#define __pyx_n_u_num_std __pyx_string_tab[109]
-#define __pyx_n_u_num_threads __pyx_string_tab[110]
-#define __pyx_n_u_numpy __pyx_string_tab[111]
-#define __pyx_n_u_obj __pyx_string_tab[112]
-#define __pyx_n_u_pack __pyx_string_tab[113]
-#define __pyx_n_u_period __pyx_string_tab[114]
-#define __pyx_n_u_pop __pyx_string_tab[115]
-#define __pyx_n_u_pyx_checksum __pyx_string_tab[116]
-#define __pyx_n_u_pyx_state __pyx_string_tab[117]
-#define __pyx_n_u_pyx_type __pyx_string_tab[118]
-#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[119]
-#define __pyx_n_u_pyx_vtable __pyx_string_tab[120]
-#define __pyx_n_u_qualname __pyx_string_tab[121]
-#define __pyx_n_u_reduce __pyx_string_tab[122]
-#define __pyx_n_u_reduce_cython __pyx_string_tab[123]
-#define __pyx_n_u_reduce_ex __pyx_string_tab[124]
-#define __pyx_n_u_register __pyx_string_tab[125]
-#define __pyx_n_u_returns __pyx_string_tab[126]
-#define __pyx_n_u_set_name __pyx_string_tab[127]
-#define __pyx_n_u_set_openmp_threads __pyx_string_tab[128]
-#define __pyx_n_u_setdefault __pyx_string_tab[129]
-#define __pyx_n_u_setstate __pyx_string_tab[130]
-#define __pyx_n_u_setstate_cython __pyx_string_tab[131]
-#define __pyx_n_u_shape __pyx_string_tab[132]
-#define __pyx_n_u_size __pyx_string_tab[133]
-#define __pyx_n_u_start __pyx_string_tab[134]
-#define __pyx_n_u_std_val __pyx_string_tab[135]
-#define __pyx_n_u_step __pyx_string_tab[136]
-#define __pyx_n_u_stop __pyx_string_tab[137]
-#define __pyx_n_u_struct __pyx_string_tab[138]
-#define __pyx_n_u_test __pyx_string_tab[139]
-#define __pyx_n_u_threads_to_use __pyx_string_tab[140]
-#define __pyx_n_u_tr __pyx_string_tab[141]
-#define __pyx_n_u_tr_arr __pyx_string_tab[142]
-#define __pyx_n_u_tr_sum __pyx_string_tab[143]
-#define __pyx_n_u_trading_days __pyx_string_tab[144]
-#define __pyx_n_u_unpack __pyx_string_tab[145]
-#define __pyx_n_u_update __pyx_string_tab[146]
-#define __pyx_n_u_upper_band __pyx_string_tab[147]
-#define __pyx_n_u_upper_band_arr __pyx_string_tab[148]
-#define __pyx_n_u_val1 __pyx_string_tab[149]
-#define __pyx_n_u_val2 __pyx_string_tab[150]
-#define __pyx_n_u_val3 __pyx_string_tab[151]
-#define __pyx_n_u_values __pyx_string_tab[152]
-#define __pyx_n_u_volatility __pyx_string_tab[153]
-#define __pyx_n_u_volatility_arr __pyx_string_tab[154]
-#define __pyx_n_u_x __pyx_string_tab[155]
-#define __pyx_kp_b_iso88591__7 __pyx_string_tab[156]
-#define __pyx_kp_b_iso88591_aq_6b_as_U_7_A_5_r_1_q_4q_o_7_1 __pyx_string_tab[157]
-#define __pyx_kp_b_iso88591_fAQ_r_q_6_1_U_1_1E_r_A_q_b_as_a __pyx_string_tab[158]
-#define __pyx_kp_b_iso88591_vQa_8r_q_6_1_6b_as_6b_as_U_7_A __pyx_string_tab[159]
-#define __pyx_n_b_O __pyx_string_tab[160]
+#define __pyx_n_u_alpha __pyx_string_tab[52]
+#define __pyx_n_u_alpha_sig __pyx_string_tab[53]
+#define __pyx_n_u_annotate __pyx_string_tab[54]
+#define __pyx_n_u_annualize_factor __pyx_string_tab[55]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[56]
+#define __pyx_n_u_atr __pyx_string_tab[57]
+#define __pyx_n_u_atr_arr __pyx_string_tab[58]
+#define __pyx_n_u_atr_val __pyx_string_tab[59]
+#define __pyx_n_u_avg_gain __pyx_string_tab[60]
+#define __pyx_n_u_avg_loss __pyx_string_tab[61]
+#define __pyx_n_u_base __pyx_string_tab[62]
+#define __pyx_n_u_c __pyx_string_tab[63]
+#define __pyx_n_u_class __pyx_string_tab[64]
+#define __pyx_n_u_class_getitem __pyx_string_tab[65]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[66]
+#define __pyx_n_u_close __pyx_string_tab[67]
+#define __pyx_n_u_compute_atr_omp __pyx_string_tab[68]
+#define __pyx_n_u_compute_bollinger_bands_omp __pyx_string_tab[69]
+#define __pyx_n_u_compute_daily_returns_omp __pyx_string_tab[70]
+#define __pyx_n_u_compute_ema_omp __pyx_string_tab[71]
+#define __pyx_n_u_compute_log_returns_omp __pyx_string_tab[72]
+#define __pyx_n_u_compute_macd_omp __pyx_string_tab[73]
+#define __pyx_n_u_compute_momentum_omp __pyx_string_tab[74]
+#define __pyx_n_u_compute_obv_omp __pyx_string_tab[75]
+#define __pyx_n_u_compute_rolling_std_omp __pyx_string_tab[76]
+#define __pyx_n_u_compute_rolling_volatility_omp __pyx_string_tab[77]
+#define __pyx_n_u_compute_rsi_omp __pyx_string_tab[78]
+#define __pyx_n_u_compute_sma_omp __pyx_string_tab[79]
+#define __pyx_n_u_contains_nan __pyx_string_tab[80]
+#define __pyx_n_u_count __pyx_string_tab[81]
+#define __pyx_n_u_current_ema __pyx_string_tab[82]
+#define __pyx_n_u_current_obv __pyx_string_tab[83]
+#define __pyx_n_u_current_signal __pyx_string_tab[84]
+#define __pyx_n_u_dict __pyx_string_tab[85]
+#define __pyx_n_u_diff __pyx_string_tab[86]
+#define __pyx_n_u_dtype __pyx_string_tab[87]
+#define __pyx_n_u_dtype_is_object __pyx_string_tab[88]
+#define __pyx_n_u_ema __pyx_string_tab[89]
+#define __pyx_n_u_ema_arr __pyx_string_tab[90]
+#define __pyx_n_u_ema_fast __pyx_string_tab[91]
+#define __pyx_n_u_ema_fast_arr __pyx_string_tab[92]
+#define __pyx_n_u_ema_slow __pyx_string_tab[93]
+#define __pyx_n_u_ema_slow_arr __pyx_string_tab[94]
+#define __pyx_n_u_empty __pyx_string_tab[95]
+#define __pyx_n_u_encode __pyx_string_tab[96]
+#define __pyx_n_u_enumerate __pyx_string_tab[97]
+#define __pyx_n_u_error __pyx_string_tab[98]
+#define __pyx_n_u_fast_period __pyx_string_tab[99]
+#define __pyx_n_u_flags __pyx_string_tab[100]
+#define __pyx_n_u_float64 __pyx_string_tab[101]
+#define __pyx_n_u_format __pyx_string_tab[102]
+#define __pyx_n_u_fortran __pyx_string_tab[103]
+#define __pyx_n_u_func __pyx_string_tab[104]
+#define __pyx_n_u_gains __pyx_string_tab[105]
+#define __pyx_n_u_gains_arr __pyx_string_tab[106]
+#define __pyx_n_u_getstate __pyx_string_tab[107]
+#define __pyx_n_u_high __pyx_string_tab[108]
+#define __pyx_n_u_hist __pyx_string_tab[109]
+#define __pyx_n_u_hist_arr __pyx_string_tab[110]
+#define __pyx_n_u_i __pyx_string_tab[111]
+#define __pyx_n_u_id __pyx_string_tab[112]
+#define __pyx_n_u_import __pyx_string_tab[113]
+#define __pyx_n_u_index __pyx_string_tab[114]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[115]
+#define __pyx_n_u_items __pyx_string_tab[116]
+#define __pyx_n_u_itemsize __pyx_string_tab[117]
+#define __pyx_n_u_k __pyx_string_tab[118]
+#define __pyx_n_u_losses __pyx_string_tab[119]
+#define __pyx_n_u_losses_arr __pyx_string_tab[120]
+#define __pyx_n_u_low __pyx_string_tab[121]
+#define __pyx_n_u_lower_band __pyx_string_tab[122]
+#define __pyx_n_u_lower_band_arr __pyx_string_tab[123]
+#define __pyx_n_u_macd_line __pyx_string_tab[124]
+#define __pyx_n_u_macd_line_arr __pyx_string_tab[125]
+#define __pyx_n_u_main __pyx_string_tab[126]
+#define __pyx_n_u_max_val __pyx_string_tab[127]
+#define __pyx_n_u_mean_val __pyx_string_tab[128]
+#define __pyx_n_u_memview __pyx_string_tab[129]
+#define __pyx_n_u_middle_band __pyx_string_tab[130]
+#define __pyx_n_u_middle_band_arr __pyx_string_tab[131]
+#define __pyx_n_u_mode __pyx_string_tab[132]
+#define __pyx_n_u_module __pyx_string_tab[133]
+#define __pyx_n_u_mom __pyx_string_tab[134]
+#define __pyx_n_u_mom_arr __pyx_string_tab[135]
+#define __pyx_n_u_n __pyx_string_tab[136]
+#define __pyx_n_u_name __pyx_string_tab[137]
+#define __pyx_n_u_name_2 __pyx_string_tab[138]
+#define __pyx_n_u_nan __pyx_string_tab[139]
+#define __pyx_n_u_ndim __pyx_string_tab[140]
+#define __pyx_n_u_new __pyx_string_tab[141]
+#define __pyx_n_u_np __pyx_string_tab[142]
+#define __pyx_n_u_num_std __pyx_string_tab[143]
+#define __pyx_n_u_num_threads __pyx_string_tab[144]
+#define __pyx_n_u_numpy __pyx_string_tab[145]
+#define __pyx_n_u_obj __pyx_string_tab[146]
+#define __pyx_n_u_obv __pyx_string_tab[147]
+#define __pyx_n_u_obv_arr __pyx_string_tab[148]
+#define __pyx_n_u_pack __pyx_string_tab[149]
+#define __pyx_n_u_period __pyx_string_tab[150]
+#define __pyx_n_u_pop __pyx_string_tab[151]
+#define __pyx_n_u_pyx_checksum __pyx_string_tab[152]
+#define __pyx_n_u_pyx_state __pyx_string_tab[153]
+#define __pyx_n_u_pyx_type __pyx_string_tab[154]
+#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[155]
+#define __pyx_n_u_pyx_vtable __pyx_string_tab[156]
+#define __pyx_n_u_qualname __pyx_string_tab[157]
+#define __pyx_n_u_reduce __pyx_string_tab[158]
+#define __pyx_n_u_reduce_cython __pyx_string_tab[159]
+#define __pyx_n_u_reduce_ex __pyx_string_tab[160]
+#define __pyx_n_u_register __pyx_string_tab[161]
+#define __pyx_n_u_ret __pyx_string_tab[162]
+#define __pyx_n_u_ret_arr __pyx_string_tab[163]
+#define __pyx_n_u_returns __pyx_string_tab[164]
+#define __pyx_n_u_rsi __pyx_string_tab[165]
+#define __pyx_n_u_rsi_arr __pyx_string_tab[166]
+#define __pyx_n_u_set_name __pyx_string_tab[167]
+#define __pyx_n_u_set_openmp_threads __pyx_string_tab[168]
+#define __pyx_n_u_setdefault __pyx_string_tab[169]
+#define __pyx_n_u_setstate __pyx_string_tab[170]
+#define __pyx_n_u_setstate_cython __pyx_string_tab[171]
+#define __pyx_n_u_shape __pyx_string_tab[172]
+#define __pyx_n_u_signal_line __pyx_string_tab[173]
+#define __pyx_n_u_signal_line_arr __pyx_string_tab[174]
+#define __pyx_n_u_signal_period __pyx_string_tab[175]
+#define __pyx_n_u_size __pyx_string_tab[176]
+#define __pyx_n_u_slow_period __pyx_string_tab[177]
+#define __pyx_n_u_sma __pyx_string_tab[178]
+#define __pyx_n_u_sma_arr __pyx_string_tab[179]
+#define __pyx_n_u_start __pyx_string_tab[180]
+#define __pyx_n_u_start_idx __pyx_string_tab[181]
+#define __pyx_n_u_std __pyx_string_tab[182]
+#define __pyx_n_u_std_arr __pyx_string_tab[183]
+#define __pyx_n_u_std_val __pyx_string_tab[184]
+#define __pyx_n_u_step __pyx_string_tab[185]
+#define __pyx_n_u_stop __pyx_string_tab[186]
+#define __pyx_n_u_struct __pyx_string_tab[187]
+#define __pyx_n_u_sum_gain __pyx_string_tab[188]
+#define __pyx_n_u_sum_loss __pyx_string_tab[189]
+#define __pyx_n_u_sum_macd __pyx_string_tab[190]
+#define __pyx_n_u_sum_val __pyx_string_tab[191]
+#define __pyx_n_u_test __pyx_string_tab[192]
+#define __pyx_n_u_threads_to_use __pyx_string_tab[193]
+#define __pyx_n_u_tr __pyx_string_tab[194]
+#define __pyx_n_u_tr_arr __pyx_string_tab[195]
+#define __pyx_n_u_tr_sum __pyx_string_tab[196]
+#define __pyx_n_u_trading_days __pyx_string_tab[197]
+#define __pyx_n_u_unpack __pyx_string_tab[198]
+#define __pyx_n_u_update __pyx_string_tab[199]
+#define __pyx_n_u_upper_band __pyx_string_tab[200]
+#define __pyx_n_u_upper_band_arr __pyx_string_tab[201]
+#define __pyx_n_u_val1 __pyx_string_tab[202]
+#define __pyx_n_u_val2 __pyx_string_tab[203]
+#define __pyx_n_u_val3 __pyx_string_tab[204]
+#define __pyx_n_u_values __pyx_string_tab[205]
+#define __pyx_n_u_volatility __pyx_string_tab[206]
+#define __pyx_n_u_volatility_arr __pyx_string_tab[207]
+#define __pyx_n_u_volume __pyx_string_tab[208]
+#define __pyx_n_u_x __pyx_string_tab[209]
+#define __pyx_kp_b_iso88591__7 __pyx_string_tab[210]
+#define __pyx_kp_b_iso88591_aq_6b_as_U_7_A_5_r_1_q_4q_o_7_1 __pyx_string_tab[211]
+#define __pyx_kp_b_iso88591_fAQ_r_q_6_1_U_1_1E_r_A_q_b_as_a __pyx_string_tab[212]
+#define __pyx_kp_b_iso88591_fAQ_r_q_6_1_r_1_1E_r_A_q_o_7_1C __pyx_string_tab[213]
+#define __pyx_kp_b_iso88591_fAQ_r_q_6_1_r_1_1E_r_A_q_o_7_1C_2 __pyx_string_tab[214]
+#define __pyx_kp_b_iso88591_fAQ_r_q_6_1_r_A_q_q_V1A_fAQ_U_3 __pyx_string_tab[215]
+#define __pyx_kp_b_iso88591_vQa_6RvQc_r_7r_q_6_1_0_F_A_q_5O __pyx_string_tab[216]
+#define __pyx_kp_b_iso88591_vQa_7r_q_6_1_6b_as_6b_as_U_7_A __pyx_string_tab[217]
+#define __pyx_kp_b_iso88591_vQa_r_q_6_1_U_1_1E_r_1_q_o_7_1H __pyx_string_tab[218]
+#define __pyx_kp_b_iso88591_vQa_r_q_6_1_U_1_1E_r_A_q_1_6_V2 __pyx_string_tab[219]
+#define __pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_Cwb __pyx_string_tab[220]
+#define __pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_o_7 __pyx_string_tab[221]
+#define __pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_o_7_2 __pyx_string_tab[222]
+#define __pyx_n_b_O __pyx_string_tab[223]
 #define __pyx_int_0 __pyx_number_tab[0]
 #define __pyx_int_neg_1 __pyx_number_tab[1]
 #define __pyx_int_1 __pyx_number_tab[2]
@@ -3918,8 +3993,8 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type___pyx_memoryviewslice);
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<161; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<13; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<224; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -3969,8 +4044,8 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_type___pyx_memoryviewslice);
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<161; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<13; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<224; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -19134,22 +19209,2871 @@ static CYTHON_INLINE double __pyx_f_9ai_engine_8features_14openmp_backend_c_vola
 /* "ai_engine/features/openmp/openmp_backend.pyx":71
  * # =========================================================================
  * 
- * def compute_bollinger_bands_omp(             # <<<<<<<<<<<<<<
- *     const double[:] values,
- *     int period,
+ * def compute_sma_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
+ *     cdef int n = values.shape[0]
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_bollinger_bands_omp(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_sma_omp(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_2compute_bollinger_bands_omp, "\n    Parallel Bollinger Bands calculation utilizing OpenMP.\n    Loops are executed in parallel without Python GIL.\n    ");
-static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_3compute_bollinger_bands_omp = {"compute_bollinger_bands_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_bollinger_bands_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_2compute_bollinger_bands_omp};
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_bollinger_bands_omp(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_2compute_sma_omp, "Parallel Simple Moving Average (SMA) calculation using OpenMP.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_3compute_sma_omp = {"compute_sma_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_sma_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_2compute_sma_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_3compute_sma_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_sma_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 71, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 71, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 71, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_sma_omp", 0) < (0)) __PYX_ERR(0, 71, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_sma_omp", 1, 3, 3, i); __PYX_ERR(0, 71, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 71, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 71, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 71, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 71, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_sma_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 71, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_sma_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_2compute_sma_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_sma_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_sma_arr = 0;
+  __Pyx_memviewslice __pyx_v_sma = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_sma_arr;
+  __Pyx_Buffer __pyx_pybuffer_sma_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  long __pyx_t_9;
+  long __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  long __pyx_t_14;
+  double __pyx_t_15;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_sma_omp", 0);
+  __pyx_pybuffer_sma_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_sma_arr.refcount = 0;
+  __pyx_pybuffernd_sma_arr.data = NULL;
+  __pyx_pybuffernd_sma_arr.rcbuffer = &__pyx_pybuffer_sma_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":73
+ * def compute_sma_omp(const double[:] values, int period, int num_threads):
+ *     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] sma_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] sma = sma_arr
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":74
+ *     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] sma_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] sma = sma_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 74, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_sma_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_sma_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_sma_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 74, __pyx_L1_error)
+    } else {__pyx_pybuffernd_sma_arr.diminfo[0].strides = __pyx_pybuffernd_sma_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_sma_arr.diminfo[0].shape = __pyx_pybuffernd_sma_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_sma_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":75
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] sma_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] sma = sma_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_sma_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_v_sma = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":78
+ *     cdef int i
+ * 
+ *     for i in range(period - 1):             # <<<<<<<<<<<<<<
+ *         sma[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_period - 1);
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":79
+ * 
+ *     for i in range(period - 1):
+ *         sma[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n < period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_sma.data + __pyx_t_12 * __pyx_v_sma.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":81
+ *         sma[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return sma_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":82
+ * 
+ *     if n < period:
+ *         return sma_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_sma_arr);
+    __pyx_r = ((PyObject *)__pyx_v_sma_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":81
+ *         sma[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return sma_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":84
+ *         return sma_arr
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         sma[i] = c_mean(values, i - period + 1, i + 1)
+*/
+  __pyx_t_13 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_13) {
+    __pyx_t_11 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_11 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_11;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":85
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         sma[i] = c_mean(values, i - period + 1, i + 1)
+ * 
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = (__pyx_v_period - 1);
+        __pyx_t_11 = __pyx_v_n;
+        {
+            const char *__pyx_parallel_filename = NULL; int __pyx_parallel_lineno = 0, __pyx_parallel_clineno = 0;
+            PyObject *__pyx_parallel_exc_type = NULL, *__pyx_parallel_exc_value = NULL, *__pyx_parallel_exc_tb = NULL;
+            #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+            PyMutex __pyx_parallel_freethreading_mutex = {0};
+            #endif
+            int __pyx_parallel_why;
+            __pyx_parallel_why = 0;
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_14 = (__pyx_t_11 - __pyx_t_9 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_14 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_15) __Pyx_shared_in_cpython_freethreading(__pyx_parallel_freethreading_mutex) private(__pyx_filename, __pyx_lineno, __pyx_clineno) shared(__pyx_parallel_why, __pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    Py_BEGIN_ALLOW_THREADS
+                    #endif /* _OPENMP */
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_14; __pyx_t_10++){
+                        if (__pyx_parallel_why < 2)
+                        {
+                            __pyx_v_i = (int)(__pyx_t_9 + 1 * __pyx_t_10);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":86
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         sma[i] = c_mean(values, i - period + 1, i + 1)             # <<<<<<<<<<<<<<
+ * 
+ *     return sma_arr
+*/
+                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_mean(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1)); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 86, __pyx_L11_error)
+                            __pyx_t_12 = __pyx_v_i;
+                            *((double *) ( /* dim=0 */ (__pyx_v_sma.data + __pyx_t_12 * __pyx_v_sma.strides[0]) )) = __pyx_t_15;
+                            goto __pyx_L14;
+                            __pyx_L11_error:;
+                            {
+                                PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                                #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                                PyMutex_Lock(&__pyx_parallel_freethreading_mutex);
+                                #endif
+                                #ifdef _OPENMP
+                                #pragma omp flush(__pyx_parallel_exc_type)
+                                #endif /* _OPENMP */
+                                if (!__pyx_parallel_exc_type) {
+                                  __Pyx_ErrFetchWithState(&__pyx_parallel_exc_type, &__pyx_parallel_exc_value, &__pyx_parallel_exc_tb);
+                                  __pyx_parallel_filename = __pyx_filename; __pyx_parallel_lineno = __pyx_lineno; __pyx_parallel_clineno = __pyx_clineno;
+                                  __Pyx_GOTREF(__pyx_parallel_exc_type);
+                                }
+                                #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                                PyMutex_Unlock(&__pyx_parallel_freethreading_mutex);
+                                #endif
+                                __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                            }
+                            __pyx_parallel_why = 4;
+                            goto __pyx_L14;
+                            __pyx_L14:;
+                            #ifdef _OPENMP
+                            #pragma omp flush(__pyx_parallel_why)
+                            #endif /* _OPENMP */
+                        }
+                    }
+                    #ifdef _OPENMP
+                    Py_END_ALLOW_THREADS
+                    #else
+{
+PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    #endif /* _OPENMP */
+                    /* Clean up any temporaries */
+                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                    #ifndef _OPENMP
+}
+#endif /* _OPENMP */
+                }
+            }
+            if (__pyx_parallel_exc_type) {
+              /* This may have been overridden by a continue, break or return in another thread. Prefer the error. */
+              __pyx_parallel_why = 4;
+            }
+            if (__pyx_parallel_why) {
+              switch (__pyx_parallel_why) {
+                    case 4:
+                {
+                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                    PyMutex_Lock(&__pyx_parallel_freethreading_mutex);
+                    #endif
+                    __Pyx_GIVEREF(__pyx_parallel_exc_type);
+                    __Pyx_ErrRestoreWithState(__pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb);
+                    __pyx_filename = __pyx_parallel_filename; __pyx_lineno = __pyx_parallel_lineno; __pyx_clineno = __pyx_parallel_clineno;
+                    #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                    PyMutex_Unlock(&__pyx_parallel_freethreading_mutex);
+                    #endif
+                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                }
+                goto __pyx_L7_error;
+              }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":85
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         sma[i] = c_mean(values, i - period + 1, i + 1)
+ * 
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L8;
+        }
+        __pyx_L7_error: {
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L1_error;
+        }
+        __pyx_L8:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":88
+ *         sma[i] = c_mean(values, i - period + 1, i + 1)
+ * 
+ *     return sma_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_sma_arr);
+  __pyx_r = ((PyObject *)__pyx_v_sma_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":71
+ * # =========================================================================
+ * 
+ * def compute_sma_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
+ *     cdef int n = values.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_sma_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_sma_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_sma_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_sma_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_sma, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":91
+ * 
+ * 
+ * def compute_ema_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
+ *     cdef int n = values.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_ema_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_4compute_ema_omp, "Exponential Moving Average (EMA) calculation with C loop optimizations.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_5compute_ema_omp = {"compute_ema_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_ema_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_4compute_ema_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_ema_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  CYTHON_UNUSED int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_ema_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 91, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 91, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 91, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 91, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_ema_omp", 0) < (0)) __PYX_ERR(0, 91, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_ema_omp", 1, 3, 3, i); __PYX_ERR(0, 91, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 91, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 91, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 91, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 91, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_ema_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 91, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_ema_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_4compute_ema_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_ema_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, CYTHON_UNUSED int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_ema_arr = 0;
+  __Pyx_memviewslice __pyx_v_ema = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  double __pyx_v_alpha;
+  double __pyx_v_sum_val;
+  double __pyx_v_current_ema;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_ema_arr;
+  __Pyx_Buffer __pyx_pybuffer_ema_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  long __pyx_t_9;
+  long __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_t_14;
+  int __pyx_t_15;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_ema_omp", 0);
+  __pyx_pybuffer_ema_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_ema_arr.refcount = 0;
+  __pyx_pybuffernd_ema_arr.data = NULL;
+  __pyx_pybuffernd_ema_arr.rcbuffer = &__pyx_pybuffer_ema_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":93
+ * def compute_ema_omp(const double[:] values, int period, int num_threads):
+ *     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] ema_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ema = ema_arr
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":94
+ *     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ema_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] ema = ema_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 94, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ema_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_ema_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_ema_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 94, __pyx_L1_error)
+    } else {__pyx_pybuffernd_ema_arr.diminfo[0].strides = __pyx_pybuffernd_ema_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ema_arr.diminfo[0].shape = __pyx_pybuffernd_ema_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_ema_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":95
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ema_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ema = ema_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_ema_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_v_ema = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":98
+ *     cdef int i
+ * 
+ *     for i in range(period - 1):             # <<<<<<<<<<<<<<
+ *         ema[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_period - 1);
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":99
+ * 
+ *     for i in range(period - 1):
+ *         ema[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n < period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_ema.data + __pyx_t_12 * __pyx_v_ema.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":101
+ *         ema[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return ema_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":102
+ * 
+ *     if n < period:
+ *         return ema_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double alpha = 2.0 / (period + 1)
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_ema_arr);
+    __pyx_r = ((PyObject *)__pyx_v_ema_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":101
+ *         ema[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return ema_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":104
+ *         return ema_arr
+ * 
+ *     cdef double alpha = 2.0 / (period + 1)             # <<<<<<<<<<<<<<
+ * 
+ *     # Seeding with simple mean
+*/
+  __pyx_v_alpha = (2.0 / ((double)(__pyx_v_period + 1)));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":107
+ * 
+ *     # Seeding with simple mean
+ *     cdef double sum_val = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(period):
+ *         sum_val += values[i]
+*/
+  __pyx_v_sum_val = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":108
+ *     # Seeding with simple mean
+ *     cdef double sum_val = 0.0
+ *     for i in range(period):             # <<<<<<<<<<<<<<
+ *         sum_val += values[i]
+ *     cdef double current_ema = sum_val / period
+*/
+  __pyx_t_11 = __pyx_v_period;
+  __pyx_t_14 = __pyx_t_11;
+  for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
+    __pyx_v_i = __pyx_t_15;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":109
+ *     cdef double sum_val = 0.0
+ *     for i in range(period):
+ *         sum_val += values[i]             # <<<<<<<<<<<<<<
+ *     cdef double current_ema = sum_val / period
+ *     ema[period - 1] = current_ema
+*/
+    __pyx_t_12 = __pyx_v_i;
+    __pyx_v_sum_val = (__pyx_v_sum_val + (*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_12 * __pyx_v_values.strides[0]) ))));
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":110
+ *     for i in range(period):
+ *         sum_val += values[i]
+ *     cdef double current_ema = sum_val / period             # <<<<<<<<<<<<<<
+ *     ema[period - 1] = current_ema
+ * 
+*/
+  __pyx_v_current_ema = (__pyx_v_sum_val / ((double)__pyx_v_period));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":111
+ *         sum_val += values[i]
+ *     cdef double current_ema = sum_val / period
+ *     ema[period - 1] = current_ema             # <<<<<<<<<<<<<<
+ * 
+ *     # Sequential computation due to recursive temporal dependency
+*/
+  __pyx_t_12 = (__pyx_v_period - 1);
+  *((double *) ( /* dim=0 */ (__pyx_v_ema.data + __pyx_t_12 * __pyx_v_ema.strides[0]) )) = __pyx_v_current_ema;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":114
+ * 
+ *     # Sequential computation due to recursive temporal dependency
+ *     for i in range(period, n):             # <<<<<<<<<<<<<<
+ *         current_ema = (values[i] * alpha) + (current_ema * (1.0 - alpha))
+ *         ema[i] = current_ema
+*/
+  __pyx_t_11 = __pyx_v_n;
+  __pyx_t_14 = __pyx_t_11;
+  for (__pyx_t_15 = __pyx_v_period; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
+    __pyx_v_i = __pyx_t_15;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":115
+ *     # Sequential computation due to recursive temporal dependency
+ *     for i in range(period, n):
+ *         current_ema = (values[i] * alpha) + (current_ema * (1.0 - alpha))             # <<<<<<<<<<<<<<
+ *         ema[i] = current_ema
+ * 
+*/
+    __pyx_t_12 = __pyx_v_i;
+    __pyx_v_current_ema = (((*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_12 * __pyx_v_values.strides[0]) ))) * __pyx_v_alpha) + (__pyx_v_current_ema * (1.0 - __pyx_v_alpha)));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":116
+ *     for i in range(period, n):
+ *         current_ema = (values[i] * alpha) + (current_ema * (1.0 - alpha))
+ *         ema[i] = current_ema             # <<<<<<<<<<<<<<
+ * 
+ *     return ema_arr
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_ema.data + __pyx_t_12 * __pyx_v_ema.strides[0]) )) = __pyx_v_current_ema;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":118
+ *         ema[i] = current_ema
+ * 
+ *     return ema_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_ema_arr);
+  __pyx_r = ((PyObject *)__pyx_v_ema_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":91
+ * 
+ * 
+ * def compute_ema_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
+ *     cdef int n = values.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_ema_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_ema_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_ema, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":121
+ * 
+ * 
+ * def compute_rsi_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel RSI computation using Wilder's smoothing loop structures."""
+ *     cdef int n = values.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_rsi_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_6compute_rsi_omp, "Parallel RSI computation using Wilder's smoothing loop structures.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_7compute_rsi_omp = {"compute_rsi_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_rsi_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_6compute_rsi_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_rsi_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_rsi_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 121, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 121, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 121, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 121, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_rsi_omp", 0) < (0)) __PYX_ERR(0, 121, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_rsi_omp", 1, 3, 3, i); __PYX_ERR(0, 121, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 121, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 121, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 121, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 121, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_rsi_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 121, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_rsi_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_6compute_rsi_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_6compute_rsi_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_rsi_arr = 0;
+  __Pyx_memviewslice __pyx_v_rsi = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  PyArrayObject *__pyx_v_gains_arr = 0;
+  PyArrayObject *__pyx_v_losses_arr = 0;
+  __Pyx_memviewslice __pyx_v_gains = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_losses = { 0, 0, { 0 }, { 0 }, { 0 } };
+  double __pyx_v_diff;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  double __pyx_v_sum_gain;
+  double __pyx_v_sum_loss;
+  double __pyx_v_avg_gain;
+  double __pyx_v_avg_loss;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_gains_arr;
+  __Pyx_Buffer __pyx_pybuffer_gains_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_losses_arr;
+  __Pyx_Buffer __pyx_pybuffer_losses_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_rsi_arr;
+  __Pyx_Buffer __pyx_pybuffer_rsi_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  long __pyx_t_14;
+  long __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_rsi_omp", 0);
+  __pyx_pybuffer_rsi_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_rsi_arr.refcount = 0;
+  __pyx_pybuffernd_rsi_arr.data = NULL;
+  __pyx_pybuffernd_rsi_arr.rcbuffer = &__pyx_pybuffer_rsi_arr;
+  __pyx_pybuffer_gains_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_gains_arr.refcount = 0;
+  __pyx_pybuffernd_gains_arr.data = NULL;
+  __pyx_pybuffernd_gains_arr.rcbuffer = &__pyx_pybuffer_gains_arr;
+  __pyx_pybuffer_losses_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_losses_arr.refcount = 0;
+  __pyx_pybuffernd_losses_arr.data = NULL;
+  __pyx_pybuffernd_losses_arr.rcbuffer = &__pyx_pybuffer_losses_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":123
+ * def compute_rsi_omp(const double[:] values, int period, int num_threads):
+ *     """Parallel RSI computation using Wilder's smoothing loop structures."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] rsi_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] rsi = rsi_arr
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":124
+ *     """Parallel RSI computation using Wilder's smoothing loop structures."""
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] rsi_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] rsi = rsi_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 124, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_rsi_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 124, __pyx_L1_error)
+    } else {__pyx_pybuffernd_rsi_arr.diminfo[0].strides = __pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_rsi_arr.diminfo[0].shape = __pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_rsi_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":125
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] rsi_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] rsi = rsi_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_rsi_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_v_rsi = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":128
+ *     cdef int i
+ * 
+ *     for i in range(period):             # <<<<<<<<<<<<<<
+ *         rsi[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = __pyx_v_period;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":129
+ * 
+ *     for i in range(period):
+ *         rsi[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n <= period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_rsi.data + __pyx_t_12 * __pyx_v_rsi.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":131
+ *         rsi[i] = c_nan
+ * 
+ *     if n <= period:             # <<<<<<<<<<<<<<
+ *         return rsi_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n <= __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":132
+ * 
+ *     if n <= period:
+ *         return rsi_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] gains_arr = np.empty(n, dtype=np.float64)
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_rsi_arr);
+    __pyx_r = ((PyObject *)__pyx_v_rsi_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":131
+ *         rsi[i] = c_nan
+ * 
+ *     if n <= period:             # <<<<<<<<<<<<<<
+ *         return rsi_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":134
+ *         return rsi_arr
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] gains_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] losses_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] gains = gains_arr
+*/
+  __pyx_t_4 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_6);
+    assert(__pyx_t_4);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_5};
+    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 134, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_gains_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_gains_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_gains_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 134, __pyx_L1_error)
+    } else {__pyx_pybuffernd_gains_arr.diminfo[0].strides = __pyx_pybuffernd_gains_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_gains_arr.diminfo[0].shape = __pyx_pybuffernd_gains_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_gains_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":135
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] gains_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] losses_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] gains = gains_arr
+ *     cdef double[:] losses = losses_arr
+*/
+  __pyx_t_6 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+    assert(__pyx_t_6);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
+    __Pyx_INCREF(__pyx_t_6);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_6, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 135, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_losses_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_losses_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_losses_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 135, __pyx_L1_error)
+    } else {__pyx_pybuffernd_losses_arr.diminfo[0].strides = __pyx_pybuffernd_losses_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_losses_arr.diminfo[0].shape = __pyx_pybuffernd_losses_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_losses_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":136
+ *     cdef cnp.ndarray[double, ndim=1] gains_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] losses_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] gains = gains_arr             # <<<<<<<<<<<<<<
+ *     cdef double[:] losses = losses_arr
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_gains_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_v_gains = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":137
+ *     cdef cnp.ndarray[double, ndim=1] losses_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] gains = gains_arr
+ *     cdef double[:] losses = losses_arr             # <<<<<<<<<<<<<<
+ * 
+ *     gains[0] = 0.0
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_losses_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_v_losses = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":139
+ *     cdef double[:] losses = losses_arr
+ * 
+ *     gains[0] = 0.0             # <<<<<<<<<<<<<<
+ *     losses[0] = 0.0
+ * 
+*/
+  __pyx_t_12 = 0;
+  *((double *) ( /* dim=0 */ (__pyx_v_gains.data + __pyx_t_12 * __pyx_v_gains.strides[0]) )) = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":140
+ * 
+ *     gains[0] = 0.0
+ *     losses[0] = 0.0             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double diff
+*/
+  __pyx_t_12 = 0;
+  *((double *) ( /* dim=0 */ (__pyx_v_losses.data + __pyx_t_12 * __pyx_v_losses.strides[0]) )) = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":143
+ * 
+ *     cdef double diff
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ * 
+ *     # 1. Parallel changes separation loop
+*/
+  __pyx_t_13 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_13) {
+    __pyx_t_9 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_9 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_9;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":146
+ * 
+ *     # 1. Parallel changes separation loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         diff = values[i] - values[i - 1]
+ *         if diff > 0:
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_15 = (__pyx_t_9 - 1 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_15 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_13, __pyx_t_16)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_diff) lastprivate(__pyx_v_diff) firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_15; __pyx_t_14++){
+                        {
+                            __pyx_v_i = (int)(1 + 1 * __pyx_t_14);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":147
+ *     # 1. Parallel changes separation loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         diff = values[i] - values[i - 1]             # <<<<<<<<<<<<<<
+ *         if diff > 0:
+ *             gains[i] = diff
+*/
+                            __pyx_t_12 = __pyx_v_i;
+                            __pyx_t_16 = (__pyx_v_i - 1);
+                            __pyx_v_diff = ((*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_12 * __pyx_v_values.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_16 * __pyx_v_values.strides[0]) ))));
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":148
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         diff = values[i] - values[i - 1]
+ *         if diff > 0:             # <<<<<<<<<<<<<<
+ *             gains[i] = diff
+ *             losses[i] = 0.0
+*/
+                            __pyx_t_13 = (__pyx_v_diff > 0.0);
+                            if (__pyx_t_13) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":149
+ *         diff = values[i] - values[i - 1]
+ *         if diff > 0:
+ *             gains[i] = diff             # <<<<<<<<<<<<<<
+ *             losses[i] = 0.0
+ *         else:
+*/
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_gains.data + __pyx_t_16 * __pyx_v_gains.strides[0]) )) = __pyx_v_diff;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":150
+ *         if diff > 0:
+ *             gains[i] = diff
+ *             losses[i] = 0.0             # <<<<<<<<<<<<<<
+ *         else:
+ *             gains[i] = 0.0
+*/
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_losses.data + __pyx_t_16 * __pyx_v_losses.strides[0]) )) = 0.0;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":148
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         diff = values[i] - values[i - 1]
+ *         if diff > 0:             # <<<<<<<<<<<<<<
+ *             gains[i] = diff
+ *             losses[i] = 0.0
+*/
+                              goto __pyx_L13;
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":152
+ *             losses[i] = 0.0
+ *         else:
+ *             gains[i] = 0.0             # <<<<<<<<<<<<<<
+ *             losses[i] = -diff
+ * 
+*/
+                            /*else*/ {
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_gains.data + __pyx_t_16 * __pyx_v_gains.strides[0]) )) = 0.0;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":153
+ *         else:
+ *             gains[i] = 0.0
+ *             losses[i] = -diff             # <<<<<<<<<<<<<<
+ * 
+ *     # 2. Seeding averages
+*/
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_losses.data + __pyx_t_16 * __pyx_v_losses.strides[0]) )) = (-__pyx_v_diff);
+                            }
+                            __pyx_L13:;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":146
+ * 
+ *     # 1. Parallel changes separation loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         diff = values[i] - values[i - 1]
+ *         if diff > 0:
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L8;
+        }
+        __pyx_L8:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":156
+ * 
+ *     # 2. Seeding averages
+ *     cdef double sum_gain = 0.0             # <<<<<<<<<<<<<<
+ *     cdef double sum_loss = 0.0
+ *     for i in range(1, period + 1):
+*/
+  __pyx_v_sum_gain = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":157
+ *     # 2. Seeding averages
+ *     cdef double sum_gain = 0.0
+ *     cdef double sum_loss = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(1, period + 1):
+ *         sum_gain += gains[i]
+*/
+  __pyx_v_sum_loss = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":158
+ *     cdef double sum_gain = 0.0
+ *     cdef double sum_loss = 0.0
+ *     for i in range(1, period + 1):             # <<<<<<<<<<<<<<
+ *         sum_gain += gains[i]
+ *         sum_loss += losses[i]
+*/
+  __pyx_t_15 = (__pyx_v_period + 1);
+  __pyx_t_14 = __pyx_t_15;
+  for (__pyx_t_9 = 1; __pyx_t_9 < __pyx_t_14; __pyx_t_9+=1) {
+    __pyx_v_i = __pyx_t_9;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":159
+ *     cdef double sum_loss = 0.0
+ *     for i in range(1, period + 1):
+ *         sum_gain += gains[i]             # <<<<<<<<<<<<<<
+ *         sum_loss += losses[i]
+ * 
+*/
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_v_sum_gain = (__pyx_v_sum_gain + (*((double *) ( /* dim=0 */ (__pyx_v_gains.data + __pyx_t_16 * __pyx_v_gains.strides[0]) ))));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":160
+ *     for i in range(1, period + 1):
+ *         sum_gain += gains[i]
+ *         sum_loss += losses[i]             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double avg_gain = sum_gain / period
+*/
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_v_sum_loss = (__pyx_v_sum_loss + (*((double *) ( /* dim=0 */ (__pyx_v_losses.data + __pyx_t_16 * __pyx_v_losses.strides[0]) ))));
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":162
+ *         sum_loss += losses[i]
+ * 
+ *     cdef double avg_gain = sum_gain / period             # <<<<<<<<<<<<<<
+ *     cdef double avg_loss = sum_loss / period
+ * 
+*/
+  __pyx_v_avg_gain = (__pyx_v_sum_gain / ((double)__pyx_v_period));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":163
+ * 
+ *     cdef double avg_gain = sum_gain / period
+ *     cdef double avg_loss = sum_loss / period             # <<<<<<<<<<<<<<
+ * 
+ *     if avg_loss == 0.0:
+*/
+  __pyx_v_avg_loss = (__pyx_v_sum_loss / ((double)__pyx_v_period));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":165
+ *     cdef double avg_loss = sum_loss / period
+ * 
+ *     if avg_loss == 0.0:             # <<<<<<<<<<<<<<
+ *         rsi[period] = 100.0
+ *     else:
+*/
+  __pyx_t_13 = (__pyx_v_avg_loss == 0.0);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":166
+ * 
+ *     if avg_loss == 0.0:
+ *         rsi[period] = 100.0             # <<<<<<<<<<<<<<
+ *     else:
+ *         rsi[period] = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))
+*/
+    __pyx_t_16 = __pyx_v_period;
+    *((double *) ( /* dim=0 */ (__pyx_v_rsi.data + __pyx_t_16 * __pyx_v_rsi.strides[0]) )) = 100.0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":165
+ *     cdef double avg_loss = sum_loss / period
+ * 
+ *     if avg_loss == 0.0:             # <<<<<<<<<<<<<<
+ *         rsi[period] = 100.0
+ *     else:
+*/
+    goto __pyx_L18;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":168
+ *         rsi[period] = 100.0
+ *     else:
+ *         rsi[period] = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))             # <<<<<<<<<<<<<<
+ * 
+ *     # 3. Smoothed sequential loops
+*/
+  /*else*/ {
+    __pyx_t_16 = __pyx_v_period;
+    *((double *) ( /* dim=0 */ (__pyx_v_rsi.data + __pyx_t_16 * __pyx_v_rsi.strides[0]) )) = (100.0 - (100.0 / (1.0 + (__pyx_v_avg_gain / __pyx_v_avg_loss))));
+  }
+  __pyx_L18:;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":171
+ * 
+ *     # 3. Smoothed sequential loops
+ *     for i in range(period + 1, n):             # <<<<<<<<<<<<<<
+ *         avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+*/
+  __pyx_t_9 = __pyx_v_n;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = (__pyx_v_period + 1); __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":172
+ *     # 3. Smoothed sequential loops
+ *     for i in range(period + 1, n):
+ *         avg_gain = (avg_gain * (period - 1) + gains[i]) / period             # <<<<<<<<<<<<<<
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+ *         if avg_loss == 0.0:
+*/
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_v_avg_gain = (((__pyx_v_avg_gain * (__pyx_v_period - 1)) + (*((double *) ( /* dim=0 */ (__pyx_v_gains.data + __pyx_t_16 * __pyx_v_gains.strides[0]) )))) / ((double)__pyx_v_period));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":173
+ *     for i in range(period + 1, n):
+ *         avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period             # <<<<<<<<<<<<<<
+ *         if avg_loss == 0.0:
+ *             rsi[i] = 100.0
+*/
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_v_avg_loss = (((__pyx_v_avg_loss * (__pyx_v_period - 1)) + (*((double *) ( /* dim=0 */ (__pyx_v_losses.data + __pyx_t_16 * __pyx_v_losses.strides[0]) )))) / ((double)__pyx_v_period));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":174
+ *         avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+ *         if avg_loss == 0.0:             # <<<<<<<<<<<<<<
+ *             rsi[i] = 100.0
+ *         else:
+*/
+    __pyx_t_13 = (__pyx_v_avg_loss == 0.0);
+    if (__pyx_t_13) {
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":175
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+ *         if avg_loss == 0.0:
+ *             rsi[i] = 100.0             # <<<<<<<<<<<<<<
+ *         else:
+ *             rsi[i] = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))
+*/
+      __pyx_t_16 = __pyx_v_i;
+      *((double *) ( /* dim=0 */ (__pyx_v_rsi.data + __pyx_t_16 * __pyx_v_rsi.strides[0]) )) = 100.0;
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":174
+ *         avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+ *         avg_loss = (avg_loss * (period - 1) + losses[i]) / period
+ *         if avg_loss == 0.0:             # <<<<<<<<<<<<<<
+ *             rsi[i] = 100.0
+ *         else:
+*/
+      goto __pyx_L21;
+    }
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":177
+ *             rsi[i] = 100.0
+ *         else:
+ *             rsi[i] = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))             # <<<<<<<<<<<<<<
+ * 
+ *     return rsi_arr
+*/
+    /*else*/ {
+      __pyx_t_16 = __pyx_v_i;
+      *((double *) ( /* dim=0 */ (__pyx_v_rsi.data + __pyx_t_16 * __pyx_v_rsi.strides[0]) )) = (100.0 - (100.0 / (1.0 + (__pyx_v_avg_gain / __pyx_v_avg_loss))));
+    }
+    __pyx_L21:;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":179
+ *             rsi[i] = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))
+ * 
+ *     return rsi_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_rsi_arr);
+  __pyx_r = ((PyObject *)__pyx_v_rsi_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":121
+ * 
+ * 
+ * def compute_rsi_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel RSI computation using Wilder's smoothing loop structures."""
+ *     cdef int n = values.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_gains_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_losses_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_rsi_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_gains_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_losses_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_rsi_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_rsi_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_rsi, 1);
+  __Pyx_XDECREF((PyObject *)__pyx_v_gains_arr);
+  __Pyx_XDECREF((PyObject *)__pyx_v_losses_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_gains, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_losses, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":182
+ * 
+ * 
+ * def compute_macd_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] values,
+ *     int fast_period,
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_9compute_macd_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_8compute_macd_omp, "Computes MACD, signal line, and histogram using OpenMP optimized EMAs.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_9compute_macd_omp = {"compute_macd_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_9compute_macd_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_8compute_macd_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_9compute_macd_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_fast_period;
+  int __pyx_v_slow_period;
+  int __pyx_v_signal_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[5] = {0,0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_macd_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_fast_period,&__pyx_mstate_global->__pyx_n_u_slow_period,&__pyx_mstate_global->__pyx_n_u_signal_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 182, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  5:
+        values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 182, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 182, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 182, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 182, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 182, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_macd_omp", 0) < (0)) __PYX_ERR(0, 182, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_macd_omp", 1, 5, 5, i); __PYX_ERR(0, 182, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 5)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 182, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 182, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 182, __pyx_L3_error)
+      values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 182, __pyx_L3_error)
+      values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 182, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 183, __pyx_L3_error)
+    __pyx_v_fast_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_fast_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 184, __pyx_L3_error)
+    __pyx_v_slow_period = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_slow_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 185, __pyx_L3_error)
+    __pyx_v_signal_period = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_signal_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 186, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 187, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_macd_omp", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 182, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_macd_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_8compute_macd_omp(__pyx_self, __pyx_v_values, __pyx_v_fast_period, __pyx_v_slow_period, __pyx_v_signal_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_8compute_macd_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_fast_period, int __pyx_v_slow_period, int __pyx_v_signal_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_macd_line_arr = 0;
+  PyArrayObject *__pyx_v_signal_line_arr = 0;
+  PyArrayObject *__pyx_v_hist_arr = 0;
+  __Pyx_memviewslice __pyx_v_macd_line = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_signal_line = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_hist = { 0, 0, { 0 }, { 0 }, { 0 } };
+  PyArrayObject *__pyx_v_ema_fast_arr = 0;
+  PyArrayObject *__pyx_v_ema_slow_arr = 0;
+  __Pyx_memviewslice __pyx_v_ema_fast = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_ema_slow = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  int __pyx_v_start_idx;
+  double __pyx_v_alpha_sig;
+  double __pyx_v_sum_macd;
+  double __pyx_v_current_signal;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_ema_fast_arr;
+  __Pyx_Buffer __pyx_pybuffer_ema_fast_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_ema_slow_arr;
+  __Pyx_Buffer __pyx_pybuffer_ema_slow_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_hist_arr;
+  __Pyx_Buffer __pyx_pybuffer_hist_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_macd_line_arr;
+  __Pyx_Buffer __pyx_pybuffer_macd_line_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_signal_line_arr;
+  __Pyx_Buffer __pyx_pybuffer_signal_line_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  int __pyx_t_12;
+  Py_ssize_t __pyx_t_13;
+  Py_ssize_t __pyx_t_14;
+  int __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  long __pyx_t_17;
+  long __pyx_t_18;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_macd_omp", 0);
+  __pyx_pybuffer_macd_line_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_macd_line_arr.refcount = 0;
+  __pyx_pybuffernd_macd_line_arr.data = NULL;
+  __pyx_pybuffernd_macd_line_arr.rcbuffer = &__pyx_pybuffer_macd_line_arr;
+  __pyx_pybuffer_signal_line_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_signal_line_arr.refcount = 0;
+  __pyx_pybuffernd_signal_line_arr.data = NULL;
+  __pyx_pybuffernd_signal_line_arr.rcbuffer = &__pyx_pybuffer_signal_line_arr;
+  __pyx_pybuffer_hist_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_hist_arr.refcount = 0;
+  __pyx_pybuffernd_hist_arr.data = NULL;
+  __pyx_pybuffernd_hist_arr.rcbuffer = &__pyx_pybuffer_hist_arr;
+  __pyx_pybuffer_ema_fast_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_ema_fast_arr.refcount = 0;
+  __pyx_pybuffernd_ema_fast_arr.data = NULL;
+  __pyx_pybuffernd_ema_fast_arr.rcbuffer = &__pyx_pybuffer_ema_fast_arr;
+  __pyx_pybuffer_ema_slow_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_ema_slow_arr.refcount = 0;
+  __pyx_pybuffernd_ema_slow_arr.data = NULL;
+  __pyx_pybuffernd_ema_slow_arr.rcbuffer = &__pyx_pybuffer_ema_slow_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":190
+ * ):
+ *     """Computes MACD, signal line, and histogram using OpenMP optimized EMAs."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ * 
+ *     # Pre-allocate output arrays
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":193
+ * 
+ *     # Pre-allocate output arrays
+ *     cdef cnp.ndarray[double, ndim=1] macd_line_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] signal_line_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] hist_arr = np.empty(n, dtype=np.float64)
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 193, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_macd_line_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 193, __pyx_L1_error)
+    } else {__pyx_pybuffernd_macd_line_arr.diminfo[0].strides = __pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_macd_line_arr.diminfo[0].shape = __pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_macd_line_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":194
+ *     # Pre-allocate output arrays
+ *     cdef cnp.ndarray[double, ndim=1] macd_line_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] signal_line_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] hist_arr = np.empty(n, dtype=np.float64)
+ * 
+*/
+  __pyx_t_4 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_6);
+    assert(__pyx_t_4);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_5};
+    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 194, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_signal_line_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 194, __pyx_L1_error)
+    } else {__pyx_pybuffernd_signal_line_arr.diminfo[0].strides = __pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_signal_line_arr.diminfo[0].shape = __pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_signal_line_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":195
+ *     cdef cnp.ndarray[double, ndim=1] macd_line_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] signal_line_arr = np.empty(n, dtype=np.float64)
+ *     cdef cnp.ndarray[double, ndim=1] hist_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double[:] macd_line = macd_line_arr
+*/
+  __pyx_t_6 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+    assert(__pyx_t_6);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
+    __Pyx_INCREF(__pyx_t_6);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_6, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 195, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_hist_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_hist_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_hist_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 195, __pyx_L1_error)
+    } else {__pyx_pybuffernd_hist_arr.diminfo[0].strides = __pyx_pybuffernd_hist_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_hist_arr.diminfo[0].shape = __pyx_pybuffernd_hist_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_hist_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":197
+ *     cdef cnp.ndarray[double, ndim=1] hist_arr = np.empty(n, dtype=np.float64)
+ * 
+ *     cdef double[:] macd_line = macd_line_arr             # <<<<<<<<<<<<<<
+ *     cdef double[:] signal_line = signal_line_arr
+ *     cdef double[:] hist = hist_arr
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_macd_line_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_v_macd_line = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":198
+ * 
+ *     cdef double[:] macd_line = macd_line_arr
+ *     cdef double[:] signal_line = signal_line_arr             # <<<<<<<<<<<<<<
+ *     cdef double[:] hist = hist_arr
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_signal_line_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_v_signal_line = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":199
+ *     cdef double[:] macd_line = macd_line_arr
+ *     cdef double[:] signal_line = signal_line_arr
+ *     cdef double[:] hist = hist_arr             # <<<<<<<<<<<<<<
+ * 
+ *     # Compute EMAs
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_hist_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_v_hist = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":202
+ * 
+ *     # Compute EMAs
+ *     cdef cnp.ndarray[double, ndim=1] ema_fast_arr = compute_ema_omp(values, fast_period, num_threads)             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] ema_slow_arr = compute_ema_omp(values, slow_period, num_threads)
+ * 
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_compute_ema_omp); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_values, 1, (PyObject *(*)(char *)) __pyx_memview_get_double__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_fast_period); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = __Pyx_PyLong_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[4] = {__pyx_t_2, __pyx_t_4, __pyx_t_3, __pyx_t_6};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_7, (4-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 202, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_ema_fast_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 202, __pyx_L1_error)
+    } else {__pyx_pybuffernd_ema_fast_arr.diminfo[0].strides = __pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ema_fast_arr.diminfo[0].shape = __pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_ema_fast_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":203
+ *     # Compute EMAs
+ *     cdef cnp.ndarray[double, ndim=1] ema_fast_arr = compute_ema_omp(values, fast_period, num_threads)
+ *     cdef cnp.ndarray[double, ndim=1] ema_slow_arr = compute_ema_omp(values, slow_period, num_threads)             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double[:] ema_fast = ema_fast_arr
+*/
+  __pyx_t_5 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_compute_ema_omp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_values, 1, (PyObject *(*)(char *)) __pyx_memview_get_double__const__, (int (*)(char *, PyObject *)) NULL, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_slow_period); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
+    assert(__pyx_t_5);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
+    __Pyx_INCREF(__pyx_t_5);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[4] = {__pyx_t_5, __pyx_t_3, __pyx_t_4, __pyx_t_2};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (4-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 203, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_ema_slow_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 203, __pyx_L1_error)
+    } else {__pyx_pybuffernd_ema_slow_arr.diminfo[0].strides = __pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ema_slow_arr.diminfo[0].shape = __pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_ema_slow_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":205
+ *     cdef cnp.ndarray[double, ndim=1] ema_slow_arr = compute_ema_omp(values, slow_period, num_threads)
+ * 
+ *     cdef double[:] ema_fast = ema_fast_arr             # <<<<<<<<<<<<<<
+ *     cdef double[:] ema_slow = ema_slow_arr
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_ema_fast_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_v_ema_fast = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":206
+ * 
+ *     cdef double[:] ema_fast = ema_fast_arr
+ *     cdef double[:] ema_slow = ema_slow_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int i
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_ema_slow_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_v_ema_slow = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":209
+ * 
+ *     cdef int i
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ * 
+ *     # 1. Parallel compute MACD line
+*/
+  __pyx_t_10 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_10) {
+    __pyx_t_9 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_9 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_9;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":212
+ * 
+ *     # 1. Parallel compute MACD line
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if ema_fast[i] != ema_fast[i] or ema_slow[i] != ema_slow[i]:
+ *             macd_line[i] = c_nan
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_12 = (__pyx_t_9 - 0 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_12 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_10, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_12; __pyx_t_11++){
+                        {
+                            __pyx_v_i = (int)(0 + 1 * __pyx_t_11);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":213
+ *     # 1. Parallel compute MACD line
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if ema_fast[i] != ema_fast[i] or ema_slow[i] != ema_slow[i]:             # <<<<<<<<<<<<<<
+ *             macd_line[i] = c_nan
+ *         else:
+*/
+                            __pyx_t_13 = __pyx_v_i;
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_15 = ((*((double *) ( /* dim=0 */ (__pyx_v_ema_fast.data + __pyx_t_13 * __pyx_v_ema_fast.strides[0]) ))) != (*((double *) ( /* dim=0 */ (__pyx_v_ema_fast.data + __pyx_t_14 * __pyx_v_ema_fast.strides[0]) ))));
+                            if (!__pyx_t_15) {
+                            } else {
+                              __pyx_t_10 = __pyx_t_15;
+                              goto __pyx_L11_bool_binop_done;
+                            }
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_13 = __pyx_v_i;
+                            __pyx_t_15 = ((*((double *) ( /* dim=0 */ (__pyx_v_ema_slow.data + __pyx_t_14 * __pyx_v_ema_slow.strides[0]) ))) != (*((double *) ( /* dim=0 */ (__pyx_v_ema_slow.data + __pyx_t_13 * __pyx_v_ema_slow.strides[0]) ))));
+                            __pyx_t_10 = __pyx_t_15;
+                            __pyx_L11_bool_binop_done:;
+                            if (__pyx_t_10) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":214
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if ema_fast[i] != ema_fast[i] or ema_slow[i] != ema_slow[i]:
+ *             macd_line[i] = c_nan             # <<<<<<<<<<<<<<
+ *         else:
+ *             macd_line[i] = ema_fast[i] - ema_slow[i]
+*/
+                              __pyx_t_13 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_13 * __pyx_v_macd_line.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":213
+ *     # 1. Parallel compute MACD line
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if ema_fast[i] != ema_fast[i] or ema_slow[i] != ema_slow[i]:             # <<<<<<<<<<<<<<
+ *             macd_line[i] = c_nan
+ *         else:
+*/
+                              goto __pyx_L10;
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":216
+ *             macd_line[i] = c_nan
+ *         else:
+ *             macd_line[i] = ema_fast[i] - ema_slow[i]             # <<<<<<<<<<<<<<
+ * 
+ *     # Remove leading NaNs for signal EMA seeding
+*/
+                            /*else*/ {
+                              __pyx_t_13 = __pyx_v_i;
+                              __pyx_t_14 = __pyx_v_i;
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_16 * __pyx_v_macd_line.strides[0]) )) = ((*((double *) ( /* dim=0 */ (__pyx_v_ema_fast.data + __pyx_t_13 * __pyx_v_ema_fast.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_ema_slow.data + __pyx_t_14 * __pyx_v_ema_slow.strides[0]) ))));
+                            }
+                            __pyx_L10:;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":212
+ * 
+ *     # 1. Parallel compute MACD line
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if ema_fast[i] != ema_fast[i] or ema_slow[i] != ema_slow[i]:
+ *             macd_line[i] = c_nan
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L5;
+        }
+        __pyx_L5:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":219
+ * 
+ *     # Remove leading NaNs for signal EMA seeding
+ *     cdef int start_idx = slow_period - 1             # <<<<<<<<<<<<<<
+ *     if n <= start_idx + signal_period:
+ *         for i in range(n):
+*/
+  __pyx_v_start_idx = (__pyx_v_slow_period - 1);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":220
+ *     # Remove leading NaNs for signal EMA seeding
+ *     cdef int start_idx = slow_period - 1
+ *     if n <= start_idx + signal_period:             # <<<<<<<<<<<<<<
+ *         for i in range(n):
+ *             signal_line[i] = c_nan
+*/
+  __pyx_t_10 = (__pyx_v_n <= (__pyx_v_start_idx + __pyx_v_signal_period));
+  if (__pyx_t_10) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":221
+ *     cdef int start_idx = slow_period - 1
+ *     if n <= start_idx + signal_period:
+ *         for i in range(n):             # <<<<<<<<<<<<<<
+ *             signal_line[i] = c_nan
+ *             hist[i] = c_nan
+*/
+    __pyx_t_12 = __pyx_v_n;
+    __pyx_t_11 = __pyx_t_12;
+    for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_11; __pyx_t_9+=1) {
+      __pyx_v_i = __pyx_t_9;
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":222
+ *     if n <= start_idx + signal_period:
+ *         for i in range(n):
+ *             signal_line[i] = c_nan             # <<<<<<<<<<<<<<
+ *             hist[i] = c_nan
+ *         return macd_line_arr, signal_line_arr, hist_arr
+*/
+      __pyx_t_14 = __pyx_v_i;
+      *((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_14 * __pyx_v_signal_line.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":223
+ *         for i in range(n):
+ *             signal_line[i] = c_nan
+ *             hist[i] = c_nan             # <<<<<<<<<<<<<<
+ *         return macd_line_arr, signal_line_arr, hist_arr
+ * 
+*/
+      __pyx_t_14 = __pyx_v_i;
+      *((double *) ( /* dim=0 */ (__pyx_v_hist.data + __pyx_t_14 * __pyx_v_hist.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+    }
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":224
+ *             signal_line[i] = c_nan
+ *             hist[i] = c_nan
+ *         return macd_line_arr, signal_line_arr, hist_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double alpha_sig = 2.0 / (signal_period + 1)
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF((PyObject *)__pyx_v_macd_line_arr);
+    __Pyx_GIVEREF((PyObject *)__pyx_v_macd_line_arr);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_macd_line_arr)) != (0)) __PYX_ERR(0, 224, __pyx_L1_error);
+    __Pyx_INCREF((PyObject *)__pyx_v_signal_line_arr);
+    __Pyx_GIVEREF((PyObject *)__pyx_v_signal_line_arr);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_signal_line_arr)) != (0)) __PYX_ERR(0, 224, __pyx_L1_error);
+    __Pyx_INCREF((PyObject *)__pyx_v_hist_arr);
+    __Pyx_GIVEREF((PyObject *)__pyx_v_hist_arr);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_hist_arr)) != (0)) __PYX_ERR(0, 224, __pyx_L1_error);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":220
+ *     # Remove leading NaNs for signal EMA seeding
+ *     cdef int start_idx = slow_period - 1
+ *     if n <= start_idx + signal_period:             # <<<<<<<<<<<<<<
+ *         for i in range(n):
+ *             signal_line[i] = c_nan
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":226
+ *         return macd_line_arr, signal_line_arr, hist_arr
+ * 
+ *     cdef double alpha_sig = 2.0 / (signal_period + 1)             # <<<<<<<<<<<<<<
+ *     for i in range(start_idx + signal_period - 1):
+ *         signal_line[i] = c_nan
+*/
+  __pyx_v_alpha_sig = (2.0 / ((double)(__pyx_v_signal_period + 1)));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":227
+ * 
+ *     cdef double alpha_sig = 2.0 / (signal_period + 1)
+ *     for i in range(start_idx + signal_period - 1):             # <<<<<<<<<<<<<<
+ *         signal_line[i] = c_nan
+ * 
+*/
+  __pyx_t_17 = ((__pyx_v_start_idx + __pyx_v_signal_period) - 1);
+  __pyx_t_18 = __pyx_t_17;
+  for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_18; __pyx_t_12+=1) {
+    __pyx_v_i = __pyx_t_12;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":228
+ *     cdef double alpha_sig = 2.0 / (signal_period + 1)
+ *     for i in range(start_idx + signal_period - 1):
+ *         signal_line[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double sum_macd = 0.0
+*/
+    __pyx_t_14 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_14 * __pyx_v_signal_line.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":230
+ *         signal_line[i] = c_nan
+ * 
+ *     cdef double sum_macd = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(start_idx, start_idx + signal_period):
+ *         sum_macd += macd_line[i]
+*/
+  __pyx_v_sum_macd = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":231
+ * 
+ *     cdef double sum_macd = 0.0
+ *     for i in range(start_idx, start_idx + signal_period):             # <<<<<<<<<<<<<<
+ *         sum_macd += macd_line[i]
+ *     cdef double current_signal = sum_macd / signal_period
+*/
+  __pyx_t_12 = (__pyx_v_start_idx + __pyx_v_signal_period);
+  __pyx_t_11 = __pyx_t_12;
+  for (__pyx_t_9 = __pyx_v_start_idx; __pyx_t_9 < __pyx_t_11; __pyx_t_9+=1) {
+    __pyx_v_i = __pyx_t_9;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":232
+ *     cdef double sum_macd = 0.0
+ *     for i in range(start_idx, start_idx + signal_period):
+ *         sum_macd += macd_line[i]             # <<<<<<<<<<<<<<
+ *     cdef double current_signal = sum_macd / signal_period
+ *     signal_line[start_idx + signal_period - 1] = current_signal
+*/
+    __pyx_t_14 = __pyx_v_i;
+    __pyx_v_sum_macd = (__pyx_v_sum_macd + (*((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_14 * __pyx_v_macd_line.strides[0]) ))));
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":233
+ *     for i in range(start_idx, start_idx + signal_period):
+ *         sum_macd += macd_line[i]
+ *     cdef double current_signal = sum_macd / signal_period             # <<<<<<<<<<<<<<
+ *     signal_line[start_idx + signal_period - 1] = current_signal
+ * 
+*/
+  __pyx_v_current_signal = (__pyx_v_sum_macd / ((double)__pyx_v_signal_period));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":234
+ *         sum_macd += macd_line[i]
+ *     cdef double current_signal = sum_macd / signal_period
+ *     signal_line[start_idx + signal_period - 1] = current_signal             # <<<<<<<<<<<<<<
+ * 
+ *     # 2. Sequential Wilder's EMA loop for signal line
+*/
+  __pyx_t_14 = ((__pyx_v_start_idx + __pyx_v_signal_period) - 1);
+  *((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_14 * __pyx_v_signal_line.strides[0]) )) = __pyx_v_current_signal;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":237
+ * 
+ *     # 2. Sequential Wilder's EMA loop for signal line
+ *     for i in range(start_idx + signal_period, n):             # <<<<<<<<<<<<<<
+ *         current_signal = (macd_line[i] * alpha_sig) + (current_signal * (1.0 - alpha_sig))
+ *         signal_line[i] = current_signal
+*/
+  __pyx_t_12 = __pyx_v_n;
+  __pyx_t_11 = __pyx_t_12;
+  for (__pyx_t_9 = (__pyx_v_start_idx + __pyx_v_signal_period); __pyx_t_9 < __pyx_t_11; __pyx_t_9+=1) {
+    __pyx_v_i = __pyx_t_9;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":238
+ *     # 2. Sequential Wilder's EMA loop for signal line
+ *     for i in range(start_idx + signal_period, n):
+ *         current_signal = (macd_line[i] * alpha_sig) + (current_signal * (1.0 - alpha_sig))             # <<<<<<<<<<<<<<
+ *         signal_line[i] = current_signal
+ * 
+*/
+    __pyx_t_14 = __pyx_v_i;
+    __pyx_v_current_signal = (((*((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_14 * __pyx_v_macd_line.strides[0]) ))) * __pyx_v_alpha_sig) + (__pyx_v_current_signal * (1.0 - __pyx_v_alpha_sig)));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":239
+ *     for i in range(start_idx + signal_period, n):
+ *         current_signal = (macd_line[i] * alpha_sig) + (current_signal * (1.0 - alpha_sig))
+ *         signal_line[i] = current_signal             # <<<<<<<<<<<<<<
+ * 
+ *     # 3. Parallel compute Histogram loop
+*/
+    __pyx_t_14 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_14 * __pyx_v_signal_line.strides[0]) )) = __pyx_v_current_signal;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":242
+ * 
+ *     # 3. Parallel compute Histogram loop
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if macd_line[i] != macd_line[i] or signal_line[i] != signal_line[i]:
+ *             hist[i] = c_nan
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_12 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_9 = (__pyx_t_12 - 0 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_9 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_10, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_9; __pyx_t_11++){
+                        {
+                            __pyx_v_i = (int)(0 + 1 * __pyx_t_11);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":243
+ *     # 3. Parallel compute Histogram loop
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if macd_line[i] != macd_line[i] or signal_line[i] != signal_line[i]:             # <<<<<<<<<<<<<<
+ *             hist[i] = c_nan
+ *         else:
+*/
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_13 = __pyx_v_i;
+                            __pyx_t_15 = ((*((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_14 * __pyx_v_macd_line.strides[0]) ))) != (*((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_13 * __pyx_v_macd_line.strides[0]) ))));
+                            if (!__pyx_t_15) {
+                            } else {
+                              __pyx_t_10 = __pyx_t_15;
+                              goto __pyx_L32_bool_binop_done;
+                            }
+                            __pyx_t_13 = __pyx_v_i;
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_15 = ((*((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_13 * __pyx_v_signal_line.strides[0]) ))) != (*((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_14 * __pyx_v_signal_line.strides[0]) ))));
+                            __pyx_t_10 = __pyx_t_15;
+                            __pyx_L32_bool_binop_done:;
+                            if (__pyx_t_10) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":244
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if macd_line[i] != macd_line[i] or signal_line[i] != signal_line[i]:
+ *             hist[i] = c_nan             # <<<<<<<<<<<<<<
+ *         else:
+ *             hist[i] = macd_line[i] - signal_line[i]
+*/
+                              __pyx_t_14 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_hist.data + __pyx_t_14 * __pyx_v_hist.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":243
+ *     # 3. Parallel compute Histogram loop
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if macd_line[i] != macd_line[i] or signal_line[i] != signal_line[i]:             # <<<<<<<<<<<<<<
+ *             hist[i] = c_nan
+ *         else:
+*/
+                              goto __pyx_L31;
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":246
+ *             hist[i] = c_nan
+ *         else:
+ *             hist[i] = macd_line[i] - signal_line[i]             # <<<<<<<<<<<<<<
+ * 
+ *     return macd_line_arr, signal_line_arr, hist_arr
+*/
+                            /*else*/ {
+                              __pyx_t_14 = __pyx_v_i;
+                              __pyx_t_13 = __pyx_v_i;
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_hist.data + __pyx_t_16 * __pyx_v_hist.strides[0]) )) = ((*((double *) ( /* dim=0 */ (__pyx_v_macd_line.data + __pyx_t_14 * __pyx_v_macd_line.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_signal_line.data + __pyx_t_13 * __pyx_v_signal_line.strides[0]) ))));
+                            }
+                            __pyx_L31:;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":242
+ * 
+ *     # 3. Parallel compute Histogram loop
+ *     for i in prange(n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if macd_line[i] != macd_line[i] or signal_line[i] != signal_line[i]:
+ *             hist[i] = c_nan
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L26;
+        }
+        __pyx_L26:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":248
+ *             hist[i] = macd_line[i] - signal_line[i]
+ * 
+ *     return macd_line_arr, signal_line_arr, hist_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF((PyObject *)__pyx_v_macd_line_arr);
+  __Pyx_GIVEREF((PyObject *)__pyx_v_macd_line_arr);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_macd_line_arr)) != (0)) __PYX_ERR(0, 248, __pyx_L1_error);
+  __Pyx_INCREF((PyObject *)__pyx_v_signal_line_arr);
+  __Pyx_GIVEREF((PyObject *)__pyx_v_signal_line_arr);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_signal_line_arr)) != (0)) __PYX_ERR(0, 248, __pyx_L1_error);
+  __Pyx_INCREF((PyObject *)__pyx_v_hist_arr);
+  __Pyx_GIVEREF((PyObject *)__pyx_v_hist_arr);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_hist_arr)) != (0)) __PYX_ERR(0, 248, __pyx_L1_error);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":182
+ * 
+ * 
+ * def compute_macd_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] values,
+ *     int fast_period,
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_hist_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_macd_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_fast_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ema_slow_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_hist_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_macd_line_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_signal_line_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_macd_line_arr);
+  __Pyx_XDECREF((PyObject *)__pyx_v_signal_line_arr);
+  __Pyx_XDECREF((PyObject *)__pyx_v_hist_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_macd_line, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_signal_line, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_hist, 1);
+  __Pyx_XDECREF((PyObject *)__pyx_v_ema_fast_arr);
+  __Pyx_XDECREF((PyObject *)__pyx_v_ema_slow_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_ema_fast, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_ema_slow, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":251
+ * 
+ * 
+ * def compute_bollinger_bands_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] values,
+ *     int period,
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_11compute_bollinger_bands_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_10compute_bollinger_bands_omp, "\n    Parallel Bollinger Bands calculation utilizing OpenMP.\n    Loops are executed in parallel without Python GIL.\n    ");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_11compute_bollinger_bands_omp = {"compute_bollinger_bands_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_11compute_bollinger_bands_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_10compute_bollinger_bands_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_11compute_bollinger_bands_omp(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19182,53 +22106,53 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_std,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 251, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 251, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 251, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 251, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 251, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_bollinger_bands_omp", 0) < (0)) __PYX_ERR(0, 71, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_bollinger_bands_omp", 0) < (0)) __PYX_ERR(0, 251, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_bollinger_bands_omp", 1, 4, 4, i); __PYX_ERR(0, 71, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_bollinger_bands_omp", 1, 4, 4, i); __PYX_ERR(0, 251, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 71, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 251, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 71, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 251, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 71, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 251, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 71, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 251, __pyx_L3_error)
     }
-    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 72, __pyx_L3_error)
-    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L3_error)
-    __pyx_v_num_std = __Pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_num_std == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 252, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 253, __pyx_L3_error)
+    __pyx_v_num_std = __Pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_num_std == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 254, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 255, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("compute_bollinger_bands_omp", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 71, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("compute_bollinger_bands_omp", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 251, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19240,7 +22164,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bollinger_bands_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_std, __pyx_v_num_threads);
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_10compute_bollinger_bands_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_std, __pyx_v_num_threads);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -19251,7 +22175,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bollinger_bands_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, double __pyx_v_num_std, int __pyx_v_num_threads) {
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_10compute_bollinger_bands_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, double __pyx_v_num_std, int __pyx_v_num_threads) {
   int __pyx_v_n;
   PyArrayObject *__pyx_v_middle_band_arr = 0;
   PyArrayObject *__pyx_v_upper_band_arr = 0;
@@ -19303,33 +22227,33 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   __pyx_pybuffernd_lower_band_arr.data = NULL;
   __pyx_pybuffernd_lower_band_arr.rcbuffer = &__pyx_pybuffer_lower_band_arr;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":81
+  /* "ai_engine/features/openmp/openmp_backend.pyx":261
  *     Loops are executed in parallel without Python GIL.
  *     """
  *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
  * 
- *     # Pre-allocate NumPy arrays and get views
+ *     cdef cnp.ndarray[double, ndim=1] middle_band_arr = np.empty(n, dtype=np.float64)
 */
   __pyx_v_n = (__pyx_v_values.shape[0]);
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":84
+  /* "ai_engine/features/openmp/openmp_backend.pyx":263
+ *     cdef int n = values.shape[0]
  * 
- *     # Pre-allocate NumPy arrays and get views
  *     cdef cnp.ndarray[double, ndim=1] middle_band_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
  *     cdef cnp.ndarray[double, ndim=1] upper_band_arr = np.empty(n, dtype=np.float64)
  *     cdef cnp.ndarray[double, ndim=1] lower_band_arr = np.empty(n, dtype=np.float64)
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_7 = 1;
@@ -19346,48 +22270,48 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
-    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 84, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 263, __pyx_L1_error)
     __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 84, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 263, __pyx_L1_error)
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_middle_band_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_middle_band_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_middle_band_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 84, __pyx_L1_error)
+      __PYX_ERR(0, 263, __pyx_L1_error)
     } else {__pyx_pybuffernd_middle_band_arr.diminfo[0].strides = __pyx_pybuffernd_middle_band_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_middle_band_arr.diminfo[0].shape = __pyx_pybuffernd_middle_band_arr.rcbuffer->pybuffer.shape[0];
     }
   }
   __pyx_v_middle_band_arr = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":85
- *     # Pre-allocate NumPy arrays and get views
+  /* "ai_engine/features/openmp/openmp_backend.pyx":264
+ * 
  *     cdef cnp.ndarray[double, ndim=1] middle_band_arr = np.empty(n, dtype=np.float64)
  *     cdef cnp.ndarray[double, ndim=1] upper_band_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
  *     cdef cnp.ndarray[double, ndim=1] lower_band_arr = np.empty(n, dtype=np.float64)
  * 
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_7 = 1;
@@ -19404,31 +22328,31 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_5};
-    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 264, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 85, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 264, __pyx_L1_error)
     __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 264, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 264, __pyx_L1_error)
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_upper_band_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_upper_band_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_upper_band_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 85, __pyx_L1_error)
+      __PYX_ERR(0, 264, __pyx_L1_error)
     } else {__pyx_pybuffernd_upper_band_arr.diminfo[0].strides = __pyx_pybuffernd_upper_band_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_upper_band_arr.diminfo[0].shape = __pyx_pybuffernd_upper_band_arr.rcbuffer->pybuffer.shape[0];
     }
   }
   __pyx_v_upper_band_arr = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":86
+  /* "ai_engine/features/openmp/openmp_backend.pyx":265
  *     cdef cnp.ndarray[double, ndim=1] middle_band_arr = np.empty(n, dtype=np.float64)
  *     cdef cnp.ndarray[double, ndim=1] upper_band_arr = np.empty(n, dtype=np.float64)
  *     cdef cnp.ndarray[double, ndim=1] lower_band_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
@@ -19436,16 +22360,16 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
  *     cdef double[:] middle_band = middle_band_arr
 */
   __pyx_t_6 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_7 = 1;
@@ -19462,69 +22386,69 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_6, __pyx_t_3};
-    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 265, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 86, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_4, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 265, __pyx_L1_error)
     __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 265, __pyx_L1_error)
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_lower_band_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_lower_band_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_lower_band_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 86, __pyx_L1_error)
+      __PYX_ERR(0, 265, __pyx_L1_error)
     } else {__pyx_pybuffernd_lower_band_arr.diminfo[0].strides = __pyx_pybuffernd_lower_band_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_lower_band_arr.diminfo[0].shape = __pyx_pybuffernd_lower_band_arr.rcbuffer->pybuffer.shape[0];
     }
   }
   __pyx_v_lower_band_arr = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":88
+  /* "ai_engine/features/openmp/openmp_backend.pyx":267
  *     cdef cnp.ndarray[double, ndim=1] lower_band_arr = np.empty(n, dtype=np.float64)
  * 
  *     cdef double[:] middle_band = middle_band_arr             # <<<<<<<<<<<<<<
  *     cdef double[:] upper_band = upper_band_arr
  *     cdef double[:] lower_band = lower_band_arr
 */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_middle_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_middle_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 267, __pyx_L1_error)
   __pyx_v_middle_band = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":89
+  /* "ai_engine/features/openmp/openmp_backend.pyx":268
  * 
  *     cdef double[:] middle_band = middle_band_arr
  *     cdef double[:] upper_band = upper_band_arr             # <<<<<<<<<<<<<<
  *     cdef double[:] lower_band = lower_band_arr
  * 
 */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_upper_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_upper_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 268, __pyx_L1_error)
   __pyx_v_upper_band = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":90
+  /* "ai_engine/features/openmp/openmp_backend.pyx":269
  *     cdef double[:] middle_band = middle_band_arr
  *     cdef double[:] upper_band = upper_band_arr
  *     cdef double[:] lower_band = lower_band_arr             # <<<<<<<<<<<<<<
  * 
  *     cdef int i
 */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_lower_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_lower_band_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 269, __pyx_L1_error)
   __pyx_v_lower_band = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":95
+  /* "ai_engine/features/openmp/openmp_backend.pyx":273
+ *     cdef int i
  * 
- *     # Set leading indices to NaN using C-constant
  *     for i in range(period - 1):             # <<<<<<<<<<<<<<
  *         middle_band[i] = c_nan
  *         upper_band[i] = c_nan
@@ -19534,8 +22458,8 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":96
- *     # Set leading indices to NaN using C-constant
+    /* "ai_engine/features/openmp/openmp_backend.pyx":274
+ * 
  *     for i in range(period - 1):
  *         middle_band[i] = c_nan             # <<<<<<<<<<<<<<
  *         upper_band[i] = c_nan
@@ -19544,7 +22468,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
     __pyx_t_12 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_middle_band.data + __pyx_t_12 * __pyx_v_middle_band.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":97
+    /* "ai_engine/features/openmp/openmp_backend.pyx":275
  *     for i in range(period - 1):
  *         middle_band[i] = c_nan
  *         upper_band[i] = c_nan             # <<<<<<<<<<<<<<
@@ -19554,7 +22478,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
     __pyx_t_12 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_upper_band.data + __pyx_t_12 * __pyx_v_upper_band.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":98
+    /* "ai_engine/features/openmp/openmp_backend.pyx":276
  *         middle_band[i] = c_nan
  *         upper_band[i] = c_nan
  *         lower_band[i] = c_nan             # <<<<<<<<<<<<<<
@@ -19565,7 +22489,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
     *((double *) ( /* dim=0 */ (__pyx_v_lower_band.data + __pyx_t_12 * __pyx_v_lower_band.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":100
+  /* "ai_engine/features/openmp/openmp_backend.pyx":278
  *         lower_band[i] = c_nan
  * 
  *     if n < period:             # <<<<<<<<<<<<<<
@@ -19575,7 +22499,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
   if (__pyx_t_13) {
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":101
+    /* "ai_engine/features/openmp/openmp_backend.pyx":279
  * 
  *     if n < period:
  *         return middle_band_arr, upper_band_arr, lower_band_arr             # <<<<<<<<<<<<<<
@@ -19583,22 +22507,22 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
  *     cdef double mean_val, std_val
 */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 279, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF((PyObject *)__pyx_v_middle_band_arr);
     __Pyx_GIVEREF((PyObject *)__pyx_v_middle_band_arr);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_middle_band_arr)) != (0)) __PYX_ERR(0, 101, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_middle_band_arr)) != (0)) __PYX_ERR(0, 279, __pyx_L1_error);
     __Pyx_INCREF((PyObject *)__pyx_v_upper_band_arr);
     __Pyx_GIVEREF((PyObject *)__pyx_v_upper_band_arr);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_upper_band_arr)) != (0)) __PYX_ERR(0, 101, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_upper_band_arr)) != (0)) __PYX_ERR(0, 279, __pyx_L1_error);
     __Pyx_INCREF((PyObject *)__pyx_v_lower_band_arr);
     __Pyx_GIVEREF((PyObject *)__pyx_v_lower_band_arr);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_lower_band_arr)) != (0)) __PYX_ERR(0, 101, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_lower_band_arr)) != (0)) __PYX_ERR(0, 279, __pyx_L1_error);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":100
+    /* "ai_engine/features/openmp/openmp_backend.pyx":278
  *         lower_band[i] = c_nan
  * 
  *     if n < period:             # <<<<<<<<<<<<<<
@@ -19607,12 +22531,12 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
 */
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":104
+  /* "ai_engine/features/openmp/openmp_backend.pyx":282
  * 
  *     cdef double mean_val, std_val
  *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
  * 
- *     # Parallel sliding window calculation (thread variables are private automatically)
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
 */
   __pyx_t_13 = (__pyx_v_num_threads > 0);
   if (__pyx_t_13) {
@@ -19622,9 +22546,9 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
   }
   __pyx_v_threads_to_use = __pyx_t_11;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":107
+  /* "ai_engine/features/openmp/openmp_backend.pyx":284
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
  * 
- *     # Parallel sliding window calculation (thread variables are private automatically)
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
  *         mean_val = c_mean(values, i - period + 1, i + 1)
  *         std_val = c_std(values, i - period + 1, i + 1, mean_val)
@@ -19669,27 +22593,27 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
                         {
                             __pyx_v_i = (int)(__pyx_t_9 + 1 * __pyx_t_10);
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":108
- *     # Parallel sliding window calculation (thread variables are private automatically)
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":285
+ * 
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
  *         mean_val = c_mean(values, i - period + 1, i + 1)             # <<<<<<<<<<<<<<
  *         std_val = c_std(values, i - period + 1, i + 1, mean_val)
  * 
 */
-                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_mean(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1)); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 108, __pyx_L11_error)
+                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_mean(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1)); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 285, __pyx_L11_error)
                             __pyx_v_mean_val = __pyx_t_15;
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":109
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":286
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
  *         mean_val = c_mean(values, i - period + 1, i + 1)
  *         std_val = c_std(values, i - period + 1, i + 1, mean_val)             # <<<<<<<<<<<<<<
  * 
  *         middle_band[i] = mean_val
 */
-                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_std(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1), __pyx_v_mean_val); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 109, __pyx_L11_error)
+                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_std(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1), __pyx_v_mean_val); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 286, __pyx_L11_error)
                             __pyx_v_std_val = __pyx_t_15;
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":111
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":288
  *         std_val = c_std(values, i - period + 1, i + 1, mean_val)
  * 
  *         middle_band[i] = mean_val             # <<<<<<<<<<<<<<
@@ -19699,7 +22623,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
                             __pyx_t_12 = __pyx_v_i;
                             *((double *) ( /* dim=0 */ (__pyx_v_middle_band.data + __pyx_t_12 * __pyx_v_middle_band.strides[0]) )) = __pyx_v_mean_val;
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":112
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":289
  * 
  *         middle_band[i] = mean_val
  *         upper_band[i] = mean_val + num_std * std_val             # <<<<<<<<<<<<<<
@@ -19709,7 +22633,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_2compute_bolling
                             __pyx_t_12 = __pyx_v_i;
                             *((double *) ( /* dim=0 */ (__pyx_v_upper_band.data + __pyx_t_12 * __pyx_v_upper_band.strides[0]) )) = (__pyx_v_mean_val + (__pyx_v_num_std * __pyx_v_std_val));
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":113
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":290
  *         middle_band[i] = mean_val
  *         upper_band[i] = mean_val + num_std * std_val
  *         lower_band[i] = mean_val - num_std * std_val             # <<<<<<<<<<<<<<
@@ -19791,9 +22715,9 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         #endif
       }
 
-      /* "ai_engine/features/openmp/openmp_backend.pyx":107
+      /* "ai_engine/features/openmp/openmp_backend.pyx":284
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
  * 
- *     # Parallel sliding window calculation (thread variables are private automatically)
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
  *         mean_val = c_mean(values, i - period + 1, i + 1)
  *         std_val = c_std(values, i - period + 1, i + 1, mean_val)
@@ -19813,7 +22737,7 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       }
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":115
+  /* "ai_engine/features/openmp/openmp_backend.pyx":292
  *         lower_band[i] = mean_val - num_std * std_val
  * 
  *     return middle_band_arr, upper_band_arr, lower_band_arr             # <<<<<<<<<<<<<<
@@ -19821,23 +22745,23 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
  * 
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF((PyObject *)__pyx_v_middle_band_arr);
   __Pyx_GIVEREF((PyObject *)__pyx_v_middle_band_arr);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_middle_band_arr)) != (0)) __PYX_ERR(0, 115, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_middle_band_arr)) != (0)) __PYX_ERR(0, 292, __pyx_L1_error);
   __Pyx_INCREF((PyObject *)__pyx_v_upper_band_arr);
   __Pyx_GIVEREF((PyObject *)__pyx_v_upper_band_arr);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_upper_band_arr)) != (0)) __PYX_ERR(0, 115, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_v_upper_band_arr)) != (0)) __PYX_ERR(0, 292, __pyx_L1_error);
   __Pyx_INCREF((PyObject *)__pyx_v_lower_band_arr);
   __Pyx_GIVEREF((PyObject *)__pyx_v_lower_band_arr);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_lower_band_arr)) != (0)) __PYX_ERR(0, 115, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_v_lower_band_arr)) != (0)) __PYX_ERR(0, 292, __pyx_L1_error);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":71
- * # =========================================================================
+  /* "ai_engine/features/openmp/openmp_backend.pyx":251
+ * 
  * 
  * def compute_bollinger_bands_omp(             # <<<<<<<<<<<<<<
  *     const double[:] values,
@@ -19880,7 +22804,3029 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   return __pyx_r;
 }
 
-/* "ai_engine/features/openmp/openmp_backend.pyx":118
+/* "ai_engine/features/openmp/openmp_backend.pyx":295
+ * 
+ * 
+ * def compute_atr_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] high,
+ *     const double[:] low,
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_13compute_atr_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_12compute_atr_omp, "\n    Calculates Average True Range (ATR) using OpenMP.\n    The True Range loop is parallelized; smoothing is computed sequentially.\n    ");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_13compute_atr_omp = {"compute_atr_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_13compute_atr_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_12compute_atr_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_13compute_atr_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_high = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_low = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_close = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[5] = {0,0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_atr_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_high,&__pyx_mstate_global->__pyx_n_u_low,&__pyx_mstate_global->__pyx_n_u_close,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 295, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  5:
+        values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 295, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 295, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 295, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 295, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 295, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_atr_omp", 0) < (0)) __PYX_ERR(0, 295, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_atr_omp", 1, 5, 5, i); __PYX_ERR(0, 295, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 5)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 295, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 295, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 295, __pyx_L3_error)
+      values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 295, __pyx_L3_error)
+      values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 295, __pyx_L3_error)
+    }
+    __pyx_v_high = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_high.memview)) __PYX_ERR(0, 296, __pyx_L3_error)
+    __pyx_v_low = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[1], 0); if (unlikely(!__pyx_v_low.memview)) __PYX_ERR(0, 297, __pyx_L3_error)
+    __pyx_v_close = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[2], 0); if (unlikely(!__pyx_v_close.memview)) __PYX_ERR(0, 298, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 299, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 300, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_atr_omp", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 295, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_high, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_low, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_atr_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_12compute_atr_omp(__pyx_self, __pyx_v_high, __pyx_v_low, __pyx_v_close, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_high, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_low, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_12compute_atr_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_high, __Pyx_memviewslice __pyx_v_low, __Pyx_memviewslice __pyx_v_close, int __pyx_v_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_atr_arr = 0;
+  __Pyx_memviewslice __pyx_v_atr = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  PyArrayObject *__pyx_v_tr_arr = 0;
+  __Pyx_memviewslice __pyx_v_tr = { 0, 0, { 0 }, { 0 }, { 0 } };
+  double __pyx_v_val1;
+  double __pyx_v_val2;
+  double __pyx_v_val3;
+  double __pyx_v_max_val;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  double __pyx_v_tr_sum;
+  double __pyx_v_atr_val;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_atr_arr;
+  __Pyx_Buffer __pyx_pybuffer_atr_arr;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_tr_arr;
+  __Pyx_Buffer __pyx_pybuffer_tr_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  Py_ssize_t __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  long __pyx_t_16;
+  long __pyx_t_17;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_atr_omp", 0);
+  __pyx_pybuffer_atr_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_atr_arr.refcount = 0;
+  __pyx_pybuffernd_atr_arr.data = NULL;
+  __pyx_pybuffernd_atr_arr.rcbuffer = &__pyx_pybuffer_atr_arr;
+  __pyx_pybuffer_tr_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_tr_arr.refcount = 0;
+  __pyx_pybuffernd_tr_arr.data = NULL;
+  __pyx_pybuffernd_tr_arr.rcbuffer = &__pyx_pybuffer_tr_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":306
+ *     The True Range loop is parallelized; smoothing is computed sequentially.
+ *     """
+ *     cdef int n = close.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] atr = atr_arr
+*/
+  __pyx_v_n = (__pyx_v_close.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":307
+ *     """
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] atr = atr_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 307, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 307, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 307, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_atr_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 307, __pyx_L1_error)
+    } else {__pyx_pybuffernd_atr_arr.diminfo[0].strides = __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_atr_arr.diminfo[0].shape = __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_atr_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":308
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] atr = atr_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_atr_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 308, __pyx_L1_error)
+  __pyx_v_atr = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":311
+ *     cdef int i
+ * 
+ *     for i in range(period):             # <<<<<<<<<<<<<<
+ *         atr[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = __pyx_v_period;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":312
+ * 
+ *     for i in range(period):
+ *         atr[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n <= period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":314
+ *         atr[i] = c_nan
+ * 
+ *     if n <= period:             # <<<<<<<<<<<<<<
+ *         return atr_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n <= __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":315
+ * 
+ *     if n <= period:
+ *         return atr_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_atr_arr);
+    __pyx_r = ((PyObject *)__pyx_v_atr_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":314
+ *         atr[i] = c_nan
+ * 
+ *     if n <= period:             # <<<<<<<<<<<<<<
+ *         return atr_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":317
+ *         return atr_arr
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] tr = tr_arr
+ *     tr[0] = high[0] - low[0]
+*/
+  __pyx_t_4 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_6);
+    assert(__pyx_t_4);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_5};
+    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 317, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 317, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_tr_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 317, __pyx_L1_error)
+    } else {__pyx_pybuffernd_tr_arr.diminfo[0].strides = __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_tr_arr.diminfo[0].shape = __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_tr_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":318
+ * 
+ *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] tr = tr_arr             # <<<<<<<<<<<<<<
+ *     tr[0] = high[0] - low[0]
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_tr_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __pyx_v_tr = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":319
+ *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] tr = tr_arr
+ *     tr[0] = high[0] - low[0]             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double val1, val2, val3, max_val
+*/
+  __pyx_t_12 = 0;
+  __pyx_t_14 = 0;
+  __pyx_t_15 = 0;
+  *((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_15 * __pyx_v_tr.strides[0]) )) = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_12 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_14 * __pyx_v_low.strides[0]) ))));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":322
+ * 
+ *     cdef double val1, val2, val3, max_val
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ * 
+ *     # Parallel True Range Loop
+*/
+  __pyx_t_13 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_13) {
+    __pyx_t_9 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_9 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_9;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":325
+ * 
+ *     # Parallel True Range Loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         val1 = high[i] - low[i]
+ *         val2 = high[i] - close[i - 1]
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_17 = (__pyx_t_9 - 1 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_17 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_13, __pyx_t_14)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) firstprivate(__pyx_v_max_val) lastprivate(__pyx_v_max_val) firstprivate(__pyx_v_val1) lastprivate(__pyx_v_val1) firstprivate(__pyx_v_val2) lastprivate(__pyx_v_val2) firstprivate(__pyx_v_val3) lastprivate(__pyx_v_val3) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_17; __pyx_t_16++){
+                        {
+                            __pyx_v_i = (int)(1 + 1 * __pyx_t_16);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":326
+ *     # Parallel True Range Loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         val1 = high[i] - low[i]             # <<<<<<<<<<<<<<
+ *         val2 = high[i] - close[i - 1]
+ *         val3 = low[i] - close[i - 1]
+*/
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_12 = __pyx_v_i;
+                            __pyx_v_val1 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_14 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_12 * __pyx_v_low.strides[0]) ))));
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":327
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         val1 = high[i] - low[i]
+ *         val2 = high[i] - close[i - 1]             # <<<<<<<<<<<<<<
+ *         val3 = low[i] - close[i - 1]
+ * 
+*/
+                            __pyx_t_12 = __pyx_v_i;
+                            __pyx_t_14 = (__pyx_v_i - 1);
+                            __pyx_v_val2 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_12 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_14 * __pyx_v_close.strides[0]) ))));
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":328
+ *         val1 = high[i] - low[i]
+ *         val2 = high[i] - close[i - 1]
+ *         val3 = low[i] - close[i - 1]             # <<<<<<<<<<<<<<
+ * 
+ *         if val2 < 0.0:
+*/
+                            __pyx_t_14 = __pyx_v_i;
+                            __pyx_t_12 = (__pyx_v_i - 1);
+                            __pyx_v_val3 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_14 * __pyx_v_low.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_12 * __pyx_v_close.strides[0]) ))));
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":330
+ *         val3 = low[i] - close[i - 1]
+ * 
+ *         if val2 < 0.0:             # <<<<<<<<<<<<<<
+ *             val2 = -val2
+ *         if val3 < 0.0:
+*/
+                            __pyx_t_13 = (__pyx_v_val2 < 0.0);
+                            if (__pyx_t_13) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":331
+ * 
+ *         if val2 < 0.0:
+ *             val2 = -val2             # <<<<<<<<<<<<<<
+ *         if val3 < 0.0:
+ *             val3 = -val3
+*/
+                              __pyx_v_val2 = (-__pyx_v_val2);
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":330
+ *         val3 = low[i] - close[i - 1]
+ * 
+ *         if val2 < 0.0:             # <<<<<<<<<<<<<<
+ *             val2 = -val2
+ *         if val3 < 0.0:
+*/
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":332
+ *         if val2 < 0.0:
+ *             val2 = -val2
+ *         if val3 < 0.0:             # <<<<<<<<<<<<<<
+ *             val3 = -val3
+ * 
+*/
+                            __pyx_t_13 = (__pyx_v_val3 < 0.0);
+                            if (__pyx_t_13) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":333
+ *             val2 = -val2
+ *         if val3 < 0.0:
+ *             val3 = -val3             # <<<<<<<<<<<<<<
+ * 
+ *         max_val = val1
+*/
+                              __pyx_v_val3 = (-__pyx_v_val3);
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":332
+ *         if val2 < 0.0:
+ *             val2 = -val2
+ *         if val3 < 0.0:             # <<<<<<<<<<<<<<
+ *             val3 = -val3
+ * 
+*/
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":335
+ *             val3 = -val3
+ * 
+ *         max_val = val1             # <<<<<<<<<<<<<<
+ *         if val2 > max_val:
+ *             max_val = val2
+*/
+                            __pyx_v_max_val = __pyx_v_val1;
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":336
+ * 
+ *         max_val = val1
+ *         if val2 > max_val:             # <<<<<<<<<<<<<<
+ *             max_val = val2
+ *         if val3 > max_val:
+*/
+                            __pyx_t_13 = (__pyx_v_val2 > __pyx_v_max_val);
+                            if (__pyx_t_13) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":337
+ *         max_val = val1
+ *         if val2 > max_val:
+ *             max_val = val2             # <<<<<<<<<<<<<<
+ *         if val3 > max_val:
+ *             max_val = val3
+*/
+                              __pyx_v_max_val = __pyx_v_val2;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":336
+ * 
+ *         max_val = val1
+ *         if val2 > max_val:             # <<<<<<<<<<<<<<
+ *             max_val = val2
+ *         if val3 > max_val:
+*/
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":338
+ *         if val2 > max_val:
+ *             max_val = val2
+ *         if val3 > max_val:             # <<<<<<<<<<<<<<
+ *             max_val = val3
+ * 
+*/
+                            __pyx_t_13 = (__pyx_v_val3 > __pyx_v_max_val);
+                            if (__pyx_t_13) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":339
+ *             max_val = val2
+ *         if val3 > max_val:
+ *             max_val = val3             # <<<<<<<<<<<<<<
+ * 
+ *         tr[i] = max_val
+*/
+                              __pyx_v_max_val = __pyx_v_val3;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":338
+ *         if val2 > max_val:
+ *             max_val = val2
+ *         if val3 > max_val:             # <<<<<<<<<<<<<<
+ *             max_val = val3
+ * 
+*/
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":341
+ *             max_val = val3
+ * 
+ *         tr[i] = max_val             # <<<<<<<<<<<<<<
+ * 
+ *     # Seeding ATR
+*/
+                            __pyx_t_12 = __pyx_v_i;
+                            *((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) )) = __pyx_v_max_val;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":325
+ * 
+ *     # Parallel True Range Loop
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         val1 = high[i] - low[i]
+ *         val2 = high[i] - close[i - 1]
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L8;
+        }
+        __pyx_L8:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":344
+ * 
+ *     # Seeding ATR
+ *     cdef double tr_sum = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(period):
+ *         tr_sum += tr[i]
+*/
+  __pyx_v_tr_sum = 0.0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":345
+ *     # Seeding ATR
+ *     cdef double tr_sum = 0.0
+ *     for i in range(period):             # <<<<<<<<<<<<<<
+ *         tr_sum += tr[i]
+ *     cdef double atr_val = tr_sum / period
+*/
+  __pyx_t_9 = __pyx_v_period;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":346
+ *     cdef double tr_sum = 0.0
+ *     for i in range(period):
+ *         tr_sum += tr[i]             # <<<<<<<<<<<<<<
+ *     cdef double atr_val = tr_sum / period
+ *     atr[period - 1] = atr_val
+*/
+    __pyx_t_12 = __pyx_v_i;
+    __pyx_v_tr_sum = (__pyx_v_tr_sum + (*((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) ))));
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":347
+ *     for i in range(period):
+ *         tr_sum += tr[i]
+ *     cdef double atr_val = tr_sum / period             # <<<<<<<<<<<<<<
+ *     atr[period - 1] = atr_val
+ * 
+*/
+  __pyx_v_atr_val = (__pyx_v_tr_sum / ((double)__pyx_v_period));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":348
+ *         tr_sum += tr[i]
+ *     cdef double atr_val = tr_sum / period
+ *     atr[period - 1] = atr_val             # <<<<<<<<<<<<<<
+ * 
+ *     # Wilder's smoothing loop (sequential)
+*/
+  __pyx_t_12 = (__pyx_v_period - 1);
+  *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_atr_val;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":351
+ * 
+ *     # Wilder's smoothing loop (sequential)
+ *     for i in range(period, n):             # <<<<<<<<<<<<<<
+ *         atr_val = (atr_val * (period - 1) + tr[i]) / period
+ *         atr[i] = atr_val
+*/
+  __pyx_t_9 = __pyx_v_n;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = __pyx_v_period; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":352
+ *     # Wilder's smoothing loop (sequential)
+ *     for i in range(period, n):
+ *         atr_val = (atr_val * (period - 1) + tr[i]) / period             # <<<<<<<<<<<<<<
+ *         atr[i] = atr_val
+ * 
+*/
+    __pyx_t_12 = __pyx_v_i;
+    __pyx_v_atr_val = (((__pyx_v_atr_val * (__pyx_v_period - 1)) + (*((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) )))) / ((double)__pyx_v_period));
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":353
+ *     for i in range(period, n):
+ *         atr_val = (atr_val * (period - 1) + tr[i]) / period
+ *         atr[i] = atr_val             # <<<<<<<<<<<<<<
+ * 
+ *     return atr_arr
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_atr_val;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":355
+ *         atr[i] = atr_val
+ * 
+ *     return atr_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_atr_arr);
+  __pyx_r = ((PyObject *)__pyx_v_atr_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":295
+ * 
+ * 
+ * def compute_atr_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] high,
+ *     const double[:] low,
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_atr_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_atr_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_atr, 1);
+  __Pyx_XDECREF((PyObject *)__pyx_v_tr_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_tr, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":358
+ * 
+ * 
+ * def compute_obv_omp(const double[:] close, const double[:] volume, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Computes On-Balance Volume (OBV) cumulative indicator."""
+ *     cdef int n = close.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_15compute_obv_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_14compute_obv_omp, "Computes On-Balance Volume (OBV) cumulative indicator.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_15compute_obv_omp = {"compute_obv_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_15compute_obv_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_14compute_obv_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_15compute_obv_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_close = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_volume = { 0, 0, { 0 }, { 0 }, { 0 } };
+  CYTHON_UNUSED int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_obv_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_close,&__pyx_mstate_global->__pyx_n_u_volume,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 358, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 358, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 358, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 358, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_obv_omp", 0) < (0)) __PYX_ERR(0, 358, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_obv_omp", 1, 3, 3, i); __PYX_ERR(0, 358, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 358, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 358, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 358, __pyx_L3_error)
+    }
+    __pyx_v_close = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_close.memview)) __PYX_ERR(0, 358, __pyx_L3_error)
+    __pyx_v_volume = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[1], 0); if (unlikely(!__pyx_v_volume.memview)) __PYX_ERR(0, 358, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_obv_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 358, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_volume, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_obv_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_14compute_obv_omp(__pyx_self, __pyx_v_close, __pyx_v_volume, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_volume, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_14compute_obv_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, __Pyx_memviewslice __pyx_v_volume, CYTHON_UNUSED int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_obv_arr = 0;
+  __Pyx_memviewslice __pyx_v_obv = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  double __pyx_v_current_obv;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_obv_arr;
+  __Pyx_Buffer __pyx_pybuffer_obv_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  Py_ssize_t __pyx_t_10;
+  Py_ssize_t __pyx_t_11;
+  int __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_t_14;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_obv_omp", 0);
+  __pyx_pybuffer_obv_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_obv_arr.refcount = 0;
+  __pyx_pybuffernd_obv_arr.data = NULL;
+  __pyx_pybuffernd_obv_arr.rcbuffer = &__pyx_pybuffer_obv_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":360
+ * def compute_obv_omp(const double[:] close, const double[:] volume, int num_threads):
+ *     """Computes On-Balance Volume (OBV) cumulative indicator."""
+ *     cdef int n = close.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] obv_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] obv = obv_arr
+*/
+  __pyx_v_n = (__pyx_v_close.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":361
+ *     """Computes On-Balance Volume (OBV) cumulative indicator."""
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] obv_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] obv = obv_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 361, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 361, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 361, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_obv_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_obv_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_obv_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 361, __pyx_L1_error)
+    } else {__pyx_pybuffernd_obv_arr.diminfo[0].strides = __pyx_pybuffernd_obv_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_obv_arr.diminfo[0].shape = __pyx_pybuffernd_obv_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_obv_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":362
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] obv_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] obv = obv_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_obv_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 362, __pyx_L1_error)
+  __pyx_v_obv = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":365
+ *     cdef int i
+ * 
+ *     if n == 0:             # <<<<<<<<<<<<<<
+ *         return obv_arr
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_n == 0);
+  if (__pyx_t_9) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":366
+ * 
+ *     if n == 0:
+ *         return obv_arr             # <<<<<<<<<<<<<<
+ * 
+ *     obv[0] = volume[0]
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_obv_arr);
+    __pyx_r = ((PyObject *)__pyx_v_obv_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":365
+ *     cdef int i
+ * 
+ *     if n == 0:             # <<<<<<<<<<<<<<
+ *         return obv_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":368
+ *         return obv_arr
+ * 
+ *     obv[0] = volume[0]             # <<<<<<<<<<<<<<
+ *     cdef double current_obv = volume[0]
+ * 
+*/
+  __pyx_t_10 = 0;
+  __pyx_t_11 = 0;
+  *((double *) ( /* dim=0 */ (__pyx_v_obv.data + __pyx_t_11 * __pyx_v_obv.strides[0]) )) = (*((double const  *) ( /* dim=0 */ (__pyx_v_volume.data + __pyx_t_10 * __pyx_v_volume.strides[0]) )));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":369
+ * 
+ *     obv[0] = volume[0]
+ *     cdef double current_obv = volume[0]             # <<<<<<<<<<<<<<
+ * 
+ *     # Cumulative calculation (sequential)
+*/
+  __pyx_t_10 = 0;
+  __pyx_v_current_obv = (*((double const  *) ( /* dim=0 */ (__pyx_v_volume.data + __pyx_t_10 * __pyx_v_volume.strides[0]) )));
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":372
+ * 
+ *     # Cumulative calculation (sequential)
+ *     for i in range(1, n):             # <<<<<<<<<<<<<<
+ *         if close[i] > close[i - 1]:
+ *             current_obv += volume[i]
+*/
+  __pyx_t_12 = __pyx_v_n;
+  __pyx_t_13 = __pyx_t_12;
+  for (__pyx_t_14 = 1; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
+    __pyx_v_i = __pyx_t_14;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":373
+ *     # Cumulative calculation (sequential)
+ *     for i in range(1, n):
+ *         if close[i] > close[i - 1]:             # <<<<<<<<<<<<<<
+ *             current_obv += volume[i]
+ *         elif close[i] < close[i - 1]:
+*/
+    __pyx_t_10 = __pyx_v_i;
+    __pyx_t_11 = (__pyx_v_i - 1);
+    __pyx_t_9 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))) > (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_11 * __pyx_v_close.strides[0]) ))));
+    if (__pyx_t_9) {
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":374
+ *     for i in range(1, n):
+ *         if close[i] > close[i - 1]:
+ *             current_obv += volume[i]             # <<<<<<<<<<<<<<
+ *         elif close[i] < close[i - 1]:
+ *             current_obv -= volume[i]
+*/
+      __pyx_t_11 = __pyx_v_i;
+      __pyx_v_current_obv = (__pyx_v_current_obv + (*((double const  *) ( /* dim=0 */ (__pyx_v_volume.data + __pyx_t_11 * __pyx_v_volume.strides[0]) ))));
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":373
+ *     # Cumulative calculation (sequential)
+ *     for i in range(1, n):
+ *         if close[i] > close[i - 1]:             # <<<<<<<<<<<<<<
+ *             current_obv += volume[i]
+ *         elif close[i] < close[i - 1]:
+*/
+      goto __pyx_L6;
+    }
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":375
+ *         if close[i] > close[i - 1]:
+ *             current_obv += volume[i]
+ *         elif close[i] < close[i - 1]:             # <<<<<<<<<<<<<<
+ *             current_obv -= volume[i]
+ *         obv[i] = current_obv
+*/
+    __pyx_t_11 = __pyx_v_i;
+    __pyx_t_10 = (__pyx_v_i - 1);
+    __pyx_t_9 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_11 * __pyx_v_close.strides[0]) ))) < (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))));
+    if (__pyx_t_9) {
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":376
+ *             current_obv += volume[i]
+ *         elif close[i] < close[i - 1]:
+ *             current_obv -= volume[i]             # <<<<<<<<<<<<<<
+ *         obv[i] = current_obv
+ * 
+*/
+      __pyx_t_10 = __pyx_v_i;
+      __pyx_v_current_obv = (__pyx_v_current_obv - (*((double const  *) ( /* dim=0 */ (__pyx_v_volume.data + __pyx_t_10 * __pyx_v_volume.strides[0]) ))));
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":375
+ *         if close[i] > close[i - 1]:
+ *             current_obv += volume[i]
+ *         elif close[i] < close[i - 1]:             # <<<<<<<<<<<<<<
+ *             current_obv -= volume[i]
+ *         obv[i] = current_obv
+*/
+    }
+    __pyx_L6:;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":377
+ *         elif close[i] < close[i - 1]:
+ *             current_obv -= volume[i]
+ *         obv[i] = current_obv             # <<<<<<<<<<<<<<
+ * 
+ *     return obv_arr
+*/
+    __pyx_t_10 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_obv.data + __pyx_t_10 * __pyx_v_obv.strides[0]) )) = __pyx_v_current_obv;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":379
+ *         obv[i] = current_obv
+ * 
+ *     return obv_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_obv_arr);
+  __pyx_r = ((PyObject *)__pyx_v_obv_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":358
+ * 
+ * 
+ * def compute_obv_omp(const double[:] close, const double[:] volume, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Computes On-Balance Volume (OBV) cumulative indicator."""
+ *     cdef int n = close.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_obv_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_obv_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_obv_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_obv_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_obv, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":382
+ * 
+ * 
+ * def compute_momentum_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel momentum calculator using OpenMP loops."""
+ *     cdef int n = values.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_17compute_momentum_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_16compute_momentum_omp, "Parallel momentum calculator using OpenMP loops.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_17compute_momentum_omp = {"compute_momentum_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_17compute_momentum_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_16compute_momentum_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_17compute_momentum_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_momentum_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 382, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 382, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 382, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 382, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_momentum_omp", 0) < (0)) __PYX_ERR(0, 382, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_momentum_omp", 1, 3, 3, i); __PYX_ERR(0, 382, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 382, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 382, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 382, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 382, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 382, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 382, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_momentum_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 382, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_momentum_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_16compute_momentum_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_16compute_momentum_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_mom_arr = 0;
+  __Pyx_memviewslice __pyx_v_mom = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_mom_arr;
+  __Pyx_Buffer __pyx_pybuffer_mom_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_momentum_omp", 0);
+  __pyx_pybuffer_mom_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_mom_arr.refcount = 0;
+  __pyx_pybuffernd_mom_arr.data = NULL;
+  __pyx_pybuffernd_mom_arr.rcbuffer = &__pyx_pybuffer_mom_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":384
+ * def compute_momentum_omp(const double[:] values, int period, int num_threads):
+ *     """Parallel momentum calculator using OpenMP loops."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] mom_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] mom = mom_arr
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":385
+ *     """Parallel momentum calculator using OpenMP loops."""
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] mom_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] mom = mom_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 385, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 385, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 385, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 385, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 385, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_mom_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_mom_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_mom_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 385, __pyx_L1_error)
+    } else {__pyx_pybuffernd_mom_arr.diminfo[0].strides = __pyx_pybuffernd_mom_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_mom_arr.diminfo[0].shape = __pyx_pybuffernd_mom_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_mom_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":386
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] mom_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] mom = mom_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_mom_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 386, __pyx_L1_error)
+  __pyx_v_mom = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":389
+ *     cdef int i
+ * 
+ *     for i in range(period):             # <<<<<<<<<<<<<<
+ *         mom[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = __pyx_v_period;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":390
+ * 
+ *     for i in range(period):
+ *         mom[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n < period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_mom.data + __pyx_t_12 * __pyx_v_mom.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":392
+ *         mom[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return mom_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":393
+ * 
+ *     if n < period:
+ *         return mom_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_mom_arr);
+    __pyx_r = ((PyObject *)__pyx_v_mom_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":392
+ *         mom[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return mom_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":395
+ *         return mom_arr
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ *     for i in prange(period, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         mom[i] = values[i] - values[i - period]
+*/
+  __pyx_t_13 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_13) {
+    __pyx_t_9 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_9 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_9;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":396
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         mom[i] = values[i] - values[i - period]
+ * 
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = __pyx_v_period;
+        __pyx_t_10 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_14 = (__pyx_t_10 - __pyx_t_9 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_14 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_15, __pyx_t_16)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_14; __pyx_t_11++){
+                        {
+                            __pyx_v_i = (int)(__pyx_t_9 + 1 * __pyx_t_11);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":397
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         mom[i] = values[i] - values[i - period]             # <<<<<<<<<<<<<<
+ * 
+ *     return mom_arr
+*/
+                            __pyx_t_12 = __pyx_v_i;
+                            __pyx_t_15 = (__pyx_v_i - __pyx_v_period);
+                            __pyx_t_16 = __pyx_v_i;
+                            *((double *) ( /* dim=0 */ (__pyx_v_mom.data + __pyx_t_16 * __pyx_v_mom.strides[0]) )) = ((*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_12 * __pyx_v_values.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_15 * __pyx_v_values.strides[0]) ))));
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":396
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(period, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         mom[i] = values[i] - values[i - period]
+ * 
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L8;
+        }
+        __pyx_L8:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":399
+ *         mom[i] = values[i] - values[i - period]
+ * 
+ *     return mom_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_mom_arr);
+  __pyx_r = ((PyObject *)__pyx_v_mom_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":382
+ * 
+ * 
+ * def compute_momentum_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel momentum calculator using OpenMP loops."""
+ *     cdef int n = values.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_mom_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_momentum_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_mom_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_mom_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_mom, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":402
+ * 
+ * 
+ * def compute_daily_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Daily returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_19compute_daily_returns_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_18compute_daily_returns_omp, "Parallel Daily returns percentage calculation using OpenMP.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_19compute_daily_returns_omp = {"compute_daily_returns_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_19compute_daily_returns_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_18compute_daily_returns_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_19compute_daily_returns_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_close = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_daily_returns_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_close,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 402, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 402, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 402, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_daily_returns_omp", 0) < (0)) __PYX_ERR(0, 402, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_daily_returns_omp", 1, 2, 2, i); __PYX_ERR(0, 402, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 402, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 402, __pyx_L3_error)
+    }
+    __pyx_v_close = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_close.memview)) __PYX_ERR(0, 402, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 402, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_daily_returns_omp", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 402, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_daily_returns_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_18compute_daily_returns_omp(__pyx_self, __pyx_v_close, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_18compute_daily_returns_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_ret_arr = 0;
+  __Pyx_memviewslice __pyx_v_ret = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_ret_arr;
+  __Pyx_Buffer __pyx_pybuffer_ret_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  Py_ssize_t __pyx_t_10;
+  int __pyx_t_11;
+  long __pyx_t_12;
+  long __pyx_t_13;
+  Py_ssize_t __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_daily_returns_omp", 0);
+  __pyx_pybuffer_ret_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_ret_arr.refcount = 0;
+  __pyx_pybuffernd_ret_arr.data = NULL;
+  __pyx_pybuffernd_ret_arr.rcbuffer = &__pyx_pybuffer_ret_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":404
+ * def compute_daily_returns_omp(const double[:] close, int num_threads):
+ *     """Parallel Daily returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ret = ret_arr
+*/
+  __pyx_v_n = (__pyx_v_close.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":405
+ *     """Parallel Daily returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] ret = ret_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 405, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 405, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 405, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 405, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 405, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_ret_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 405, __pyx_L1_error)
+    } else {__pyx_pybuffernd_ret_arr.diminfo[0].strides = __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ret_arr.diminfo[0].shape = __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_ret_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":406
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ret = ret_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_ret_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_v_ret = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":409
+ *     cdef int i
+ * 
+ *     if n > 0:             # <<<<<<<<<<<<<<
+ *         ret[0] = c_nan
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_n > 0);
+  if (__pyx_t_9) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":410
+ * 
+ *     if n > 0:
+ *         ret[0] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n <= 1:
+*/
+    __pyx_t_10 = 0;
+    *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_10 * __pyx_v_ret.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":409
+ *     cdef int i
+ * 
+ *     if n > 0:             # <<<<<<<<<<<<<<
+ *         ret[0] = c_nan
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":412
+ *         ret[0] = c_nan
+ * 
+ *     if n <= 1:             # <<<<<<<<<<<<<<
+ *         return ret_arr
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_n <= 1);
+  if (__pyx_t_9) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":413
+ * 
+ *     if n <= 1:
+ *         return ret_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_ret_arr);
+    __pyx_r = ((PyObject *)__pyx_v_ret_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":412
+ *         ret[0] = c_nan
+ * 
+ *     if n <= 1:             # <<<<<<<<<<<<<<
+ *         return ret_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":415
+ *         return ret_arr
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] == 0.0:
+*/
+  __pyx_t_9 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_9) {
+    __pyx_t_11 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_11 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_11;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":416
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if close[i - 1] == 0.0:
+ *             ret[i] = 0.0
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_11 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_13 = (__pyx_t_11 - 1 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_13 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_10, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_t_9)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_13; __pyx_t_12++){
+                        {
+                            __pyx_v_i = (int)(1 + 1 * __pyx_t_12);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":417
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] == 0.0:             # <<<<<<<<<<<<<<
+ *             ret[i] = 0.0
+ *         else:
+*/
+                            __pyx_t_10 = (__pyx_v_i - 1);
+                            __pyx_t_9 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))) == 0.0);
+                            if (__pyx_t_9) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":418
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] == 0.0:
+ *             ret[i] = 0.0             # <<<<<<<<<<<<<<
+ *         else:
+ *             ret[i] = (close[i] - close[i - 1]) / close[i - 1]
+*/
+                              __pyx_t_10 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_10 * __pyx_v_ret.strides[0]) )) = 0.0;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":417
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] == 0.0:             # <<<<<<<<<<<<<<
+ *             ret[i] = 0.0
+ *         else:
+*/
+                              goto __pyx_L12;
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":420
+ *             ret[i] = 0.0
+ *         else:
+ *             ret[i] = (close[i] - close[i - 1]) / close[i - 1]             # <<<<<<<<<<<<<<
+ * 
+ *     return ret_arr
+*/
+                            /*else*/ {
+                              __pyx_t_10 = __pyx_v_i;
+                              __pyx_t_14 = (__pyx_v_i - 1);
+                              __pyx_t_15 = (__pyx_v_i - 1);
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_16 * __pyx_v_ret.strides[0]) )) = (((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_14 * __pyx_v_close.strides[0]) )))) / ((double)(*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_15 * __pyx_v_close.strides[0]) )))));
+                            }
+                            __pyx_L12:;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":416
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if close[i - 1] == 0.0:
+ *             ret[i] = 0.0
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L7;
+        }
+        __pyx_L7:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":422
+ *             ret[i] = (close[i] - close[i - 1]) / close[i - 1]
+ * 
+ *     return ret_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_ret_arr);
+  __pyx_r = ((PyObject *)__pyx_v_ret_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":402
+ * 
+ * 
+ * def compute_daily_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Daily returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_daily_returns_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_ret_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_ret, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":425
+ * 
+ * 
+ * def compute_log_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Log returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_21compute_log_returns_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_20compute_log_returns_omp, "Parallel Log returns percentage calculation using OpenMP.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_21compute_log_returns_omp = {"compute_log_returns_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_21compute_log_returns_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_20compute_log_returns_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_21compute_log_returns_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_close = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_log_returns_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_close,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 425, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 425, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 425, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_log_returns_omp", 0) < (0)) __PYX_ERR(0, 425, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_log_returns_omp", 1, 2, 2, i); __PYX_ERR(0, 425, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 425, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 425, __pyx_L3_error)
+    }
+    __pyx_v_close = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_close.memview)) __PYX_ERR(0, 425, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 425, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_log_returns_omp", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 425, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_log_returns_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_20compute_log_returns_omp(__pyx_self, __pyx_v_close, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_20compute_log_returns_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_close, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_ret_arr = 0;
+  __Pyx_memviewslice __pyx_v_ret = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_ret_arr;
+  __Pyx_Buffer __pyx_pybuffer_ret_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_9;
+  Py_ssize_t __pyx_t_10;
+  int __pyx_t_11;
+  long __pyx_t_12;
+  long __pyx_t_13;
+  int __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_log_returns_omp", 0);
+  __pyx_pybuffer_ret_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_ret_arr.refcount = 0;
+  __pyx_pybuffernd_ret_arr.data = NULL;
+  __pyx_pybuffernd_ret_arr.rcbuffer = &__pyx_pybuffer_ret_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":427
+ * def compute_log_returns_omp(const double[:] close, int num_threads):
+ *     """Parallel Log returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ret = ret_arr
+*/
+  __pyx_v_n = (__pyx_v_close.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":428
+ *     """Parallel Log returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] ret = ret_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 428, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 428, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 428, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_ret_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 428, __pyx_L1_error)
+    } else {__pyx_pybuffernd_ret_arr.diminfo[0].strides = __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ret_arr.diminfo[0].shape = __pyx_pybuffernd_ret_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_ret_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":429
+ *     cdef int n = close.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] ret = ret_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_ret_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 429, __pyx_L1_error)
+  __pyx_v_ret = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":432
+ *     cdef int i
+ * 
+ *     if n > 0:             # <<<<<<<<<<<<<<
+ *         ret[0] = c_nan
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_n > 0);
+  if (__pyx_t_9) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":433
+ * 
+ *     if n > 0:
+ *         ret[0] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n <= 1:
+*/
+    __pyx_t_10 = 0;
+    *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_10 * __pyx_v_ret.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":432
+ *     cdef int i
+ * 
+ *     if n > 0:             # <<<<<<<<<<<<<<
+ *         ret[0] = c_nan
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":435
+ *         ret[0] = c_nan
+ * 
+ *     if n <= 1:             # <<<<<<<<<<<<<<
+ *         return ret_arr
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_n <= 1);
+  if (__pyx_t_9) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":436
+ * 
+ *     if n <= 1:
+ *         return ret_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_ret_arr);
+    __pyx_r = ((PyObject *)__pyx_v_ret_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":435
+ *         ret[0] = c_nan
+ * 
+ *     if n <= 1:             # <<<<<<<<<<<<<<
+ *         return ret_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":438
+ *         return ret_arr
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:
+*/
+  __pyx_t_9 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_9) {
+    __pyx_t_11 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_11 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_11;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":439
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:
+ *             ret[i] = 0.0
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_11 = __pyx_v_n;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_13 = (__pyx_t_11 - 1 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_13 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_10, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_t_9)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_13; __pyx_t_12++){
+                        {
+                            __pyx_v_i = (int)(1 + 1 * __pyx_t_12);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":440
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:             # <<<<<<<<<<<<<<
+ *             ret[i] = 0.0
+ *         else:
+*/
+                            __pyx_t_10 = (__pyx_v_i - 1);
+                            __pyx_t_14 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))) <= 0.0);
+                            if (!__pyx_t_14) {
+                            } else {
+                              __pyx_t_9 = __pyx_t_14;
+                              goto __pyx_L13_bool_binop_done;
+                            }
+                            __pyx_t_10 = __pyx_v_i;
+                            __pyx_t_14 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) ))) <= 0.0);
+                            __pyx_t_9 = __pyx_t_14;
+                            __pyx_L13_bool_binop_done:;
+                            if (__pyx_t_9) {
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":441
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:
+ *             ret[i] = 0.0             # <<<<<<<<<<<<<<
+ *         else:
+ *             ret[i] = log(close[i] / close[i - 1])
+*/
+                              __pyx_t_10 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_10 * __pyx_v_ret.strides[0]) )) = 0.0;
+
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":440
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:             # <<<<<<<<<<<<<<
+ *             ret[i] = 0.0
+ *         else:
+*/
+                              goto __pyx_L12;
+                            }
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":443
+ *             ret[i] = 0.0
+ *         else:
+ *             ret[i] = log(close[i] / close[i - 1])             # <<<<<<<<<<<<<<
+ * 
+ *     return ret_arr
+*/
+                            /*else*/ {
+                              __pyx_t_10 = __pyx_v_i;
+                              __pyx_t_15 = (__pyx_v_i - 1);
+                              __pyx_t_16 = __pyx_v_i;
+                              *((double *) ( /* dim=0 */ (__pyx_v_ret.data + __pyx_t_16 * __pyx_v_ret.strides[0]) )) = log((((double)(*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_10 * __pyx_v_close.strides[0]) )))) / ((double)(*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_15 * __pyx_v_close.strides[0]) ))))));
+                            }
+                            __pyx_L12:;
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":439
+ * 
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         if close[i - 1] <= 0.0 or close[i] <= 0.0:
+ *             ret[i] = 0.0
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L7;
+        }
+        __pyx_L7:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":445
+ *             ret[i] = log(close[i] / close[i - 1])
+ * 
+ *     return ret_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_ret_arr);
+  __pyx_r = ((PyObject *)__pyx_v_ret_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":425
+ * 
+ * 
+ * def compute_log_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Log returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_log_returns_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ret_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_ret_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_ret, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":448
+ * 
+ * 
+ * def compute_rolling_std_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel rolling standard deviation calculation utilizing OpenMP."""
+ *     cdef int n = values.shape[0]
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_23compute_rolling_std_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_22compute_rolling_std_omp, "Parallel rolling standard deviation calculation utilizing OpenMP.");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_23compute_rolling_std_omp = {"compute_rolling_std_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_23compute_rolling_std_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_22compute_rolling_std_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_23compute_rolling_std_omp(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  __Pyx_memviewslice __pyx_v_values = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_period;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("compute_rolling_std_omp (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_values,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 448, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 448, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 448, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 448, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_rolling_std_omp", 0) < (0)) __PYX_ERR(0, 448, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_rolling_std_omp", 1, 3, 3, i); __PYX_ERR(0, 448, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 448, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 448, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 448, __pyx_L3_error)
+    }
+    __pyx_v_values = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_values.memview)) __PYX_ERR(0, 448, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 448, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 448, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("compute_rolling_std_omp", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 448, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_rolling_std_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_22compute_rolling_std_omp(__pyx_self, __pyx_v_values, __pyx_v_period, __pyx_v_num_threads);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_22compute_rolling_std_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_values, int __pyx_v_period, int __pyx_v_num_threads) {
+  int __pyx_v_n;
+  PyArrayObject *__pyx_v_std_arr = 0;
+  __Pyx_memviewslice __pyx_v_std = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_i;
+  double __pyx_v_mean_val;
+  CYTHON_UNUSED int __pyx_v_threads_to_use;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_std_arr;
+  __Pyx_Buffer __pyx_pybuffer_std_arr;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  size_t __pyx_t_7;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  long __pyx_t_9;
+  long __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  int __pyx_t_13;
+  long __pyx_t_14;
+  double __pyx_t_15;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("compute_rolling_std_omp", 0);
+  __pyx_pybuffer_std_arr.pybuffer.buf = NULL;
+  __pyx_pybuffer_std_arr.refcount = 0;
+  __pyx_pybuffernd_std_arr.data = NULL;
+  __pyx_pybuffernd_std_arr.rcbuffer = &__pyx_pybuffer_std_arr;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":450
+ * def compute_rolling_std_omp(const double[:] values, int period, int num_threads):
+ *     """Parallel rolling standard deviation calculation utilizing OpenMP."""
+ *     cdef int n = values.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef cnp.ndarray[double, ndim=1] std_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] std = std_arr
+*/
+  __pyx_v_n = (__pyx_v_values.shape[0]);
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":451
+ *     """Parallel rolling standard deviation calculation utilizing OpenMP."""
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] std_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
+ *     cdef double[:] std = std_arr
+ *     cdef int i
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 451, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_7 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_7 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 451, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 451, __pyx_L1_error)
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_std_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_std_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_std_arr.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 451, __pyx_L1_error)
+    } else {__pyx_pybuffernd_std_arr.diminfo[0].strides = __pyx_pybuffernd_std_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_std_arr.diminfo[0].shape = __pyx_pybuffernd_std_arr.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_v_std_arr = ((PyArrayObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":452
+ *     cdef int n = values.shape[0]
+ *     cdef cnp.ndarray[double, ndim=1] std_arr = np.empty(n, dtype=np.float64)
+ *     cdef double[:] std = std_arr             # <<<<<<<<<<<<<<
+ *     cdef int i
+ * 
+*/
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_std_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 452, __pyx_L1_error)
+  __pyx_v_std = __pyx_t_8;
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":455
+ *     cdef int i
+ * 
+ *     for i in range(period - 1):             # <<<<<<<<<<<<<<
+ *         std[i] = c_nan
+ * 
+*/
+  __pyx_t_9 = (__pyx_v_period - 1);
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":456
+ * 
+ *     for i in range(period - 1):
+ *         std[i] = c_nan             # <<<<<<<<<<<<<<
+ * 
+ *     if n < period:
+*/
+    __pyx_t_12 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_std.data + __pyx_t_12 * __pyx_v_std.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":458
+ *         std[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return std_arr
+ * 
+*/
+  __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
+  if (__pyx_t_13) {
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":459
+ * 
+ *     if n < period:
+ *         return std_arr             # <<<<<<<<<<<<<<
+ * 
+ *     cdef double mean_val
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF((PyObject *)__pyx_v_std_arr);
+    __pyx_r = ((PyObject *)__pyx_v_std_arr);
+    goto __pyx_L0;
+
+    /* "ai_engine/features/openmp/openmp_backend.pyx":458
+ *         std[i] = c_nan
+ * 
+ *     if n < period:             # <<<<<<<<<<<<<<
+ *         return std_arr
+ * 
+*/
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":462
+ * 
+ *     cdef double mean_val
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
+ * 
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+*/
+  __pyx_t_13 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_13) {
+    __pyx_t_11 = __pyx_v_num_threads;
+  } else {
+    __pyx_t_11 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
+  }
+  __pyx_v_threads_to_use = __pyx_t_11;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":464
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ * 
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         mean_val = c_mean(values, i - period + 1, i + 1)
+ *         std[i] = c_std(values, i - period + 1, i + 1, mean_val)
+*/
+  {
+      PyThreadState * _save;
+      _save = PyEval_SaveThread();
+      __Pyx_FastGIL_Remember();
+      /*try:*/ {
+        __pyx_t_9 = (__pyx_v_period - 1);
+        __pyx_t_11 = __pyx_v_n;
+        {
+            const char *__pyx_parallel_filename = NULL; int __pyx_parallel_lineno = 0, __pyx_parallel_clineno = 0;
+            PyObject *__pyx_parallel_exc_type = NULL, *__pyx_parallel_exc_value = NULL, *__pyx_parallel_exc_tb = NULL;
+            #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+            PyMutex __pyx_parallel_freethreading_mutex = {0};
+            #endif
+            int __pyx_parallel_why;
+            __pyx_parallel_why = 0;
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_14 = (__pyx_t_11 - __pyx_t_9 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_14 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_15) __Pyx_shared_in_cpython_freethreading(__pyx_parallel_freethreading_mutex) private(__pyx_filename, __pyx_lineno, __pyx_clineno) shared(__pyx_parallel_why, __pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    Py_BEGIN_ALLOW_THREADS
+                    #endif /* _OPENMP */
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) firstprivate(__pyx_v_mean_val) lastprivate(__pyx_v_mean_val) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_14; __pyx_t_10++){
+                        if (__pyx_parallel_why < 2)
+                        {
+                            __pyx_v_i = (int)(__pyx_t_9 + 1 * __pyx_t_10);
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":465
+ * 
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         mean_val = c_mean(values, i - period + 1, i + 1)             # <<<<<<<<<<<<<<
+ *         std[i] = c_std(values, i - period + 1, i + 1, mean_val)
+ * 
+*/
+                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_mean(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1)); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 465, __pyx_L11_error)
+                            __pyx_v_mean_val = __pyx_t_15;
+
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":466
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
+ *         mean_val = c_mean(values, i - period + 1, i + 1)
+ *         std[i] = c_std(values, i - period + 1, i + 1, mean_val)             # <<<<<<<<<<<<<<
+ * 
+ *     return std_arr
+*/
+                            __pyx_t_15 = __pyx_f_9ai_engine_8features_14openmp_backend_c_std(__pyx_v_values, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1), __pyx_v_mean_val); if (unlikely(__pyx_t_15 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 466, __pyx_L11_error)
+                            __pyx_t_12 = __pyx_v_i;
+                            *((double *) ( /* dim=0 */ (__pyx_v_std.data + __pyx_t_12 * __pyx_v_std.strides[0]) )) = __pyx_t_15;
+                            goto __pyx_L14;
+                            __pyx_L11_error:;
+                            {
+                                PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                                #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                                PyMutex_Lock(&__pyx_parallel_freethreading_mutex);
+                                #endif
+                                #ifdef _OPENMP
+                                #pragma omp flush(__pyx_parallel_exc_type)
+                                #endif /* _OPENMP */
+                                if (!__pyx_parallel_exc_type) {
+                                  __Pyx_ErrFetchWithState(&__pyx_parallel_exc_type, &__pyx_parallel_exc_value, &__pyx_parallel_exc_tb);
+                                  __pyx_parallel_filename = __pyx_filename; __pyx_parallel_lineno = __pyx_lineno; __pyx_parallel_clineno = __pyx_clineno;
+                                  __Pyx_GOTREF(__pyx_parallel_exc_type);
+                                }
+                                #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                                PyMutex_Unlock(&__pyx_parallel_freethreading_mutex);
+                                #endif
+                                __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                            }
+                            __pyx_parallel_why = 4;
+                            goto __pyx_L14;
+                            __pyx_L14:;
+                            #ifdef _OPENMP
+                            #pragma omp flush(__pyx_parallel_why)
+                            #endif /* _OPENMP */
+                        }
+                    }
+                    #ifdef _OPENMP
+                    Py_END_ALLOW_THREADS
+                    #else
+{
+PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    #endif /* _OPENMP */
+                    /* Clean up any temporaries */
+                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                    #ifndef _OPENMP
+}
+#endif /* _OPENMP */
+                }
+            }
+            if (__pyx_parallel_exc_type) {
+              /* This may have been overridden by a continue, break or return in another thread. Prefer the error. */
+              __pyx_parallel_why = 4;
+            }
+            if (__pyx_parallel_why) {
+              switch (__pyx_parallel_why) {
+                    case 4:
+                {
+                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+                    #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                    PyMutex_Lock(&__pyx_parallel_freethreading_mutex);
+                    #endif
+                    __Pyx_GIVEREF(__pyx_parallel_exc_type);
+                    __Pyx_ErrRestoreWithState(__pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb);
+                    __pyx_filename = __pyx_parallel_filename; __pyx_lineno = __pyx_parallel_lineno; __pyx_clineno = __pyx_parallel_clineno;
+                    #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
+                    PyMutex_Unlock(&__pyx_parallel_freethreading_mutex);
+                    #endif
+                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+                }
+                goto __pyx_L7_error;
+              }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "ai_engine/features/openmp/openmp_backend.pyx":464
+ *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS
+ * 
+ *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
+ *         mean_val = c_mean(values, i - period + 1, i + 1)
+ *         std[i] = c_std(values, i - period + 1, i + 1, mean_val)
+*/
+      /*finally:*/ {
+        /*normal exit:*/{
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L8;
+        }
+        __pyx_L7_error: {
+          __Pyx_FastGIL_Forget();
+          PyEval_RestoreThread(_save);
+          goto __pyx_L1_error;
+        }
+        __pyx_L8:;
+      }
+  }
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":468
+ *         std[i] = c_std(values, i - period + 1, i + 1, mean_val)
+ * 
+ *     return std_arr             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_std_arr);
+  __pyx_r = ((PyObject *)__pyx_v_std_arr);
+  goto __pyx_L0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":448
+ * 
+ * 
+ * def compute_rolling_std_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel rolling standard deviation calculation utilizing OpenMP."""
+ *     cdef int n = values.shape[0]
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_std_arr.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_rolling_std_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_std_arr.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_std_arr);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_v_std, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "ai_engine/features/openmp/openmp_backend.pyx":471
  * 
  * 
  * def compute_rolling_volatility_omp(             # <<<<<<<<<<<<<<
@@ -19889,16 +25835,16 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_rolling_volatility_omp(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_25compute_rolling_volatility_omp(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_4compute_rolling_volatility_omp, "\n    Parallel Rolling Volatility calculation utilizing OpenMP.\n    Loops are executed in parallel without Python GIL.\n    ");
-static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_5compute_rolling_volatility_omp = {"compute_rolling_volatility_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_rolling_volatility_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_4compute_rolling_volatility_omp};
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_5compute_rolling_volatility_omp(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_24compute_rolling_volatility_omp, "\n    Parallel Rolling Volatility calculation utilizing OpenMP.\n    Loops are executed in parallel without Python GIL.\n    ");
+static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_25compute_rolling_volatility_omp = {"compute_rolling_volatility_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_25compute_rolling_volatility_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_24compute_rolling_volatility_omp};
+static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_25compute_rolling_volatility_omp(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19931,53 +25877,53 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_returns,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_trading_days,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 118, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 471, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 471, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 471, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 471, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 118, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 471, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_rolling_volatility_omp", 0) < (0)) __PYX_ERR(0, 118, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_rolling_volatility_omp", 0) < (0)) __PYX_ERR(0, 471, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_rolling_volatility_omp", 1, 4, 4, i); __PYX_ERR(0, 118, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_rolling_volatility_omp", 1, 4, 4, i); __PYX_ERR(0, 471, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 118, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 471, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 118, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 471, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 118, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 471, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 118, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 471, __pyx_L3_error)
     }
-    __pyx_v_returns = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_returns.memview)) __PYX_ERR(0, 119, __pyx_L3_error)
-    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L3_error)
-    __pyx_v_trading_days = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_trading_days == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
-    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L3_error)
+    __pyx_v_returns = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_returns.memview)) __PYX_ERR(0, 472, __pyx_L3_error)
+    __pyx_v_period = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 473, __pyx_L3_error)
+    __pyx_v_trading_days = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_trading_days == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 474, __pyx_L3_error)
+    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 475, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("compute_rolling_volatility_omp", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 118, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("compute_rolling_volatility_omp", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 471, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19989,7 +25935,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling_volatility_omp(__pyx_self, __pyx_v_returns, __pyx_v_period, __pyx_v_trading_days, __pyx_v_num_threads);
+  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_24compute_rolling_volatility_omp(__pyx_self, __pyx_v_returns, __pyx_v_period, __pyx_v_trading_days, __pyx_v_num_threads);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -20000,7 +25946,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling_volatility_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_returns, int __pyx_v_period, int __pyx_v_trading_days, int __pyx_v_num_threads) {
+static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_24compute_rolling_volatility_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_returns, int __pyx_v_period, int __pyx_v_trading_days, int __pyx_v_num_threads) {
   int __pyx_v_n;
   PyArrayObject *__pyx_v_volatility_arr = 0;
   __Pyx_memviewslice __pyx_v_volatility = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -20041,7 +25987,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
   __pyx_pybuffernd_volatility_arr.data = NULL;
   __pyx_pybuffernd_volatility_arr.rcbuffer = &__pyx_pybuffer_volatility_arr;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":128
+  /* "ai_engine/features/openmp/openmp_backend.pyx":481
  *     Loops are executed in parallel without Python GIL.
  *     """
  *     cdef int n = returns.shape[0]             # <<<<<<<<<<<<<<
@@ -20050,24 +25996,24 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
 */
   __pyx_v_n = (__pyx_v_returns.shape[0]);
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":129
+  /* "ai_engine/features/openmp/openmp_backend.pyx":482
  *     """
  *     cdef int n = returns.shape[0]
  *     cdef cnp.ndarray[double, ndim=1] volatility_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
  *     cdef double[:] volatility = volatility_arr
- * 
+ *     cdef int i
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_7 = 1;
@@ -20084,43 +26030,43 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
-    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 482, __pyx_L1_error)
     __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 129, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 482, __pyx_L1_error)
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_volatility_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_volatility_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_volatility_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 129, __pyx_L1_error)
+      __PYX_ERR(0, 482, __pyx_L1_error)
     } else {__pyx_pybuffernd_volatility_arr.diminfo[0].strides = __pyx_pybuffernd_volatility_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_volatility_arr.diminfo[0].shape = __pyx_pybuffernd_volatility_arr.rcbuffer->pybuffer.shape[0];
     }
   }
   __pyx_v_volatility_arr = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":130
+  /* "ai_engine/features/openmp/openmp_backend.pyx":483
  *     cdef int n = returns.shape[0]
  *     cdef cnp.ndarray[double, ndim=1] volatility_arr = np.empty(n, dtype=np.float64)
  *     cdef double[:] volatility = volatility_arr             # <<<<<<<<<<<<<<
- * 
  *     cdef int i
+ * 
 */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_volatility_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_volatility_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 483, __pyx_L1_error)
   __pyx_v_volatility = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":134
+  /* "ai_engine/features/openmp/openmp_backend.pyx":486
  *     cdef int i
  * 
  *     for i in range(period - 1):             # <<<<<<<<<<<<<<
@@ -20132,7 +26078,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":135
+    /* "ai_engine/features/openmp/openmp_backend.pyx":487
  * 
  *     for i in range(period - 1):
  *         volatility[i] = c_nan             # <<<<<<<<<<<<<<
@@ -20143,7 +26089,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
     *((double *) ( /* dim=0 */ (__pyx_v_volatility.data + __pyx_t_12 * __pyx_v_volatility.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":137
+  /* "ai_engine/features/openmp/openmp_backend.pyx":489
  *         volatility[i] = c_nan
  * 
  *     if n < period:             # <<<<<<<<<<<<<<
@@ -20153,7 +26099,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
   __pyx_t_13 = (__pyx_v_n < __pyx_v_period);
   if (__pyx_t_13) {
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":138
+    /* "ai_engine/features/openmp/openmp_backend.pyx":490
  * 
  *     if n < period:
  *         return volatility_arr             # <<<<<<<<<<<<<<
@@ -20165,7 +26111,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
     __pyx_r = ((PyObject *)__pyx_v_volatility_arr);
     goto __pyx_L0;
 
-    /* "ai_engine/features/openmp/openmp_backend.pyx":137
+    /* "ai_engine/features/openmp/openmp_backend.pyx":489
  *         volatility[i] = c_nan
  * 
  *     if n < period:             # <<<<<<<<<<<<<<
@@ -20174,7 +26120,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
 */
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":140
+  /* "ai_engine/features/openmp/openmp_backend.pyx":492
  *         return volatility_arr
  * 
  *     cdef double annualize_factor = sqrt(<double>trading_days)             # <<<<<<<<<<<<<<
@@ -20183,7 +26129,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
 */
   __pyx_v_annualize_factor = sqrt(((double)__pyx_v_trading_days));
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":141
+  /* "ai_engine/features/openmp/openmp_backend.pyx":493
  * 
  *     cdef double annualize_factor = sqrt(<double>trading_days)
  *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
@@ -20198,9 +26144,9 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
   }
   __pyx_v_threads_to_use = __pyx_t_11;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":146
+  /* "ai_engine/features/openmp/openmp_backend.pyx":497
+ *     cdef int contains_nan, k
  * 
- *     # Parallel sliding window standard deviation
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
  *         contains_nan = 0
  * 
@@ -20245,18 +26191,18 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                         {
                             __pyx_v_i = (int)(__pyx_t_9 + 1 * __pyx_t_10);
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":147
- *     # Parallel sliding window standard deviation
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":498
+ * 
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
  *         contains_nan = 0             # <<<<<<<<<<<<<<
  * 
- *         # OMP NaN detection using self-comparison (returns[k] != returns[k])
+ *         # OMP NaN detection
 */
                             __pyx_v_contains_nan = 0;
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":150
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":501
  * 
- *         # OMP NaN detection using self-comparison (returns[k] != returns[k])
+ *         # OMP NaN detection
  *         for k in range(i - period + 1, i + 1):             # <<<<<<<<<<<<<<
  *             if returns[k] != returns[k]:
  *                 contains_nan = 1
@@ -20266,8 +26212,8 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                             for (__pyx_t_17 = ((__pyx_v_i - __pyx_v_period) + 1); __pyx_t_17 < __pyx_t_16; __pyx_t_17+=1) {
                               __pyx_v_k = __pyx_t_17;
 
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":151
- *         # OMP NaN detection using self-comparison (returns[k] != returns[k])
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":502
+ *         # OMP NaN detection
  *         for k in range(i - period + 1, i + 1):
  *             if returns[k] != returns[k]:             # <<<<<<<<<<<<<<
  *                 contains_nan = 1
@@ -20278,7 +26224,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                               __pyx_t_13 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_returns.data + __pyx_t_12 * __pyx_v_returns.strides[0]) ))) != (*((double const  *) ( /* dim=0 */ (__pyx_v_returns.data + __pyx_t_18 * __pyx_v_returns.strides[0]) ))));
                               if (__pyx_t_13) {
 
-                                /* "ai_engine/features/openmp/openmp_backend.pyx":152
+                                /* "ai_engine/features/openmp/openmp_backend.pyx":503
  *         for k in range(i - period + 1, i + 1):
  *             if returns[k] != returns[k]:
  *                 contains_nan = 1             # <<<<<<<<<<<<<<
@@ -20287,7 +26233,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
 */
                                 __pyx_v_contains_nan = 1;
 
-                                /* "ai_engine/features/openmp/openmp_backend.pyx":153
+                                /* "ai_engine/features/openmp/openmp_backend.pyx":504
  *             if returns[k] != returns[k]:
  *                 contains_nan = 1
  *                 break             # <<<<<<<<<<<<<<
@@ -20296,8 +26242,8 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
 */
                                 goto __pyx_L14_break;
 
-                                /* "ai_engine/features/openmp/openmp_backend.pyx":151
- *         # OMP NaN detection using self-comparison (returns[k] != returns[k])
+                                /* "ai_engine/features/openmp/openmp_backend.pyx":502
+ *         # OMP NaN detection
  *         for k in range(i - period + 1, i + 1):
  *             if returns[k] != returns[k]:             # <<<<<<<<<<<<<<
  *                 contains_nan = 1
@@ -20307,7 +26253,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                             }
                             __pyx_L14_break:;
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":155
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":506
  *                 break
  * 
  *         if contains_nan == 1:             # <<<<<<<<<<<<<<
@@ -20317,7 +26263,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                             __pyx_t_13 = (__pyx_v_contains_nan == 1);
                             if (__pyx_t_13) {
 
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":156
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":507
  * 
  *         if contains_nan == 1:
  *             volatility[i] = c_nan             # <<<<<<<<<<<<<<
@@ -20327,7 +26273,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                               __pyx_t_18 = __pyx_v_i;
                               *((double *) ( /* dim=0 */ (__pyx_v_volatility.data + __pyx_t_18 * __pyx_v_volatility.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
 
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":155
+                              /* "ai_engine/features/openmp/openmp_backend.pyx":506
  *                 break
  * 
  *         if contains_nan == 1:             # <<<<<<<<<<<<<<
@@ -20337,7 +26283,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
                               goto __pyx_L16;
                             }
 
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":158
+                            /* "ai_engine/features/openmp/openmp_backend.pyx":509
  *             volatility[i] = c_nan
  *         else:
  *             volatility[i] = c_volatility(returns, i - period + 1, i + 1, annualize_factor)             # <<<<<<<<<<<<<<
@@ -20345,7 +26291,7 @@ static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_4compute_rolling
  *     return volatility_arr
 */
                             /*else*/ {
-                              __pyx_t_19 = __pyx_f_9ai_engine_8features_14openmp_backend_c_volatility(__pyx_v_returns, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1), __pyx_v_annualize_factor); if (unlikely(__pyx_t_19 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 158, __pyx_L11_error)
+                              __pyx_t_19 = __pyx_f_9ai_engine_8features_14openmp_backend_c_volatility(__pyx_v_returns, ((__pyx_v_i - __pyx_v_period) + 1), (__pyx_v_i + 1), __pyx_v_annualize_factor); if (unlikely(__pyx_t_19 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 509, __pyx_L11_error)
                               __pyx_t_18 = __pyx_v_i;
                               *((double *) ( /* dim=0 */ (__pyx_v_volatility.data + __pyx_t_18 * __pyx_v_volatility.strides[0]) )) = __pyx_t_19;
                             }
@@ -20423,9 +26369,9 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         #endif
       }
 
-      /* "ai_engine/features/openmp/openmp_backend.pyx":146
+      /* "ai_engine/features/openmp/openmp_backend.pyx":497
+ *     cdef int contains_nan, k
  * 
- *     # Parallel sliding window standard deviation
  *     for i in prange(period - 1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
  *         contains_nan = 0
  * 
@@ -20445,19 +26391,17 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       }
   }
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":160
+  /* "ai_engine/features/openmp/openmp_backend.pyx":511
  *             volatility[i] = c_volatility(returns, i - period + 1, i + 1, annualize_factor)
  * 
  *     return volatility_arr             # <<<<<<<<<<<<<<
- * 
- * 
 */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF((PyObject *)__pyx_v_volatility_arr);
   __pyx_r = ((PyObject *)__pyx_v_volatility_arr);
   goto __pyx_L0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":118
+  /* "ai_engine/features/openmp/openmp_backend.pyx":471
  * 
  * 
  * def compute_rolling_volatility_omp(             # <<<<<<<<<<<<<<
@@ -20488,779 +26432,6 @@ PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   __pyx_L2:;
   __Pyx_XDECREF((PyObject *)__pyx_v_volatility_arr);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_volatility, 1);
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "ai_engine/features/openmp/openmp_backend.pyx":163
- * 
- * 
- * def compute_atr_omp(             # <<<<<<<<<<<<<<
- *     const double[:] high,
- *     const double[:] low,
-*/
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_atr_omp(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-PyDoc_STRVAR(__pyx_doc_9ai_engine_8features_14openmp_backend_6compute_atr_omp, "\n    Calculates Average True Range (ATR) using OpenMP.\n    The True Range computation loop is parallelized; the subsequent Wilder's \n    smoothing is computed sequentially due to recursive temporal dependency.\n    ");
-static PyMethodDef __pyx_mdef_9ai_engine_8features_14openmp_backend_7compute_atr_omp = {"compute_atr_omp", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_atr_omp, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_9ai_engine_8features_14openmp_backend_6compute_atr_omp};
-static PyObject *__pyx_pw_9ai_engine_8features_14openmp_backend_7compute_atr_omp(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  __Pyx_memviewslice __pyx_v_high = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __Pyx_memviewslice __pyx_v_low = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __Pyx_memviewslice __pyx_v_close = { 0, 0, { 0 }, { 0 }, { 0 } };
-  int __pyx_v_period;
-  int __pyx_v_num_threads;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[5] = {0,0,0,0,0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("compute_atr_omp (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_SIZE
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  {
-    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_high,&__pyx_mstate_global->__pyx_n_u_low,&__pyx_mstate_global->__pyx_n_u_close,&__pyx_mstate_global->__pyx_n_u_period,&__pyx_mstate_global->__pyx_n_u_num_threads,0};
-    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
-    if (__pyx_kwds_len > 0) {
-      switch (__pyx_nargs) {
-        case  5:
-        values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 163, __pyx_L3_error)
-        CYTHON_FALLTHROUGH;
-        case  4:
-        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 163, __pyx_L3_error)
-        CYTHON_FALLTHROUGH;
-        case  3:
-        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 163, __pyx_L3_error)
-        CYTHON_FALLTHROUGH;
-        case  2:
-        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 163, __pyx_L3_error)
-        CYTHON_FALLTHROUGH;
-        case  1:
-        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 163, __pyx_L3_error)
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "compute_atr_omp", 0) < (0)) __PYX_ERR(0, 163, __pyx_L3_error)
-      for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("compute_atr_omp", 1, 5, 5, i); __PYX_ERR(0, 163, __pyx_L3_error) }
-      }
-    } else if (unlikely(__pyx_nargs != 5)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 163, __pyx_L3_error)
-      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 163, __pyx_L3_error)
-      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 163, __pyx_L3_error)
-      values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 163, __pyx_L3_error)
-      values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 163, __pyx_L3_error)
-    }
-    __pyx_v_high = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[0], 0); if (unlikely(!__pyx_v_high.memview)) __PYX_ERR(0, 164, __pyx_L3_error)
-    __pyx_v_low = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[1], 0); if (unlikely(!__pyx_v_low.memview)) __PYX_ERR(0, 165, __pyx_L3_error)
-    __pyx_v_close = __Pyx_PyObject_to_MemoryviewSlice_ds_double__const__(values[2], 0); if (unlikely(!__pyx_v_close.memview)) __PYX_ERR(0, 166, __pyx_L3_error)
-    __pyx_v_period = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_period == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
-    __pyx_v_num_threads = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("compute_atr_omp", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 163, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-    Py_XDECREF(values[__pyx_temp]);
-  }
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_high, 1);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_low, 1);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
-  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_atr_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9ai_engine_8features_14openmp_backend_6compute_atr_omp(__pyx_self, __pyx_v_high, __pyx_v_low, __pyx_v_close, __pyx_v_period, __pyx_v_num_threads);
-
-  /* function exit code */
-  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-    Py_XDECREF(values[__pyx_temp]);
-  }
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_high, 1);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_low, 1);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_close, 1);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9ai_engine_8features_14openmp_backend_6compute_atr_omp(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_high, __Pyx_memviewslice __pyx_v_low, __Pyx_memviewslice __pyx_v_close, int __pyx_v_period, int __pyx_v_num_threads) {
-  int __pyx_v_n;
-  PyArrayObject *__pyx_v_atr_arr = 0;
-  __Pyx_memviewslice __pyx_v_atr = { 0, 0, { 0 }, { 0 }, { 0 } };
-  int __pyx_v_i;
-  PyArrayObject *__pyx_v_tr_arr = 0;
-  __Pyx_memviewslice __pyx_v_tr = { 0, 0, { 0 }, { 0 }, { 0 } };
-  double __pyx_v_val1;
-  double __pyx_v_val2;
-  double __pyx_v_val3;
-  double __pyx_v_max_val;
-  CYTHON_UNUSED int __pyx_v_threads_to_use;
-  double __pyx_v_tr_sum;
-  double __pyx_v_atr_val;
-  __Pyx_LocalBuf_ND __pyx_pybuffernd_atr_arr;
-  __Pyx_Buffer __pyx_pybuffer_atr_arr;
-  __Pyx_LocalBuf_ND __pyx_pybuffernd_tr_arr;
-  __Pyx_Buffer __pyx_pybuffer_tr_arr;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  size_t __pyx_t_7;
-  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  int __pyx_t_9;
-  int __pyx_t_10;
-  int __pyx_t_11;
-  Py_ssize_t __pyx_t_12;
-  int __pyx_t_13;
-  Py_ssize_t __pyx_t_14;
-  Py_ssize_t __pyx_t_15;
-  long __pyx_t_16;
-  long __pyx_t_17;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("compute_atr_omp", 0);
-  __pyx_pybuffer_atr_arr.pybuffer.buf = NULL;
-  __pyx_pybuffer_atr_arr.refcount = 0;
-  __pyx_pybuffernd_atr_arr.data = NULL;
-  __pyx_pybuffernd_atr_arr.rcbuffer = &__pyx_pybuffer_atr_arr;
-  __pyx_pybuffer_tr_arr.pybuffer.buf = NULL;
-  __pyx_pybuffer_tr_arr.refcount = 0;
-  __pyx_pybuffernd_tr_arr.data = NULL;
-  __pyx_pybuffernd_tr_arr.rcbuffer = &__pyx_pybuffer_tr_arr;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":175
- *     smoothing is computed sequentially due to recursive temporal dependency.
- *     """
- *     cdef int n = close.shape[0]             # <<<<<<<<<<<<<<
- *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)
- *     cdef double[:] atr = atr_arr
-*/
-  __pyx_v_n = (__pyx_v_close.shape[0]);
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":176
- *     """
- *     cdef int n = close.shape[0]
- *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
- *     cdef double[:] atr = atr_arr
- * 
-*/
-  __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 176, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-    assert(__pyx_t_2);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
-    __Pyx_INCREF(__pyx_t_2);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
-    __pyx_t_7 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_2, __pyx_t_3};
-    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_6, __pyx_t_5, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 176, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 176, __pyx_L1_error)
-  {
-    __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
-      __pyx_v_atr_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 176, __pyx_L1_error)
-    } else {__pyx_pybuffernd_atr_arr.diminfo[0].strides = __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_atr_arr.diminfo[0].shape = __pyx_pybuffernd_atr_arr.rcbuffer->pybuffer.shape[0];
-    }
-  }
-  __pyx_v_atr_arr = ((PyArrayObject *)__pyx_t_1);
-  __pyx_t_1 = 0;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":177
- *     cdef int n = close.shape[0]
- *     cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)
- *     cdef double[:] atr = atr_arr             # <<<<<<<<<<<<<<
- * 
- *     cdef int i
-*/
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_atr_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 177, __pyx_L1_error)
-  __pyx_v_atr = __pyx_t_8;
-  __pyx_t_8.memview = NULL;
-  __pyx_t_8.data = NULL;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":181
- *     cdef int i
- * 
- *     for i in range(period):             # <<<<<<<<<<<<<<
- *         atr[i] = c_nan
- * 
-*/
-  __pyx_t_9 = __pyx_v_period;
-  __pyx_t_10 = __pyx_t_9;
-  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
-    __pyx_v_i = __pyx_t_11;
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":182
- * 
- *     for i in range(period):
- *         atr[i] = c_nan             # <<<<<<<<<<<<<<
- * 
- *     if n <= period:
-*/
-    __pyx_t_12 = __pyx_v_i;
-    *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_9ai_engine_8features_14openmp_backend_c_nan;
-  }
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":184
- *         atr[i] = c_nan
- * 
- *     if n <= period:             # <<<<<<<<<<<<<<
- *         return atr_arr
- * 
-*/
-  __pyx_t_13 = (__pyx_v_n <= __pyx_v_period);
-  if (__pyx_t_13) {
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":185
- * 
- *     if n <= period:
- *         return atr_arr             # <<<<<<<<<<<<<<
- * 
- *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
-*/
-    __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF((PyObject *)__pyx_v_atr_arr);
-    __pyx_r = ((PyObject *)__pyx_v_atr_arr);
-    goto __pyx_L0;
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":184
- *         atr[i] = c_nan
- * 
- *     if n <= period:             # <<<<<<<<<<<<<<
- *         return atr_arr
- * 
-*/
-  }
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":187
- *         return atr_arr
- * 
- *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)             # <<<<<<<<<<<<<<
- *     cdef double[:] tr = tr_arr
- * 
-*/
-  __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 187, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 187, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 187, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_7 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_6);
-    assert(__pyx_t_4);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
-    __Pyx_INCREF(__pyx_t_4);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
-    __pyx_t_7 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_5};
-    __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_2, __pyx_t_3, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 187, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 187, __pyx_L1_error)
-  {
-    __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer, (PyObject*)((PyArrayObject *)__pyx_t_1), &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
-      __pyx_v_tr_arr = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 187, __pyx_L1_error)
-    } else {__pyx_pybuffernd_tr_arr.diminfo[0].strides = __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_tr_arr.diminfo[0].shape = __pyx_pybuffernd_tr_arr.rcbuffer->pybuffer.shape[0];
-    }
-  }
-  __pyx_v_tr_arr = ((PyArrayObject *)__pyx_t_1);
-  __pyx_t_1 = 0;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":188
- * 
- *     cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
- *     cdef double[:] tr = tr_arr             # <<<<<<<<<<<<<<
- * 
- *     tr[0] = high[0] - low[0]
-*/
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(((PyObject *)__pyx_v_tr_arr), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 188, __pyx_L1_error)
-  __pyx_v_tr = __pyx_t_8;
-  __pyx_t_8.memview = NULL;
-  __pyx_t_8.data = NULL;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":190
- *     cdef double[:] tr = tr_arr
- * 
- *     tr[0] = high[0] - low[0]             # <<<<<<<<<<<<<<
- * 
- *     cdef double val1, val2, val3, max_val
-*/
-  __pyx_t_12 = 0;
-  __pyx_t_14 = 0;
-  __pyx_t_15 = 0;
-  *((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_15 * __pyx_v_tr.strides[0]) )) = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_12 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_14 * __pyx_v_low.strides[0]) ))));
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":193
- * 
- *     cdef double val1, val2, val3, max_val
- *     cdef int threads_to_use = num_threads if num_threads > 0 else GLOBAL_NUM_THREADS             # <<<<<<<<<<<<<<
- * 
- *     # Step 1: Parallel True Range Calculation (with thread-private variables)
-*/
-  __pyx_t_13 = (__pyx_v_num_threads > 0);
-  if (__pyx_t_13) {
-    __pyx_t_9 = __pyx_v_num_threads;
-  } else {
-    __pyx_t_9 = __pyx_v_9ai_engine_8features_14openmp_backend_GLOBAL_NUM_THREADS;
-  }
-  __pyx_v_threads_to_use = __pyx_t_9;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":196
- * 
- *     # Step 1: Parallel True Range Calculation (with thread-private variables)
- *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
- *         val1 = high[i] - low[i]
- *         val2 = high[i] - close[i - 1]
-*/
-  {
-      PyThreadState * _save;
-      _save = PyEval_SaveThread();
-      __Pyx_FastGIL_Remember();
-      /*try:*/ {
-        __pyx_t_9 = __pyx_v_n;
-        {
-            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
-                #undef likely
-                #undef unlikely
-                #define likely(x)   (x)
-                #define unlikely(x) (x)
-            #endif
-            __pyx_t_17 = (__pyx_t_9 - 1 + 1 - 1/abs(1)) / 1;
-            if (__pyx_t_17 > 0)
-            {
-                #ifdef _OPENMP
-                #pragma omp parallel num_threads(__pyx_v_threads_to_use) private(__pyx_t_12, __pyx_t_13, __pyx_t_14)
-                #endif /* _OPENMP */
-                {
-                    #ifdef _OPENMP
-                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) firstprivate(__pyx_v_max_val) lastprivate(__pyx_v_max_val) firstprivate(__pyx_v_val1) lastprivate(__pyx_v_val1) firstprivate(__pyx_v_val2) lastprivate(__pyx_v_val2) firstprivate(__pyx_v_val3) lastprivate(__pyx_v_val3) schedule(static)
-                    #endif /* _OPENMP */
-                    for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_17; __pyx_t_16++){
-                        {
-                            __pyx_v_i = (int)(1 + 1 * __pyx_t_16);
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":197
- *     # Step 1: Parallel True Range Calculation (with thread-private variables)
- *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
- *         val1 = high[i] - low[i]             # <<<<<<<<<<<<<<
- *         val2 = high[i] - close[i - 1]
- *         val3 = low[i] - close[i - 1]
-*/
-                            __pyx_t_14 = __pyx_v_i;
-                            __pyx_t_12 = __pyx_v_i;
-                            __pyx_v_val1 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_14 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_12 * __pyx_v_low.strides[0]) ))));
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":198
- *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):
- *         val1 = high[i] - low[i]
- *         val2 = high[i] - close[i - 1]             # <<<<<<<<<<<<<<
- *         val3 = low[i] - close[i - 1]
- * 
-*/
-                            __pyx_t_12 = __pyx_v_i;
-                            __pyx_t_14 = (__pyx_v_i - 1);
-                            __pyx_v_val2 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_high.data + __pyx_t_12 * __pyx_v_high.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_14 * __pyx_v_close.strides[0]) ))));
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":199
- *         val1 = high[i] - low[i]
- *         val2 = high[i] - close[i - 1]
- *         val3 = low[i] - close[i - 1]             # <<<<<<<<<<<<<<
- * 
- *         if val2 < 0.0:
-*/
-                            __pyx_t_14 = __pyx_v_i;
-                            __pyx_t_12 = (__pyx_v_i - 1);
-                            __pyx_v_val3 = ((*((double const  *) ( /* dim=0 */ (__pyx_v_low.data + __pyx_t_14 * __pyx_v_low.strides[0]) ))) - (*((double const  *) ( /* dim=0 */ (__pyx_v_close.data + __pyx_t_12 * __pyx_v_close.strides[0]) ))));
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":201
- *         val3 = low[i] - close[i - 1]
- * 
- *         if val2 < 0.0:             # <<<<<<<<<<<<<<
- *             val2 = -val2
- *         if val3 < 0.0:
-*/
-                            __pyx_t_13 = (__pyx_v_val2 < 0.0);
-                            if (__pyx_t_13) {
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":202
- * 
- *         if val2 < 0.0:
- *             val2 = -val2             # <<<<<<<<<<<<<<
- *         if val3 < 0.0:
- *             val3 = -val3
-*/
-                              __pyx_v_val2 = (-__pyx_v_val2);
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":201
- *         val3 = low[i] - close[i - 1]
- * 
- *         if val2 < 0.0:             # <<<<<<<<<<<<<<
- *             val2 = -val2
- *         if val3 < 0.0:
-*/
-                            }
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":203
- *         if val2 < 0.0:
- *             val2 = -val2
- *         if val3 < 0.0:             # <<<<<<<<<<<<<<
- *             val3 = -val3
- * 
-*/
-                            __pyx_t_13 = (__pyx_v_val3 < 0.0);
-                            if (__pyx_t_13) {
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":204
- *             val2 = -val2
- *         if val3 < 0.0:
- *             val3 = -val3             # <<<<<<<<<<<<<<
- * 
- *         max_val = val1
-*/
-                              __pyx_v_val3 = (-__pyx_v_val3);
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":203
- *         if val2 < 0.0:
- *             val2 = -val2
- *         if val3 < 0.0:             # <<<<<<<<<<<<<<
- *             val3 = -val3
- * 
-*/
-                            }
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":206
- *             val3 = -val3
- * 
- *         max_val = val1             # <<<<<<<<<<<<<<
- *         if val2 > max_val:
- *             max_val = val2
-*/
-                            __pyx_v_max_val = __pyx_v_val1;
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":207
- * 
- *         max_val = val1
- *         if val2 > max_val:             # <<<<<<<<<<<<<<
- *             max_val = val2
- *         if val3 > max_val:
-*/
-                            __pyx_t_13 = (__pyx_v_val2 > __pyx_v_max_val);
-                            if (__pyx_t_13) {
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":208
- *         max_val = val1
- *         if val2 > max_val:
- *             max_val = val2             # <<<<<<<<<<<<<<
- *         if val3 > max_val:
- *             max_val = val3
-*/
-                              __pyx_v_max_val = __pyx_v_val2;
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":207
- * 
- *         max_val = val1
- *         if val2 > max_val:             # <<<<<<<<<<<<<<
- *             max_val = val2
- *         if val3 > max_val:
-*/
-                            }
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":209
- *         if val2 > max_val:
- *             max_val = val2
- *         if val3 > max_val:             # <<<<<<<<<<<<<<
- *             max_val = val3
- * 
-*/
-                            __pyx_t_13 = (__pyx_v_val3 > __pyx_v_max_val);
-                            if (__pyx_t_13) {
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":210
- *             max_val = val2
- *         if val3 > max_val:
- *             max_val = val3             # <<<<<<<<<<<<<<
- * 
- *         tr[i] = max_val
-*/
-                              __pyx_v_max_val = __pyx_v_val3;
-
-                              /* "ai_engine/features/openmp/openmp_backend.pyx":209
- *         if val2 > max_val:
- *             max_val = val2
- *         if val3 > max_val:             # <<<<<<<<<<<<<<
- *             max_val = val3
- * 
-*/
-                            }
-
-                            /* "ai_engine/features/openmp/openmp_backend.pyx":212
- *             max_val = val3
- * 
- *         tr[i] = max_val             # <<<<<<<<<<<<<<
- * 
- *     # Step 2: Seeding ATR (sequential mean of the first 'period' elements)
-*/
-                            __pyx_t_12 = __pyx_v_i;
-                            *((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) )) = __pyx_v_max_val;
-                        }
-                    }
-                }
-            }
-        }
-        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
-            #undef likely
-            #undef unlikely
-            #define likely(x)   __builtin_expect(!!(x), 1)
-            #define unlikely(x) __builtin_expect(!!(x), 0)
-        #endif
-      }
-
-      /* "ai_engine/features/openmp/openmp_backend.pyx":196
- * 
- *     # Step 1: Parallel True Range Calculation (with thread-private variables)
- *     for i in prange(1, n, nogil=True, num_threads=threads_to_use, schedule='static'):             # <<<<<<<<<<<<<<
- *         val1 = high[i] - low[i]
- *         val2 = high[i] - close[i - 1]
-*/
-      /*finally:*/ {
-        /*normal exit:*/{
-          __Pyx_FastGIL_Forget();
-          PyEval_RestoreThread(_save);
-          goto __pyx_L8;
-        }
-        __pyx_L8:;
-      }
-  }
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":215
- * 
- *     # Step 2: Seeding ATR (sequential mean of the first 'period' elements)
- *     cdef double tr_sum = 0.0             # <<<<<<<<<<<<<<
- *     for i in range(period):
- *         tr_sum += tr[i]
-*/
-  __pyx_v_tr_sum = 0.0;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":216
- *     # Step 2: Seeding ATR (sequential mean of the first 'period' elements)
- *     cdef double tr_sum = 0.0
- *     for i in range(period):             # <<<<<<<<<<<<<<
- *         tr_sum += tr[i]
- *     cdef double atr_val = tr_sum / period
-*/
-  __pyx_t_9 = __pyx_v_period;
-  __pyx_t_10 = __pyx_t_9;
-  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
-    __pyx_v_i = __pyx_t_11;
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":217
- *     cdef double tr_sum = 0.0
- *     for i in range(period):
- *         tr_sum += tr[i]             # <<<<<<<<<<<<<<
- *     cdef double atr_val = tr_sum / period
- *     atr[period - 1] = atr_val
-*/
-    __pyx_t_12 = __pyx_v_i;
-    __pyx_v_tr_sum = (__pyx_v_tr_sum + (*((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) ))));
-  }
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":218
- *     for i in range(period):
- *         tr_sum += tr[i]
- *     cdef double atr_val = tr_sum / period             # <<<<<<<<<<<<<<
- *     atr[period - 1] = atr_val
- * 
-*/
-  __pyx_v_atr_val = (__pyx_v_tr_sum / ((double)__pyx_v_period));
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":219
- *         tr_sum += tr[i]
- *     cdef double atr_val = tr_sum / period
- *     atr[period - 1] = atr_val             # <<<<<<<<<<<<<<
- * 
- *     # Step 3: Wilder's smoothing loop (sequential)
-*/
-  __pyx_t_12 = (__pyx_v_period - 1);
-  *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_atr_val;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":222
- * 
- *     # Step 3: Wilder's smoothing loop (sequential)
- *     for i in range(period, n):             # <<<<<<<<<<<<<<
- *         atr_val = (atr_val * (period - 1) + tr[i]) / period
- *         atr[i] = atr_val
-*/
-  __pyx_t_9 = __pyx_v_n;
-  __pyx_t_10 = __pyx_t_9;
-  for (__pyx_t_11 = __pyx_v_period; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
-    __pyx_v_i = __pyx_t_11;
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":223
- *     # Step 3: Wilder's smoothing loop (sequential)
- *     for i in range(period, n):
- *         atr_val = (atr_val * (period - 1) + tr[i]) / period             # <<<<<<<<<<<<<<
- *         atr[i] = atr_val
- * 
-*/
-    __pyx_t_12 = __pyx_v_i;
-    __pyx_v_atr_val = (((__pyx_v_atr_val * (__pyx_v_period - 1)) + (*((double *) ( /* dim=0 */ (__pyx_v_tr.data + __pyx_t_12 * __pyx_v_tr.strides[0]) )))) / ((double)__pyx_v_period));
-
-    /* "ai_engine/features/openmp/openmp_backend.pyx":224
- *     for i in range(period, n):
- *         atr_val = (atr_val * (period - 1) + tr[i]) / period
- *         atr[i] = atr_val             # <<<<<<<<<<<<<<
- * 
- *     return atr_arr
-*/
-    __pyx_t_12 = __pyx_v_i;
-    *((double *) ( /* dim=0 */ (__pyx_v_atr.data + __pyx_t_12 * __pyx_v_atr.strides[0]) )) = __pyx_v_atr_val;
-  }
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":226
- *         atr[i] = atr_val
- * 
- *     return atr_arr             # <<<<<<<<<<<<<<
-*/
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF((PyObject *)__pyx_v_atr_arr);
-  __pyx_r = ((PyObject *)__pyx_v_atr_arr);
-  goto __pyx_L0;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":163
- * 
- * 
- * def compute_atr_omp(             # <<<<<<<<<<<<<<
- *     const double[:] high,
- *     const double[:] low,
-*/
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
-  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
-    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer);
-    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer);
-  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("ai_engine.features.openmp_backend.compute_atr_omp", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  goto __pyx_L2;
-  __pyx_L0:;
-  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_atr_arr.rcbuffer->pybuffer);
-  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_tr_arr.rcbuffer->pybuffer);
-  __pyx_L2:;
-  __Pyx_XDECREF((PyObject *)__pyx_v_atr_arr);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_atr, 1);
-  __Pyx_XDECREF((PyObject *)__pyx_v_tr_arr);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_v_tr, 1);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -23307,46 +28478,181 @@ __Pyx_RefNannySetupContext("PyInit_openmp_backend", 0);
   /* "ai_engine/features/openmp/openmp_backend.pyx":71
  * # =========================================================================
  * 
+ * def compute_sma_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
+ *     cdef int n = values.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_3compute_sma_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_sma_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_sma_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":91
+ * 
+ * 
+ * def compute_ema_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
+ *     cdef int n = values.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_5compute_ema_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_ema_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_ema_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":121
+ * 
+ * 
+ * def compute_rsi_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel RSI computation using Wilder's smoothing loop structures."""
+ *     cdef int n = values.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_7compute_rsi_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_rsi_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_rsi_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":182
+ * 
+ * 
+ * def compute_macd_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] values,
+ *     int fast_period,
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_9compute_macd_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_macd_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_macd_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":251
+ * 
+ * 
  * def compute_bollinger_bands_omp(             # <<<<<<<<<<<<<<
  *     const double[:] values,
  *     int period,
 */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_3compute_bollinger_bands_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_bollinger_bands_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_11compute_bollinger_bands_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_bollinger_bands_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_bollinger_bands_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_bollinger_bands_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "ai_engine/features/openmp/openmp_backend.pyx":118
- * 
- * 
- * def compute_rolling_volatility_omp(             # <<<<<<<<<<<<<<
- *     const double[:] returns,
- *     int period,
-*/
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_5compute_rolling_volatility_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_rolling_volatility_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 118, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
-  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
-  #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_rolling_volatility_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 118, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-  /* "ai_engine/features/openmp/openmp_backend.pyx":163
+  /* "ai_engine/features/openmp/openmp_backend.pyx":295
  * 
  * 
  * def compute_atr_omp(             # <<<<<<<<<<<<<<
  *     const double[:] high,
  *     const double[:] low,
 */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_7compute_atr_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_atr_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_13compute_atr_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_atr_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_atr_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_atr_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":358
+ * 
+ * 
+ * def compute_obv_omp(const double[:] close, const double[:] volume, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Computes On-Balance Volume (OBV) cumulative indicator."""
+ *     cdef int n = close.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_15compute_obv_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_obv_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_obv_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":382
+ * 
+ * 
+ * def compute_momentum_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel momentum calculator using OpenMP loops."""
+ *     cdef int n = values.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_17compute_momentum_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_momentum_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_momentum_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 382, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":402
+ * 
+ * 
+ * def compute_daily_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Daily returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_19compute_daily_returns_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_daily_returns_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[9])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_daily_returns_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":425
+ * 
+ * 
+ * def compute_log_returns_omp(const double[:] close, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel Log returns percentage calculation using OpenMP."""
+ *     cdef int n = close.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_21compute_log_returns_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_log_returns_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[10])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 425, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_log_returns_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 425, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":448
+ * 
+ * 
+ * def compute_rolling_std_omp(const double[:] values, int period, int num_threads):             # <<<<<<<<<<<<<<
+ *     """Parallel rolling standard deviation calculation utilizing OpenMP."""
+ *     cdef int n = values.shape[0]
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_23compute_rolling_std_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_rolling_std_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[11])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_rolling_std_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 448, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "ai_engine/features/openmp/openmp_backend.pyx":471
+ * 
+ * 
+ * def compute_rolling_volatility_omp(             # <<<<<<<<<<<<<<
+ *     const double[:] returns,
+ *     int period,
+*/
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_9ai_engine_8features_14openmp_backend_25compute_rolling_volatility_omp, 0, __pyx_mstate_global->__pyx_n_u_compute_rolling_volatility_omp, NULL, __pyx_mstate_global->__pyx_n_u_ai_engine_features_openmp_backen, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[12])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  #endif
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_rolling_volatility_omp, __pyx_t_4) < (0)) __PYX_ERR(0, 471, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ai_engine/features/openmp/openmp_backend.pyx":1
@@ -23500,31 +28806,31 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 9; } index[] = {{2},{35},{54},{37},{60},{24},{52},{26},{34},{33},{45},{22},{15},{179},{37},{32},{1},{1},{1},{1},{1},{8},{44},{5},{6},{15},{23},{25},{7},{6},{2},{6},{35},{9},{30},{50},{39},{34},{8},{20},{32},{22},{30},{37},{5},{8},{20},{8},{15},{3},{33},{15},{12},{16},{18},{3},{7},{7},{4},{1},{9},{17},{18},{5},{15},{27},{30},{12},{5},{8},{5},{15},{5},{6},{9},{5},{5},{7},{6},{7},{8},{12},{4},{1},{2},{10},{5},{13},{5},{8},{1},{3},{10},{14},{8},{7},{8},{7},{11},{15},{4},{10},{1},{4},{8},{3},{4},{7},{2},{7},{11},{5},{3},{4},{6},{3},{14},{11},{10},{19},{14},{12},{10},{17},{13},{8},{7},{12},{18},{10},{12},{19},{5},{4},{5},{7},{4},{4},{6},{8},{14},{2},{6},{6},{12},{6},{6},{10},{14},{4},{4},{4},{6},{10},{14},{1},{10},{230},{381},{286},{1}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (1840 bytes) */
-const char* const cstring = "BZh91AY&SYu\221|-\000\001#\177\377\377\376\377\365\373\347\377\337\277\247\373\204\277\377\377\360@@@@@@@@@@@@@\000@\000`\006\256mlf_U\204\355\252U\261M\2671\327\r\004\215\021\240\231'\264\014\246\324\324\332\233M4j\017I\243@\321\352\014\215\001\241\243 dmF2\023j\006\204\032\002d\215\023\324\236\251\345\007\232\246\236\203Dbh\000\006\200\000\321\240\032i\240\320\302i\352\034\000\003@\000\320\031\000\000\003@\000i\240\000\000\000\003@\004\246\210\020M\t\210\230jM\246Q\3512\032h\000\000\000\000\000\000\000\r4z\207\000\000\320\0004\006@\000\000\320\000\032h\000\000\000\000\320\001)\020\246&\311\224\321\241\241\243M6\246\200\000h\000\320\000\000h\000m@\000\003\302S\320\345\204\"]\242.,X\361\343\304d\343\030\030J\002\005\346\347'y\327 \310dfF\0012\r,\307\372\3057y\300O}\315\0019\226\260\223$\314$\3114\253\225\301\320\010*l\347\250\354\312\301r8g66\251\026\r(\3347:Q\240\311\254\000b\201|KLaA\000'\034E\211\204\307\000\232ex6\032\n\266G\357\243\006?\227\363\370\t\213\037\007\237\226\002k\233,\305\256\2340;\310\307\240xtMi\231\354\272\033\255*Y\341G\245dl\001\025\255S\023#\366\177\356gY\277\327\367;\3740U\250uC!\205C0CG\241\3147\303\030\221\254\316\013g\211\237\345\247{\336'\261\\!<@HUz\316X\305m\206\312nt[\306\352\362\263\005\321\321\013l\300K\272.\023\020)g\272N1\261\266\343\205\025\255\316\223@|\301\327\240x8k\006\305\\\352\325}\002\270#`V\245\234\264g\365g\025\252\300B@U\206\262\261\206\225)\035dx\302\026\n\354u\315\317g\306\\\262\016\220\250s\312d\345\022\224\264\024</a\242\004\222\001\2737Jp-\270V\226\025E`C\2325\372\306=\315\222\362\006\331HJ)\301\n\360\366\361\362\332J$bO\354\266[SN\254f\337\315\235\2464<P\361=x\035\3217\247\317c\304\264\020\277,\332\342\250\001\263\343`\0027]\231m\206\353.\272\306]\213\212Oz+)4\327\024\372\322\220\256\307\tR\310\304\303\004\226z`I\320\220\213\250\335\002\371\035y\035\222\007\222\035Q\3340\223\266\010{\226\016i\023\314\005\301X\022\220\253\314\372\n\214\235YjZ\350\244g#t{\345A\256\343\264\344K\311\013h\216\334\217\3211\034*\230\030""\360X\360O\232\350\3431\000\216\210\266\202L\345B\206\013\013]\300\300--Y\000\2618\216V\213j\007 \020\3247!\022kh{\220\032\302\323\361xS\351\276\022\311o\315FV\241\226\343 =<\261$\310\006\000i\344R\242Dn*L\257\256\225d\241Q\270\000\233\270\006\260\254p6\365\242\023\302\274+\276\\\301\220R\361\225\201\344B\203\004\016\214\312EM\235\345\246\t\217\252\316\2245\207xv\341\343{\362\302\3255\211\224\352\240\251Ht\324q\3312;\027\336H\264\356\202\255K \234\347\177'=\320\266\272\345\204\273\210mS\226T\273\246.\033%\312\365j\301(\264<\010\232XV\222\263\n\256v\345o\314\244\337\362\022\013>\020\367b\3224\303\322\201\214R}\227\"sYJ\215\221\375\t\220\003\255i~\177\2125\213\201\000\"\247\323\311\014\270\336{Qx\034\307\303=\333\007h\310\036\246n\307^P\002\306\014\342\355\342(\230\226\223\330;\307\201t\361{B\016\016\336D.\004\360\264\007\241\305\224\260Z\240\004\323[r\3241\035\032y\312Wo\335\200\t\300\031V9\225P\000\370\211-G\2128dg\343!\213\035\244\220\2259\263\340\317\210\355\303<Sl\320\202t\210H4\031\346V\360h\306&\352\20537<\020\350\t\023f\032\311\347\026G7\303h\2319Z\303\033IV`t\331\007l\341\310\321\246\201\314\265\344a\276I\260\261|\332m\027\267\210\343c6\244oG\212\024\223AR\206\032\3402\305\021@\246\222\006\360\035J:\020\211\024\300\231D\263\312\032\366v\\\257\031\250\351\t\343dD\201;\244\364;T3\337\200N]UV\004\231\\S\231\302E\020\355\235\026LTX3\204L\013\251p\204\223J\000\324\255\030\201\027\270\006-\265\350l\263\316\302,\002&\n\207{\010]\205\2767\025*\255\265\247\253\201^\320\326\246\327\314\340\361\346\016\323cWP\340\273M\266\211\352c',\016\\\211\006;,\014\301\231\016#\313DyE1\002\341)\356\031q\312\354(Ox\214x\347\000.$W\037F\245g\303N)N\225H\340t\001R\241\016\243\227\355\347\347\337\204v\202\271\003\306F\005[\003\260\200\207\036\030\203|\344m\246\340\306\215\014\247\250\265\256\032\363\250\361)\327\247\0228\206\262I\223\205d\344\242\010f\326\332t6\346\277\013^\376\243@\214]\362\342\\S\2444\223)\303\273\273\314R\310\351iyT\331\254|\037w\222m\023\304:;[6R|\314A\240\234\0360s""\246\277/P\214!\211\035\221_\225N\2340\303\230\003\242\234\363(\301\200\265\305VK\024\363L\334kyWe\321\277qi\363Ze\351\222\242\243Bc\001\t\355|\213\210M\205ak\233L\324\306\266$\331fj3\342=\331\2267\014[\tRi)pAF\274\027.\t8\260\225T3<\001\266{\002#s\032\364\323\223\001\020*l\321\344\216\371\206\334Qy\362\264`&\242\347LfRf\225\214\330!j\223\244\336\3752Qj\310\245\307\310\365\000e\212\272\234C\215\267\2254,4\260dTN\375\032\302I&\337^\303\220\0326\300\215\212\rg\2356\006\2223\rEdF3&\004$f\232\032\220\216\017\326v+\227\254\033\343\242\244\234\342sQ\016\323\315hAz\341\006\332\034C\252\n\036\350P))\330\311\240Y-\005\242\240\005\016\222\212K\024(\200\020\310\371(\0042-\2748?`'W\270\236\355\331-\203&\303\204\306\377\201\266X?\227~\234Q\206FW9E\207W\357\307\316\022O\034y\202\340\331\271 \327\034\275y:\007O\230sYC\326);77\242\325\027\267\254%Q@\306J\205KkO\353\247\277\222\354\375[s3\205\2569\331\242q\354\024\377o\332~d[\034\026(\313\241z\277w(\235\305~\221\037\237\342g\216\313\027!^\374\203\245\274[,U\316\205\311\\um*\201:j\312%\347F$\276\346\010q\351D<=\273\332\213\177A\307\021i8\303[\253M\212j\304k\032\214c\256 \016\2030\327\032\025g\224\212\274\253%*M<\240\234\207M\377\213\271\"\234(H:\310\276\026\200";
-    PyObject *data = __Pyx_DecompressString(cstring, 1840, 2);
+    const struct { const unsigned int length: 10; } index[] = {{2},{35},{54},{37},{60},{24},{52},{26},{34},{33},{45},{22},{15},{179},{37},{32},{1},{1},{1},{1},{1},{8},{44},{5},{6},{15},{23},{25},{7},{6},{2},{6},{35},{9},{30},{50},{39},{34},{8},{20},{32},{22},{30},{37},{5},{8},{20},{8},{15},{3},{33},{15},{5},{9},{12},{16},{18},{3},{7},{7},{8},{8},{4},{1},{9},{17},{18},{5},{15},{27},{25},{15},{23},{16},{20},{15},{23},{30},{15},{15},{12},{5},{11},{11},{14},{8},{4},{5},{15},{3},{7},{8},{12},{8},{12},{5},{6},{9},{5},{11},{5},{7},{6},{7},{8},{5},{9},{12},{4},{4},{8},{1},{2},{10},{5},{13},{5},{8},{1},{6},{10},{3},{10},{14},{9},{13},{8},{7},{8},{7},{11},{15},{4},{10},{3},{7},{1},{4},{8},{3},{4},{7},{2},{7},{11},{5},{3},{3},{7},{4},{6},{3},{14},{11},{10},{19},{14},{12},{10},{17},{13},{8},{3},{7},{7},{3},{7},{12},{18},{10},{12},{19},{5},{11},{15},{13},{4},{11},{3},{7},{5},{9},{3},{7},{7},{4},{4},{6},{8},{8},{8},{7},{8},{14},{2},{6},{6},{12},{6},{6},{10},{14},{4},{4},{4},{6},{10},{14},{6},{1},{10},{230},{381},{162},{166},{160},{512},{282},{126},{455},{191},{138},{167},{1}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (2742 bytes) */
+const char* const cstring = "BZh91AY&SYn\036\270\261\000\002\267\177\377\377\376\377\375\373\357\377\377\277\367\377\274\277\377\377\361\300@@@@@@@@@@@@\000@\000`\n\337\001\235{\200\307\256\235v9\312\325\253[ \263Z\273\201\000\016\002P\204\212dG\206\251\275#M0\3624j=OSOB!0zS\310\033T4\320\003A\35223\324d\214\324\364j\033@\224 L\231\002\020S\032\2324\315#\324h\032i\240\320\000\000\000\000\032\r\000\036\220\320\365\001\024\207\245\032f\200#\001\014\t\246\023\000\t\220b`\000A\246\010`\214\000\010\310`4\310\231!\002Sz\236\224\375MA\352\036\247\352\236\240\320\032\000\320\000\000\000\032\000\032\000\000\006\202\014\000\000\000\000\000\000\000\000&\000\000\000\0020\000\023\000\002E\001\001\t\3524\236\251\357BMO*zlQ44d\323M\006\217Q\351\0312\r\006jd\365\0324= h2<\223\024H\261\206\276.\007\021)3\363\213\375\245\377\017\213\376\377\357\017\212s\237\212#\360\300\224\000\204l\224\341\031\204\021\000\224\225\205\205\212\226\"\245J \241\362|\215\214Cm\r\260M\200\333Bm\261\2150m\203lb\033\023\244\370\022K\377\244\026\242K\217\345I'\030\343z\222J\206\005K\257I6\r\211\261!\2646\230\320\266*\"\323\013p\024\320\2473(c\362\300DA&Z\256M1\211\266\321\027\234\367\212\223\022\2031\241\025n\230\024\002\342H\322\264\3525JFP\036UA6F\223\3544\020e\340d\034\270\352M\242\322%D\2614\250%\220,TJ\024\021(Re\306Ff\210I\nL\230$\313Zp\010 9\002\205\257\010P\216e\205\020\243G!\344Y\222A \034p\021@#\230E\006\000\020\300H\357\326[\240OO\335\371\177\205\306\016\021\345\013L\022x\210\340\320\"\244\025\017\354$\252\276\204Ix4\275\177&\272\234R\250\316{\344\245\350\276G\027\007\232\376\036\255\371zWJV!a\327\321\234>\204T\243\220\217\357\014\030\326E\305\364\275\207\363{b\261\005\\VNS\270\022\035aY\313\010\326\313\365\323-\313\353yG\220\220\271\344\274\216\230\364\277$\204\272\312\262!>\232\315\024*\350J\265\"\024\202SJ\250\230\246J\311J\247-\326\253g;V\356\327\265\256\340\305\215m\177s\206=\317\006\322\315\373\236y\333\00239dF\260\350\361\241/\017\236wf\203$\363\351`nh\r\311\007\031\271Sv\322d\247'$\014\336N\2437\267\004U\304\2116\313""\\\031t\210\"\223\016\340_}\366X\026\026XR\337g\362\376\252\326\267\342\"\344\274\315\260UQ\232\303\004\032\n\n\227\033\352PG\317\276\252\265\"A{\362X\361\013\243\240=\273>\216B\277\330\224\255\270\301\024YJRN\210\202\226R\2160!QT(\221?\035\352r\315\373\357\013\302\360\274\274xs)iCf\377SN|\200(\205kgR\214\0204\032\2359c\315h%\351\216\326\276Q\224\241\357\303#\351\204J$\221\014\331\203)6\213\243A\033S\321\207\244%n\237s0\270\270\270\271\300\265\314@\325\300\255tj\275\371\302^\374tC%\023\033\"\353\221\035\232\302+%\305\245r#\330\237\032\243\357\324\350\301\320xT\216\032\356x\264\302\347\306\353\333\003\010u\245\317\215\2268\026\342|\345\013\227\256~C\331EQLl\235\201W\247\"\002\313HC0\213\035\024\205\0318,\372\211W\2722\310\212\272\024B\210\314\345\0262\305\261\264n+\225Q#k#\202RQ\330B\270Hl\261\316J\275\010I\317\312n\325i\t\337(\272\363|\321V\253)\005\377\312`r_\231\365\305\221\3337\035\023Hh`\246\336\342\322\332k\353\352,\211\035\232<\022*\034}S4\312\3408\222\204\303\223\312u\260 \025\303tp\006e4\333\332\013\266%\355y\306\331\236\330\265\006Y\017\274\242=\366]\333\212\221e\325\346~\265C\037\r\201,$zR\244\2113\340\210\370\234\243D9\231\357AL\214\244\014\254\363\262m\330\021\002y&\342\026\253V\n\374\0276\375\332{\020\271b\210\351\010g\244\224V\247c\227\253i\017\025{U\354\202\362\315eW\217X\224H\300cf\017G4z(Zl6l\3173\034\001\243\277\242\r\305`B\021\201\213\3437\270\230\313G\014m\260\3304\347V\342\204H\207-(&,Go\226B\006\026\273\212@\210\312\270\210\0255\226n\257\241\213\235\310\365.N\373\267Gh\3258\361\003\252\344\356T\325\020\036\352C\300\"K\034\242/\002\344\026LfJ\226W\247\022\212\241s^\346\235Q\346\216h\304*\350\303\366a\320\202\340\370\246\265~\327j\322s\3638EH9\033,\261\325\316\345\0244\013\202\211F\271\272;\021\032h\361\247\255\311\300\233\355\340\324-\311\316\013\353\020\266r\261\327\027-\245 \212h\340D\232\224\324\274s\252\272\273 \340\315::\347!l\2566o\365\031\0145\002\343\245\016\227m\255\325\315\035F]<f\0173\\\0131g\014`R\004`\213\317\241\321\025\216=g\227""\251r\217\020i\274\273\330\267-@\234j.\217\337\247\347\273\274\363>H\344-3\254\252\242\254\213\360T*\225\304\202\335\nb\327\035\354)8\270\301\207\001\245M\267n\253\"\262\264\034\303\002\254\233H`\2731\213,\204>\214\307n1\216\332\303p\314\326\250r6\364\273\233\003\267x\007-\222\016h\006\365\035u\016\333\331\300h\332I_a\330/e\002\212W\207\241\001c5J;\331\322l\332\371\030\001\245\263\254\373\033L:\n\301\3133\340X\226\254B\005\336\036\341m\244\026a8\225\253\2439\362\024\252%\202 \224L\336\340K\321\221yl\354\"\211\005?)\336\000)\022\244\177\022$\rX\344\006\025=y\301\200%\214\t\343A\"\214\20250\261\212\243\301@5P\013\253p\306\332\262\321\330\255,\026a79\310\370\2521,w5>\234}\230\223pMD\275r\304\273.K\034\350&\321\2730lf\220\271#\250\3439\244\224\004\200$\356\353\333\006\006w\2222A\r}\241\306\236\227o\034*c(\026\004\014R\201\251\031\351\033\033G[\327\303nj\362\301vD_\261\251[\246 \253v\344\316w`i2\346d\251\211|m\207%\345\257v\024[7\350\242\003f\204}9\375E\350%\332\016>\243\251\007\222Br%\322\275\030\225\0072M)\271h\271\246\263\\\304\020\320\332\214\010E\0216\235\013y\304#,\223\235E\254\266\022\035\261\024.GTbI\224T9\343!\362\244MY\030\242\014\013\353.FN\244T\233\330s\2349\023lD\314\3155\246\320\233\021\r\201\320\266&B\226f\307yw\241.\320X\331\323\273\272\262\005Di\034=\022\264\001\263XY-\376,\322\321\260\0329\203\330\003\303\323\266\233I:\013\212\021\r\240\202!,!\364\035Y\021\201\272s\303m\352\030\350\363\223 \316{\364\350\307\016z\351\307<\314\314\3633<p\251\330\326\327da\035\206\331K\022\254Y\266\221;o\255\257\311\262E\325\347\215\341\261,Ri\"Z\013\014\201\004 \324\233\311\221{%\356r\354\202@\326\203\366!\004\302\311$j\215;-h!u\"lI\216\007\023\025A\270\322\313\n\206OT!\2704\003\031m\tF\321\277\277\257.\206\222\201\212\273V\371\302\243\3635\3355NC\r\315i\252;\242\376f\017\324\334\244\354im\3119\r\324\250\225v\271\340\216%\220\254W\354\360r\212\302\247\242.\213\371\303g\232I\233\023U\313\345\266\207\300\004\262\327\003\204m`8B\223\272M\266\326\207\370\340D\361\232\273\226C""9\036\203a\334\234I\223|\022\246\211\n?khX\245KZ3\350\330\031\032\370\273{\227q\213\335~\337\356^\310\304\3328_yDm\200\333\353P\341\022\367K}\241\013\367\200\327\2761\036\362<\315\t\036\347~\001'\354$\035\344\275f#\200b\377\007u\367\323K\257\211.\003\272\221\374\001\246k\"\270\243\"(\212\374\002}0\202M!\373\310d\217S\204\355\235\350\036\340\322m\231\257\342\313\006\221$\300m\177_\363\310\244B\tU\203hk\357x\016\326\340\353\014\3167q\r\330f^&Eq\333\366,\354@!\006\213\304\266zJP\365p\252\243\321\034\322~\033\377#\201\330\245b\020\035QH\216\017\346^\273\036W#\320&hi\243\241\373z&Gp\211\263C\225\343v\210\214K99\251\016 v\264\032\"\202'8\360\005\032\310c\3655\234\260\363B\020\336\270\211@\272\3107\325\300@\245\017V\275\007\005(\212\267U\032\221x\2248P^\363S\347\276\347w\034\330\230\201\364^QN\361{o\244_M3\025\322\366\350\317\305\257\266\252\254_\274\361i\247\372\272S\215#\201\337\355\315\302\205\245\221G2Pk\320\3275g\235<\213\271\252\306\335\273V\346\3020\345\343\323M\3759\205\301*\026\3605\235\251f\267\347_e\231\214\005\254/n\033)\200\\\013!\311hcxB\211=\326[\310\243\177d\213$\254\200\342W\362|~;\"\332\357\226%\363KyD9\241b\324\245\246{\333\014r)\177E\014<\266\357\346\343\366tvv;}\330\310\352#}(\0274\273\2228R\303\377\356\327\335\262\201a%\346i{W\334\210J\307\327\031%\22325E\334\330@a\013\346\325\355\023=>}\014\363\241\234\2273\263\272\005~z\007Z\271\240!\316\314\r\363\232\201\335\314&\235u\t\255\0335\357\374I\035l\272\302\326L\203\220\374sw\277L\222p\343\335\253\225\340\325\0163'\224\272\023\352=\035u\337{\320!m\255\004\314\336R\275\251\211 R\377\241\346\256\034\220&\005L\007\016,\224\010\275\221\005\210\"\322e\352\322\246-\"h!\000$\tB\003\241i\264\002\024 \346\212\263\2532$\2014U(q\005\245\300\022\362\256@\233\246\273)\210qv\265\3574\032\305\242d;\271T\234\302.\232!\020?\361w$S\205\t\006\341\353\213\020";
+    PyObject *data = __Pyx_DecompressString(cstring, 2742, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (1697 bytes) */
-const char* const cstring = "x\332}U\317o\0337\026\216\035\331U\222.R\313M\322\026\305\226r\321*\005\022%vR'\330M\263\220\035oa`\267\215\023t\367R\200\240f(\211\233\031r4\344\330VO>\3528\3079\352\250\243\216:\352\350\243\217:\352O\310\237\260\0379#[\261\263\013hf\036\311\367\363{\337\243\376Bv\222V\213\307\344P\360#\342+\256\211T\206\360\343HiN\264\211\205\317\365.\223D\311\240G\274\2303\303\t#\315\334\310t\230!B\023OI#\332\211J4\021\222\204<Tq\257\016+\353\212i-\332\222\030E`\354?t~r\r\033\262P*\034\037\305\302\260f\300\013\205<\251V\254\302\377g+\244\317\217\311\2210\035bz\021'\265b\337\304LjW\306\205I\256\006\013\021s\317\020_\204\\j\241\244~5\227\310w\276\255\310:\310\225\366\302\310\364\210\3560\2706I\204\344Z*&^\317t\224\254\2638f\275\375\253\356\234\275N\242H\305\206\373\373\362\220\005\302'\241\362\371\003\213-\224\271Oj^\215\300U\r\376l\256\265\007\244\r\253\271r\036\021p\262c\344\363\342\237\256\206\177\331\032T\213\374\242\200\226C\177\327%bS\366y \232<\006\216@\311v\016A\\\213$y\275\367\372\341\323\347O\t\223>\220\374\017\302kd\327\364\0024\007\035\207\303f\"\002\203`\026A]'\373-\322S\t\221\034i\242s\021\364\026\rL\207K\242\271\261\002\2519\270\231A\335\024\346B\266k\005t\342\220[\353\277\263@\363\372\257\211q\201T\"}\204\224s\0161\317\343\360~\337\225\371\233t\355\207\021(u\310ct\327\360\320\256U\323\246]\177Y\373\341o\314\367)\"r&(\227m!\371\243\026\330\223\304\\?R\021\227aT|h\223y\357\270\364\353Q\357\330\225N\200\327\343cO\005\201M\016m\252\263\246\367b\201\274V)O\375\345\345\3559g^\372B\333\034\271\313\264\355\221\373\266imG\027[\017\312G\207\r\227\306\315\3029%\320\241\334\304\267\025i\361\007'/~\"\217\257\220I*4\262\305\222\300\020Jc\356'\036\247\224\370\211\003E*\371\020\215=\024,\300\251'\2440\224\312$\214zu\352\251\230\327C\330\t\347\207\264\230\010\362\356\211\320\322pQ-\t\031\306\340\262F\201\361\313\027\371\330\373\037\300qu\317r\367\034\225\017\316\317w\223\363v\262 P\236\273;\\r>3\254\376\221\323\234\364\326Gq\365\324\033ow\367\367\367\202@DZhJ_\367\216\361\274\002""\267\351/\200\371\ro\275\345\335\204K\217\333\321\250_L\t:{\316\217\372\234\037\365\017\2111\017Ks*RZ0\231;)\301\030\376\301i\213yF\305L\367\244'T\035\360\251\004\203\3025\303\314\232\230\332z\360\301\3146\231\346\036\272bg\204\322\271\320\346\3066\334.aE\005f$f\036\267\031x\001.'O\205Q\202\210\326\t\304\371\262\t\222\202JH\252\t4\364\342Q\234\037\321C\025`\350\002az\371\2514LHM%\223\036f\014\304\360-J\324\267#\355^\024\000\346-\346\366N\003h\270\2178x\341.\r\036\307*n\005\254\255[\201bf\373)\230\t\232\024\227\023\245\255Dz\266,\024\244s\214:\242\335\021\302\2474\247\017\276\366&\266Q\316Q\312\271^\020\376]\240\216\360+j\272\220,\206\224\206\310\336\276\217-\226!GH\367\r\355\265\035\n\337\017\270S^\020\255\235\275Ra\245\374\004\233TJ\026\332O\361\226\340!\220\227\374\010\257\010\205Rm|\3731\035\373\177\242\335H\000\221\010\315\2100\272\312\217TD)\256\013\352u\270\367NC\325\255\212\202\255\350\200tR\"#\341\275C\330=9\327;t\377^\026\245.\330\223\247q1\305\347R>\357\013\033@\rb[h\334\3301\007U\321G\212\373\265\250\304J\005s\213\314\261S\334\022\356\264\310oA\236\207p\003e\301\307v\2143\337\242\2120\2216\nO\234X\212\030\234\322\271kj\024M\340'\316\311\2157`\000\005|\3139\237\3654\352\006^I\204\031\346\370\207+\232x!Y+\004\331\304\263\205\347\t\236\204\353\013\266.\360\026\232\307'K\263\322\312\264\364e\266v\262\364\376\363k+\225\364^\266\232\261\254;-m\217\232\343\3251\033\353\311\367\247\313\247\325i\211\014\226\336\227\257\255\334\350\257\364\177K\253\351\263l#kL\313\025\210?fp\363\311I\334\257\3647\247\345\333\375\356\254\364\355\340\351\240;,\217\226\246\245?gj\370\373\2702~6\251\276\277y\355\306\347\351f\372s\266\225\275=#\177\035C\375^\332}\277z\355\306\237\372{\351\235\224\245qV\311\236\r6\006\273\203xX\031nN?\275\335?\302\266\316\276\315\376=h\014\016\246\237}\203\354>[\233\225o\365\177\312\256g\320\270\213\363$k\314\n\341\037\303\245\341\227\243\215\321\316\250=~\203\3647&;\023\357tmV\272\325\337D\225_\330*\357\244\255\254\221\035LK\217\206\361\350\356\250;""\276>\336\236T&\233\016\212\305*\221 \314\220\333Z^\341z\277QTX\0376G\253#6\322\343\357'\313\023\340\363\205Ea\365\204\235$\375W\351R\272\236\356\244^\266\226UQ\335\3127\013\030\254\346\030\354\236\335\333\032U\2553cW(|\335\245\264\260q\007\235\210\007\225\201\003U#\233'i3[\311\016\262\346`yP\265\010\374\230.\247\325\351\247\3530hL/\255g\2667\013\233@\347\303\325\254|\263_\305z\311f\370U\2666-\225/\252\256\244\033i#\005B_e5\227\002\312\357\366?\351\307\266K\326`\216\320s\264\240\274\216\317\223\254=x3\320\303\215\341\316\220\r\315hkt\260\000^\016\276\243\330\335\364\02058'\317G\361\370\356\270;\271>\331>\255\234n~\204u\2276f\245\352`\315q1'\344\315+\204\264\265\357\241\23093?J\321\263\333\344\214<\036-\375\217\336,\362s=\335F\027\357\203\222;\203\366\360\315P;j1\353\366\273\264\233\225\321\212\215\301\317\303\255\341\333\3212\216vG\335\331\345\034n\000\300\347\3208\270\262\001\\\316n}}\366\365\203a\343\327\377\002\270\037\245_";
-    PyObject *data = __Pyx_DecompressString(cstring, 1697, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (2634 bytes) */
+const char* const cstring = "x\332\305VKo\333V\026\256l\331UZ\027\211\344\330I\023\243\245\034\244N1\215\022\331\256\235\266i\n\333qZ\027\323\207\355i\0063\035\200\270\"\257d6\024)\361![]L\263\324\222K.\271\344\222K-\265\364\322K-\365\023\362\023\372\235K\322\242\345\264\203\026\005\006\220x\037\274\217s\276\363}\347\360Si\333\255\327\271%u4~,\251&\267%\303t$~\3222m.\331\216\245\251\334\336a\206d\032zWR,\316\034.1\251\026or\216\230#i\266\244\230\206\2435\\\323\265%\315\220\232\274iZ\335\nv\321Q\314\266\265\206!9\246\204\315\352}qN\274\202\256L\026%\007\037[\232\303j:O\026\304F\325-\263\371{{5C\345'\322\261\346\034IN\267\305\245\225d\336\261\230a\0137\306[\342e\330\241Y\\q$Ukr\303\326L\303~\232\366\244\273*yD\007\304\213v\233-\247+\331G\014G;n\013\306\325MKR\272\316\221iT\230e\261\356\336\345\343\304~\333m\265L\313\341\352\236\321a\272\246JMS\345\037\021\266X\314UiEY\221p\324\n\316#[W>\222\032\330\225.\216o\004\234\354\004\366<\376F\370\360\234|0\353\322\267&\320\022\350\357\010C\310d\225\353Z\215[\300\021(Q\344p\211\010\221!}\277\373\375\375\365G\353\0223T \371\023\256\267a]M\321\021\034D\034\007\326\\Mwp\031!hW\244\275\272\3245]\311\3400\023\221ka]v\203s\304\r\311\346\016u\244\025\0017s\340\267\214\355\232\321XI\240\323:\234v?c\272\315+\337\271\216\270\310t\r\025W\032)\207\230\242p\234~O\270\371\203!\302\217M\240T\207[\210\256\303\23346kdv\345\311\312\207_0U\225q#g\232\314\215\206f\360\007u\260\307\265\270\375\300lq\243\331J\032\271\306\224\027\334P+\255\356\211p]\002^\017O\024S\327\3118\204\251\302j\312\343\014yiQl\372\223\311\351\2243OT\315&\033\271\260\264\241H\367(h\rA\027\362\007\356#\302\0167\034\241\205sJ B\361\026\225<\262\265\237\271\364\370s\351\341%2\031&\002Yg\256\356H\262lq\325U\270,K\252+@1L\343>\002\333\321\230\216\267\212fh\216,\033n\263\325\255\310\212i\361J\023\3734q\216Tg\232\036GOk\022\r\263\313\334&\203\014&W$\030?y\034\313^\275\000\307\3459\342\3569*\027\336\237\317\272\347\341d\272n*\"w\010\343T\346\260\312k\336\306\244\2473\222\324S\331:\334\331\333\333\325u\255ek\266,""\177\337=\301\377)\270-\177\013\230\017x\375\220\267]n(\234\244Q\031\253\004\221=\347G%\345G\345\"1\322k\345\230\212Lo\0351\361\220\221\262d9\3415\027=\027\242\374\231\313u\2468\246\305\354\256\241hf\005`\232.d\303m\006\005;\226L\336\241\201\202Y\247!7\230fP\253\233\266]c6W\0203R\220,\247\235\006w\210\0164\304)\262\006\005YL\341d\237\202]\\1\233-\027\026\320\241\350\246\303\032(\014\242q\013\236@M\331W*\202\332\005q\340\257q\341\005o\262\354P7\033\257[\325d\212zal\202\277\216\333\314\316\231\265Nvh\305\306\310\266\243\276n\272c\352\310\r\272\346t/\274\265\265\354\320N\2153\034`f\313\0063\024$\nGq-\013\367\223\361i\027\267\247]*,L\227e\225\350 \223\376T\312_\342!\203-1\237\261\227|Gh\250\2513\333I\333t\316\326\315\343\264\215\347\220\362\301)\244k\016\331\210\234\312-\313\264\304\246\026Dn\252u\2355\354\272n2gc\035\032\206\240\2224.\313u\327@\244)\370\266x\320\2212\205\332\216\331t\2445\216\2164\333\241?\275\3234U\226c\t\242\245jF\306\237s+\316\027I\322xA\\\342v\374\244\3150\231\254\217\2310\356\321+\021K\342\325y'\266\244\t\243\350yB<mr\230,\332&\025\310\246\246\252:\027Gd\272\3424\240\201]\246\352\352\242m\342G\363\206\301\232\230H\237\006\264\017>\033\374\030\217\026\320#^P\343\034Q\r\267E\032B`\020F\342\021\016h\201\3541\246-\263%\313H\326\262r\304\225\02766\211Q\002\033uEdE\3175Z\232\362\002\246\354\032\351\272\216\370v q\265\241\326\330\240q\016=\357\305\33163\001\274\321m \032\0102w\360#\263\022q\200\250\304U\001\034*^\342'\365\222\\\222\370\205\231$o\213\267\211\315\231~z\255Hq\ts)&\231.\335\222\014c@(\342\202\224\311\260\311\354\230\3118\322r\304C\326\324\023 L\342\023\363*\005\023\236\264l\307\304\337rQ\353\001\220 \"Z\"\016\265D\tj;\244\037\207\203\210\251#\262c\312.\254\266\342t\206'\326\201\330*\211Ye]\033\310#bn\0139\234\343\013'!\334\270G\273pl\025\377U\374\327\360w\271=N\003\231\204@+M\035\n;y\231\033\345g\206\371w\375\342\313\334\253\353o\314\224\274\033\376\254\317\374\3660\277\021\325\372\263}\326\267\007\037\234N\235\226\207y)\310\275\232}c\346Jo""\246\367\203W\3666\375e\177kX(\241\373\261\217c\336|i\365J\275\352\260p\265\327\036\345\357\004\353A;,D\271a\376=\337\014\377\323/\3657\007\345W\2057\256\\\367\252\336\227\376\252\177x&}\326\307\362\033^\033\307^y\247\267\353-x\314\263\374\222\277\031,\007;\201\025\226\302\352p\356j\357\030\323\266\177\307\377g\260\025\354\017\257\275\017\353\256\025G\205\267{\237\373\323>V,\342\275\353o\215\222\316\337\303\\\370n\264\034mG\215\376\001\314_\036l\017\224\323\342(\377v\257\n/\027\311\313\005\257\356o\371\373\303\374\203\320\212\026\243v\177\272\2771(\r\252\002\212\254\2270\020\333`[1\366p\276\267\225xX\tk\321l\304\"\273\377\301`j\000|n\372pv\366%{\351\366\236z9o\336\333\366\024\277\350\227\351\270\3673\030\314\306\030\354\234\335X\215\312t\230C#8>/L\312L, \022VP\n\004\2506\254Y\363j\376\214\277\357\327\202\251\240L\010|\354My\345\341\334<6l\r'\306#\212Mf\022\350\\\034\215\no\365\312\030\213\260\336\362\213\303|a\354u\311[\366\266< t\313_\021&\300\375v\357\315\236EQ\312\"\364\010!(\314\243Y\363\033\301A`\207\313\341v\310B'Z\215\3663\340\t\360G\371\342\377\206\276\220\022\3517\200\317\360\211.\036#I\276\345\274\222\267\352\035\306\304\300ro\306\333\037\211\316\254\307\375\252\277\003@\027\002&\310\265\016\003\026\020A\013\207U\377\017\026\256\373vp\027*\231\016\327B6a\355\014V\344\004\001l\210a7,\306\260\376Q+\3076Q\364fz\317\005Q``\235\264\224\r\343Z\312\216\230\271\204\3256x\226\033\316\335\3667\202bP\036\276S\232d\340\370\335D\234_]#\221-z\035\254\024d\331\210\016\242N\177\277\257\014\026\007\326)\230\266\t\324\027\373\355\301\364`\343\264t\n\243\037FS\321\007\375\\\177\276\377\014\212\335\032\345I\346\371rP$\006\n\r}\034}7\250\016\276:\375\346\354_\377\036\346\3273#B\234\221W\354\365Z;\273\376 l\223\215\217\204\260l\377^P\016\326\002%\274\031\025\243;\321a\2770\310\r\212\303\271\005o\237\034\037%\235GAU\244!ZU\2165\262\004\206\267\207I\270\277\006\026\271aa.\311\\\355\341\034r\031\2413\234\273\006\030\027\010\321\253\275_\316\336\303\355\243\374\222\3774\230\016""\236D\245\250:\026\332\247\376\201\377\337\360\200\254#\236\354\372@\360\266\237Y\360\231\377S8\025\002\340\353\336\036\201I\220\274\013. \210D\223\267\220\204\277\305p7\272\220\265\350\330_\300\251\302-\377\303\304\211\333\321N\364\013\362\340\365\323\203\323\361m\223\000}\002\315\0235?\001=\016A\314\317D\202\273\323\377\3614\207\250\245n\215\222\216\346\267\341\322j\360c\224\213D\350\2778\273\365\267\260\232\226\222$\376\243\313\301\276T[&&Fq\340Qq\342\262S\270Tv\022\373\317\353\317k\013\321\331U\351Lz\030\345&X1\022\273\2635h\336\333@\246\276\007\245m\007\r\204\303\026\345\203\321\241w\021\322\002\310\276\034|\031\256\206\207`\3512\220l\217&-\270\202$\371\010+\366/M\000\230\263\267\227\316\226>\n\267b\345&\270\374\361\3423.\257\2272\314WgK\233Q;]\277\010\243\247\341\337s\004\177;\250\205\271L\336\370\323\267\217sI\025$\336\350\027\301\213\347\203\325\001R\320*@y\326/\367\327\372u\024[\234-8\274\204\232\234\277\322+\366\356\366\240\231L\255\371\335j\330\201\366\024|\004Pb\241xd\213V\321+R@\206si\260/\315\304.,\321\365\027t\264\3465\240\2116\351h\227\2122u\236\371e\210\035\353>\021\327\244\035\362\266\353M\247\376\177M\2052\356\324Q>:\320E>\334\t\273\375\251~y\362{h'\276a\317?\014\336\204\346\346\221\262yT\215\236\322\332\311\027\365h+\372\007U\236Xw;\344\304D\tx\216\232Z\207z\035\024\010\r\032*\376\2310&\202\371\r\"\335\364\363\260\372\2308B\233n\003\231\354W@,\2142\345\326#Z\363\373_\0017\204M\n\210\277\031\336A\204\347\373O\305\247\321k\276\002\376\"\363/\351 \253\352\261\026&\005\274\365W[\362\3473L|\034\325\217\023\361\255\267\211l\276\003KJ\321Z\024\227\373\357~\005\267\017\234\247";
+    PyObject *data = __Pyx_DecompressString(cstring, 2634, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (3086 bytes) */
-const char* const bytes = ": Buffer view does not expose stridesCan only create a buffer that is contiguous in memory.Cannot assign to read-only memoryviewCannot create writable memory view from read-only memoryviewCannot index with type 'Cannot transpose memoryview with indirect dimensionsDimension %d is not directEmpty shape tuple for cython.arrayIndirect dimensions not supportedInvalid mode, expected 'c' or 'fortran', got Invalid shape in axis <MemoryView of Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.Out of bounds on buffer access (axis Unable to convert item to object.>')?add_noteai_engine/features/openmp/openmp_backend.pyx and  at 0xcollections.abc<contiguous and direct><contiguous and indirect>disableenablegc (got got differing extents in dimension isenableditemsize <= 0 for cython.arrayno default __reduce__ due to non-trivial __cinit__numpy._core.multiarray failed to importnumpy._core.umath failed to import object><strided and direct><strided and direct or indirect><strided and indirect>unable to allocate array data.unable to allocate shape and strides.ASCIIEllipsis__Pyx_PyDict_NextRefSequenceView.MemoryViewabcai_engine.features.openmp_backendallocate_buffer__annotate__annualize_factorasyncio.coroutinesatratr_arratr_valbasec__class____class_getitem__cline_in_tracebackclosecompute_atr_ompcompute_bollinger_bands_ompcompute_rolling_volatility_ompcontains_nancount__dict__dtypedtype_is_objectemptyencodeenumerateerrorflagsfloat64formatfortran__func____getstate__highiid__import__index_is_coroutineitemsitemsizeklowlower_bandlower_band_arr__main__max_valmean_valmemviewmiddle_bandmiddle_band_arrmode__module__nname__name__nanndim__new__npnum_stdnum_threadsnumpyobjpackperiodpop__pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex__registerreturns__set_name__set_openmp_threadssetdefault__setstate____s""etstate_cython__shapesizestartstd_valstepstopstruct__test__threads_to_usetrtr_arrtr_sumtrading_daysunpackupdateupper_bandupper_band_arrval1val2val3valuesvolatilityvolatility_arrx\200\001\340\004\005\330\004\031\230\021\200\001\360\024\000\005\022\220\027\230\006\230a\230q\330\0046\260b\270\006\270a\270s\300&\310\002\310!\330\004 \240\001\360\010\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\022\220!\2205\230\001\340\004\007\200r\210\022\2101\330\010\017\210q\340\004#\2404\240q\250\010\260\001\330\004\036\230o\250\\\270\022\2707\300!\360\n\000\t\024\2201\220G\2302\230S\320 ;\2701\330\010\027\220q\360\006\000\t\r\210E\220\025\220a\220r\230\022\2307\240\"\240C\240r\250\022\2501\330\014\017\210w\220a\220s\230#\230W\240A\240Q\330\020\037\230q\330\020\021\340\010\013\210=\230\003\2301\330\014\026\220a\220u\230A\340\014\026\220a\220u\230L\250\001\250\031\260\"\260B\260g\270R\270s\300\"\300B\300c\310\021\340\004\013\2101\200\001\360\030\000\005\022\220\025\220f\230A\230Q\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\010\000\005\t\210\005\210U\220!\2201\330\010\013\2101\210E\220\021\340\004\007\200r\210\023\210A\330\010\017\210q\340\004.\250b\260\006\260a\260s\270&\300\002\300!\330\004\030\230\001\340\004\006\200a\200u\210D\220\001\220\023\220B\220c\230\021\230!\360\006\000\005\037\230o\250\\\270\022\2707\300!\360\006\000\t\024\2201\220C\320\0272\260!\330\010\017\210t\2201\220C\220r\230\023\230A\230Q\330\010\017\210t\2201\220C\220r\230\025\230a\230r\240\022\2401\330\010\017\210s\220!\2203\220b\230\005\230Q\230b\240\002\240!\340\010\013\2105\220\002\220!\330\014\023\2201\220A\330\010\013\2105\220\002\220!\330\014\023\2201\220A\340\010\022\220!\330\010\013\2105\220\002\220!\330\014\026\220a\330\010\013\2105\220\002\220!\330\014\026\220a\340\010\n\210!\2105\220\001\360\006\000\005\032\230\021\330\004\010\210\005\210U\220!\2201\330\010\022\220\"\220A\220Q\330\004\032\230'\240\022\2401\330\004\007\200q\210\007\210r\220\025\220a\360\006\000""\005\t\210\005\210U\220!\2208\2301\330\010\023\2208\2303\230g\240R\240s\250\"\250B\250a\250t\2602\260Q\330\010\013\2101\210E\220\021\340\004\013\2101\200\001\360\024\000\005\022\220\026\220v\230Q\230a\360\006\000\0058\260r\270\026\270q\300\003\3006\310\022\3101\330\0046\260b\270\006\270a\270s\300&\310\002\310!\330\0046\260b\270\006\270a\270s\300&\310\002\310!\340\004!\240\021\330\004 \240\001\330\004 \240\001\360\n\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\023\2201\220E\230\021\330\010\022\220!\2205\230\001\330\010\022\220!\2205\230\001\340\004\007\200r\210\022\2101\330\010\017\320\017 \320 0\260\001\360\006\000\005\037\230o\250\\\270\022\2707\300!\360\006\000\t\024\2201\220G\2302\230S\320 ;\2701\330\010\023\2206\230\021\230(\240\"\240B\240g\250R\250s\260\"\260B\260a\330\010\022\220%\220q\230\010\240\002\240\"\240G\2502\250S\260\002\260\"\260C\260q\340\010\023\2201\220E\230\021\330\010\022\220!\2205\230\t\240\022\2408\2502\250Q\330\010\022\220!\2205\230\t\240\022\2408\2502\250Q\340\004\013\320\013\034\320\034,\250AO";
+    #else /* compression: none (5677 bytes) */
+const char* const bytes = ": Buffer view does not expose stridesCan only create a buffer that is contiguous in memory.Cannot assign to read-only memoryviewCannot create writable memory view from read-only memoryviewCannot index with type 'Cannot transpose memoryview with indirect dimensionsDimension %d is not directEmpty shape tuple for cython.arrayIndirect dimensions not supportedInvalid mode, expected 'c' or 'fortran', got Invalid shape in axis <MemoryView of Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.Out of bounds on buffer access (axis Unable to convert item to object.>')?add_noteai_engine/features/openmp/openmp_backend.pyx and  at 0xcollections.abc<contiguous and direct><contiguous and indirect>disableenablegc (got got differing extents in dimension isenableditemsize <= 0 for cython.arrayno default __reduce__ due to non-trivial __cinit__numpy._core.multiarray failed to importnumpy._core.umath failed to import object><strided and direct><strided and direct or indirect><strided and indirect>unable to allocate array data.unable to allocate shape and strides.ASCIIEllipsis__Pyx_PyDict_NextRefSequenceView.MemoryViewabcai_engine.features.openmp_backendallocate_bufferalphaalpha_sig__annotate__annualize_factorasyncio.coroutinesatratr_arratr_valavg_gainavg_lossbasec__class____class_getitem__cline_in_tracebackclosecompute_atr_ompcompute_bollinger_bands_ompcompute_daily_returns_ompcompute_ema_ompcompute_log_returns_ompcompute_macd_ompcompute_momentum_ompcompute_obv_ompcompute_rolling_std_ompcompute_rolling_volatility_ompcompute_rsi_ompcompute_sma_ompcontains_nancountcurrent_emacurrent_obvcurrent_signal__dict__diffdtypedtype_is_objectemaema_arrema_fastema_fast_arrema_slowema_slow_arremptyencodeenumerateerrorfast_periodflagsfloat64formatfortran__func__gainsgains_arr__getstate__highhisthist_arriid__import__index_is_coroutineitemsitemsizeklosseslosses_arrlowlower_bandlo""wer_band_arrmacd_linemacd_line_arr__main__max_valmean_valmemviewmiddle_bandmiddle_band_arrmode__module__mommom_arrnname__name__nanndim__new__npnum_stdnum_threadsnumpyobjobvobv_arrpackperiodpop__pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex__registerretret_arrreturnsrsirsi_arr__set_name__set_openmp_threadssetdefault__setstate____setstate_cython__shapesignal_linesignal_line_arrsignal_periodsizeslow_periodsmasma_arrstartstart_idxstdstd_arrstd_valstepstopstructsum_gainsum_losssum_macdsum_val__test__threads_to_usetrtr_arrtr_sumtrading_daysunpackupdateupper_bandupper_band_arrval1val2val3valuesvolatilityvolatility_arrvolumex\200\001\340\004\005\330\004\031\230\021\200\001\360\024\000\005\022\220\027\230\006\230a\230q\330\0046\260b\270\006\270a\270s\300&\310\002\310!\330\004 \240\001\360\006\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\022\220!\2205\230\001\340\004\007\200r\210\022\2101\330\010\017\210q\340\004#\2404\240q\250\010\260\001\330\004\036\230o\250\\\270\022\2707\300!\360\010\000\t\024\2201\220G\2302\230S\320 ;\2701\330\010\027\220q\360\006\000\t\r\210E\220\025\220a\220r\230\022\2307\240\"\240C\240r\250\022\2501\330\014\017\210w\220a\220s\230#\230W\240A\240Q\330\020\037\230q\330\020\021\340\010\013\210=\230\003\2301\330\014\026\220a\220u\230A\340\014\026\220a\220u\230L\250\001\250\031\260\"\260B\260g\270R\270s\300\"\300B\300c\310\021\340\004\013\2101\200\001\360\026\000\005\022\220\025\220f\230A\230Q\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2201\330\010\013\2101\210E\220\021\340\004\007\200r\210\023\210A\330\010\017\210q\340\004.\250b\260\006\260a\260s\270&\300\002\300!\330\004\030\230\001\330\004\006\200a\200u\210D\220\001\220\023\220B\220c\230\021\230!\360\006\000\005\037\230o\250\\\270\022\2707\300!\360\006\000\t\024\2201\220C\320\0272\260!\330\010\017\210t\2201\220C\220r\230\023\230A\230Q\330\010\017\210t\2201\220C""\220r\230\025\230a\230r\240\022\2401\330\010\017\210s\220!\2203\220b\230\005\230Q\230b\240\002\240!\340\010\013\2105\220\002\220!\330\014\023\2201\220A\330\010\013\2105\220\002\220!\330\014\023\2201\220A\340\010\022\220!\330\010\013\2105\220\002\220!\330\014\026\220a\330\010\013\2105\220\002\220!\330\014\026\220a\340\010\n\210!\2105\220\001\360\006\000\005\032\230\021\330\004\010\210\005\210U\220!\2201\330\010\022\220\"\220A\220Q\330\004\032\230'\240\022\2401\330\004\007\200q\210\007\210r\220\025\220a\360\006\000\005\t\210\005\210U\220!\2208\2301\330\010\023\2208\2303\230g\240R\240s\250\"\250B\250a\250t\2602\260Q\330\010\013\2101\210E\220\021\340\004\013\2101\200\001\340\004\021\220\025\220f\230A\230Q\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\010\200r\210\022\2101\330\010\013\2101\210E\220\021\340\004\007\200r\210\023\210A\330\010\017\210q\340\004\036\230o\250\\\270\022\2707\300!\330\010\023\2201\220C\320\0272\260!\330\010\013\2105\220\001\220\022\2202\220S\230\003\2301\330\014\017\210q\220\005\220Q\340\014\017\210q\220\006\220e\2301\230C\230r\240\025\240a\240r\250\022\2504\250r\260\025\260a\260r\270\022\2701\340\004\013\2101\200\001\340\004\021\220\025\220f\230A\230Q\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\010\200r\210\022\2101\330\010\013\2101\210E\220\021\340\004\007\200r\210\023\210A\330\010\017\210q\340\004\036\230o\250\\\270\022\2707\300!\330\010\023\2201\220C\320\0272\260!\330\010\013\2105\220\001\220\022\2202\220S\230\003\2304\230s\240%\240q\250\003\2503\250a\330\014\017\210q\220\005\220Q\340\014\017\210q\220\005\220S\230\001\230\025\230a\230s\240\"\240E\250\021\250\"\250B\250a\340\004\013\2101\200\001\340\004\021\220\025\220f\230A\230Q\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\010\200r\210\023\210A\330\010\017\210q\340\004\007\200q\210\005\210V\2201\220A\330\004\036\230f\240A\240Q\360\006\000\005\t\210\005\210U\220!""\2203\220a\330\010\013\2105\220\001\220\023\220B\220e\2301\230B\230b\240\001\330\014\033\2306\240\021\240!\330\r\022\220!\2203\220b\230\005\230Q\230b\240\002\240!\330\014\033\2306\240\021\240!\330\010\013\2101\210E\220\021\340\004\013\2101\200\001\360\020\000\005\022\220\026\220v\230Q\230a\360\006\000\0056\260R\260v\270Q\270c\300\026\300r\310\021\330\0047\260r\270\026\270q\300\003\3006\310\022\3101\330\0040\260\002\260&\270\001\270\023\270F\300\"\300A\340\004\037\230q\330\004!\240\021\330\004\032\230!\360\006\000\0055\260O\3001\300H\310M\320YZ\330\0044\260O\3001\300H\310M\320YZ\340\004\036\230a\330\004\036\230a\360\006\000\005\037\230o\250\\\270\022\2707\300!\360\006\000\t\024\2201\320\024/\250q\330\010\013\2108\2201\220C\220s\230(\240!\2403\240c\250\030\260\021\260#\260S\270\010\300\001\300\021\330\014\025\220Q\220e\2301\340\014\025\220Q\220e\2308\2401\240C\240r\250\030\260\021\260!\360\006\000\005\032\230\034\240R\240q\330\004\007\200r\210\023\210J\220b\230\001\330\010\014\210E\220\025\220a\220q\330\014\027\220q\230\005\230Q\330\014\020\220\001\220\025\220a\330\010\017\210\177\320\036/\250q\340\004\034\230D\240\003\240>\260\022\2601\330\004\010\210\005\210U\220!\220:\230R\230~\250R\250q\330\010\023\2201\220E\230\021\340\004\033\2301\330\004\010\210\005\210U\220!\220;\230j\250\002\250!\330\010\024\220I\230Q\230a\330\004!\240\031\250\"\250A\330\004\017\210q\220\n\230\"\230N\250\"\250E\260\021\360\006\000\005\t\210\005\210U\220!\220:\230R\230\177\250a\330\010\032\230)\2401\240C\240r\250\033\260C\260\177\300c\310\024\310R\310q\330\010\023\2201\220E\230\021\360\006\000\t\024\2201\320\024/\250q\330\010\013\2109\220A\220S\230\003\2309\240A\240S\250\003\250;\260a\260s\270#\270[\310\001\310\021\330\014\020\220\001\220\025\220a\340\014\020\220\001\220\025\220i\230q\240\003\2402\240[\260\001\260\021\340\004\013\210?\320\032+\2501\200\001\360\024\000\005\022\220\026\220v\230Q\230a\340\0047\260r\270\026\270q\300\003\3006\310\022\3101\330\0046\260b\270\006\270a\270s\300&\310""\002\310!\330\0046\260b\270\006\270a\270s\300&\310\002\310!\340\004!\240\021\330\004 \240\001\330\004 \240\001\360\010\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\023\2201\220E\230\021\330\010\022\220!\2205\230\001\330\010\022\220!\2205\230\001\340\004\007\200r\210\022\2101\330\010\017\320\017 \320 0\260\001\360\006\000\005\037\230o\250\\\270\022\2707\300!\340\010\023\2201\220G\2302\230S\320 ;\2701\330\010\023\2206\230\021\230(\240\"\240B\240g\250R\250s\260\"\260B\260a\330\010\022\220%\220q\230\010\240\002\240\"\240G\2502\250S\260\002\260\"\260C\260q\340\010\023\2201\220E\230\021\330\010\022\220!\2205\230\t\240\022\2408\2502\250Q\330\010\022\220!\2205\230\t\240\022\2408\2502\250Q\340\004\013\320\013\034\320\034,\250A\200\001\340\004\021\220\026\220v\230Q\230a\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2201\330\010\013\2101\210E\220\021\340\004\007\200r\210\022\2101\330\010\017\210q\340\004\036\230o\250\\\270\022\2707\300!\330\010\023\2201\220H\320\0347\260q\330\010\013\2101\210E\220\026\220q\230\003\2302\230V\2401\240B\240b\250\001\340\004\013\2101\200\001\340\004\021\220\026\220v\230Q\230a\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2201\330\010\013\2101\210E\220\021\340\004\007\200r\210\023\210A\330\010\017\210q\340\0041\260\022\2606\270\021\270#\270V\3002\300Q\330\0042\260\"\260F\270!\2703\270f\300B\300a\330\004\033\2301\330\004\034\230A\340\004\t\210\021\210%\210q\330\004\n\210!\2105\220\001\360\006\000\005\037\230o\250\\\270\022\2707\300!\360\006\000\t\024\2201\220C\320\0272\260!\330\010\017\210v\220Q\220c\230\022\2306\240\021\240\"\240B\240a\330\010\013\2105\220\002\220!\330\014\021\220\021\220%\220q\330\014\022\220!\2205\230\001\340\014\021\220\021\220%\220q\330\014\022\220!\2205\230\001\230\021\360\006\000\005\034\2301\330\004\033\2301\330\004\010\210\005\210U\220!\2203\220g\230R\230q\330\010\024\220E\230\021\230!\330""\010\024\220F\230!\2301\340\004\033\2309\240B\240a\330\004\033\2309\240B\240a\340\004\007\200y\220\003\2201\330\010\013\2101\210J\220a\340\010\013\2101\210J\220f\230C\230v\240S\250\004\250C\250y\270\002\270!\360\006\000\005\t\210\005\210U\220!\2207\230\"\230C\230q\330\010\024\220I\230S\240\007\240r\250\023\250B\250e\2601\260D\270\002\270!\330\010\024\220I\230S\240\007\240r\250\023\250B\250f\260A\260T\270\022\2701\330\010\013\2109\220C\220q\330\014\017\210q\220\005\220Q\340\014\017\210q\220\005\220V\2303\230f\240C\240t\2503\250i\260r\270\021\340\004\013\2101\200\001\340\004\021\220\026\220v\230Q\230a\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\013\2101\210E\220\021\340\004\007\200r\210\022\2101\330\010\017\210q\340\004\030\230\004\230C\230w\240b\250\001\360\006\000\005\033\230!\330\004\010\210\005\210U\220!\2201\330\010\023\2206\230\021\230!\330\004\036\230h\240b\250\001\330\004\007\200q\210\007\210r\220\025\220a\360\006\000\005\t\210\005\210U\220!\2208\2301\330\010\027\220v\230Q\230c\240\022\2407\250#\250\\\270\023\270D\300\002\300!\330\010\013\2101\210E\220\021\340\004\013\2101\200\001\340\004\021\220\026\220v\230Q\230a\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\013\2101\210E\220\021\340\004\007\200r\210\022\2101\330\010\017\210q\340\004\036\230o\250\\\270\022\2707\300!\330\010\023\2201\220G\2302\230S\320 ;\2701\330\010\013\2101\210E\220\026\220q\230\010\240\002\240\"\240G\2502\250S\260\002\260\"\260A\340\004\013\2101\200\001\340\004\021\220\026\220v\230Q\230a\330\004/\250r\260\026\260q\270\003\2706\300\022\3001\330\004\031\230\021\360\006\000\005\t\210\005\210U\220!\2207\230\"\230A\330\010\013\2101\210E\220\021\340\004\007\200r\210\022\2101\330\010\017\210q\360\006\000\005\037\230o\250\\\270\022\2707\300!\340\010\023\2201\220G\2302\230S\320 ;\2701\330\010\023\2206\230\021\230(\240\"\240B""\240g\250R\250s\260\"\260B\260a\330\010\013\2101\210E\220\025\220a\220x\230r\240\022\2407\250\"\250C\250r\260\022\2603\260a\340\004\013\2101O";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 156; i++) {
+    for (int i = 0; i < 210; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
       if (likely(string) && i >= 44) PyUnicode_InternInPlace(&string);
@@ -23535,7 +28841,7 @@ const char* const bytes = ": Buffer view does not expose stridesCan only create 
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 156; i < 161; i++) {
+    for (int i = 210; i < 224; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -23546,15 +28852,15 @@ const char* const bytes = ": Buffer view does not expose stridesCan only create 
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 161; i++) {
+    for (Py_ssize_t i = 0; i < 224; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 156;
-      for (Py_ssize_t i=0; i<5; ++i) {
+      PyObject **table = stringtab + 210;
+      for (Py_ssize_t i=0; i<14; ++i) {
         #if PY_VERSION_HEX >= 0x030F0000
         PyUnstable_SetImmortal(table[i]);
         #elif CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
@@ -23618,7 +28924,7 @@ typedef struct {
     unsigned int num_kwonly_args : 1;
     unsigned int nlocals : 5;
     unsigned int flags : 10;
-    unsigned int first_line : 8;
+    unsigned int first_line : 9;
 } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
 static PyObject* __Pyx_PyCode_New(
@@ -23640,19 +28946,64 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_set_openmp_threads, __pyx_mstate->__pyx_kp_b_iso88591__7, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 15, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 71};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 71};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_sma_arr, __pyx_mstate->__pyx_n_u_sma, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_threads_to_use};
+    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_sma_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_o_7, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 10, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 91};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_ema_arr, __pyx_mstate->__pyx_n_u_ema, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_alpha, __pyx_mstate->__pyx_n_u_sum_val, __pyx_mstate->__pyx_n_u_current_ema};
+    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_ema_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_Cwb, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 17, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 121};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_rsi_arr, __pyx_mstate->__pyx_n_u_rsi, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_gains_arr, __pyx_mstate->__pyx_n_u_losses_arr, __pyx_mstate->__pyx_n_u_gains, __pyx_mstate->__pyx_n_u_losses, __pyx_mstate->__pyx_n_u_diff, __pyx_mstate->__pyx_n_u_threads_to_use, __pyx_mstate->__pyx_n_u_sum_gain, __pyx_mstate->__pyx_n_u_sum_loss, __pyx_mstate->__pyx_n_u_avg_gain, __pyx_mstate->__pyx_n_u_avg_loss};
+    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_rsi_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_r_q_6_1_U_1_1E_r_A_q_1_6_V2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 22, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 182};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_fast_period, __pyx_mstate->__pyx_n_u_slow_period, __pyx_mstate->__pyx_n_u_signal_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_macd_line_arr, __pyx_mstate->__pyx_n_u_signal_line_arr, __pyx_mstate->__pyx_n_u_hist_arr, __pyx_mstate->__pyx_n_u_macd_line, __pyx_mstate->__pyx_n_u_signal_line, __pyx_mstate->__pyx_n_u_hist, __pyx_mstate->__pyx_n_u_ema_fast_arr, __pyx_mstate->__pyx_n_u_ema_slow_arr, __pyx_mstate->__pyx_n_u_ema_fast, __pyx_mstate->__pyx_n_u_ema_slow, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_threads_to_use, __pyx_mstate->__pyx_n_u_start_idx, __pyx_mstate->__pyx_n_u_alpha_sig, __pyx_mstate->__pyx_n_u_sum_macd, __pyx_mstate->__pyx_n_u_current_signal};
+    __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_macd_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_6RvQc_r_7r_q_6_1_0_F_A_q_5O, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 15, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 251};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_std, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_middle_band_arr, __pyx_mstate->__pyx_n_u_upper_band_arr, __pyx_mstate->__pyx_n_u_lower_band_arr, __pyx_mstate->__pyx_n_u_middle_band, __pyx_mstate->__pyx_n_u_upper_band, __pyx_mstate->__pyx_n_u_lower_band, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_mean_val, __pyx_mstate->__pyx_n_u_std_val, __pyx_mstate->__pyx_n_u_threads_to_use};
-    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_bollinger_bands_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_8r_q_6_1_6b_as_6b_as_U_7_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[5] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_bollinger_bands_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_7r_q_6_1_6b_as_6b_as_U_7_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[5])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 12, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 118};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_returns, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_trading_days, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_volatility_arr, __pyx_mstate->__pyx_n_u_volatility, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_annualize_factor, __pyx_mstate->__pyx_n_u_threads_to_use, __pyx_mstate->__pyx_n_u_contains_nan, __pyx_mstate->__pyx_n_u_k};
-    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_rolling_volatility_omp, __pyx_mstate->__pyx_kp_b_iso88591_aq_6b_as_U_7_A_5_r_1_q_4q_o_7_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
-  }
-  {
-    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 18, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 163};
+    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 18, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 295};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_high, __pyx_mstate->__pyx_n_u_low, __pyx_mstate->__pyx_n_u_close, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_atr_arr, __pyx_mstate->__pyx_n_u_atr, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_tr_arr, __pyx_mstate->__pyx_n_u_tr, __pyx_mstate->__pyx_n_u_val1, __pyx_mstate->__pyx_n_u_val2, __pyx_mstate->__pyx_n_u_val3, __pyx_mstate->__pyx_n_u_max_val, __pyx_mstate->__pyx_n_u_threads_to_use, __pyx_mstate->__pyx_n_u_tr_sum, __pyx_mstate->__pyx_n_u_atr_val};
-    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_atr_omp, __pyx_mstate->__pyx_kp_b_iso88591_fAQ_r_q_6_1_U_1_1E_r_A_q_b_as_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[6] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_atr_omp, __pyx_mstate->__pyx_kp_b_iso88591_fAQ_r_q_6_1_U_1_1E_r_A_q_b_as_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[6])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 358};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_close, __pyx_mstate->__pyx_n_u_volume, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_obv_arr, __pyx_mstate->__pyx_n_u_obv, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_current_obv};
+    __pyx_mstate_global->__pyx_codeobj_tab[7] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_obv_omp, __pyx_mstate->__pyx_kp_b_iso88591_fAQ_r_q_6_1_r_A_q_q_V1A_fAQ_U_3, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[7])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 382};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_mom_arr, __pyx_mstate->__pyx_n_u_mom, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_threads_to_use};
+    __pyx_mstate_global->__pyx_codeobj_tab[8] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_momentum_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_r_q_6_1_U_1_1E_r_1_q_o_7_1H, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[8])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 402};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_close, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_ret_arr, __pyx_mstate->__pyx_n_u_ret, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_threads_to_use};
+    __pyx_mstate_global->__pyx_codeobj_tab[9] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_daily_returns_omp, __pyx_mstate->__pyx_kp_b_iso88591_fAQ_r_q_6_1_r_1_1E_r_A_q_o_7_1C, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[9])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 425};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_close, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_ret_arr, __pyx_mstate->__pyx_n_u_ret, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_threads_to_use};
+    __pyx_mstate_global->__pyx_codeobj_tab[10] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_log_returns_omp, __pyx_mstate->__pyx_kp_b_iso88591_fAQ_r_q_6_1_r_1_1E_r_A_q_o_7_1C_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[10])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 448};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_values, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_std_arr, __pyx_mstate->__pyx_n_u_std, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_mean_val, __pyx_mstate->__pyx_n_u_threads_to_use};
+    __pyx_mstate_global->__pyx_codeobj_tab[11] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_rolling_std_omp, __pyx_mstate->__pyx_kp_b_iso88591_vQa_r_q_6_1_U_7_A_1E_r_1_q_o_7_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[11])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 12, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 471};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_returns, __pyx_mstate->__pyx_n_u_period, __pyx_mstate->__pyx_n_u_trading_days, __pyx_mstate->__pyx_n_u_num_threads, __pyx_mstate->__pyx_n_u_n, __pyx_mstate->__pyx_n_u_volatility_arr, __pyx_mstate->__pyx_n_u_volatility, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_annualize_factor, __pyx_mstate->__pyx_n_u_threads_to_use, __pyx_mstate->__pyx_n_u_contains_nan, __pyx_mstate->__pyx_n_u_k};
+    __pyx_mstate_global->__pyx_codeobj_tab[12] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_ai_engine_features_openmp_openmp, __pyx_mstate->__pyx_n_u_compute_rolling_volatility_omp, __pyx_mstate->__pyx_kp_b_iso88591_aq_6b_as_U_7_A_5_r_1_q_4q_o_7_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[12])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
@@ -30354,6 +35705,11 @@ static const char* __Pyx_BufFmt_CheckString(__Pyx_BufFmt_Context* ctx, const cha
       result.memview = NULL;
       result.data = NULL;
       return result;
+  }
+  
+/* MemviewDtypeToObject */
+  static CYTHON_INLINE PyObject *__pyx_memview_get_double__const__(const char *itemp) {
+      return (PyObject *) PyFloat_FromDouble(*(double const   *) itemp);
   }
   
 /* Declarations */

@@ -34,7 +34,12 @@ class DataStorage:
         self.raw_dir.mkdir(parents=True, exist_ok=True)
         self.processed_dir.mkdir(parents=True, exist_ok=True)
 
-    def save_raw(self, df: pd.DataFrame, ticker: str, start_date: str, end_date: str) -> Path:
+    def _get_clean_filename(self, ticker: str) -> str:
+        """Strip exchange suffixes (like .NS, .BO) for clean local storage filenames."""
+        name = ticker.split(".")[0]
+        return f"{name}.{self.file_format}"
+
+    def save_raw(self, df: pd.DataFrame, ticker: str, start_date: str, end_date: str, interval: str = "1d") -> Path:
         """
         Saves a cleaned DataFrame to the raw storage directory along with its companion metadata JSON.
         
@@ -43,6 +48,7 @@ class DataStorage:
             ticker: The stock ticker (e.g. 'RELIANCE.NS').
             start_date: Request start date.
             end_date: Request end date.
+            interval: Request data frequency interval (default: '1d').
             
         Returns:
             The Path where the dataset was saved.
@@ -50,7 +56,7 @@ class DataStorage:
         Raises:
             StorageError: If file write operations fail.
         """
-        filename = f"{ticker}.{self.file_format}"
+        filename = self._get_clean_filename(ticker)
         filepath = self.raw_dir / filename
         
         try:
@@ -67,6 +73,7 @@ class DataStorage:
                 "download_timestamp": datetime.utcnow().isoformat() + "Z",
                 "start_date": start_date,
                 "end_date": end_date,
+                "interval": interval,
                 "row_count": len(df),
                 "source": "Yahoo Finance",
                 "file_format": self.file_format
@@ -90,7 +97,7 @@ class DataStorage:
         Raises:
             StorageError: If the file does not exist, is corrupted, or fails to parse.
         """
-        filename = f"{ticker}.{self.file_format}"
+        filename = self._get_clean_filename(ticker)
         filepath = self.raw_dir / filename
         
         if not filepath.exists():
@@ -110,7 +117,7 @@ class DataStorage:
 
     def load_raw_metadata(self, ticker: str) -> Dict[str, Any]:
         """Loads and returns the companion metadata JSON for the given raw ticker dataset."""
-        filename = f"{ticker}.{self.file_format}"
+        filename = self._get_clean_filename(ticker)
         filepath = self.raw_dir / filename
         metadata_path = filepath.with_suffix(filepath.suffix + ".metadata.json")
         
@@ -125,7 +132,7 @@ class DataStorage:
 
     def raw_exists(self, ticker: str) -> bool:
         """Checks if both the data file and its companion metadata JSON exist in raw storage."""
-        filename = f"{ticker}.{self.file_format}"
+        filename = self._get_clean_filename(ticker)
         filepath = self.raw_dir / filename
         metadata_path = filepath.with_suffix(filepath.suffix + ".metadata.json")
         return filepath.exists() and metadata_path.exists()

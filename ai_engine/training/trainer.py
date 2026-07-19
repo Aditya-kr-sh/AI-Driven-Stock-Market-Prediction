@@ -1,7 +1,7 @@
 """
 PyTorch Deep Learning Training Engine.
 Provides general epoch loops, optimization, validation tracking,
-early stopping, and hardware acceleration management.
+early stopping, learning rate scheduling, mixed precision (AMP), and GPU acceleration.
 """
 
 import time
@@ -9,6 +9,21 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from typing import Dict, Any, Tuple
+
+# Unified AMP wrappers to resolve deprecation warnings on PyTorch 2.1+
+if hasattr(torch, "amp") and hasattr(torch.amp, "autocast"):
+    def get_autocast_context(device_type: str, enabled: bool):
+        return torch.amp.autocast(device_type=device_type, enabled=enabled)
+    def get_grad_scaler(device_type: str, enabled: bool):
+        return torch.amp.GradScaler(device_type, enabled=enabled)
+else:
+    from torch.cuda.amp import autocast as legacy_autocast, GradScaler as legacy_scaler
+    def get_autocast_context(device_type: str, enabled: bool):
+        # legacy autocast only supports cuda device type explicitly via keyword-less call
+        return legacy_autocast(enabled=enabled)
+    def get_grad_scaler(device_type: str, enabled: bool):
+        return legacy_scaler(enabled=enabled)
+
 
 def get_computation_device() -> torch.device:
     """Detects and returns the available computational hardware device (CUDA or CPU)."""
@@ -28,16 +43,23 @@ def train_pytorch_regressor(
 ) -> Dict[str, Any]:
     """
     Core training and validation execution loop for sequential PyTorch models.
-    Supports learning rate optimization, early stopping patience check, 
-    and performance/training statistics tracking.
+    Supports mixed precision (AMP), scheduler updates, early stopping, and multi-GPU checks.
     """
     if device is None:
         device = get_computation_device()
         
     model.to(device)
     
+    # Optional DistributedDataParallel (DDP) wrapping for Multi-GPU environments
+    if device.type == "cuda" and torch.cuda.device_count() > 1 and torch.distributed.is_initialized():
+        model = nn.parallel.DistributedDataParallel(model)
+        
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min", factor=0.5, patience=3)
     criterion = nn.MSELoss()
+    
+    # Initialize Gradient Scaler for Automatic Mixed Precision (AMP)
+    amp_scaler = get_grad_scaler(device_type=device.type, enabled=(device.type == "cuda"))
     
     best_loss = float("inf")
     best_model_weights = None
@@ -57,13 +79,20 @@ def train_pytorch_regressor(
         epoch_train_loss = 0.0
         
         for batch_x, batch_y in train_loader:
-            batch_x, batch_y = batch_x.to(device), batch_y.to(device)
+            # Pinned memory transfers are accelerated with non_blocking=True
+            batch_x = batch_x.to(device, non_blocking=True)
+            batch_y = batch_y.to(device, non_blocking=True)
             
             optimizer.zero_grad()
-            pred = model(batch_x).squeeze(-1) # output is (batch, 1) -> squeeze to (batch,)
-            loss = criterion(pred, batch_y)
-            loss.backward()
-            optimizer.step()
+            
+            # Autocast runs forward operations under mixed FP16/FP32 precision
+            with get_autocast_context(device_type=device.type, enabled=(device.type == "cuda")):
+                pred = model(batch_x).squeeze(-1)
+                loss = criterion(pred, batch_y)
+                
+            amp_scaler.scale(loss).backward()
+            amp_scaler.step(optimizer)
+            amp_scaler.update()
             
             epoch_train_loss += loss.item() * len(batch_x)
             
@@ -77,9 +106,11 @@ def train_pytorch_regressor(
         
         with torch.no_grad():
             for batch_x, batch_y in val_loader:
-                batch_x, batch_y = batch_x.to(device), batch_y.to(device)
-                pred = model(batch_x).squeeze(-1)
-                loss = criterion(pred, batch_y)
+                batch_x = batch_x.to(device, non_blocking=True)
+                batch_y = batch_y.to(device, non_blocking=True)
+                with get_autocast_context(device_type=device.type, enabled=(device.type == "cuda")):
+                    pred = model(batch_x).squeeze(-1)
+                    loss = criterion(pred, batch_y)
                 epoch_val_loss += loss.item() * len(batch_x)
                 
         epoch_val_loss /= len(val_loader.dataset)
@@ -88,16 +119,20 @@ def train_pytorch_regressor(
         val_duration = time.perf_counter() - val_start
         total_val_time += val_duration
         
+        # Update learning rate scheduler based on validation score
+        scheduler.step(epoch_val_loss)
+        
         # 3. Validation Checkpoint & Early Stopping Check
         if epoch_val_loss < best_loss:
             best_loss = epoch_val_loss
-            best_model_weights = {k: v.cpu().clone() for k, v in model.state_dict().items()}
+            # Handle unwrapping DDP model weights
+            unwrap_model = model.module if hasattr(model, "module") else model
+            best_model_weights = {k: v.cpu().clone() for k, v in unwrap_model.state_dict().items()}
             best_epoch = epoch
             no_improve_epochs = 0
         else:
             no_improve_epochs += 1
             if no_improve_epochs >= early_stopping_patience:
-                # Stop epoch progression early
                 break
                 
     end_train_time = time.perf_counter()
@@ -105,7 +140,8 @@ def train_pytorch_regressor(
     
     # Restore the model weights with best val loss checkpoint
     if best_model_weights is not None:
-        model.load_state_dict({k: v.to(device) for k, v in best_model_weights.items()})
+        unwrap_model = model.module if hasattr(model, "module") else model
+        unwrap_model.load_state_dict({k: v.to(device) for k, v in best_model_weights.items()})
         
     return {
         "train_losses": train_losses,

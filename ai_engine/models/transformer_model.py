@@ -196,7 +196,7 @@ class TransformerPredictor(BasePredictor):
             "hyperparameters": {
                 "input_dim": self.input_dim,
                 "d_model": self.d_model,
-                "nhead": self.head if hasattr(self, "head") else self.nhead,
+                "nhead": self.nhead,
                 "num_layers": self.num_layers,
                 "dropout": self.dropout,
                 "learning_rate": self.learning_rate,

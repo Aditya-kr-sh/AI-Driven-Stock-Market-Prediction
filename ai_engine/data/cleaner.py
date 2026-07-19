@@ -1,12 +1,20 @@
 """
 Data cleaning and validation engine for stock market datasets.
 Standardizes headers, filters duplicates, fills missing data, and validates mathematical constraints.
+Supports optional RAPIDS cuDF GPU acceleration when available.
 """
 
 import pandas as pd
 import numpy as np
 from ai_engine.data.exceptions import ValidationError
 from ai_engine.utils.logging import logger
+
+try:
+    import cudf
+    CUDF_AVAILABLE = True
+    logger.info("RAPIDS cuDF is available. GPU-accelerated dataframe cleaning active.")
+except ImportError:
+    CUDF_AVAILABLE = False
 
 class DataCleaner:
     """
@@ -19,25 +27,68 @@ class DataCleaner:
     @classmethod
     def clean_dataframe(cls, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Cleans the input DataFrame by:
-        1. Formitting the Date index.
-        2. Dropping duplicate index values.
-        3. Filling missing rows/values.
-        4. Validating data types and mathematical boundaries.
+        Cleans the input DataFrame. Uses cuDF if available.
         
         Args:
             df: Raw DataFrame downloaded from Yahoo Finance.
-            
-        Returns:
-            A cleaned and validated DataFrame.
-            
-        Raises:
-            ValidationError: If required columns are missing, data is corrupted, or numerical constraints are violated.
         """
         if df.empty:
             raise ValidationError("DataFrame is empty; cleaning cannot proceed.")
 
-        # Create a copy to prevent SettingWithCopy warnings
+        if CUDF_AVAILABLE:
+            try:
+                return cls._clean_with_cudf(df)
+            except Exception as e:
+                logger.warning(f"cuDF cleaning failed: {e}. Falling back to Pandas.")
+                
+        return cls._clean_with_pandas(df)
+
+    @classmethod
+    def _clean_with_cudf(cls, df: pd.DataFrame) -> pd.DataFrame:
+        """Accelerated cleaning implementation using RAPIDS cuDF."""
+        # Convert to GPU DataFrame
+        gdf = cudf.DataFrame.from_pandas(df)
+        
+        # Standardize index
+        if "Date" in gdf.columns:
+            gdf = gdf.set_index("Date")
+        
+        # Sort and remove duplicates
+        gdf = gdf.sort_index()
+        gdf = gdf[~gdf.index.duplicated(keep="first")]
+        
+        # Check required columns
+        for col in cls.REQUIRED_COLUMNS:
+            if col not in gdf.columns:
+                raise ValidationError(f"Missing required column in dataset: {col}")
+                
+        # Fill missing values
+        gdf[cls.REQUIRED_COLUMNS] = gdf[cls.REQUIRED_COLUMNS].ffill().bfill()
+        
+        # Validate constraints
+        # 1. Price columns must be positive
+        price_cols = ["Open", "High", "Low", "Close", "Adj Close"]
+        for col in price_cols:
+            if (gdf[col] <= 0).any():
+                raise ValidationError(f"Found non-positive values in price column '{col}' on GPU.")
+                
+        # 2. Volume must be non-negative
+        if (gdf["Volume"] < 0).any():
+            raise ValidationError("Found negative volume records on GPU.")
+            
+        # 3. High must be >= Low
+        if (gdf["High"] < gdf["Low"]).any():
+            raise ValidationError("High price is less than Low price on GPU.")
+            
+        # Convert back to standard pandas
+        cleaned_df = gdf.to_pandas()
+        cleaned_df.index.name = "Date"
+        cleaned_df.index = pd.to_datetime(cleaned_df.index)
+        return cleaned_df
+
+    @classmethod
+    def _clean_with_pandas(cls, df: pd.DataFrame) -> pd.DataFrame:
+        """Standard pandas cleaning implementation."""
         cleaned_df = df.copy()
 
         # 1. Standardize and Format Date Index
@@ -64,7 +115,6 @@ class DataCleaner:
     @classmethod
     def _standardize_date_index(cls, df: pd.DataFrame) -> pd.DataFrame:
         """Standardizes the DataFrame index to be a chronological DatetimeIndex."""
-        # Check if Date is a column or index
         if "Date" in df.columns:
             df = df.set_index("Date")
         
@@ -73,14 +123,10 @@ class DataCleaner:
         except Exception as e:
             raise ValidationError(f"Failed to convert index to datetime: {e}")
 
-        # Ensure index is timezone-naive to prevent compatibility issues (e.g. Parquet serialization)
         if df.index.tz is not None:
             df.index = df.index.tz_localize(None)
 
-        # Name index 'Date'
         df.index.name = "Date"
-
-        # Sort chronologically
         df = df.sort_index()
         return df
 
@@ -106,7 +152,6 @@ class DataCleaner:
         """Ensures that all pricing and volume columns contain numeric types only."""
         for col in cls.REQUIRED_COLUMNS:
             if not pd.api.types.is_numeric_dtype(df[col]):
-                # Attempt conversion
                 try:
                     df[col] = pd.to_numeric(df[col])
                 except Exception:
@@ -138,22 +183,18 @@ class DataCleaner:
         - Volume must be >= 0.
         - High must be >= Low.
         """
-        # Constraint 1: Prices > 0
         price_cols = ["Open", "High", "Low", "Close", "Adj Close"]
         for col in price_cols:
             invalid_price_count = (df[col] <= 0).sum()
             if invalid_price_count > 0:
                 raise ValidationError(f"Found {invalid_price_count} records in column '{col}' with negative or zero price.")
 
-        # Constraint 2: Volume >= 0
         invalid_volume_count = (df["Volume"] < 0).sum()
         if invalid_volume_count > 0:
             raise ValidationError(f"Found {invalid_volume_count} records in column 'Volume' with negative values.")
 
-        # Constraint 3: High >= Low
         high_low_violation = (df["High"] < df["Low"]).sum()
         if high_low_violation > 0:
-            # Let's inspect the violations
             violation_dates = df[df["High"] < df["Low"]].index.tolist()
             raise ValidationError(
                 f"Found {high_low_violation} records where High price is less than Low price. "

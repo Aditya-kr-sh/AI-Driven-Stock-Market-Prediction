@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPC Financial Analytics Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: rgba(21, 23, 30, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f5f6f9;
+            --text-secondary: #9499a6;
+            --cyan: #66fcf1;
+            --cyan-dark: #45a29e;
+            --purple: #bf5af2;
+            --green: #30d158;
+            --red: #ff453a;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            --accent-glow: radial-gradient(circle, rgba(102, 252, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(102, 252, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(191, 90, 242, 0.05) 0%, transparent 40%);
+            padding-bottom: 50px;
+        }
+
+        /* Container & Navigation */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 30px;
+            backdrop-filter: blur(8px);
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--green);
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        /* Dashboard Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: 350px 1fr;
+            }
+        }
+
+        /* Glassmorphic Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(102, 252, 241, 0.2);
+        }
+
+        .card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            border-left: 3px solid var(--cyan);
+            padding-left: 10px;
+        }
+
+        /* Forms and Interactive Controls */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 8px rgba(102, 252, 241, 0.2);
+        }
+
+        select.form-control option {
+            background: #15171e;
+            color: #fff;
+        }
+
+        .btn {
+            width: 100%;
+            background: linear-gradient(95deg, var(--cyan-dark) 0%, var(--cyan) 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            color: #0b0c10;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: filter 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* System Info Lists */
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list .label {
+            color: var(--text-secondary);
+        }
+
+        .info-list .value {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .highlight-value {
+            color: var(--cyan) !important;
+        }
+
+        /* Results Visualization */
+        .results-container {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: none;
+        }
+
+        .pred-card {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .pred-price {
+            font-size: 2.2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .direction-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .direction-up {
+            background: rgba(48, 209, 88, 0.15);
+            color: var(--green);
+        }
+
+        .direction-down {
+            background: rgba(255, 69, 58, 0.15);
+            color: var(--red);
+        }
+
+        /* Charts grid */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 1200px) {
+            .charts-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .chart-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 15px;
+            min-height: 280px;
+        }
+
+        .portfolio-alloc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        /* Loader */
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(102, 252, 241, 0.2);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 15px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .flex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HPC FINANCIAL ANALYTICS PLATFORM</h1>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Active Backend Connection</span>
+            </div>
+        </header>
+
+        <div class="grid">
+            <!-- Sidebar: Controls & Health Status -->
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <!-- Platform Health Card -->
+                <div class="card">
+                    <h2>Platform Status</h2>
+                    <ul class="info-list">
+                        <li>
+                            <span class="label">Operational Health</span>
+                            <span class="value" id="health-status">Checking...</span>
+                        </li>
+                        <li>
+                            <span class="label">Acceleration Device</span>
+                            <span class="value highlight-value" id="hardware-device">Checking...</span>
+                        </li>
+                        <li>
+                            <span class="label">Feature Engine</span>
+                            <span class="value" id="feature-engine">Checking...</span>
+                        </li>
+                        <li>
+                            <span class="label">OpenMP Active Threads</span>
+                            <span class="value highlight-value" id="openmp-threads">Checking...</span>
+                        </li>
+                        <li>
+                            <span class="label">Available GPUs</span>
+                            <span class="value" id="gpu-count">Checking...</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Run Benchmark Card -->
+                <div class="card">
+                    <h2>Scaling Benchmarks</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">
+                        Run scaling studies evaluating Python vs multi-threaded OpenMP computations and Monte Carlo allocations.
+                    </p>
+                    <button class="btn btn-secondary" id="run-benchmarks-btn" onclick="executeBenchmarks()">Execute Platform Benchmarks</button>
+                    <div class="spinner" id="benchmarks-spinner"></div>
+                </div>
+            </div>
+
+            <!-- Main Panel: Predictive Analytics & Portfolio Simulation -->
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <div class="card">
+                    <div class="flex-header">
+                        <h2>Analytics Dashboard</h2>
+                        <div class="form-group" style="margin: 0;">
+                            <select class="form-control" id="registry-selector" onchange="loadRegistryConstituents()" style="padding: 8px 12px; width: 180px;">
+                                <option value="nifty50">NIFTY 50</option>
+                                <option value="sp500">S&P 500</option>
+                                <option value="nasdaq100">NASDAQ 100</option>
+                                <option value="dowjones30">Dow Jones 30</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-alloc-grid">
+                        <!-- Predict Section -->
+                        <div style="border-right: 1px solid var(--card-border); padding-right: 20px;">
+                            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Next-Day Prediction</h3>
+                            <div class="form-group">
+                                <label for="predict-ticker">Asset Ticker</label>
+                                <select class="form-control" id="predict-ticker">
+                                    <option value="RELIANCE">RELIANCE</option>
+                                    <option value="TCS">TCS</option>
+                                    <option value="SBIN">SBIN</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="predict-model">Architecture</label>
+                                <select class="form-control" id="predict-model">
+                                    <option value="xgboost">XGBoost Regressor</option>
+                                    <option value="lstm">LSTM Network (AMP)</option>
+                                    <option value="transformer">Transformer (AMP)</option>
+                                </select>
+                            </div>
+                            <button class="btn" onclick="generatePrediction()">Get Prediction</button>
+                            
+                            <div class="spinner" id="predict-spinner"></div>
+                            <div class="results-container" id="predict-results">
+                                <div class="pred-card">
+                                    <span class="direction-badge" id="pred-direction">UP</span>
+                                    <div class="pred-price" id="pred-price">--</div>
+                                    <span style="color: var(--text-secondary); font-size: 0.8rem;" id="pred-change">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Section -->
+                        <div style="padding-left: 10px;">
+                            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Monte Carlo Allocations</h3>
+                            <div class="form-group">
+                                <label for="portfolio-assets">Tickers (Comma Separated)</label>
+                                <input type="text" class="form-control" id="portfolio-assets" value="RELIANCE, TCS, SBIN">
+                            </div>
+                            <div class="form-group">
+                                <label for="portfolio-sims">Simulations</label>
+                                <input type="number" class="form-control" id="portfolio-sims" value="50000">
+                            </div>
+                            <button class="btn" onclick="optimizePortfolio()">Optimize Weights</button>
+                            
+                            <div class="spinner" id="portfolio-spinner"></div>
+                            <div class="results-container" id="portfolio-results">
+                                <div id="portfolio-allocation-text" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-primary);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benchmarking Plot Output -->
+                <div class="card" id="benchmark-chart-card" style="display: none;">
+                    <h2>Benchmark Speedup Profiling</h2>
+                    <div class="charts-row">
+                        <div>
+                            <h3 style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px;">Feature Engineering Scaling (seconds)</h3>
+                            <div class="chart-box">
+                                <canvas id="featureChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px;">Monte Carlo Vectorization Speedups</h3>
+                            <div class="chart-box">
+                                <canvas id="portfolioChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000";
+        let featureChartInstance = null;
+        let portfolioChartInstance = null;
+
+        // Initialize Page & Load Metrics
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSystemHealth();
+            loadRegistryConstituents();
+        });
+
+        function fetchSystemHealth() {
+            fetch(`${API_URL}/health`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('health-status').textContent = data.status === 'healthy' ? 'Active' : 'Error';
+                    document.getElementById('health-status').className = data.status === 'healthy' ? 'value' : 'value highlight-value';
+                })
+                .catch(() => {
+                    document.getElementById('health-status').textContent = 'Disconnected';
+                    document.getElementById('health-status').style.color = 'var(--red)';
+                });
+
+            fetch(`${API_URL}/models`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('hardware-device').textContent = data.active_device.toUpperCase();
+                    document.getElementById('feature-engine').textContent = data.feature_engine;
+                    document.getElementById('openmp-threads').textContent = data.openmp_threads;
+                    document.getElementById('gpu-count').textContent = `${data.gpu_count} (${data.gpu_name || 'None'})`;
+                })
+                .catch(() => {});
+        }
+
+        function loadRegistryConstituents() {
+            const index = document.getElementById('registry-selector').value;
+            fetch(`${API_URL}/api/registries`)
+                .then(res => res.json())
+                .then(data => {
+                    const list = data[index] || [];
+                    const select = document.getElementById('predict-ticker');
+                    select.innerHTML = '';
+                    
+                    // Filter down list for dashboard performance (show first 15)
+                    const activeList = list.slice(0, 15);
+                    if (activeList.length === 0) {
+                        // Fallbacks
+                        const fallbacks = ["RELIANCE", "TCS", "SBIN"];
+                        fallbacks.forEach(t => {
+                            const opt = document.createElement('option');
+                            opt.value = t;
+                            opt.textContent = t;
+                            select.appendChild(opt);
+                        });
+                    } else {
+                        activeList.forEach(t => {
+                            const opt = document.createElement('option');
+                            // strip .NS suffix for API submission
+                            const label = t.replace('.NS', '');
+                            opt.value = label;
+                            opt.textContent = label;
+                            select.appendChild(opt);
+                        });
+                    }
+                })
+                .catch(() => {});
+        }
+
+        function generatePrediction() {
+            const ticker = document.getElementById('predict-ticker').value;
+            const model = document.getElementById('predict-model').value;
+            const spinner = document.getElementById('predict-spinner');
+            const container = document.getElementById('predict-results');
+            
+            spinner.style.display = 'block';
+            container.style.display = 'none';
+
+            fetch(`${API_URL}/predict`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker: ticker, model_type: model })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("API call failed");
+                return res.json();
+            })
+            .then(data => {
+                spinner.style.display = 'none';
+                container.style.display = 'block';
+                
+                document.getElementById('pred-price').textContent = `$${data.predicted_price.toFixed(2)}`;
+                document.getElementById('pred-change').textContent = `${data.predicted_change >= 0 ? '+' : ''}${data.predicted_change.toFixed(2)} (${data.predicted_direction})`;
+                
+                const badge = document.getElementById('pred-direction');
+                badge.textContent = data.predicted_direction;
+                badge.className = data.predicted_direction === 'UP' ? 'direction-badge direction-up' : 'direction-badge direction-down';
+            })
+            .catch(err => {
+                spinner.style.display = 'none';
+                alert("Failed to compute prediction. Ensure dataset is downloaded and model is trained.");
+            });
+        }
+
+        function optimizePortfolio() {
+            const tickersRaw = document.getElementById('portfolio-assets').value;
+            const sims = parseInt(document.getElementById('portfolio-sims').value);
+            const spinner = document.getElementById('portfolio-spinner');
+            const container = document.getElementById('portfolio-results');
+            
+            spinner.style.display = 'block';
+            container.style.display = 'none';
+
+            const tickers = tickersRaw.split(',').map(t => t.trim().toUpperCase());
+
+            fetch(`${API_URL}/portfolio`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tickers: tickers, num_simulations: sims, risk_free_rate: 0.05 })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("API call failed");
+                return res.json();
+            })
+            .then(data => {
+                spinner.style.display = 'none';
+                container.style.display = 'block';
+                
+                const maxS = data.max_sharpe;
+                const minV = data.min_vol;
+                
+                let text = `<strong>Max Sharpe (Ratio: ${maxS.sharpe_ratio.toFixed(4)}):</strong><br>`;
+                for (const [t, w] of Object.entries(maxS.weights)) {
+                    text += `&bull; ${t}: ${(w*100).toFixed(1)}%<br>`;
+                }
+                text += `Ret: ${(maxS.expected_return*100).toFixed(1)}% | Vol: ${(maxS.expected_volatility*100).toFixed(1)}%<br><br>`;
+                
+                text += `<strong>Min Volatility (Ratio: ${minV.sharpe_ratio.toFixed(4)}):</strong><br>`;
+                for (const [t, w] of Object.entries(minV.weights)) {
+                    text += `&bull; ${t}: ${(w*100).toFixed(1)}%<br>`;
+                }
+                text += `Ret: ${(minV.expected_return*100).toFixed(1)}% | Vol: ${(minV.expected_volatility*100).toFixed(1)}%`;
+                
+                document.getElementById('portfolio-allocation-text').innerHTML = text;
+            })
+            .catch(err => {
+                spinner.style.display = 'none';
+                alert("Failed to compute portfolio optimization. Ensure tickers are valid and downloaded.");
+            });
+        }
+
+        function executeBenchmarks() {
+            const spinner = document.getElementById('benchmarks-spinner');
+            const chartCard = document.getElementById('benchmark-chart-card');
+            
+            spinner.style.display = 'block';
+            
+            fetch(`${API_URL}/api/benchmark`, { method: 'POST' })
+            .then(res => {
+                if (!res.ok) throw new Error("Benchmark failed");
+                return res.json();
+            })
+            .then(data => {
+                spinner.style.display = 'none';
+                chartCard.style.display = 'block';
+                
+                renderBenchmarkCharts(data);
+            })
+            .catch(() => {
+                spinner.style.display = 'none';
+                alert("Benchmarks run failed. Check terminal logs.");
+            });
+        }
+
+        function renderBenchmarkCharts(data) {
+            const feat = data.feature_benchmarks;
+            const port = data.portfolio_benchmarks;
+            
+            const sizes = feat.map(r => r.size);
+            const pyTimes = feat.map(r => r.python_time);
+            const omp8Times = feat.map(r => r.omp_8_threads_time);
+            
+            // Feature Engineering Chart
+            if (featureChartInstance) featureChartInstance.destroy();
+            const ctx1 = document.getElementById('featureChart').getContext('2d');
+            featureChartInstance = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: sizes.map(s => s.toLocaleString()),
+                    datasets: [
+                        { label: 'Python Baseline', data: pyTimes, borderColor: '#ff453a', borderWidth: 2, fill: false },
+                        { label: 'OpenMP (8 Threads)', data: omp8Times, borderColor: '#66fcf1', borderWidth: 2, fill: false }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
+                    },
+                    plugins: { legend: { labels: { color: '#fff' } } }
+                }
+            });
+
+            // Portfolio Optimization Chart
+            const sims = port.map(r => r.simulations);
+            const loopTimes = port.map(r => r.iterative_time);
+            const vecTimes = port.map(r => r.vectorized_time);
+            
+            if (portfolioChartInstance) portfolioChartInstance.destroy();
+            const ctx2 = document.getElementById('portfolioChart').getContext('2d');
+            portfolioChartInstance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: sims.map(s => s.toLocaleString()),
+                    datasets: [
+                        { label: 'Iterative Loops', data: loopTimes, backgroundColor: 'rgba(255, 69, 58, 0.7)' },
+                        { label: 'Vectorized NumPy', data: vecTimes, backgroundColor: 'rgba(102, 252, 225, 0.7)' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
+                    },
+                    plugins: { legend: { labels: { color: '#fff' } } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
