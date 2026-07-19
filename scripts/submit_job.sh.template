@@ -1,0 +1,60 @@
+#!/bin/bash
+# =========================================================================
+# SLURM JOB SUBMISSION BATCH TEMPLATE
+# Ramanujan Universe HPC Cluster
+#
+# Instructions:
+# 1. Copy this template to scripts/submit_job.sh:
+#    cp scripts/submit_job.sh.template scripts/submit_job.sh
+# 2. Open scripts/submit_job.sh and replace placeholders (<...>) with 
+#    valid names from your cluster user documentation.
+# 3. Submit the job using: sbatch scripts/submit_job.sh
+# =========================================================================
+
+#SBATCH --job-name=<JOB_NAME>                 # Human-readable job identifier (e.g. nifty50_hpc_training)
+#SBATCH --partition=<PARTITION_NAME>         # Slurm partition to target (e.g. gpu, compute, standard)
+#SBATCH --gres=<GPU_SPEC>                    # Request GPU allocations (e.g. gpu:1, gpu:a100:1) or remove if CPU-only
+#SBATCH --nodes=1                            # Number of nodes requested
+#SBATCH --ntasks-per-node=1                  # Tasks per node
+#SBATCH --cpus-per-task=<CPUS_PER_TASK>      # CPU cores to allocate per task (maps to OpenMP thread limit, e.g. 12)
+#SBATCH --mem=<MEMORY_SIZE>                  # Node RAM memory (e.g. 32G, 64G)
+#SBATCH --time=<WALL_TIME>                   # Maximum allocation duration (format: HH:MM:SS, e.g. 04:00:00)
+#SBATCH --output=logs/job_%j_stdout.log      # Log stdout outputs (%j maps to Slurm JobID)
+#SBATCH --error=logs/job_%j_stderr.log       # Log stderr outputs (%j maps to Slurm JobID)
+
+# Ensure output logs directory exists
+mkdir -p logs
+
+echo "========================================================================="
+# 1. Environment Loading (Verify module names with cluster documentation)
+# Placeholders: Load required compiler, CUDA runtime, and python toolkits
+# =========================================================================
+echo "Loading cluster software modules..."
+# Example configurations (uncomment and customize as needed):
+# module load <COMPILER_MODULE>  # e.g., gcc/11.2.0 or intel/2021.4
+# module load <CUDA_MODULE>      # e.g., cuda/11.8.0 or cuda/12.1.1
+# module load <PYTHON_MODULE>    # e.g., python/3.10.8 or anaconda3/2022.10
+
+# 2. Virtual Environment Setup
+# =========================================================================
+echo "Activating Python virtual environment..."
+# Replace with the path to your cluster environment activate script
+source .venv/bin/activate
+
+# 3. Environment Check
+# =========================================================================
+echo "Running cluster diagnostics..."
+python scripts/check_hpc_environment.py
+
+# 4. Pipeline Execution
+# =========================================================================
+echo "Compiling Cython/OpenMP extensions..."
+# Force inplace rebuild under Linux GCC environment
+python setup.py build_ext --inplace
+
+echo "Launching full-scale NIFTY-50 pipeline..."
+# Launches training, evaluation, and benchmark executions
+python scripts/run_hpc_pipeline.py
+
+echo "Job execution finalized."
+echo "========================================================================="
