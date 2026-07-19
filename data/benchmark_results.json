@@ -2,21 +2,77 @@
     {
         "name": "OpenMP Parallel Workload Simulation",
         "implementation": "openmp",
-        "elapsed_time_sec": 0.636044499988202,
-        "start_memory_mb": 258.05078125,
-        "end_memory_mb": 258.05078125,
+        "elapsed_time_sec": 0.3826673000003211,
+        "start_memory_mb": 257.5234375,
+        "end_memory_mb": 257.5234375,
         "memory_delta_mb": 0.0,
-        "cpu_percent": 63.4,
-        "timestamp": "2026-07-19T05:41:06.827032Z"
+        "cpu_percent": 45.8,
+        "timestamp": "2026-07-19T05:52:25.971907Z",
+        "system_metadata": {
+            "python_version": "3.12.4",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "cpu_info": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+            "cpu_count": 12,
+            "git_commit_hash": "82936d319e15b626ca7264368190039e678ff4c4",
+            "timestamp": "2026-07-19T05:52:26.073979Z"
+        },
+        "gpu_metrics": null
     },
     {
         "name": "Slow Python Block",
         "implementation": "python",
-        "elapsed_time_sec": 0.7829423000221141,
-        "start_memory_mb": 258.0859375,
-        "end_memory_mb": 258.0859375,
+        "elapsed_time_sec": 0.32451960002072155,
+        "start_memory_mb": 257.796875,
+        "end_memory_mb": 257.796875,
         "memory_delta_mb": 0.0,
         "cpu_percent": 100.0,
-        "timestamp": "2026-07-19T05:41:07.717050Z"
+        "timestamp": "2026-07-19T05:52:26.483336Z",
+        "system_metadata": {
+            "python_version": "3.12.4",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "cpu_info": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+            "cpu_count": 12,
+            "git_commit_hash": "82936d319e15b626ca7264368190039e678ff4c4",
+            "timestamp": "2026-07-19T05:52:26.528322Z"
+        },
+        "gpu_metrics": null
+    },
+    {
+        "name": "Feature Engineering Pipeline Run",
+        "implementation": "python",
+        "elapsed_time_sec": 0.015000499959569424,
+        "start_memory_mb": 259.44140625,
+        "end_memory_mb": 259.81640625,
+        "memory_delta_mb": 0.375,
+        "cpu_percent": 0.0,
+        "timestamp": "2026-07-19T05:57:01.437895Z",
+        "system_metadata": {
+            "python_version": "3.12.4",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "cpu_info": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+            "cpu_count": 12,
+            "git_commit_hash": "82936d319e15b626ca7264368190039e678ff4c4",
+            "timestamp": "2026-07-19T05:57:01.546619Z"
+        },
+        "gpu_metrics": null
+    },
+    {
+        "name": "Feature Engineering Pipeline Run",
+        "implementation": "python",
+        "elapsed_time_sec": 0.15854109998326749,
+        "start_memory_mb": 260.84765625,
+        "end_memory_mb": 261.20703125,
+        "memory_delta_mb": 0.359375,
+        "cpu_percent": 110.2,
+        "timestamp": "2026-07-19T05:59:33.066304Z",
+        "system_metadata": {
+            "python_version": "3.12.4",
+            "platform": "Windows-11-10.0.26200-SP0",
+            "cpu_info": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+            "cpu_count": 12,
+            "git_commit_hash": "82936d319e15b626ca7264368190039e678ff4c4",
+            "timestamp": "2026-07-19T05:59:33.160962Z"
+        },
+        "gpu_metrics": null
     }
 ]

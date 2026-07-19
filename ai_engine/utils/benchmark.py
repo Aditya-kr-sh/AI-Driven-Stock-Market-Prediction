@@ -1,13 +1,16 @@
 """
 Benchmarking framework for quantitative and parallel computing tasks.
 Records execution time, process-level CPU utilization, and RAM usage deltas.
-Provides JSON serialization for comparative modeling (Python vs. OpenMP vs. CUDA).
+Provides JSON serialization for comparative modeling (Python vs. OpenMP vs. CUDA)
+with system metadata, history rotation, and forward-compatible GPU metric fields.
 """
 
 import time
 import os
 import gc
 import json
+import platform
+import subprocess
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, asdict
@@ -26,29 +29,88 @@ class BenchmarkResult:
     memory_delta_mb: float
     cpu_percent: float
     timestamp: str
+    system_metadata: Dict[str, Any]  # Stores platform, CPU, python version, and git hash
+    gpu_metrics: Optional[Dict[str, Any]] = None  # Forward-compatible field for CUDA/GPU profiling
+
+
+def get_system_metadata() -> Dict[str, Any]:
+    """Compiles local CPU, system platform, python engine version, and git commit details."""
+    git_hash = "unknown"
+    try:
+        # Fetch current commit hash silently
+        git_hash = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8").strip()
+    except Exception:
+        pass
+
+    return {
+        "python_version": platform.python_version(),
+        "platform": platform.platform(),
+        "cpu_info": platform.processor() or "unknown",
+        "cpu_count": psutil.cpu_count(logical=True),
+        "git_commit_hash": git_hash,
+        "timestamp": datetime.utcnow().isoformat() + "Z"
+    }
+
 
 class BenchmarkTracker:
     """
-    Maintains benchmark history and automatically persists records to a JSON file
-    under the project's data directory.
+    Maintains benchmark history, limits file size via log rotation limits,
+    and persists records to data/benchmark_results.json.
     """
     _results: List[BenchmarkResult] = []
 
     @classmethod
     def add_result(cls, result: BenchmarkResult) -> None:
-        """Adds a result to the history and triggers disk serialization."""
+        """Adds a result to the history, applies history rotation limits, and serializes to disk."""
+        # Load prior results from disk to append if the in-memory array is empty
+        if not cls._results:
+            loaded_data = cls.load_results()
+            for item in loaded_data:
+                try:
+                    cls._results.append(
+                        BenchmarkResult(
+                            name=item["name"],
+                            implementation=item["implementation"],
+                            elapsed_time_sec=item["elapsed_time_sec"],
+                            start_memory_mb=item["start_memory_mb"],
+                            end_memory_mb=item["end_memory_mb"],
+                            memory_delta_mb=item["memory_delta_mb"],
+                            cpu_percent=item["cpu_percent"],
+                            timestamp=item["timestamp"],
+                            system_metadata=item.get("system_metadata", {}),
+                            gpu_metrics=item.get("gpu_metrics")
+                        )
+                    )
+                except Exception:
+                    pass  # Skip corrupted or obsolete schemas
+
         cls._results.append(result)
+
+        # Rotate history to prevent unlimited growth (configured in settings)
+        max_records = getattr(settings, "MAX_BENCHMARK_RECORDS", 100)
+        if len(cls._results) > max_records:
+            cls._results = cls._results[-max_records:]
+
         cls.save_results()
 
     @classmethod
     def get_results(cls) -> List[BenchmarkResult]:
-        """Returns the in-memory benchmark history list."""
+        """Returns the current in-memory benchmark history list."""
         return cls._results
 
     @classmethod
     def clear_results(cls) -> None:
-        """Clears all benchmark history records."""
+        """Clears all benchmark history records both in-memory and on disk."""
         cls._results = []
+        filepath = settings.BASE_PATH / "data" / "benchmark_results.json"
+        if filepath.exists():
+            try:
+                filepath.unlink()
+            except Exception as e:
+                logger.error(f"Failed to clear benchmark file: {e}")
 
     @classmethod
     def save_results(cls) -> None:
@@ -79,7 +141,7 @@ class BenchmarkTracker:
 class BenchmarkContext:
     """
     Context manager to wrap code blocks for performance monitoring.
-    Automatically captures time, RAM delta, and average CPU load.
+    Automatically captures time, RAM delta, average CPU load, and system metadata.
     """
 
     def __init__(self, name: str, implementation: str):
@@ -121,7 +183,9 @@ class BenchmarkContext:
             end_memory_mb=self.end_mem,
             memory_delta_mb=mem_delta,
             cpu_percent=cpu_usage,
-            timestamp=datetime.utcnow().isoformat() + "Z"
+            timestamp=datetime.utcnow().isoformat() + "Z",
+            system_metadata=get_system_metadata(),
+            gpu_metrics=None  # Can be populated dynamically in future phases
         )
 
         logger.info(

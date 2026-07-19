@@ -2,9 +2,9 @@
 =========================================================================
                     DATA INGESTION PIPELINE REPORT
 =========================================================================
-Execution Date      : 2026-07-19 10:29:41
+Execution Date      : 2026-07-19 11:29:18
 Date Range Requested: 2010-01-01 to 2026-07-19
-Storage Directory   : d:\stockproject\data\raw
+Storage Directory   : D:\stockproject\data\raw
 File Storage Format : CSV (.csv + .metadata.json)
 
 Ingestion Metrics:

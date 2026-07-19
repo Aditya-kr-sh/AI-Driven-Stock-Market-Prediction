@@ -74,6 +74,7 @@ class Settings(BaseSettings):
     )
     DEFAULT_START_DATE: str = Field(default="2018-01-01", description="yfinance start date")
     DEFAULT_END_DATE: str = Field(default="2026-01-01", description="yfinance end date")
+    MAX_BENCHMARK_RECORDS: int = Field(default=100, description="Max benchmark records retained on disk")
 
     # =========================================================================
     # AI Models Training Configuration
