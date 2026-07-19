@@ -9,7 +9,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any
 import pandas as pd
-from ai_engine.utils.config import settings
 from ai_engine.utils.logging import logger
 from ai_engine.data.exceptions import StorageError
 
@@ -20,6 +19,9 @@ class DataStorage:
     """
 
     def __init__(self, raw_dir: Path = None, processed_dir: Path = None, file_format: str = None):
+        # Lazy import to break circular module dependencies at package startup
+        from ai_engine.utils.config import settings
+
         self.raw_dir = raw_dir or settings.DATA_RAW_DIR
         self.processed_dir = processed_dir or settings.DATA_PROCESSED_DIR
         self.file_format = (file_format or settings.STORAGE_FORMAT).lower()

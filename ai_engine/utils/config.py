@@ -3,8 +3,7 @@ from pathlib import Path
 from typing import List
 import torch
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
-from ai_engine.data.tickers import NIFTY_50_TICKERS
+from pydantic import Field, model_validator
 
 # Base Directory of the workspace (stockproject/)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -70,7 +69,7 @@ class Settings(BaseSettings):
     # =========================================================================
     # Imports list of all 50 tickers directly from the tickers module
     TICKERS: List[str] = Field(
-        default=NIFTY_50_TICKERS,
+        default_factory=list,
         description="Centralized NIFTY 50 stock tickers list"
     )
     DEFAULT_START_DATE: str = Field(default="2018-01-01", description="yfinance start date")
@@ -108,6 +107,14 @@ class Settings(BaseSettings):
     # =========================================================================
     PORTFOLIO_MC_SIMULATIONS: int = Field(default=10000, description="Monte Carlo execution loops")
     RISK_FREE_RATE: float = Field(default=0.07, description="Annualized risk free return rate (7% Default)")
+
+    @model_validator(mode="after")
+    def populate_tickers(self) -> "Settings":
+        """Lazily populates NIFTY 50 tickers list from tickers.py if empty."""
+        if not self.TICKERS:
+            from ai_engine.data.tickers import NIFTY_50_TICKERS
+            self.TICKERS = NIFTY_50_TICKERS
+        return self
 
 # Instantiate Settings Object
 settings = Settings()

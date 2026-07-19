@@ -1,6 +1,5 @@
 import logging
 import sys
-from ai_engine.utils.config import settings
 
 def setup_logger(name: str = "ai_engine") -> logging.Logger:
     """
@@ -13,7 +12,10 @@ def setup_logger(name: str = "ai_engine") -> logging.Logger:
     if logger.handlers:
         return logger
 
-    log_level = logging.DEBUG if settings.DEBUG else logging.INFO
+    import os
+    # Read environment variable directly to bypass circular module imports at startup
+    debug_mode = os.getenv("DEBUG", "false").lower() in ("true", "1", "t", "yes")
+    log_level = logging.DEBUG if debug_mode else logging.INFO
     logger.setLevel(log_level)
 
     # Standard formatter fallback

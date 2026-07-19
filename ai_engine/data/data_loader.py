@@ -9,7 +9,6 @@ from typing import List, Dict, Optional
 import pandas as pd
 import yfinance as yf
 from tqdm import tqdm
-from ai_engine.utils.config import settings
 from ai_engine.utils.logging import logger
 from ai_engine.data.tickers import is_valid_nifty_50_ticker
 from ai_engine.data.cleaner import DataCleaner
@@ -27,6 +26,10 @@ class DataLoader:
         self.storage = storage or DataStorage()
         self.retry_limit = retry_limit
         self.retry_delay = retry_delay
+        
+        # Lazy import to break circular dependency at startup
+        from ai_engine.utils.config import settings
+        self.settings = settings
 
     def download_ticker(
         self,
@@ -79,8 +82,8 @@ class DataLoader:
             ValidationError: If data constraints are violated.
         """
         ticker = ticker.strip().upper()
-        start = start_date or settings.DEFAULT_START_DATE
-        end = end_date or settings.DEFAULT_END_DATE
+        start = start_date or self.settings.DEFAULT_START_DATE
+        end = end_date or self.settings.DEFAULT_END_DATE
 
         # Log warning if ticker is not in central NIFTY 50 list
         if not is_valid_nifty_50_ticker(ticker):

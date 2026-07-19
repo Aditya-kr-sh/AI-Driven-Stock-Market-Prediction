@@ -1,0 +1,22 @@
+[
+    {
+        "name": "OpenMP Parallel Workload Simulation",
+        "implementation": "openmp",
+        "elapsed_time_sec": 0.636044499988202,
+        "start_memory_mb": 258.05078125,
+        "end_memory_mb": 258.05078125,
+        "memory_delta_mb": 0.0,
+        "cpu_percent": 63.4,
+        "timestamp": "2026-07-19T05:41:06.827032Z"
+    },
+    {
+        "name": "Slow Python Block",
+        "implementation": "python",
+        "elapsed_time_sec": 0.7829423000221141,
+        "start_memory_mb": 258.0859375,
+        "end_memory_mb": 258.0859375,
+        "memory_delta_mb": 0.0,
+        "cpu_percent": 100.0,
+        "timestamp": "2026-07-19T05:41:07.717050Z"
+    }
+]
