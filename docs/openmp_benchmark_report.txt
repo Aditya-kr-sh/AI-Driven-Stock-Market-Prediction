@@ -1,0 +1,20 @@
+
+=========================================================================
+                 HPC BENCHMARK PERFORMANCE REPORT
+=========================================================================
+System Cfg          : Windows OpenMP Cython Acceleration
+CPU Cores Available : 12
+Stocks Evaluated    : RELIANCE.NS, TCS.NS, HDFCBANK.NS, INFY.NS, ICICIBANK.NS
+Total Records       : 20,425 rows
+
+Performance Index Table:
+-------------------------------------------------------------
+Implementation              Duration (sec)  Speedup
+-------------------------------------------------------------
+Python (NumPy Fallback)     0.75368s        1.00x (Baseline)
+OpenMP (1 thread)            0.14176s        5.32x
+OpenMP (2 threads)           0.14829s        5.08x
+OpenMP (4 threads)           0.15241s        4.94x
+OpenMP (6 threads) [Half Cores] 0.14828s        5.08x
+OpenMP (12 threads) [All Cores] 0.15420s        4.89x
+=============================================================

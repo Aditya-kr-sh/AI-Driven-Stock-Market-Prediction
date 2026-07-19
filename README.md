@@ -118,16 +118,22 @@ To optimize computing resource usage, development is divided across two environm
    ```bash
    python -c "import torch; print('CUDA Available:', torch.cuda.is_available())"
    ```
-3. **Editable Installation**:
-   Install runtime requirements and install the package:
+3. **Editable Installation & Compiling Extensions**:
+   Install runtime requirements and build the package:
    ```bash
    pip install -r requirements.txt
    pip install -e .
    ```
-4. **Compile OpenMP features**:
-   ```bash
-   python setup_hpc.py build_ext --inplace
-   ```
+4. **Compile OpenMP features manually (Optional)**:
+   - **Linux / Ramanujan Universe Cluster (GCC)**:
+     ```bash
+     python setup.py build_ext --inplace
+     ```
+   - **Windows (using MinGW GCC)**:
+     ```powershell
+     $env:PATH = "C:\msys64\ucrt64\bin;" + $env:PATH
+     python setup.py build_ext --compiler=mingw32 --inplace
+     ```
 
 ---
 

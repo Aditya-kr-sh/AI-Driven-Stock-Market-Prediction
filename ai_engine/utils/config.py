@@ -43,6 +43,7 @@ class Settings(BaseSettings):
     # Raw and processed data storage folders
     DATA_RAW_DIR: Path = BASE_DIR / "data" / "raw"
     DATA_PROCESSED_DIR: Path = BASE_DIR / "data" / "processed"
+    BENCHMARK_RESULTS_PATH: Path = BASE_DIR / "data" / "benchmark_results.json"
 
     # =========================================================================
     # Storage Format Options

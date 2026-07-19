@@ -105,7 +105,7 @@ class BenchmarkTracker:
     def clear_results(cls) -> None:
         """Clears all benchmark history records both in-memory and on disk."""
         cls._results = []
-        filepath = settings.BASE_PATH / "data" / "benchmark_results.json"
+        filepath = settings.BENCHMARK_RESULTS_PATH
         if filepath.exists():
             try:
                 filepath.unlink()
@@ -115,7 +115,7 @@ class BenchmarkTracker:
     @classmethod
     def save_results(cls) -> None:
         """Serializes historical results to data/benchmark_results.json."""
-        filepath = settings.BASE_PATH / "data" / "benchmark_results.json"
+        filepath = settings.BENCHMARK_RESULTS_PATH
         try:
             filepath.parent.mkdir(parents=True, exist_ok=True)
             serializable_data = [asdict(r) for r in cls._results]
@@ -127,7 +127,7 @@ class BenchmarkTracker:
     @classmethod
     def load_results(cls) -> List[Dict[str, Any]]:
         """Loads and returns historical results saved on disk."""
-        filepath = settings.BASE_PATH / "data" / "benchmark_results.json"
+        filepath = settings.BENCHMARK_RESULTS_PATH
         if not filepath.exists():
             return []
         try:
