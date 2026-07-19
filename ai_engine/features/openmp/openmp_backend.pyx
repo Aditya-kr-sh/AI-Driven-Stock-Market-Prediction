@@ -3,10 +3,10 @@
 Cython OpenMP accelerated implementations of heavy rolling technical indicators.
 Releases Python GIL and maps directly to double-precision raw memory views.
 Uses const double[:] read-only memory views to interface directly with Pandas columns.
+Does not import NumPy C API headers directly to guarantee compliance with NumPy 2.x interfaces.
 """
 
 import numpy as np
-cimport numpy as cnp
 from cython.parallel import prange
 from libc.math cimport sqrt, log
 
@@ -71,7 +71,7 @@ cdef inline double c_volatility(
 def compute_sma_omp(const double[:] values, int period, int num_threads):
     """Parallel Simple Moving Average (SMA) calculation using OpenMP."""
     cdef int n = values.shape[0]
-    cdef cnp.ndarray[double, ndim=1] sma_arr = np.empty(n, dtype=np.float64)
+    cdef object sma_arr = np.empty(n, dtype=np.float64)
     cdef double[:] sma = sma_arr
     cdef int i
     
@@ -91,7 +91,7 @@ def compute_sma_omp(const double[:] values, int period, int num_threads):
 def compute_ema_omp(const double[:] values, int period, int num_threads):
     """Exponential Moving Average (EMA) calculation with C loop optimizations."""
     cdef int n = values.shape[0]
-    cdef cnp.ndarray[double, ndim=1] ema_arr = np.empty(n, dtype=np.float64)
+    cdef object ema_arr = np.empty(n, dtype=np.float64)
     cdef double[:] ema = ema_arr
     cdef int i
     
@@ -121,7 +121,7 @@ def compute_ema_omp(const double[:] values, int period, int num_threads):
 def compute_rsi_omp(const double[:] values, int period, int num_threads):
     """Parallel RSI computation using Wilder's smoothing loop structures."""
     cdef int n = values.shape[0]
-    cdef cnp.ndarray[double, ndim=1] rsi_arr = np.empty(n, dtype=np.float64)
+    cdef object rsi_arr = np.empty(n, dtype=np.float64)
     cdef double[:] rsi = rsi_arr
     cdef int i
     
@@ -131,8 +131,8 @@ def compute_rsi_omp(const double[:] values, int period, int num_threads):
     if n <= period:
         return rsi_arr
         
-    cdef cnp.ndarray[double, ndim=1] gains_arr = np.empty(n, dtype=np.float64)
-    cdef cnp.ndarray[double, ndim=1] losses_arr = np.empty(n, dtype=np.float64)
+    cdef object gains_arr = np.empty(n, dtype=np.float64)
+    cdef object losses_arr = np.empty(n, dtype=np.float64)
     cdef double[:] gains = gains_arr
     cdef double[:] losses = losses_arr
     
@@ -190,17 +190,17 @@ def compute_macd_omp(
     cdef int n = values.shape[0]
     
     # Pre-allocate output arrays
-    cdef cnp.ndarray[double, ndim=1] macd_line_arr = np.empty(n, dtype=np.float64)
-    cdef cnp.ndarray[double, ndim=1] signal_line_arr = np.empty(n, dtype=np.float64)
-    cdef cnp.ndarray[double, ndim=1] hist_arr = np.empty(n, dtype=np.float64)
+    cdef object macd_line_arr = np.empty(n, dtype=np.float64)
+    cdef object signal_line_arr = np.empty(n, dtype=np.float64)
+    cdef object hist_arr = np.empty(n, dtype=np.float64)
     
     cdef double[:] macd_line = macd_line_arr
     cdef double[:] signal_line = signal_line_arr
     cdef double[:] hist = hist_arr
     
     # Compute EMAs
-    cdef cnp.ndarray[double, ndim=1] ema_fast_arr = compute_ema_omp(values, fast_period, num_threads)
-    cdef cnp.ndarray[double, ndim=1] ema_slow_arr = compute_ema_omp(values, slow_period, num_threads)
+    cdef object ema_fast_arr = compute_ema_omp(values, fast_period, num_threads)
+    cdef object ema_slow_arr = compute_ema_omp(values, slow_period, num_threads)
     
     cdef double[:] ema_fast = ema_fast_arr
     cdef double[:] ema_slow = ema_slow_arr
@@ -260,9 +260,9 @@ def compute_bollinger_bands_omp(
     """
     cdef int n = values.shape[0]
     
-    cdef cnp.ndarray[double, ndim=1] middle_band_arr = np.empty(n, dtype=np.float64)
-    cdef cnp.ndarray[double, ndim=1] upper_band_arr = np.empty(n, dtype=np.float64)
-    cdef cnp.ndarray[double, ndim=1] lower_band_arr = np.empty(n, dtype=np.float64)
+    cdef object middle_band_arr = np.empty(n, dtype=np.float64)
+    cdef object upper_band_arr = np.empty(n, dtype=np.float64)
+    cdef object lower_band_arr = np.empty(n, dtype=np.float64)
     
     cdef double[:] middle_band = middle_band_arr
     cdef double[:] upper_band = upper_band_arr
@@ -304,7 +304,7 @@ def compute_atr_omp(
     The True Range loop is parallelized; smoothing is computed sequentially.
     """
     cdef int n = close.shape[0]
-    cdef cnp.ndarray[double, ndim=1] atr_arr = np.empty(n, dtype=np.float64)
+    cdef object atr_arr = np.empty(n, dtype=np.float64)
     cdef double[:] atr = atr_arr
     cdef int i
     
@@ -314,7 +314,7 @@ def compute_atr_omp(
     if n <= period:
         return atr_arr
 
-    cdef cnp.ndarray[double, ndim=1] tr_arr = np.empty(n, dtype=np.float64)
+    cdef object tr_arr = np.empty(n, dtype=np.float64)
     cdef double[:] tr = tr_arr
     tr[0] = high[0] - low[0]
     
@@ -358,7 +358,7 @@ def compute_atr_omp(
 def compute_obv_omp(const double[:] close, const double[:] volume, int num_threads):
     """Computes On-Balance Volume (OBV) cumulative indicator."""
     cdef int n = close.shape[0]
-    cdef cnp.ndarray[double, ndim=1] obv_arr = np.empty(n, dtype=np.float64)
+    cdef object obv_arr = np.empty(n, dtype=np.float64)
     cdef double[:] obv = obv_arr
     cdef int i
     
@@ -382,7 +382,7 @@ def compute_obv_omp(const double[:] close, const double[:] volume, int num_threa
 def compute_momentum_omp(const double[:] values, int period, int num_threads):
     """Parallel momentum calculator using OpenMP loops."""
     cdef int n = values.shape[0]
-    cdef cnp.ndarray[double, ndim=1] mom_arr = np.empty(n, dtype=np.float64)
+    cdef object mom_arr = np.empty(n, dtype=np.float64)
     cdef double[:] mom = mom_arr
     cdef int i
     
@@ -402,7 +402,7 @@ def compute_momentum_omp(const double[:] values, int period, int num_threads):
 def compute_daily_returns_omp(const double[:] close, int num_threads):
     """Parallel Daily returns percentage calculation using OpenMP."""
     cdef int n = close.shape[0]
-    cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+    cdef object ret_arr = np.empty(n, dtype=np.float64)
     cdef double[:] ret = ret_arr
     cdef int i
     
@@ -425,7 +425,7 @@ def compute_daily_returns_omp(const double[:] close, int num_threads):
 def compute_log_returns_omp(const double[:] close, int num_threads):
     """Parallel Log returns percentage calculation using OpenMP."""
     cdef int n = close.shape[0]
-    cdef cnp.ndarray[double, ndim=1] ret_arr = np.empty(n, dtype=np.float64)
+    cdef object ret_arr = np.empty(n, dtype=np.float64)
     cdef double[:] ret = ret_arr
     cdef int i
     
@@ -448,7 +448,7 @@ def compute_log_returns_omp(const double[:] close, int num_threads):
 def compute_rolling_std_omp(const double[:] values, int period, int num_threads):
     """Parallel rolling standard deviation calculation utilizing OpenMP."""
     cdef int n = values.shape[0]
-    cdef cnp.ndarray[double, ndim=1] std_arr = np.empty(n, dtype=np.float64)
+    cdef object std_arr = np.empty(n, dtype=np.float64)
     cdef double[:] std = std_arr
     cdef int i
     
@@ -479,7 +479,7 @@ def compute_rolling_volatility_omp(
     Loops are executed in parallel without Python GIL.
     """
     cdef int n = returns.shape[0]
-    cdef cnp.ndarray[double, ndim=1] volatility_arr = np.empty(n, dtype=np.float64)
+    cdef object volatility_arr = np.empty(n, dtype=np.float64)
     cdef double[:] volatility = volatility_arr
     cdef int i
     
