@@ -1,0 +1,10 @@
+{
+    "ticker": "HINDALCO.NS",
+    "download_timestamp": "2026-07-19T17:14:42.516136Z",
+    "start_date": "2020-01-01",
+    "end_date": "2023-01-01",
+    "interval": "1d",
+    "row_count": 747,
+    "source": "Yahoo Finance",
+    "file_format": "csv"
+}

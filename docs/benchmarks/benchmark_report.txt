@@ -1,0 +1,24 @@
+=========================================================================
+               HPC FINANCIAL PLATFORM: BENCHMARK REPORT                 
+=========================================================================
+Timestamp   : 2026-07-19T17:26:09.851072Z
+Git Commit  : 94d4d1b524ee559f5f7804a5bb780d1e5bfe8756
+CPU Details : AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+GPU Details : None
+=========================================================================
+
+1. Feature Engineering Performance (seconds):
+  size  python_time  omp_1_threads_time  omp_2_threads_time  omp_4_threads_time  omp_8_threads_time
+ 10000     0.162817            0.000775            0.002326            0.001508            0.001909
+ 50000     0.815934            0.003335            0.004016            0.004210            0.004502
+100000     1.647211            0.006802            0.006447            0.005165            0.004999
+250000     4.077827            0.021662            0.018717            0.015444            0.014215
+500000     8.242009            0.045679            0.033255            0.026025            0.023902
+
+2. Monte Carlo Portfolio Vectorization (seconds):
+ simulations  vectorized_time  iterative_time   speedup
+        5000         0.002748        0.063023 22.937473
+       10000         0.002397        0.113489 47.352192
+       50000         0.007495        0.572120 76.333555
+      100000         0.013606        1.175940 86.428681
+      250000         0.038045        3.327450 87.460902

@@ -7,7 +7,9 @@ import time
 from datetime import datetime, date
 from typing import List, Dict, Optional
 import pandas as pd
-import yfinance as yf
+import os
+# yfinance will be imported lazily within methods to avoid import-time SQLite errors.
+# Fallback to pandas_datareader if yfinance cannot be imported due to missing sqlite3.
 from tqdm import tqdm
 from ai_engine.utils.logging import logger
 from ai_engine.data.tickers import load_registry
@@ -15,6 +17,10 @@ from ai_engine.data.cleaner import DataCleaner
 from ai_engine.data.storage import DataStorage
 from ai_engine.data.dataset import StockDataset
 from ai_engine.data.exceptions import DownloadError, ValidationError
+
+# yfinance will be imported lazily within methods to avoid import-time SQLite errors.
+# Fallback to pandas_datareader if yfinance cannot be imported due to missing sqlite3.
+
 
 class DataLoader:
     """
@@ -237,30 +243,44 @@ class DataLoader:
         return results
 
     def _download_with_retry(self, ticker: str, start: str, end: str, interval: str = "1d") -> pd.DataFrame:
-        """Downloads data from yfinance implementing exponential backoff retry loops."""
+        """Downloads data using yfinance if available, otherwise falls back to pandas_datareader.
+        Implements exponential backoff retry loops.
+        """
         attempts = 0
         last_error_msg = ""
         
+        # Lazy import yfinance to avoid import-time SQLite errors.
+        try:
+            import yfinance as yf  # type: ignore
+        except Exception as import_err:
+            logger.warning(f"yfinance import failed ({import_err}); falling back to pandas_datareader.")
+            yf = None
+        
         while attempts < self.retry_limit:
             try:
-                # yfinance returns an empty DataFrame if no data is found or ticker is invalid
-                df = yf.download(
-                    tickers=ticker,
-                    start=start,
-                    end=end,
-                    interval=interval,
-                    progress=False,
-                    auto_adjust=False,
-                    threads=False
-                )
+                if yf is not None:
+                    # Use yfinance download
+                    df = yf.download(
+                        tickers=ticker,
+                        start=start,
+                        end=end,
+                        interval=interval,
+                        progress=False,
+                        auto_adjust=False,
+                        threads=False,
+                    )
+                else:
+                    # Fallback using pandas_datareader
+                    from pandas_datareader import data as pdr
+                    df = pdr.get_data_yahoo(ticker, start=start, end=end, interval=interval)
                 
                 # Check if download returned a valid dataset
                 if df is None or df.empty:
                     attempts += 1
-                    last_error_msg = "yfinance returned an empty DataFrame (invalid ticker or missing data)."
+                    last_error_msg = "download returned an empty DataFrame (invalid ticker or missing data)."
                     logger.warning(
                         f"Download attempt {attempts}/{self.retry_limit} failed for ticker '{ticker}' "
-                        f"at timestamp {datetime.utcnow().isoformat()}Z. Exception: {last_error_msg}"
+                        f"at timestamp {datetime.utcnow().isoformat()}Z. Reason: {last_error_msg}"
                     )
                     if attempts < self.retry_limit:
                         time.sleep(self.retry_delay * attempts)

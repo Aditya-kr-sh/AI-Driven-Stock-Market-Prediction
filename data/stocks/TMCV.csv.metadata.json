@@ -1,0 +1,10 @@
+{
+    "ticker": "TMCV.NS",
+    "download_timestamp": "2026-07-19T17:03:11.071011Z",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-10",
+    "interval": "1d",
+    "row_count": 7,
+    "source": "Yahoo Finance",
+    "file_format": "csv"
+}

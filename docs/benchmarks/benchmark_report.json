@@ -1,0 +1,88 @@
+{
+    "metadata": {
+        "timestamp": "2026-07-19T17:26:09.851072Z",
+        "git_commit": "94d4d1b524ee559f5f7804a5bb780d1e5bfe8756",
+        "random_seed": 42,
+        "hardware": {
+            "os": "Windows 11",
+            "processor": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+            "logical_cores": 12,
+            "gpu_available": false,
+            "gpu_name": "None"
+        }
+    },
+    "feature_benchmarks": [
+        {
+            "size": 10000,
+            "python_time": 0.16281700000399724,
+            "omp_1_threads_time": 0.0007752000237815082,
+            "omp_2_threads_time": 0.002326000016182661,
+            "omp_4_threads_time": 0.0015076000127010047,
+            "omp_8_threads_time": 0.0019091999856755137
+        },
+        {
+            "size": 50000,
+            "python_time": 0.8159341000136919,
+            "omp_1_threads_time": 0.003335299959871918,
+            "omp_2_threads_time": 0.004015799961052835,
+            "omp_4_threads_time": 0.004209600039757788,
+            "omp_8_threads_time": 0.004501899995375425
+        },
+        {
+            "size": 100000,
+            "python_time": 1.6472106999717653,
+            "omp_1_threads_time": 0.006802499992772937,
+            "omp_2_threads_time": 0.0064468999626114964,
+            "omp_4_threads_time": 0.005164999980479479,
+            "omp_8_threads_time": 0.004998599993996322
+        },
+        {
+            "size": 250000,
+            "python_time": 4.077826799999457,
+            "omp_1_threads_time": 0.021662099985405803,
+            "omp_2_threads_time": 0.01871700002811849,
+            "omp_4_threads_time": 0.015444299962837249,
+            "omp_8_threads_time": 0.01421450002817437
+        },
+        {
+            "size": 500000,
+            "python_time": 8.242009199981112,
+            "omp_1_threads_time": 0.045678699971176684,
+            "omp_2_threads_time": 0.03325459995539859,
+            "omp_4_threads_time": 0.026025300030596554,
+            "omp_8_threads_time": 0.023902400047518313
+        }
+    ],
+    "portfolio_benchmarks": [
+        {
+            "simulations": 5000,
+            "vectorized_time": 0.0027475999668240547,
+            "iterative_time": 0.06302299996605143,
+            "speedup": 22.937472968053495
+        },
+        {
+            "simulations": 10000,
+            "vectorized_time": 0.002396700030658394,
+            "iterative_time": 0.11348899977747351,
+            "speedup": 47.352191899583325
+        },
+        {
+            "simulations": 50000,
+            "vectorized_time": 0.007495000027120113,
+            "iterative_time": 0.5721199995605275,
+            "speedup": 76.33355536895968
+        },
+        {
+            "simulations": 100000,
+            "vectorized_time": 0.013605899992398918,
+            "iterative_time": 1.175939996028319,
+            "speedup": 86.42868143123722
+        },
+        {
+            "simulations": 250000,
+            "vectorized_time": 0.0380449999938719,
+            "iterative_time": 3.3274500019615516,
+            "speedup": 87.46090162958394
+        }
+    ]
+}
