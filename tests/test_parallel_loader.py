@@ -16,6 +16,15 @@ def main():
     print("                TESTING PARALLEL CACHE DATA LOADING STATUS               ")
     print("=========================================================================")
     
+    # Mock download to avoid network calls and use local cache
+    def mock_download(self, ticker: str, start: str, end: str, interval: str = "1d"):
+        if self.storage.raw_exists(ticker):
+            return self.storage.load_raw(ticker)
+        import pandas as pd
+        return pd.DataFrame(columns=["Open", "High", "Low", "Close", "Adj Close", "Volume"])
+
+    DataLoader._download_with_retry = mock_download
+
     storage = DataStorage()
     loader = DataLoader(storage=storage, index_name="nifty50")
     
@@ -32,8 +41,8 @@ def main():
     start_time = time.perf_counter()
     datasets = loader.download_multiple(
         tickers=NIFTY_50_TICKERS,
-        start_date="2026-01-01",
-        end_date="2026-01-10",
+        start_date="2020-01-01",
+        end_date="2023-01-01",
         force_download=False
     )
     duration = time.perf_counter() - start_time
