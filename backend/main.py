@@ -99,11 +99,27 @@ def generate_prediction(req: PredictionRequest):
     
     # Resolve ticker names (e.g. check RELIANCE and RELIANCE.NS)
     target_ticker = ticker
-    if not storage.raw_exists(ticker):
-        if storage.raw_exists(ticker + ".NS"):
-            target_ticker = ticker + ".NS"
-        else:
-            raise HTTPException(status_code=404, detail=f"Stock data for {ticker} not cached in local storage.")
+    if not storage.raw_exists(ticker) and not storage.raw_exists(ticker + ".NS"):
+        try:
+            from datetime import datetime
+            download_ticker = ticker if ticker.endswith(".NS") else ticker + ".NS"
+            print(f"Ticker {ticker} not found locally. Fetching dynamically from Yahoo Finance...")
+            loader = DataLoader(storage=storage)
+            loader.get_ticker_data(
+                ticker=download_ticker,
+                start_date="2018-01-01",
+                end_date=datetime.now().strftime("%Y-%m-%d"),
+                force_download=True,
+                interval="1d"
+            )
+            target_ticker = download_ticker
+        except Exception as e:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Stock data for {ticker} is not cached, and dynamic download failed: {str(e)}"
+            )
+    else:
+        target_ticker = ticker if storage.raw_exists(ticker) else ticker + ".NS"
             
     # Load raw data and run features
     try:
@@ -184,11 +200,27 @@ def optimize_portfolio(req: PortfolioRequest):
     for ticker in req.tickers:
         t_upper = ticker.upper()
         target = t_upper
-        if not storage.raw_exists(t_upper):
-            if storage.raw_exists(t_upper + ".NS"):
-                target = t_upper + ".NS"
-            else:
-                raise HTTPException(status_code=404, detail=f"Price history for ticker {ticker} is not cached.")
+        if not storage.raw_exists(t_upper) and not storage.raw_exists(t_upper + ".NS"):
+            try:
+                from datetime import datetime
+                download_ticker = t_upper if t_upper.endswith(".NS") else t_upper + ".NS"
+                print(f"Ticker {ticker} not found locally for portfolio. Fetching dynamically...")
+                loader = DataLoader(storage=storage)
+                loader.get_ticker_data(
+                    ticker=download_ticker,
+                    start_date="2018-01-01",
+                    end_date=datetime.now().strftime("%Y-%m-%d"),
+                    force_download=True,
+                    interval="1d"
+                )
+                target = download_ticker
+            except Exception as e:
+                raise HTTPException(
+                    status_code=404, 
+                    detail=f"Price history for ticker {ticker} is not cached, and dynamic download failed: {str(e)}"
+                )
+        else:
+            target = t_upper if storage.raw_exists(t_upper) else t_upper + ".NS"
         try:
             df = storage.load_raw(target)
             price_series[t_upper] = df["Close"]
@@ -211,6 +243,24 @@ def optimize_portfolio(req: PortfolioRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Monte Carlo simulation failed: {str(e)}")
+
+@app.get("/api/supported_prediction_tickers")
+def get_supported_prediction_tickers():
+    """Scans saved_models/ and returns a list of tickers with pre-trained models."""
+    model_dir = Path("saved_models")
+    if not model_dir.exists():
+        return []
+    
+    tickers = set()
+    for filepath in model_dir.glob("hpc_*_*.model"):
+        basename = filepath.name
+        parts = basename[4:].split("_")
+        if len(parts) >= 2:
+            ticker = parts[0]
+            ticker_clean = ticker.replace(".NS", "")
+            tickers.add(ticker_clean)
+            
+    return sorted(list(tickers))
 
 @app.get("/api/registries")
 def get_registries():
