@@ -426,9 +426,10 @@
                         <!-- Portfolio Section -->
                         <div style="padding-left: 10px;">
                             <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Monte Carlo Allocations</h3>
-                            <div class="form-group">
+                            <div class="form-group" style="position: relative;">
                                 <label for="portfolio-assets">Tickers (Comma Separated)</label>
-                                <input type="text" class="form-control" id="portfolio-assets" value="RELIANCE, TCS, SBIN">
+                                <input type="text" class="form-control" id="portfolio-assets" value="RELIANCE, TCS, SBIN" autocomplete="off">
+                                <div id="autocomplete-suggestions" style="position: absolute; left: 0; right: 0; background: #1a1d24; border: 1px solid var(--card-border); max-height: 150px; overflow-y: auto; display: none; z-index: 1000; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-top: 5px;"></div>
                             </div>
                             <div class="form-group">
                                 <label for="portfolio-sims">Simulations</label>
@@ -475,11 +476,13 @@
         let portfolioChartInstance = null;
         let stockHistoryChartInstance = null;
         let portfolioPieChartInstance = null;
+        let allTickersList = [];
 
         // Initialize Page & Load Metrics
         window.addEventListener('DOMContentLoaded', () => {
             fetchSystemHealth();
             loadRegistryConstituents();
+            setupAutocomplete();
         });
 
         function fetchSystemHealth() {
@@ -511,6 +514,7 @@
                 .then(res => res.json())
                 .then(data => {
                     const list = data[index] || [];
+                    allTickersList = list.map(t => t.replace('.NS', ''));
                     const select = document.getElementById('predict-ticker');
                     select.innerHTML = '';
                     
@@ -519,6 +523,7 @@
                     if (activeList.length === 0) {
                         // Fallbacks
                         const fallbacks = ["RELIANCE", "TCS", "SBIN"];
+                        allTickersList = fallbacks;
                         fallbacks.forEach(t => {
                             const opt = document.createElement('option');
                             opt.value = t;
@@ -537,6 +542,64 @@
                     }
                 })
                 .catch(() => {});
+        }
+
+        function setupAutocomplete() {
+            const inputField = document.getElementById('portfolio-assets');
+            const suggestionsContainer = document.getElementById('autocomplete-suggestions');
+            
+            if (!inputField || !suggestionsContainer) return;
+            
+            inputField.addEventListener('input', function(e) {
+                const inputVal = e.target.value;
+                const tokens = inputVal.split(',');
+                const currentToken = tokens[tokens.length - 1].trim().toUpperCase();
+                
+                if (currentToken.length < 1) {
+                    suggestionsContainer.style.display = 'none';
+                    return;
+                }
+                
+                // Find matching tickers from global array
+                const matches = allTickersList.filter(ticker => 
+                    ticker.startsWith(currentToken) && !tokens.slice(0, -1).map(t => t.trim().toUpperCase()).includes(ticker)
+                );
+                
+                if (matches.length === 0) {
+                    suggestionsContainer.style.display = 'none';
+                    return;
+                }
+                
+                // Render suggestions list
+                suggestionsContainer.innerHTML = '';
+                matches.slice(0, 10).forEach(match => {
+                    const div = document.createElement('div');
+                    div.style.padding = '8px 12px';
+                    div.style.cursor = 'pointer';
+                    div.style.color = '#fff';
+                    div.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+                    div.textContent = match;
+                    
+                    div.addEventListener('mouseenter', () => div.style.background = 'rgba(102,252,241,0.15)');
+                    div.addEventListener('mouseleave', () => div.style.background = 'none');
+                    
+                    div.addEventListener('click', () => {
+                        tokens[tokens.length - 1] = ' ' + match;
+                        e.target.value = tokens.join(', ') + ', ';
+                        suggestionsContainer.style.display = 'none';
+                        e.target.focus();
+                    });
+                    suggestionsContainer.appendChild(div);
+                });
+                suggestionsContainer.style.display = 'block';
+            });
+            
+            // Hide when user clicks outside input field
+            document.addEventListener('click', function(e) {
+                if (e.target.id !== 'portfolio-assets') {
+                    suggestionsContainer.style.display = 'none';
+                }
+            });
         }
 
         function generatePrediction() {
