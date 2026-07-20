@@ -169,8 +169,28 @@ def run_large_scale_model_training(storage: DataStorage) -> dict:
     print(" 2. EXECUTING HYBRID AI MODELS TRAINING & EVALUATIONS ")
     print("=============================================================")
     
-    # 5 stocks representing diverse pricing profiles and sectors
-    representative_stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "INFY.NS", "ICICIBANK.NS"]
+    # Discover all cached tickers in raw storage dynamically
+    raw_dir = storage.raw_dir
+    metadata_files = list(raw_dir.glob("*.metadata.json"))
+    representative_stocks = []
+    for meta_file in metadata_files:
+        try:
+            with open(meta_file, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+                ticker = meta.get("ticker")
+                if ticker:
+                    representative_stocks.append(ticker)
+        except Exception:
+            pass
+            
+    if not representative_stocks:
+        # Fallback to the original hardcoded set if discovery fails
+        representative_stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "INFY.NS", "ICICIBANK.NS"]
+    else:
+        # Sort for deterministic processing order
+        representative_stocks = sorted(list(set(representative_stocks)))
+        
+    print(f"Discovered {len(representative_stocks)} cached stocks for full-scale training.")
     
     # Configurable hyperparameters (suited for full-scale HPC runs)
     # Exposing these dictionary variables directly to configurations
@@ -205,115 +225,124 @@ def run_large_scale_model_training(storage: DataStorage) -> dict:
     evaluation_records = []
     
     for ticker in representative_stocks:
-        if not storage.raw_exists(ticker):
-            print(f"Skipping {ticker}: Cache file missing.")
-            continue
+        try:
+            if not storage.raw_exists(ticker):
+                print(f"Skipping {ticker}: Cache file missing.")
+                continue
+                
+            print(f"\n--- Loading and preprocessing full history for {ticker} ---")
+            df_raw = storage.load_raw(ticker)
             
-        print(f"\n--- Loading and preprocessing full history for {ticker} ---")
-        df_raw = storage.load_raw(ticker)
-        df_features = add_technical_indicators(df_raw)
+            # Check length to prevent native OpenMP/Cython bounds crashes
+            if len(df_raw) < 50:
+                print(f"Skipping {ticker}: Insufficient rows ({len(df_raw)}) to calculate indicators (minimum 50 required).")
+                continue
+                
+            df_features = add_technical_indicators(df_raw)
         
-        # Prepare datasets temporally using Log_Returns target
-        target = "Log_Returns"
-        
-        # A. Preprocessing splits for Tabular XGBoost
-        splits_tab = prepare_stock_data(df_features, target_col=target, seq_length=1, seed=42)
-        X_test_tab = splits_tab["X_test"]
-        y_test_tab = splits_tab["y_test"]
-        
-        # B. Preprocessing splits for Sequential PyTorch Models (Sequence window = 20 days)
-        seq_length = 20
-        splits_seq = prepare_stock_data(df_features, target_col=target, seq_length=seq_length, seed=42)
-        X_test_seq = splits_seq["X_test"]
-        y_test_seq = splits_seq["y_test"]
-        
-        # Model 1: XGBoost tabular model
-        print("Training XGBoost...")
-        xgb_model = XGBoostPredictor(**hparams_xgb)
-        xgb_model.scaler = splits_tab["scaler"]
-        xgb_model.feature_order = splits_tab["feature_order"]
-        xgb_model.target_col = target
-        
-        t_start = time.perf_counter()
-        xgb_model.fit((splits_tab["X_train"], splits_tab["y_train"]), (splits_tab["X_val"], splits_tab["y_val"]))
-        xgb_fit_time = time.perf_counter() - t_start
-        
-        t_start = time.perf_counter()
-        xgb_preds = xgb_model.predict(X_test_tab)
-        xgb_inf_time = time.perf_counter() - t_start
-        xgb_metrics = evaluate_predictions(y_test_tab, xgb_preds)
-        
-        # Save model
-        xgb_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_xgboost.model"
-        xgb_model.save(str(xgb_path))
-        
-        evaluation_records.append({
-            "ticker": ticker,
-            "model_type": "XGBoost",
-            "train_time_sec": xgb_fit_time,
-            "inference_time_sec": xgb_inf_time,
-            "device": "cpu",
-            "metrics": xgb_metrics
-        })
-        
-        # Model 2: PyTorch LSTM
-        print("Training LSTM...")
-        lstm_model = LSTMPredictor(**hparams_lstm)
-        lstm_model.scaler = splits_seq["scaler"]
-        lstm_model.feature_order = splits_seq["feature_order"]
-        lstm_model.target_col = target
-        
-        t_start = time.perf_counter()
-        lstm_model.fit((splits_seq["X_train"], splits_seq["y_train"]), (splits_seq["X_val"], splits_seq["y_val"]))
-        lstm_fit_time = time.perf_counter() - t_start
-        
-        t_start = time.perf_counter()
-        lstm_preds = lstm_model.predict(X_test_seq)
-        lstm_inf_time = time.perf_counter() - t_start
-        lstm_metrics = evaluate_predictions(y_test_seq, lstm_preds)
-        
-        # Save model
-        lstm_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_lstm.model"
-        lstm_model.save(str(lstm_path))
-        
-        evaluation_records.append({
-            "ticker": ticker,
-            "model_type": "LSTM",
-            "train_time_sec": lstm_fit_time,
-            "inference_time_sec": lstm_inf_time,
-            "device": str(lstm_model.device),
-            "metrics": lstm_metrics
-        })
-        
-        # Model 3: PyTorch Transformer
-        print("Training Transformer...")
-        transformer_model = TransformerPredictor(**hparams_transformer)
-        transformer_model.scaler = splits_seq["scaler"]
-        transformer_model.feature_order = splits_seq["feature_order"]
-        transformer_model.target_col = target
-        
-        t_start = time.perf_counter()
-        transformer_model.fit((splits_seq["X_train"], splits_seq["y_train"]), (splits_seq["X_val"], splits_seq["y_val"]))
-        transformer_fit_time = time.perf_counter() - t_start
-        
-        t_start = time.perf_counter()
-        transformer_preds = transformer_model.predict(X_test_seq)
-        transformer_inf_time = time.perf_counter() - t_start
-        transformer_metrics = evaluate_predictions(y_test_seq, transformer_preds)
-        
-        # Save model
-        trans_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_transformer.model"
-        transformer_model.save(str(trans_path))
-        
-        evaluation_records.append({
-            "ticker": ticker,
-            "model_type": "Transformer",
-            "train_time_sec": transformer_fit_time,
-            "inference_time_sec": transformer_inf_time,
-            "device": str(transformer_model.device),
-            "metrics": transformer_metrics
-        })
-
+            # Prepare datasets temporally using Log_Returns target
+            target = "Log_Returns"
+            
+            # A. Preprocessing splits for Tabular XGBoost
+            splits_tab = prepare_stock_data(df_features, target_col=target, seq_length=1, seed=42)
+            X_test_tab = splits_tab["X_test"]
+            y_test_tab = splits_tab["y_test"]
+            
+            # B. Preprocessing splits for Sequential PyTorch Models (Sequence window = 20 days)
+            seq_length = 20
+            splits_seq = prepare_stock_data(df_features, target_col=target, seq_length=seq_length, seed=42)
+            X_test_seq = splits_seq["X_test"]
+            y_test_seq = splits_seq["y_test"]
+            
+            # Model 1: XGBoost tabular model
+            print("Training XGBoost...")
+            xgb_model = XGBoostPredictor(**hparams_xgb)
+            xgb_model.scaler = splits_tab["scaler"]
+            xgb_model.feature_order = splits_tab["feature_order"]
+            xgb_model.target_col = target
+            
+            t_start = time.perf_counter()
+            xgb_model.fit((splits_tab["X_train"], splits_tab["y_train"]), (splits_tab["X_val"], splits_tab["y_val"]))
+            xgb_fit_time = time.perf_counter() - t_start
+            
+            t_start = time.perf_counter()
+            xgb_preds = xgb_model.predict(X_test_tab)
+            xgb_inf_time = time.perf_counter() - t_start
+            xgb_metrics = evaluate_predictions(y_test_tab, xgb_preds)
+            
+            # Save model
+            xgb_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_xgboost.model"
+            xgb_model.save(str(xgb_path))
+            
+            evaluation_records.append({
+                "ticker": ticker,
+                "model_type": "XGBoost",
+                "train_time_sec": xgb_fit_time,
+                "inference_time_sec": xgb_inf_time,
+                "device": "cpu",
+                "metrics": xgb_metrics
+            })
+            
+            # Model 2: PyTorch LSTM
+            print("Training LSTM...")
+            lstm_model = LSTMPredictor(**hparams_lstm)
+            lstm_model.scaler = splits_seq["scaler"]
+            lstm_model.feature_order = splits_seq["feature_order"]
+            lstm_model.target_col = target
+            
+            t_start = time.perf_counter()
+            lstm_model.fit((splits_seq["X_train"], splits_seq["y_train"]), (splits_seq["X_val"], splits_seq["y_val"]))
+            lstm_fit_time = time.perf_counter() - t_start
+            
+            t_start = time.perf_counter()
+            lstm_preds = lstm_model.predict(X_test_seq)
+            lstm_inf_time = time.perf_counter() - t_start
+            lstm_metrics = evaluate_predictions(y_test_seq, lstm_preds)
+            
+            # Save model
+            lstm_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_lstm.model"
+            lstm_model.save(str(lstm_path))
+            
+            evaluation_records.append({
+                "ticker": ticker,
+                "model_type": "LSTM",
+                "train_time_sec": lstm_fit_time,
+                "inference_time_sec": lstm_inf_time,
+                "device": str(lstm_model.device),
+                "metrics": lstm_metrics
+            })
+            
+            # Model 3: PyTorch Transformer
+            print("Training Transformer...")
+            transformer_model = TransformerPredictor(**hparams_transformer)
+            transformer_model.scaler = splits_seq["scaler"]
+            transformer_model.feature_order = splits_seq["feature_order"]
+            transformer_model.target_col = target
+            
+            t_start = time.perf_counter()
+            transformer_model.fit((splits_seq["X_train"], splits_seq["y_train"]), (splits_seq["X_val"], splits_seq["y_val"]))
+            transformer_fit_time = time.perf_counter() - t_start
+            
+            t_start = time.perf_counter()
+            transformer_preds = transformer_model.predict(X_test_seq)
+            transformer_inf_time = time.perf_counter() - t_start
+            transformer_metrics = evaluate_predictions(y_test_seq, transformer_preds)
+            
+            # Save model
+            trans_path = settings.BASE_PATH / "saved_models" / f"hpc_{ticker}_transformer.model"
+            transformer_model.save(str(trans_path))
+            
+            evaluation_records.append({
+                "ticker": ticker,
+                "model_type": "Transformer",
+                "train_time_sec": transformer_fit_time,
+                "inference_time_sec": transformer_inf_time,
+                "device": str(transformer_model.device),
+                "metrics": transformer_metrics
+            })
+        except Exception as e:
+            print(f"Error training models for {ticker}: {e}. Continuing to next ticker.")
+            
     # Generate final evaluations report
     git_hash = get_git_commit_hash()
     timestamp = pd.Timestamp.now().isoformat()
