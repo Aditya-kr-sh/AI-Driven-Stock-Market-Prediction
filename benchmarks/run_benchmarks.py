@@ -22,6 +22,9 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from ai_engine.features.engine import PythonEngine, get_active_engine, is_openmp_available
 from ai_engine.portfolio import MonteCarloSimulator
+from ai_engine.data import DataStorage
+from ai_engine.data.tickers import load_registry
+from ai_engine.utils.config import settings
 
 def get_git_commit() -> str:
     """Safely retrieves the current Git commit hash."""
@@ -59,7 +62,7 @@ def generate_mock_ohlcv(num_rows: int) -> pd.DataFrame:
         "Volume": volume
     })
 
-def run_benchmarks(output_dir: str = "docs/benchmarks"):
+def run_benchmarks(index_name: str = "nifty50", output_dir: str = "docs/benchmarks"):
     out_path = Path(output_dir)
     out_path.mkdir(parents=True, exist_ok=True)
     
@@ -82,7 +85,80 @@ def run_benchmarks(output_dir: str = "docs/benchmarks"):
     print(f"Git Commit  : {metadata['git_commit']}")
     print(f"Hardware    : CPU={metadata['hardware']['processor']}, GPU={metadata['hardware']['gpu_name']}")
     print(f"Cores       : {metadata['hardware']['logical_cores']} threads detected")
-    print("=========================================================================")
+    # Load and benchmark the real dataset for the selected index
+    raw_dir_path = settings.BASE_PATH / "data" / index_name
+    storage = DataStorage(raw_dir=raw_dir_path)
+    
+    print(f"\n--- Loading Real Dataset for {index_name.upper()} ---")
+    tickers = load_registry(index_name)
+    loaded_dfs = []
+    for ticker in tickers:
+        if storage.raw_exists(ticker):
+            try:
+                loaded_dfs.append(storage.load_raw(ticker))
+            except Exception:
+                pass
+                
+    real_bench = {}
+    if loaded_dfs:
+        df_real = pd.concat(loaded_dfs, ignore_index=True)
+        total_stocks = len(loaded_dfs)
+        total_rows = len(df_real)
+        print(f"Loaded {total_stocks} stocks, total {total_rows:,} rows of price series.")
+        
+        close = df_real["Close"].values
+        high = df_real["High"].values
+        low = df_real["Low"].values
+        
+        # Benchmark Python
+        t0 = time.perf_counter()
+        py_engine = PythonEngine()
+        _ = py_engine.compute_sma(close, 20)
+        _ = py_engine.compute_ema(close, 12)
+        _ = py_engine.compute_rsi(close, 14)
+        _ = py_engine.compute_bollinger_bands(close, 20, 2.0)
+        _ = py_engine.compute_atr(high, low, close, 14)
+        real_py_time = time.perf_counter() - t0
+        
+        # Benchmark OpenMP
+        omp_engine = get_active_engine()
+        omp_active = is_openmp_available()
+        max_threads = os.cpu_count() or 4
+        
+        if omp_active:
+            omp_engine.set_threads(max_threads)
+            t0 = time.perf_counter()
+            _ = omp_engine.compute_sma(close, 20)
+            _ = omp_engine.compute_ema(close, 12)
+            _ = omp_engine.compute_rsi(close, 14)
+            _ = omp_engine.compute_bollinger_bands(close, 20, 2.0)
+            _ = omp_engine.compute_atr(high, low, close, 14)
+            real_omp_time = time.perf_counter() - t0
+            real_speedup = real_py_time / real_omp_time
+        else:
+            real_omp_time = np.nan
+            real_speedup = np.nan
+            
+        real_bench = {
+            "dataset_name": index_name.upper(),
+            "stocks": total_stocks,
+            "total_rows": total_rows,
+            "python_time_sec": real_py_time,
+            "openmp_time_sec": real_omp_time,
+            "speedup": real_speedup
+        }
+        
+        print(f"Python Time: {real_py_time:.5f}s | OpenMP ({max_threads} threads) Time: {real_omp_time:.5f}s | Speedup: {real_speedup:.2f}x")
+    else:
+        print(f"Warning: No cached data files found for registry {index_name.upper()} under {raw_dir_path.absolute()}")
+        real_bench = {
+            "dataset_name": index_name.upper(),
+            "stocks": 0,
+            "total_rows": 0,
+            "python_time_sec": np.nan,
+            "openmp_time_sec": np.nan,
+            "speedup": np.nan
+        }
 
     # -------------------------------------------------------------
     # 1. Feature Engineering Benchmark
@@ -257,6 +333,7 @@ def run_benchmarks(output_dir: str = "docs/benchmarks"):
     # Save benchmark metrics reports
     report = {
         "metadata": metadata,
+        "real_dataset_benchmark": real_bench,
         "feature_benchmarks": feat_bench_df.to_dict(orient="records"),
         "portfolio_benchmarks": mc_bench_df.to_dict(orient="records")
     }
@@ -274,13 +351,32 @@ def run_benchmarks(output_dir: str = "docs/benchmarks"):
         f.write(f"CPU Details : {metadata['hardware']['processor']}\n")
         f.write(f"GPU Details : {metadata['hardware']['gpu_name']}\n")
         f.write("=========================================================================\n\n")
-        f.write("1. Feature Engineering Performance (seconds):\n")
+        
+        f.write("1. Real Dataset Feature Engineering Benchmark:\n")
+        f.write(f"  Dataset Name       : {real_bench.get('dataset_name')}\n")
+        f.write(f"  Constituent Stocks : {real_bench.get('stocks')}\n")
+        f.write(f"  Total Processed Rows: {real_bench.get('total_rows'):,}\n")
+        f.write(f"  Python Baseline Time: {real_bench.get('python_time_sec'):.5f}s\n")
+        f.write(f"  OpenMP Exec Time    : {real_bench.get('openmp_time_sec'):.5f}s\n")
+        f.write(f"  OpenMP Speedup      : {real_bench.get('speedup'):.2f}x\n\n")
+        
+        f.write("2. Synthetic Feature Engineering Scaling (seconds):\n")
         f.write(feat_bench_df.to_string(index=False) + "\n\n")
-        f.write("2. Monte Carlo Portfolio Vectorization (seconds):\n")
+        f.write("3. Monte Carlo Portfolio Vectorization (seconds):\n")
         f.write(mc_bench_df.to_string(index=False) + "\n")
         
     print(f"\nALL BENCHMARKS RUN AND LOGGED SUCCESSFULLY! Saved files to {output_dir}")
     print("BENCHMARKS_SUCCESS")
 
 if __name__ == "__main__":
-    run_benchmarks()
+    import argparse
+    parser = argparse.ArgumentParser(description="HPC Analytics Platform Performance Benchmarking Framework")
+    parser.add_argument(
+        "--index",
+        type=str,
+        default="nifty50",
+        help="Registry index name to run benchmarks on (e.g. nifty50, nifty100, nifty200, nifty500)."
+    )
+    args = parser.parse_args()
+    
+    run_benchmarks(index_name=args.index)
