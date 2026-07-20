@@ -13,6 +13,14 @@ Output Locations:
 - Models Directory:      D:\stockproject\saved_models
 - Summary Report Path:   D:\stockproject\docs\all_cached_pipeline_report.txt
 
+Pipeline Architecture Notes:
+1. SCALER FALLBACK WARNING:
+   The automatic StandardScaler fitting performed during this run is strictly a VALIDATION FALLBACK to allow pipeline execution over multiple tickers when the saved model's scaler is None or mismatched. In production inference, you must use the original fitted scaler associated with the model's training stage to prevent look-ahead bias and guarantee scaling consistency.
+2. STOCK DISCOVERY NOTE:
+   Out of the ~101 metadata files in the repository (split between data/stocks/ and data/raw/), this run scanned only the active data ingestion directory 'data/stocks/' containing 50 cached stocks (representing the NIFTY-50 registry).
+3. MODEL INTEGRITY:
+   No production model files (such as hpc_RELIANCE_xgboost.model) were modified or overwritten during this validation run.
+
 Detailed Logs:
 - ADANIENT.NS: SUCCESS (0.0561s)
 - ADANIPORTS.NS: SUCCESS (0.0215s)

@@ -129,7 +129,10 @@ def main():
                     
             X = df_features[feature_order].values
             
-            # Fallback if the loaded model's scaler is None
+            # Fallback if the loaded model's scaler is None (STRICTLY FOR VALIDATION ONLY)
+            # NOTE: Fitting a new scaler on the inference dataset is a validation fallback to 
+            # prevent execution failures. In a production pipeline, you must use the exact 
+            # scaler fitted on the training data to avoid scaling discrepancies.
             scaler = xgb_model.scaler
             if scaler is None:
                 from sklearn.preprocessing import StandardScaler
@@ -139,7 +142,7 @@ def main():
                 try:
                     X_scaled = scaler.transform(X)
                 except Exception:
-                    # If transform fails (e.g. scaler not fitted or shape mismatch), fit a new one
+                    # If transform fails, fit a new scaler as a last resort validation fallback
                     from sklearn.preprocessing import StandardScaler
                     scaler = StandardScaler()
                     X_scaled = scaler.fit_transform(X)
