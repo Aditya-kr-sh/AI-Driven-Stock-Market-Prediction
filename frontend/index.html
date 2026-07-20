@@ -687,7 +687,9 @@
             spinner.style.display = 'block';
             container.style.display = 'none';
 
-            const tickers = tickersRaw.split(',').map(t => t.trim().toUpperCase());
+            const tickers = tickersRaw.split(',')
+                .map(t => t.trim().toUpperCase())
+                .filter(t => t.length > 0);
 
             fetch(`${API_URL}/portfolio`, {
                 method: 'POST',
