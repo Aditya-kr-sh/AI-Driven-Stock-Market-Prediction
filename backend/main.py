@@ -156,6 +156,11 @@ def generate_prediction(req: PredictionRequest):
         last_close = float(df_features["Close"].iloc[-1])
         predicted_direction = "UP" if pred_val > last_close else "DOWN"
         
+        # Get last 30 historical close prices and dates for charting
+        history_df = df_features.tail(30)
+        history_dates = [str(d.date()) if hasattr(d, "date") else str(d) for d in history_df.index]
+        history_prices = [float(p) for p in history_df["Close"].values]
+        
         return {
             "ticker": ticker,
             "model_type": model_type,
@@ -163,7 +168,9 @@ def generate_prediction(req: PredictionRequest):
             "predicted_price": pred_val,
             "predicted_change": float(pred_val - last_close),
             "predicted_direction": predicted_direction,
-            "timestamp": pd.Timestamp.now().isoformat()
+            "timestamp": pd.Timestamp.now().isoformat(),
+            "history_dates": history_dates,
+            "history_prices": history_prices
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction execution failed: {str(e)}")

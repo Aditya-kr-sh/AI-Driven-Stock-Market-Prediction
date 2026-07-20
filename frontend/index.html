@@ -68,6 +68,7 @@
             letter-spacing: -0.5px;
             background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -383,13 +384,16 @@
                         <div class="form-group" style="margin: 0;">
                             <select class="form-control" id="registry-selector" onchange="loadRegistryConstituents()" style="padding: 8px 12px; width: 180px;">
                                 <option value="nifty50">NIFTY 50</option>
+                                <option value="nifty100">NIFTY 100</option>
+                                <option value="nifty200">NIFTY 200</option>
+                                <option value="nifty500">NIFTY 500</option>
                                 <option value="sp500">S&P 500</option>
                                 <option value="nasdaq100">NASDAQ 100</option>
                                 <option value="dowjones30">Dow Jones 30</option>
                             </select>
                         </div>
                     </div>
-
+ 
                     <div class="portfolio-alloc-grid">
                         <!-- Predict Section -->
                         <div style="border-right: 1px solid var(--card-border); padding-right: 20px;">
@@ -417,11 +421,14 @@
                                 <div class="pred-card">
                                     <span class="direction-badge" id="pred-direction">UP</span>
                                     <div class="pred-price" id="pred-price">--</div>
-                                    <span style="color: var(--text-secondary); font-size: 0.8rem;" id="pred-change">--</span>
+                                    <span style="color: var(--text-secondary); font-size: 0.8rem; display: block; margin-bottom: 15px;" id="pred-change">--</span>
+                                </div>
+                                <div class="chart-box" style="min-height: 220px; max-height: 220px; padding: 10px; margin-top: 10px;">
+                                    <canvas id="stockHistoryChart"></canvas>
                                 </div>
                             </div>
                         </div>
-
+ 
                         <!-- Portfolio Section -->
                         <div style="padding-left: 10px;">
                             <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Monte Carlo Allocations</h3>
@@ -437,7 +444,10 @@
                             
                             <div class="spinner" id="portfolio-spinner"></div>
                             <div class="results-container" id="portfolio-results">
-                                <div id="portfolio-allocation-text" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-primary);"></div>
+                                <div id="portfolio-allocation-text" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 15px;"></div>
+                                <div class="chart-box" style="min-height: 220px; max-height: 220px; padding: 10px; margin-top: 10px;">
+                                    <canvas id="portfolioPieChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -469,6 +479,8 @@
         const API_URL = "http://127.0.0.1:8000";
         let featureChartInstance = null;
         let portfolioChartInstance = null;
+        let stockHistoryChartInstance = null;
+        let portfolioPieChartInstance = null;
 
         // Initialize Page & Load Metrics
         window.addEventListener('DOMContentLoaded', () => {
@@ -548,23 +560,64 @@
                 body: JSON.stringify({ ticker: ticker, model_type: model })
             })
             .then(res => {
-                if (!res.ok) throw new Error("API call failed");
+                if (!res.ok) {
+                    return res.json().then(err => { throw new Error(err.detail || "API call failed") });
+                }
                 return res.json();
             })
             .then(data => {
                 spinner.style.display = 'none';
                 container.style.display = 'block';
                 
-                document.getElementById('pred-price').textContent = `$${data.predicted_price.toFixed(2)}`;
+                document.getElementById('pred-price').textContent = `₹${data.predicted_price.toFixed(2)}`;
                 document.getElementById('pred-change').textContent = `${data.predicted_change >= 0 ? '+' : ''}${data.predicted_change.toFixed(2)} (${data.predicted_direction})`;
                 
                 const badge = document.getElementById('pred-direction');
                 badge.textContent = data.predicted_direction;
                 badge.className = data.predicted_direction === 'UP' ? 'direction-badge direction-up' : 'direction-badge direction-down';
+                
+                // Draw Historical + Prediction Line Chart
+                const dates = [...data.history_dates];
+                const prices = [...data.history_prices];
+                
+                // Append forecast
+                const lastDate = new Date(dates[dates.length - 1]);
+                lastDate.setDate(lastDate.getDate() + 1);
+                const nextDateStr = lastDate.toISOString().split('T')[0];
+                dates.push(nextDateStr + " (Forecast)");
+                prices.push(data.predicted_price);
+                
+                if (stockHistoryChartInstance) stockHistoryChartInstance.destroy();
+                const ctx = document.getElementById('stockHistoryChart').getContext('2d');
+                stockHistoryChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'Close Price',
+                            data: prices,
+                            borderColor: '#66fcf1',
+                            borderWidth: 2,
+                            pointBackgroundColor: prices.map((_, idx) => idx === prices.length - 1 ? '#ff453a' : '#66fcf1'),
+                            pointRadius: prices.map((_, idx) => idx === prices.length - 1 ? 6 : 2),
+                            fill: false,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                alert("Failed to compute prediction. Ensure dataset is downloaded and model is trained.");
+                alert("Failed to compute prediction:\n" + err.message);
             });
         }
 
@@ -585,7 +638,9 @@
                 body: JSON.stringify({ tickers: tickers, num_simulations: sims, risk_free_rate: 0.05 })
             })
             .then(res => {
-                if (!res.ok) throw new Error("API call failed");
+                if (!res.ok) {
+                    return res.json().then(err => { throw new Error(err.detail || "API call failed") });
+                }
                 return res.json();
             })
             .then(data => {
@@ -596,22 +651,50 @@
                 const minV = data.min_vol;
                 
                 let text = `<strong>Max Sharpe (Ratio: ${maxS.sharpe_ratio.toFixed(4)}):</strong><br>`;
-                for (const [t, w] of Object.entries(maxS.weights)) {
-                    text += `&bull; ${t}: ${(w*100).toFixed(1)}%<br>`;
-                }
-                text += `Ret: ${(maxS.expected_return*100).toFixed(1)}% | Vol: ${(maxS.expected_volatility*100).toFixed(1)}%<br><br>`;
+                text += `Ret: ${(maxS.expected_return*100).toFixed(1)}% | Vol: ${(maxS.expected_volatility*100).toFixed(1)}%<br>`;
                 
-                text += `<strong>Min Volatility (Ratio: ${minV.sharpe_ratio.toFixed(4)}):</strong><br>`;
-                for (const [t, w] of Object.entries(minV.weights)) {
-                    text += `&bull; ${t}: ${(w*100).toFixed(1)}%<br>`;
+                // Draw Pie/Doughnut Allocation Chart
+                const labels = [];
+                const weights = [];
+                for (const [t, w] of Object.entries(maxS.weights)) {
+                    if (w > 0.001) {
+                        labels.push(t);
+                        weights.push(w * 100);
+                    }
                 }
-                text += `Ret: ${(minV.expected_return*100).toFixed(1)}% | Vol: ${(minV.expected_volatility*100).toFixed(1)}%`;
+                
+                if (portfolioPieChartInstance) portfolioPieChartInstance.destroy();
+                const ctx = document.getElementById('portfolioPieChart').getContext('2d');
+                portfolioPieChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: weights,
+                            backgroundColor: [
+                                '#66fcf1', '#bf5af2', '#30d158', '#ff9f0a', '#ff375f', '#ffd60a'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#15171e'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#fff', font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
                 
                 document.getElementById('portfolio-allocation-text').innerHTML = text;
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                alert("Failed to compute portfolio optimization. Ensure tickers are valid and downloaded.");
+                alert("Failed to compute portfolio optimization:\n" + err.message);
             });
         }
 
