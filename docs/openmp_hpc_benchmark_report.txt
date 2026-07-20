@@ -1,0 +1,20 @@
+=========================================================================
+            OFFICIAL HPC OPENMP FEATURE PIPELINE BENCHMARK REPORT
+=========================================================================
+Timestamp           : 2026-07-20T07:55:08.481807
+Git Commit Hash     : 8740dbe3cc64d3e59f967a043c2fc643696b7afb
+CPU Architecture    : Intel(R) Xeon(R) Platinum 8468 (Available logical cores: 96)
+Dataset Scale       : 577,394 rows (combined NIFTY-50 historical series)
+
+Benchmark Table:
+-------------------------------------------------------------
+Implementation              Duration (sec)  Speedup
+-------------------------------------------------------------
+Python (NumPy Baseline)     10.76858s        1.00x (Baseline)
+OpenMP (1 thread)            0.07449s        144.56x
+OpenMP (2 threads)           0.04625s        232.81x
+OpenMP (4 threads)           0.02704s        398.30x
+OpenMP (8 threads)           0.02261s        476.38x
+OpenMP (16 threads)          0.02084s        516.80x
+OpenMP (96 threads)          0.12657s        85.08x
+=============================================================
