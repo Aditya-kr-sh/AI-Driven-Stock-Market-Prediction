@@ -1,0 +1,67 @@
+=========================================================================
+            COMPREHENSIVE ALL-CACHED PIPELINE EXECUTION REPORT
+=========================================================================
+Timestamp             : 2026-07-20T09:52:20.606375
+Total Discovered      : 50
+Processed Successfully: 49
+Failed                : 1
+Average Time/Ticker   : 0.0276 seconds
+Total Runtime         : 1.38 seconds
+
+Output Locations:
+- Predictions Directory: D:\stockproject\data\predictions
+- Models Directory:      D:\stockproject\saved_models
+- Summary Report Path:   D:\stockproject\docs\all_cached_pipeline_report.txt
+
+Detailed Logs:
+- ADANIENT.NS: SUCCESS (0.0561s)
+- ADANIPORTS.NS: SUCCESS (0.0215s)
+- APOLLOHOSP.NS: SUCCESS (0.0254s)
+- ASIANPAINT.NS: SUCCESS (0.0235s)
+- AXISBANK.NS: SUCCESS (0.0271s)
+- BAJAJ-AUTO.NS: SUCCESS (0.0228s)
+- BAJAJFINSV.NS: SUCCESS (0.0206s)
+- BAJFINANCE.NS: SUCCESS (0.0227s)
+- BEL.NS: SUCCESS (0.0279s)
+- BHARTIARTL.NS: SUCCESS (0.0228s)
+- BRITANNIA.NS: SUCCESS (0.0220s)
+- CIPLA.NS: SUCCESS (0.0220s)
+- COALINDIA.NS: SUCCESS (0.0214s)
+- DIVISLAB.NS: SUCCESS (0.0234s)
+- DRREDDY.NS: SUCCESS (0.0229s)
+- EICHERMOT.NS: SUCCESS (0.0266s)
+- GRASIM.NS: SUCCESS (0.0716s)
+- HCLTECH.NS: SUCCESS (0.0546s)
+- HDFCBANK.NS: SUCCESS (0.0485s)
+- HDFCLIFE.NS: SUCCESS (0.0329s)
+- HEROMOTOCO.NS: SUCCESS (0.0317s)
+- HINDALCO.NS: SUCCESS (0.0298s)
+- HINDUNILVR.NS: SUCCESS (0.0263s)
+- ICICIBANK.NS: SUCCESS (0.0461s)
+- INDUSINDBK.NS: SUCCESS (0.0302s)
+- INFY.NS: SUCCESS (0.0261s)
+- ITC.NS: SUCCESS (0.0258s)
+- JSWSTEEL.NS: SUCCESS (0.0266s)
+- KOTAKBANK.NS: SUCCESS (0.0249s)
+- LT.NS: SUCCESS (0.0250s)
+- LTM.NS: SUCCESS (0.0274s)
+- M&M.NS: SUCCESS (0.0282s)
+- MARUTI.NS: SUCCESS (0.0281s)
+- NESTLEIND.NS: SUCCESS (0.0258s)
+- NTPC.NS: SUCCESS (0.0251s)
+- ONGC.NS: SUCCESS (0.0233s)
+- POWERGRID.NS: SUCCESS (0.0243s)
+- RELIANCE.NS: SUCCESS (0.0233s)
+- SBILIFE.NS: SUCCESS (0.0218s)
+- SBIN.NS: SUCCESS (0.0213s)
+- SUNPHARMA.NS: SUCCESS (0.0236s)
+- TATACONSUM.NS: SUCCESS (0.0229s)
+- TATASTEEL.NS: SUCCESS (0.0301s)
+- TCS.NS: SUCCESS (0.0229s)
+- TECHM.NS: SUCCESS (0.0211s)
+- TITAN.NS: SUCCESS (0.0230s)
+- TMCV.NS: FAILED (0.0028s) | Error: Insufficient rows (7) to calculate indicators (minimum 50 required).
+- TRENT.NS: SUCCESS (0.0242s)
+- ULTRACEMCO.NS: SUCCESS (0.0252s)
+- WIPRO.NS: SUCCESS (0.0267s)
+=========================================================================
