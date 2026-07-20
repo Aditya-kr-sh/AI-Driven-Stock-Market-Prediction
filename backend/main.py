@@ -128,50 +128,18 @@ def generate_prediction(req: PredictionRequest):
         
     checkpoint_path = Path("saved_models") / checkpoint_name
     
-    # Check if checkpoint exists
-    if not checkpoint_path.exists():
-        # Fallback to test models or try to locate model
-        # If it doesn't exist, we run a fast train session to keep the app working (Self-healing API!)
-        print(f"Model checkpoint missing for {ticker} {model_type}. Training a fast model on-the-fly...")
-        try:
-            # Prepare fast training data (splits: 80% train, 20% val)
-            features_list = [
-                "SMA_20", "SMA_50", "EMA_12", "EMA_26", "RSI_14",
-                "MACD", "MACD_Signal", "MACD_Hist", 
-                "BB_Middle", "BB_Upper", "BB_Lower",
-                "ATR_14", "Daily_Returns", "Log_Returns", "Rolling_Volatility"
-            ]
-            df_features = df_features.dropna()
-            
-            if len(df_features) < 50:
-                raise ValueError("Insufficient data rows for training.")
-                
-            # Create features and target
-            # Target is the next day's Close price
-            df_features["Target"] = df_features["Close"].shift(-1)
-            df_features = df_features.dropna()
-            
-            X = df_features[features_list].values
-            y = df_features["Target"].values
-            
-            split = int(len(X) * 0.8)
-            train_split = (X[:split], y[:split])
-            val_split = (X[split:], y[split:])
-            
-            predictor.feature_order = features_list
-            predictor.target_col = "Target"
-            # Set short epochs for quick initialization
-            predictor.epochs = 5
-            predictor.batch_size = 16
-            
-            predictor.fit(train_split, val_split)
-            predictor.save(str(checkpoint_path))
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Failed to auto-train fallback model for {ticker}: {str(e)}")
-            
     # Load model weights
     try:
+        if not checkpoint_path.exists():
+            raise FileNotFoundError()
         predictor.load(str(checkpoint_path))
+    except FileNotFoundError as fnf:
+        err_msg = (
+            f"Pre-trained model checkpoint for '{ticker}' ({model_type}) was not found at {checkpoint_path}. "
+            "Please run 'python scripts/fetch_models.py' to download the latest model weights from GitHub Releases."
+        )
+        print(f"\nERROR: {err_msg}\n")
+        raise HTTPException(status_code=404, detail=err_msg)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to load model checkpoint: {str(e)}")
         

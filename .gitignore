@@ -33,11 +33,20 @@ env/
 *.sqlite3
 
 # Model Storage and large binary files
-saved_models/*.pt
-saved_models/*.pkl
-saved_models/*.h5
-saved_models/*.joblib
+saved_models/*
 !saved_models/.gitkeep
+
+# Cached datasets and predictions
+data/nifty50/*
+data/nifty100/*
+data/nifty200/*
+data/nifty500/*
+data/predictions/*
+!data/nifty50/.gitkeep
+!data/nifty100/.gitkeep
+!data/nifty200/.gitkeep
+!data/nifty500/.gitkeep
+!data/predictions/.gitkeep
 
 # Node / Frontend
 node_modules/

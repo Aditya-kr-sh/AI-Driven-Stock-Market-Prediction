@@ -77,6 +77,19 @@ To optimize computing resource usage, development is divided across two environm
 
 ---
 
+## 📦 Pre-trained Models
+
+To maintain a clean and lightweight source repository, all generated model checkpoints (`saved_models/`) and cached datasets (`data/nifty500/`, etc.) are excluded from version control (via `.gitignore`). 
+
+After the final project release is published, the official pre-trained models will be distributed separately as a GitHub Release artifact.
+
+You can bootstrap the local environment with all pre-trained weights by running:
+```bash
+python scripts/fetch_models.py
+```
+
+---
+
 ## ⚙️ Setup and Installation
 
 ### Windows Local Setup
