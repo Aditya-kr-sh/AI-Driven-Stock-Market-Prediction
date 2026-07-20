@@ -383,13 +383,7 @@
                         <h2>Analytics Dashboard</h2>
                         <div class="form-group" style="margin: 0;">
                             <select class="form-control" id="registry-selector" onchange="loadRegistryConstituents()" style="padding: 8px 12px; width: 180px;">
-                                <option value="nifty50">NIFTY 50</option>
-                                <option value="nifty100">NIFTY 100</option>
-                                <option value="nifty200">NIFTY 200</option>
                                 <option value="nifty500">NIFTY 500</option>
-                                <option value="sp500">S&P 500</option>
-                                <option value="nasdaq100">NASDAQ 100</option>
-                                <option value="dowjones30">Dow Jones 30</option>
                             </select>
                         </div>
                     </div>
@@ -520,8 +514,8 @@
                     const select = document.getElementById('predict-ticker');
                     select.innerHTML = '';
                     
-                    // Filter down list for dashboard performance (show first 15)
-                    const activeList = list.slice(0, 15);
+                    // Load all stocks from registry
+                    const activeList = list;
                     if (activeList.length === 0) {
                         // Fallbacks
                         const fallbacks = ["RELIANCE", "TCS", "SBIN"];

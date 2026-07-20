@@ -5,7 +5,7 @@
     "distutils": {
         "depends": [],
         "include_dirs": [
-            "D:\\stockproject\\.venv\\Lib\\site-packages\\numpy\\_core\\include"
+            "C:\\Users\\singh\\AppData\\Local\\Temp\\pip-build-env-8m79abaa\\overlay\\Lib\\site-packages\\numpy\\_core\\include"
         ],
         "name": "ai_engine.features.openmp_backend",
         "sources": [
