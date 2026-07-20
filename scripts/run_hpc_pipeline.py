@@ -16,6 +16,7 @@ import pandas as pd
 import torch
 
 from ai_engine.data import DataStorage, NIFTY_50_TICKERS
+from ai_engine.data.tickers import load_registry
 from ai_engine.features import add_technical_indicators, get_active_engine, is_openmp_available
 from ai_engine.features.engine import OpenMPEngine, PythonEngine
 import ai_engine.features.engine as fe_engine
@@ -59,14 +60,15 @@ def platform_system() -> str:
 # =========================================================================
 # 1. LARGE-SCALE OPENMP SCALING BENCHMARK
 # =========================================================================
-def run_large_scale_openmp_benchmark(storage: DataStorage) -> dict:
+def run_large_scale_openmp_benchmark(storage: DataStorage, index_name: str = "nifty50") -> dict:
     print("\n=============================================================")
     print(" 1. EXECUTING FULL-SCALE OPENMP SCALING BENCHMARK ")
     print("=============================================================")
     
     # Load all cached historical data to create a large dataset for testing
     loaded_dfs = []
-    for ticker in NIFTY_50_TICKERS:
+    tickers = load_registry(index_name)
+    for ticker in tickers:
         if storage.raw_exists(ticker):
             loaded_dfs.append(storage.load_raw(ticker))
             
@@ -387,14 +389,27 @@ Evaluation Index Results:
 # MAIN EXECUTION ROUTINE
 # =========================================================================
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="HPC AI Engine Training Pipeline")
+    parser.add_argument(
+        "--index",
+        type=str,
+        default="nifty50",
+        help="Registry index name to train models on (e.g. nifty50, nifty100, nifty500) or path to custom JSON file."
+    )
+    args = parser.parse_args()
+    
     print("=========================================================================")
     print("            RAMANUJAN UNIVERSE HPC CORE EXECUTION PIPELINE               ")
+    print(f"            Training Index: {args.index.upper()}                          ")
     print("=========================================================================")
     
-    storage = DataStorage()
+    # Isolate storage by index name to match custom dataset folders
+    raw_dir_path = settings.BASE_PATH / "data" / args.index
+    storage = DataStorage(raw_dir=raw_dir_path)
     
     # 1. Run full-scale OpenMP benchmark
-    run_large_scale_openmp_benchmark(storage)
+    run_large_scale_openmp_benchmark(storage, index_name=args.index)
     
     # 2. Run model training and evaluations
     run_large_scale_model_training(storage)
