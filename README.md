@@ -10,7 +10,15 @@ This platform provides end-to-end quantitative financial workflows, from data in
 - **Feature Pipeline**: Computes core indicators (RSI, SMA, EMA, MACD, Bollinger Bands, Volume, Volatility) using C/OpenMP on Linux and a Python fallback on Windows.
 - **Deep Learning & Boosting**: Trains LSTM, Transformer, and XGBoost models on historical NIFTY 50 stock data.
 - **Portfolio Optimization**: Directs capital allocation based on Sharpe Ratio maximization and Monte Carlo simulations.
-- **Serving & Presentation**: Integrates a local FastAPI REST service for low-latency inference and a premium React Dashboard featuring glassmorphic designs, responsive pages, and TradingView charts.
+- **Serving & Presentation**: Integrates a local FastAPI REST service for low-latency inference and a premium Dashboard featuring glassmorphic designs, responsive pages, and Chart.js dynamic visualizations.
+
+---
+
+## 📸 Dashboard Preview
+
+Below is the verified premium dashboard displaying stock predictions and Monte Carlo portfolio weight allocations:
+
+![Dashboard Preview](docs/screenshots/home_page.png)
 
 ---
 
@@ -30,7 +38,7 @@ stockproject/
 │   ├── portfolio/       # Optimization algorithms (Sharpe, Monte Carlo)
 │   └── utils/           # Configuration parsing & log configurations
 ├── backend/             # FastAPI REST Server (serves predictions & allocations)
-├── frontend/            # React + TS + Vite Dashboard (Tailwind CSS, framer-motion)
+├── frontend/            # Vanilla JS/CSS static Dashboard served with Nginx/Chart.js
 ├── notebooks/           # Jupyter Notebooks for pipeline walkthroughs
 ├── saved_models/        # Shared weights, scalers, and training configs
 ├── docs/                # Architecture docs, guides, and internship reports
