@@ -251,6 +251,14 @@ class DataLoader:
         
         # Lazy import yfinance to avoid import-time SQLite errors.
         try:
+            import yfinance.cache as yfc
+            yfc._TzCacheManager._tz_cache = yfc._TzCacheDummy()
+            yfc._CookieCacheManager._Cookie_cache = yfc._CookieCacheDummy()
+            yfc._ISINCacheManager._isin_cache = yfc._ISINCacheDummy()
+        except Exception as cache_err:
+            logger.warning(f"Failed to configure yfinance dummy caches: {cache_err}")
+            
+        try:
             import yfinance as yf  # type: ignore
         except Exception as import_err:
             logger.warning(f"yfinance import failed ({import_err}); falling back to pandas_datareader.")
