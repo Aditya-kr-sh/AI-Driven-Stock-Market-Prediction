@@ -10,7 +10,12 @@ import os
 import gc
 import json
 import subprocess
+import sys
 from pathlib import Path
+
+# Add project root to sys.path to enable importing ai_engine
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import numpy as np
 import pandas as pd
 import torch
