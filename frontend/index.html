@@ -26,6 +26,20 @@
             --accent-glow: radial-gradient(circle, rgba(102, 252, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
         }
 
+        body.light-theme {
+            --bg-color: #f5f6f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1c1d21;
+            --text-secondary: #5e636e;
+            --cyan: #007aff;
+            --cyan-dark: #0056b3;
+            --purple: #985eff;
+            --green: #24b23e;
+            --red: #d93829;
+            --accent-glow: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -329,9 +343,12 @@
     <div class="container">
         <header>
             <h1>HPC FINANCIAL ANALYTICS PLATFORM</h1>
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                <span>Active Backend Connection</span>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <button class="btn" id="theme-toggle" onclick="toggleTheme()" style="padding: 6px 12px; margin: 0; font-size: 0.8rem; border-radius: 20px; width: auto; min-width: 100px;">Light Mode</button>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>Active Backend Connection</span>
+                </div>
             </div>
         </header>
 
@@ -602,6 +619,79 @@
             });
         }
 
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('theme-toggle');
+            
+            body.classList.toggle('light-theme');
+            
+            const isLight = body.classList.contains('light-theme');
+            themeBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+            
+            // Re-render active charts dynamically
+            if (stockHistoryChartInstance) {
+                const dataset = stockHistoryChartInstance.data.datasets[0];
+                dataset.borderColor = isLight ? '#007aff' : '#66fcf1';
+                dataset.pointBackgroundColor = stockHistoryChartInstance.data.datasets[0].data.map((_, idx) => 
+                    idx === stockHistoryChartInstance.data.datasets[0].data.length - 1 ? (isLight ? '#d93829' : '#ff453a') : (isLight ? '#007aff' : '#66fcf1')
+                );
+                stockHistoryChartInstance.options.scales.y.grid.color = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
+                stockHistoryChartInstance.options.scales.x.grid.color = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
+                stockHistoryChartInstance.options.scales.y.ticks.color = isLight ? '#5e636e' : '#9499a6';
+                stockHistoryChartInstance.options.scales.x.ticks.color = isLight ? '#5e636e' : '#9499a6';
+                stockHistoryChartInstance.update();
+            }
+            if (portfolioPieChartInstance) {
+                portfolioPieChartInstance.options.plugins.legend.labels.color = isLight ? '#1c1d21' : '#fff';
+                portfolioPieChartInstance.update();
+            }
+        }
+
+        function showError(message) {
+            let alertBox = document.getElementById('floating-alert');
+            if (!alertBox) {
+                alertBox = document.createElement('div');
+                alertBox.id = 'floating-alert';
+                alertBox.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(255, 69, 58, 0.95);
+                    color: #fff;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                    z-index: 9999;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                    border-left: 4px solid #ff453a;
+                    font-family: 'Outfit', sans-serif;
+                    transition: all 0.3s ease;
+                    transform: translateY(-20px);
+                    opacity: 0;
+                `;
+                document.body.appendChild(alertBox);
+            }
+            
+            alertBox.textContent = message;
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => {
+                alertBox.style.transform = 'translateY(0)';
+                alertBox.style.opacity = '1';
+            }, 50);
+            
+            // Clear existing timeout if any
+            if (window.alertTimeout) clearTimeout(window.alertTimeout);
+            
+            window.alertTimeout = setTimeout(() => {
+                alertBox.style.transform = 'translateY(-20px)';
+                alertBox.style.opacity = '0';
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 300);
+            }, 5000);
+        }
+
         function generatePrediction() {
             const ticker = document.getElementById('predict-ticker').value;
             const model = document.getElementById('predict-model').value;
@@ -618,7 +708,9 @@
             })
             .then(res => {
                 if (!res.ok) {
-                    return res.json().then(err => { throw new Error(err.detail || "API call failed") });
+                    return res.json()
+                        .then(err => Promise.reject(new Error(err.detail || "API call failed")))
+                        .catch(() => Promise.reject(new Error("API call failed")));
                 }
                 return res.json();
             })
@@ -653,9 +745,9 @@
                         datasets: [{
                             label: 'Close Price',
                             data: prices,
-                            borderColor: '#66fcf1',
+                            borderColor: document.body.classList.contains('light-theme') ? '#007aff' : '#66fcf1',
                             borderWidth: 2,
-                            pointBackgroundColor: prices.map((_, idx) => idx === prices.length - 1 ? '#ff453a' : '#66fcf1'),
+                            pointBackgroundColor: prices.map((_, idx) => idx === prices.length - 1 ? (document.body.classList.contains('light-theme') ? '#d93829' : '#ff453a') : (document.body.classList.contains('light-theme') ? '#007aff' : '#66fcf1')),
                             pointRadius: prices.map((_, idx) => idx === prices.length - 1 ? 6 : 2),
                             fill: false,
                             tension: 0.1
@@ -665,8 +757,8 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
-                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
-                            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
+                            y: { grid: { color: document.body.classList.contains('light-theme') ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)' }, ticks: { color: document.body.classList.contains('light-theme') ? '#5e636e' : '#9499a6' } },
+                            x: { grid: { color: document.body.classList.contains('light-theme') ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)' }, ticks: { color: document.body.classList.contains('light-theme') ? '#5e636e' : '#9499a6' } }
                         },
                         plugins: { legend: { display: false } }
                     }
@@ -674,7 +766,7 @@
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                alert("Failed to compute prediction:\n" + err.message);
+                showError("Failed to compute prediction: " + err.message);
             });
         }
 
@@ -698,7 +790,9 @@
             })
             .then(res => {
                 if (!res.ok) {
-                    return res.json().then(err => { throw new Error(err.detail || "API call failed") });
+                    return res.json()
+                        .then(err => Promise.reject(new Error(err.detail || "API call failed")))
+                        .catch(() => Promise.reject(new Error("API call failed")));
                 }
                 return res.json();
             })
@@ -753,7 +847,7 @@
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                alert("Failed to compute portfolio optimization:\n" + err.message);
+                showError("Failed to compute portfolio optimization: " + err.message);
             });
         }
 
