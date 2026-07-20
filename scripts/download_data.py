@@ -53,11 +53,16 @@ def run_download_pipeline():
         choices=["1d", "1h", "30m", "15m", "5m", "1m"],
         help="yFinance frequency interval settings."
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume interrupted download by skipping already cached stocks."
+    )
     
     args = parser.parse_args()
     
     logger.info("Initializing multi-index data ingestion pipeline...")
-    logger.info(f"Configuration: Index={args.index} | Range={args.start} to {args.end} | Interval={args.interval}")
+    logger.info(f"Configuration: Index={args.index} | Range={args.start} to {args.end} | Interval={args.interval} | Resume={args.resume}")
     
     # 1. Load constituents registry
     try:
@@ -67,8 +72,9 @@ def run_download_pipeline():
         logger.error(f"Failed to load registry: {e}")
         sys.exit(1)
         
-    # Force storage format to CSV for raw data
-    storage = DataStorage(file_format="csv")
+    # Dynamically separate raw storage folders by index name to prevent overlap
+    raw_dir_path = settings.BASE_PATH / "data" / args.index
+    storage = DataStorage(raw_dir=raw_dir_path, file_format="csv")
     loader = DataLoader(storage=storage, index_name=args.index)
     
     successful = []
@@ -80,11 +86,14 @@ def run_download_pipeline():
     for i, ticker in enumerate(tickers, start=1):
         print(f"[{i}/{len(tickers)}] Querying {ticker}...", end="\r")
         try:
+            # If resume is enabled, check if stock is already completely cached
+            force_download = not args.resume
+            
             dataset = loader.get_ticker_data(
                 ticker=ticker,
                 start_date=args.start,
                 end_date=args.end,
-                force_download=True,
+                force_download=force_download,
                 interval=args.interval
             )
             
