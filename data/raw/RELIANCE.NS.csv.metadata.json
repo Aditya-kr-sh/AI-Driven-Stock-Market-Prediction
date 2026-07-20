@@ -1,9 +1,0 @@
-{
-    "ticker": "RELIANCE.NS",
-    "download_timestamp": "2026-07-19T05:59:17.541339Z",
-    "start_date": "2010-01-01",
-    "end_date": "2026-07-19",
-    "row_count": 4085,
-    "source": "Yahoo Finance",
-    "file_format": "csv"
-}
