@@ -61,7 +61,24 @@ def run_backend_verification():
     assert res.status_code == 200, f"Prediction failed: {res.text}"
     pred_data = res.json()
     assert "predicted_price" in pred_data, "Predicted price missing"
-    print(f"  [PASS] POST /predict: Ticker={pred_data['ticker']}, Price={pred_data['predicted_price']:.2f}")
+    assert "history_dates" in pred_data, "History dates missing"
+    assert "history_prices" in pred_data, "History prices missing"
+    assert len(pred_data["history_dates"]) == 30, f"Expected 30 history dates, got {len(pred_data['history_dates'])}"
+    assert len(pred_data["history_prices"]) == 30, f"Expected 30 history prices, got {len(pred_data['history_prices'])}"
+    print(f"  [PASS] POST /predict: Ticker={pred_data['ticker']}, Price={pred_data['predicted_price']:.2f}, History points={len(pred_data['history_prices'])}")
+
+    # 4.1 Missing Model 404 detection
+    print("Querying POST /predict (Missing model 404 test)...")
+    req_body = {
+        "ticker": "ADANIENT",
+        "model_type": "xgboost"
+    }
+    res = client.post("/predict", json=req_body)
+    assert res.status_code == 404, f"Expected 404 for missing model, got status {res.status_code}"
+    err_json = res.json()
+    assert "detail" in err_json, "Error detail missing"
+    assert "was not found at" in err_json["detail"], "Error detail does not explain missing model"
+    print(f"  [PASS] POST /predict (404 Missing Model): Handled gracefully with custom message.")
 
     # 5. Registries endpoint
     print("Querying GET /api/registries...")
@@ -70,6 +87,15 @@ def run_backend_verification():
     reg_data = res.json()
     assert "nifty50" in reg_data or len(reg_data) >= 0, "Nifty 50 or other registry should exist"
     print(f"  [PASS] GET /api/registries: Found {len(reg_data)} registries.")
+
+    # 6. Benchmark endpoint
+    print("Querying POST /api/benchmark...")
+    res = client.post("/api/benchmark")
+    assert res.status_code == 200, f"Benchmark execution failed: {res.text}"
+    bench_data = res.json()
+    assert "real_dataset_benchmark" in bench_data, "Real dataset benchmark details missing"
+    assert "feature_benchmarks" in bench_data, "Feature benchmarks scaling data missing"
+    print(f"  [PASS] POST /api/benchmark: Benchmark ran successfully.")
 
     print("=========================================================================")
     print("BACKEND_SUCCESS")

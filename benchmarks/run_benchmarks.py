@@ -136,8 +136,8 @@ def run_benchmarks(index_name: str = "nifty50", output_dir: str = "docs/benchmar
             real_omp_time = time.perf_counter() - t0
             real_speedup = real_py_time / real_omp_time
         else:
-            real_omp_time = np.nan
-            real_speedup = np.nan
+            real_omp_time = None
+            real_speedup = None
             
         real_bench = {
             "dataset_name": index_name.upper(),
@@ -148,16 +148,16 @@ def run_benchmarks(index_name: str = "nifty50", output_dir: str = "docs/benchmar
             "speedup": real_speedup
         }
         
-        print(f"Python Time: {real_py_time:.5f}s | OpenMP ({max_threads} threads) Time: {real_omp_time:.5f}s | Speedup: {real_speedup:.2f}x")
+        print(f"Python Time: {real_py_time:.5f}s | OpenMP ({max_threads} threads) Time: {real_omp_time:.5f}s | Speedup: {real_speedup:.2f}x" if real_omp_time is not None else f"Python Time: {real_py_time:.5f}s | OpenMP Offline")
     else:
         print(f"Warning: No cached data files found for registry {index_name.upper()} under {raw_dir_path.absolute()}")
         real_bench = {
             "dataset_name": index_name.upper(),
             "stocks": 0,
             "total_rows": 0,
-            "python_time_sec": np.nan,
-            "openmp_time_sec": np.nan,
-            "speedup": np.nan
+            "python_time_sec": None,
+            "openmp_time_sec": None,
+            "speedup": None
         }
 
     # -------------------------------------------------------------
@@ -331,11 +331,15 @@ def run_benchmarks(index_name: str = "nifty50", output_dir: str = "docs/benchmar
     plt.close()
 
     # Save benchmark metrics reports
+    # Replace NaN values with None (JSON null) to prevent serialization errors
+    feat_bench_clean = feat_bench_df.replace({np.nan: None})
+    mc_bench_clean = mc_bench_df.replace({np.nan: None})
+
     report = {
         "metadata": metadata,
         "real_dataset_benchmark": real_bench,
-        "feature_benchmarks": feat_bench_df.to_dict(orient="records"),
-        "portfolio_benchmarks": mc_bench_df.to_dict(orient="records")
+        "feature_benchmarks": feat_bench_clean.to_dict(orient="records"),
+        "portfolio_benchmarks": mc_bench_clean.to_dict(orient="records")
     }
     
     with open(out_path / "benchmark_report.json", "w", encoding="utf-8") as f:
@@ -356,9 +360,12 @@ def run_benchmarks(index_name: str = "nifty50", output_dir: str = "docs/benchmar
         f.write(f"  Dataset Name       : {real_bench.get('dataset_name')}\n")
         f.write(f"  Constituent Stocks : {real_bench.get('stocks')}\n")
         f.write(f"  Total Processed Rows: {real_bench.get('total_rows'):,}\n")
-        f.write(f"  Python Baseline Time: {real_bench.get('python_time_sec'):.5f}s\n")
-        f.write(f"  OpenMP Exec Time    : {real_bench.get('openmp_time_sec'):.5f}s\n")
-        f.write(f"  OpenMP Speedup      : {real_bench.get('speedup'):.2f}x\n\n")
+        py_time = real_bench.get('python_time_sec')
+        omp_time = real_bench.get('openmp_time_sec')
+        speedup = real_bench.get('speedup')
+        f.write(f"  Python Baseline Time: {f'{py_time:.5f}s' if py_time is not None else 'N/A'}\n")
+        f.write(f"  OpenMP Exec Time    : {f'{omp_time:.5f}s' if omp_time is not None else 'N/A'}\n")
+        f.write(f"  OpenMP Speedup      : {f'{speedup:.2f}x' if speedup is not None else 'N/A'}\n\n")
         
         f.write("2. Synthetic Feature Engineering Scaling (seconds):\n")
         f.write(feat_bench_df.to_string(index=False) + "\n\n")
