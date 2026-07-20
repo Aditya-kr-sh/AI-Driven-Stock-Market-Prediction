@@ -165,33 +165,35 @@ Our notebooks contain minimal execution steps, importing core functions directly
 
 ---
 
-## 🚀 Serving Pipelines
+## 🚀 Serving & Deployment Pipelines
 
-### How FastAPI Backend Works
-- Served via `uvicorn backend.main:app --reload` from `d:/stockproject/backend/`.
-- Reads `saved_models/` at startup to fetch scalers, hyperparameters, and PyTorch/XGBoost weights.
-- Handles CPU inference on-demand for predictability inputs without GPU overhead.
-- Exposes:
-  - `POST /predict`: Generates future price steps.
-  - `POST /portfolio`: Provides target investment allocations.
-  - `GET /models`: Returns active model metadata.
-  - `GET /health`: Basic service status check.
+### 1. Local Development Execution
+To serve the backend API locally:
+```powershell
+uvicorn backend.main:app --reload
+```
+To run the static frontend locally:
+Simply open [frontend/index.html](file:///d:/stockproject/frontend/index.html) in any modern browser, or serve it using a simple HTTP server (`python -m http.server 80`).
 
-### How React Frontend Works
-- Served using `npm run dev` from `d:/stockproject/frontend/`.
-- Responsive layout designed using Tailwind CSS, shadcn UI, and framer-motion animations.
-- Renders advanced market data charts via TradingView Lightweight Charts.
-- Interacts with local FastAPI server via JSON requests.
+### 2. Containerized Production Deployment
+The application is fully containerized using Docker and Docker Compose. This orchestrates both the FastAPI backend and Nginx frontend servers in isolated environments.
+
+**Prerequisites**:
+Before running the deployment, ensure the pre-trained weights are present. In production, these are downloaded via the release bootstrap script:
+```bash
+python scripts/fetch_models.py
+```
+
+**Launch Stack**:
+Spin up the containerized application using:
+```bash
+docker-compose up --build
+```
+Once the stack is active:
+* **Frontend Dashboard**: Open `http://localhost` (Port 80)
+* **Backend REST API**: Accessible at `http://localhost:8000` (Swagger UI at `http://localhost:8000/docs`)
 
 ---
 
-## 🗓️ Future Development Phases
-
-- **Phase 2**: Ingestion pipeline, SQLite structure, and default technical indicator rules.
-- **Phase 3**: Cython / C OpenMP accelerator implementation and Linux compiler builds.
-- **Phase 4**: XGBoost, PyTorch LSTM, and Transformer model declarations.
-- **Phase 5**: Model training on CUDA, weights serialization, and evaluation metrics.
-- **Phase 6**: Portfolio Optimizer (Sharpe Ratio maximization & Monte Carlo simulations).
-- **Phase 7**: FastAPI endpoints creation & request parsing validation.
-- **Phase 8**: React Dashboard page layouts and visual integrations.
-- **Phase 9**: Full developer guides, RU setups, and production documentations.
+## 🗓️ Development Status & Final Phases
+All quantitative, OpenMP feature acceleration, deep learning prediction, portfolio optimization, and frontend charting phases are complete and verified. Containerized configurations are fully deployed.
