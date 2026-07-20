@@ -24,6 +24,8 @@
             --red: #ff453a;
             --font-family: 'Plus Jakarta Sans', sans-serif;
             --accent-glow: radial-gradient(circle, rgba(102, 252, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            --input-bg: rgba(0, 0, 0, 0.3);
+            --results-bg: rgba(0, 0, 0, 0.2);
         }
 
         body.light-theme {
@@ -38,6 +40,8 @@
             --green: #24b23e;
             --red: #d93829;
             --accent-glow: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            --input-bg: rgba(0, 0, 0, 0.05);
+            --results-bg: rgba(0, 0, 0, 0.03);
         }
 
         * {
@@ -80,7 +84,7 @@
             font-weight: 700;
             font-size: 1.8rem;
             letter-spacing: -0.5px;
-            background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
+            background: linear-gradient(90deg, var(--text-primary) 0%, var(--cyan) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -141,7 +145,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #fff;
+            color: var(--text-primary);
             border-left: 3px solid var(--cyan);
             padding-left: 10px;
         }
@@ -163,11 +167,11 @@
 
         .form-control {
             width: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--input-bg);
             border: 1px solid var(--card-border);
             border-radius: 8px;
             padding: 12px;
-            color: #fff;
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 0.95rem;
             transition: border-color 0.2s, box-shadow 0.2s;
@@ -180,8 +184,8 @@
         }
 
         select.form-control option {
-            background: #15171e;
-            color: #fff;
+            background: var(--card-bg);
+            color: var(--text-primary);
         }
 
         .btn {
@@ -208,7 +212,7 @@
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
-            color: #fff;
+            color: var(--text-primary);
             border: 1px solid var(--card-border);
         }
 
@@ -240,7 +244,7 @@
 
         .info-list .value {
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
         }
 
         .highlight-value {
@@ -250,10 +254,10 @@
         /* Results Visualization */
         .results-container {
             margin-top: 20px;
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--results-bg);
             border-radius: 8px;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
             display: none;
         }
 
@@ -709,8 +713,8 @@
             .then(res => {
                 if (!res.ok) {
                     return res.json()
-                        .then(err => Promise.reject(new Error(err.detail || "API call failed")))
-                        .catch(() => Promise.reject(new Error("API call failed")));
+                        .catch(() => ({ detail: "API call failed" }))
+                        .then(err => Promise.reject(new Error(err.detail || "API call failed")));
                 }
                 return res.json();
             })
@@ -791,8 +795,8 @@
             .then(res => {
                 if (!res.ok) {
                     return res.json()
-                        .then(err => Promise.reject(new Error(err.detail || "API call failed")))
-                        .catch(() => Promise.reject(new Error("API call failed")));
+                        .catch(() => ({ detail: "API call failed" }))
+                        .then(err => Promise.reject(new Error(err.detail || "API call failed")));
                 }
                 return res.json();
             })
