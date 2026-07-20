@@ -181,7 +181,7 @@ To serve the backend API locally:
 uvicorn backend.main:app --reload
 ```
 To run the static frontend locally:
-Simply open [frontend/index.html](file:///d:/stockproject/frontend/index.html) in any modern browser, or serve it using a simple HTTP server (`python -m http.server 80`).
+Simply open [frontend/index.html](frontend/index.html) in any modern browser, or serve it using a simple HTTP server (`python -m http.server 80`).
 
 ### 2. Containerized Production Deployment
 The application is fully containerized using Docker and Docker Compose. This orchestrates both the FastAPI backend and Nginx frontend servers in isolated environments.
