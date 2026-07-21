@@ -12,7 +12,7 @@ This report presents a technical audit of the cached stock datasets, trained mac
 | **Local CSV Metadata** | 51 | JSON companion files containing metadata schema definitions |
 | **Trained Models (`.model`)** | 662 | Neural networks & boosting models (LSTM, Transformer, XGBoost) |
 | **Model Metadata (`.json`)** | 662 | Checkpoint training statistics, hyperparameters, and feature orders |
-| **Model Scalers (`.pkl`)** | 661 | Target feature min-max scalers for scaling prediction inputs |
+| **Model Scalers (`.pkl`)** | 661 | Feature standardizers (StandardScaler) for scaling prediction inputs |
 | **Supported Prediction Tickers** | 222 | Unique stocks with valid pre-trained checkpoints in `saved_models/` |
 | **Supported Portfolio Tickers** | 500 | All NIFTY 500 constituent stocks (resolved via dynamic download) |
 

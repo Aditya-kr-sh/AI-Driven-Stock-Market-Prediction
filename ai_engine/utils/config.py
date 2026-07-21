@@ -108,7 +108,9 @@ class Settings(BaseSettings):
     # Portfolio Optimization Configuration
     # =========================================================================
     PORTFOLIO_MC_SIMULATIONS: int = Field(default=10000, description="Monte Carlo execution loops")
-    RISK_FREE_RATE: float = Field(default=0.07, description="Annualized risk free return rate (7% Default)")
+    RISK_FREE_RATE: float = Field(default=0.07, description="Annualized risk free rate (7% Default)")
+    MIN_COMMON_TRADING_DAYS: int = Field(default=252, description="Minimum required overlapping trading days for portfolio optimization")
+    DOWNLOAD_WORKERS: int = Field(default=5, description="Number of parallel workers for ticker downloads (configurable via env var)")
 
     @model_validator(mode="after")
     def populate_tickers(self) -> "Settings":

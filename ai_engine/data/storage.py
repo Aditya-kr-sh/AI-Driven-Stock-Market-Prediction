@@ -131,11 +131,23 @@ class DataStorage:
             raise StorageError(f"Failed to load metadata file at {metadata_path}: {e}")
 
     def raw_exists(self, ticker: str) -> bool:
-        """Checks if both the data file and its companion metadata JSON exist in raw storage."""
+        """
+        Checks if both the data file and its companion metadata JSON exist in raw storage.
+        """
         filename = self._get_clean_filename(ticker)
         filepath = self.raw_dir / filename
         metadata_path = filepath.with_suffix(filepath.suffix + ".metadata.json")
         return filepath.exists() and metadata_path.exists()
+
+    def list_available_tickers(self) -> list[str]:
+        """Return a list of tickers for which raw CSV files exist in the storage directory."""
+        tickers = []
+        pattern = f"*.{self.file_format}"
+        for path in self.raw_dir.glob(pattern):
+            # Extract ticker name without extension and restore possible .NS suffix if stored
+            name = path.stem.upper()
+            tickers.append(name)
+        return tickers
 
     def save_processed(self, df: pd.DataFrame, name: str) -> Path:
         """Saves a processed feature DataFrame to the processed directory."""

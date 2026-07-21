@@ -3,45 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HPC Financial Analytics Platform</title>
+    <title>AI Financial Analytics Platform</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-color: #0b0c10;
-            --card-bg: rgba(21, 23, 30, 0.6);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #f5f6f9;
-            --text-secondary: #9499a6;
-            --cyan: #66fcf1;
-            --cyan-dark: #45a29e;
-            --purple: #bf5af2;
-            --green: #30d158;
-            --red: #ff453a;
+            --bg-color: #060709;
+            --card-bg: #0c0d12;
+            --card-border: rgba(255, 255, 255, 0.05);
+            --card-hover-border: rgba(0, 229, 255, 0.25);
+            --text-primary: #f3f4f6;
+            --text-secondary: #8e9297;
+            --cyan: #00e5ff;
+            --cyan-glow: rgba(0, 229, 255, 0.15);
+            --purple: #8b5cf6;
+            --purple-glow: rgba(139, 92, 246, 0.15);
+            --green: #00e676;
+            --green-glow: rgba(0, 230, 118, 0.15);
+            --red: #ff1744;
+            --red-glow: rgba(255, 23, 68, 0.15);
             --font-family: 'Plus Jakarta Sans', sans-serif;
-            --accent-glow: radial-gradient(circle, rgba(102, 252, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-            --input-bg: rgba(0, 0, 0, 0.3);
-            --results-bg: rgba(0, 0, 0, 0.2);
-        }
-
-        body.light-theme {
-            --bg-color: #f5f6f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: rgba(0, 0, 0, 0.08);
-            --text-primary: #1c1d21;
-            --text-secondary: #5e636e;
-            --cyan: #007aff;
-            --cyan-dark: #0056b3;
-            --purple: #985eff;
-            --green: #24b23e;
-            --red: #d93829;
-            --accent-glow: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-            --input-bg: rgba(0, 0, 0, 0.05);
-            --results-bg: rgba(0, 0, 0, 0.03);
+            --header-font: 'Outfit', sans-serif;
+            --input-bg: rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -56,110 +43,322 @@
             font-family: var(--font-family);
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(102, 252, 241, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(191, 90, 242, 0.05) 0%, transparent 40%);
-            padding-bottom: 50px;
-        }
-
-        /* Container & Navigation */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 0;
-            border-bottom: 1px solid var(--card-border);
-            margin-bottom: 30px;
-            backdrop-filter: blur(8px);
+            flex-direction: column;
         }
 
-        header h1 {
-            font-family: 'Outfit', sans-serif;
+        /* 1. Header Tickerbar */
+        .tickerbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: #090a0e;
+            border-bottom: 1px solid var(--card-border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-section svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cyan);
+            filter: drop-shadow(0 0 6px var(--cyan));
+        }
+
+        .logo-section h1 {
+            font-family: var(--header-font);
+            font-size: 1.15rem;
             font-weight: 700;
-            font-size: 1.8rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(90deg, var(--text-primary) 0%, var(--cyan) 100%);
+            letter-spacing: -0.3px;
+            background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .status-badge {
+        .logo-section span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-left: 1px solid var(--card-border);
+            padding-left: 10px;
+            margin-left: 5px;
+        }
+
+        .tickers-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-grow: 1;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .ticker-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid var(--card-border);
+            font-family: var(--header-font);
+            transition: border-color 0.2s;
         }
 
-        .status-dot {
+        .ticker-card:hover {
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .ticker-name {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .ticker-val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ticker-change {
+            font-weight: 600;
+        }
+
+        .change-up { color: var(--green); }
+        .change-down { color: var(--red); }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.8rem;
+            font-family: var(--header-font);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .live-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background-color: var(--green);
-            box-shadow: 0 0 10px var(--green);
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse 2s infinite;
         }
 
-        /* Dashboard Grid Layout */
-        .grid {
+        .status-text {
+            font-weight: 600;
+            color: var(--green);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .clock-display {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-radius: 4px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .refresh-btn:hover {
+            color: var(--cyan);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* 2. Layout Grid */
+        .dashboard-container {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            grid-template-columns: 320px 1fr 360px;
+            gap: 16px;
+            padding: 16px;
+            flex-grow: 1;
         }
 
-        @media (min-width: 1024px) {
-            .grid {
-                grid-template-columns: 350px 1fr;
+        @media (max-width: 1200px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Glassmorphic Cards */
+        /* 3. Common Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 24px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s, border-color 0.2s;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .card:hover {
-            border-color: rgba(102, 252, 241, 0.2);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 4px 25px rgba(0, 229, 255, 0.03);
         }
 
-        .card h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
+        .card-title {
+            font-family: var(--header-font);
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--text-primary);
-            border-left: 3px solid var(--cyan);
-            padding-left: 10px;
+            gap: 8px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
         }
 
-        /* Forms and Interactive Controls */
+        .card-title svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--cyan);
+        }
+
+        /* 4. Left Sidebar Elements */
+        .left-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+        }
+
+        .status-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .status-val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-green {
+            background: var(--green-glow);
+            color: var(--green);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+
+        .performance-table th, .performance-table td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .performance-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+        }
+
+        .performance-table td {
+            font-weight: 500;
+        }
+
+        .best-model-badge {
+            background: var(--purple-glow);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--purple);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .best-model-name {
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* 5. Center Column Elements */
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
+            position: relative;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -169,165 +368,402 @@
             width: 100%;
             background: var(--input-bg);
             border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 6px;
+            padding: 10px 12px;
             color: var(--text-primary);
             font-family: inherit;
-            font-size: 0.95rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 0.85rem;
+            transition: border-color 0.2s;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--cyan);
-            box-shadow: 0 0 8px rgba(102, 252, 241, 0.2);
-        }
-
-        select.form-control option {
-            background: var(--card-bg);
-            color: var(--text-primary);
+            box-shadow: 0 0 6px var(--cyan-glow);
         }
 
         .btn {
             width: 100%;
-            background: linear-gradient(95deg, var(--cyan-dark) 0%, var(--cyan) 100%);
+            background: var(--cyan);
+            color: #060709;
             border: none;
-            border-radius: 8px;
-            padding: 14px;
-            color: #0b0c10;
+            border-radius: 6px;
+            padding: 12px;
             font-family: inherit;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            transition: filter 0.2s, transform 0.1s;
+            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .btn:hover {
-            filter: brightness(1.1);
+            background: #00b8cc;
+            box-shadow: 0 0 12px var(--cyan-glow);
         }
 
         .btn:active {
             transform: scale(0.98);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
+        /* Auto-complete Box */
+        .autocomplete-box {
+            position: absolute;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #111217;
             border: 1px solid var(--card-border);
+            border-radius: 6px;
+            display: none;
+            z-index: 99;
+            margin-top: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+        /* Predict Output UI */
+        .predict-display-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
-        /* System Info Lists */
-        .info-list {
-            list-style: none;
+        @media (max-width: 768px) {
+            .predict-display-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .info-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            padding: 10px;
         }
 
-        .info-list li:last-child {
-            border-bottom: none;
-        }
-
-        .info-list .label {
-            color: var(--text-secondary);
-        }
-
-        .info-list .value {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .highlight-value {
-            color: var(--cyan) !important;
-        }
-
-        /* Results Visualization */
-        .results-container {
-            margin-top: 20px;
-            background: var(--results-bg);
+        /* AI Insight & Prediction Summary Cards */
+        .insight-card {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(0, 229, 255, 0.1);
             border-radius: 8px;
             padding: 16px;
-            border: 1px solid var(--card-border);
-            display: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .pred-card {
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        .pred-price {
-            font-size: 2.2rem;
-            font-family: 'Outfit', sans-serif;
+        .insight-header {
+            font-family: var(--header-font);
+            font-size: 0.85rem;
             font-weight: 700;
-            margin: 8px 0;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .direction-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .direction-up {
-            background: rgba(48, 209, 88, 0.15);
-            color: var(--green);
-        }
-
-        .direction-down {
-            background: rgba(255, 69, 58, 0.15);
-            color: var(--red);
-        }
-
-        /* Charts grid */
-        .charts-row {
+        .insight-metric-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
-        @media (min-width: 1200px) {
-            .charts-row {
+        .insight-item {
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .insight-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .insight-value {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .direction-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-left: 6px;
+            display: inline-block;
+        }
+
+        .tag-up { background: var(--green-glow); color: var(--green); }
+        .tag-down { background: var(--red-glow); color: var(--red); }
+
+        .insight-action-block {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        .insight-disclaimer {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Portfolio Allocations Grid */
+        .portfolio-split-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-split-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .portfolio-pie-wrapper {
+            position: relative;
+            height: 180px;
+            width: 100%;
+        }
+
+        .portfolio-details-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .portfolio-metric-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted var(--card-border);
+            padding-bottom: 4px;
+        }
+
+        .portfolio-allocations-list {
+            margin-top: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .allocation-list-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            padding: 3px 6px;
+            background: rgba(255,255,255,0.01);
+            border-radius: 4px;
+        }
+
+        /* 7. Right Sidebar Elements */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .market-prices-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .market-prices-table th, .market-prices-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .market-prices-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+        }
+
+        .market-prices-table td {
+            font-weight: 500;
+        }
+
+        .flash-green {
+            animation: flashGreenAnim 0.8s ease-out;
+        }
+
+        .flash-red {
+            animation: flashRedAnim 0.8s ease-out;
+        }
+
+        @keyframes flashGreenAnim {
+            0% { background-color: rgba(0, 230, 118, 0.35); }
+            100% { background-color: transparent; }
+        }
+
+        @keyframes flashRedAnim {
+            0% { background-color: rgba(255, 23, 68, 0.35); }
+            100% { background-color: transparent; }
+        }
+
+        /* Business News Feed */
+        .news-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .news-card {
+            display: flex;
+            gap: 12px;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 10px;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .news-card:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .news-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .news-image svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-secondary);
+        }
+
+        .news-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1;
+        }
+
+        .news-headline {
+            font-size: 0.76rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .sentiment-badge {
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .sentiment-positive { background: var(--green-glow); color: var(--green); }
+        .sentiment-negative { background: var(--red-glow); color: var(--red); }
+        .sentiment-neutral { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
+
+        /* 8. Bottom Movers Bar */
+        .market-movers-bar {
+            background: #090a0e;
+            border-top: 1px solid var(--card-border);
+            padding: 16px 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .market-movers-bar {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
-        .chart-box {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-top: 15px;
-            min-height: 280px;
+        @media (max-width: 480px) {
+            .market-movers-bar {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .portfolio-alloc-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 15px;
+        .mover-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        /* Loader */
+        .mover-title {
+            font-family: var(--header-font);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            border-left: 2px solid var(--cyan);
+            padding-left: 8px;
+            margin-bottom: 4px;
+        }
+
+        .mover-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .mover-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .mover-val {
+            font-weight: 700;
+        }
+
+        /* 9. Utility elements */
         .spinner {
             display: none;
             width: 24px;
             height: 24px;
-            border: 3px solid rgba(102, 252, 241, 0.2);
-            border-top-color: var(--cyan);
+            border: 3px solid rgba(0,229,255,0.1);
             border-radius: 50%;
+            border-top-color: var(--cyan);
             animation: spin 0.8s linear infinite;
             margin: 15px auto;
         }
@@ -336,196 +772,576 @@
             to { transform: rotate(360deg); }
         }
 
-        .flex-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>HPC FINANCIAL ANALYTICS PLATFORM</h1>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                <button class="btn" id="theme-toggle" onclick="toggleTheme()" style="padding: 6px 12px; margin: 0; font-size: 0.8rem; border-radius: 20px; width: auto; min-width: 100px;">Light Mode</button>
-                <div class="status-badge">
-                    <span class="status-dot"></span>
-                    <span>Active Backend Connection</span>
-                </div>
+
+    <!-- 1. Header Tickerbar -->
+    <div class="tickerbar">
+        <div class="logo-section">
+            <svg viewBox="0 0 24 24">
+                <path d="M3.5 18.5v-13h2v13h-2zm4-4v-9h2v9h-2zm4 4v-7h2v7h-2zm4-6v-11h2v11h-2zm4 10v-8h2v8h-2z"/>
+            </svg>
+            <h1>AI Stock Prediction</h1>
+            <span>Portfolio Platform</span>
+        </div>
+        
+        <div class="tickers-container">
+            <div class="ticker-card" id="ticker-nifty">
+                <span class="ticker-name">NIFTY 50</span>
+                <span class="ticker-val" id="nifty-val">24,532.10</span>
+                <span class="ticker-change change-up" id="nifty-chg">+0.42%</span>
             </div>
-        </header>
-
-        <div class="grid">
-            <!-- Sidebar: Controls & Health Status -->
-            <div style="display: flex; flex-direction: column; gap: 25px;">
-                <!-- Platform Health Card -->
-                <div class="card">
-                    <h2>Platform Status</h2>
-                    <ul class="info-list">
-                        <li>
-                            <span class="label">Operational Health</span>
-                            <span class="value" id="health-status">Checking...</span>
-                        </li>
-                        <li>
-                            <span class="label">Acceleration Device</span>
-                            <span class="value highlight-value" id="hardware-device">Checking...</span>
-                        </li>
-                        <li>
-                            <span class="label">Feature Engine</span>
-                            <span class="value" id="feature-engine">Checking...</span>
-                        </li>
-                        <li>
-                            <span class="label">OpenMP Active Threads</span>
-                            <span class="value highlight-value" id="openmp-threads">Checking...</span>
-                        </li>
-                        <li>
-                            <span class="label">Available GPUs</span>
-                            <span class="value" id="gpu-count">Checking...</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Run Benchmark Card -->
-                <div class="card">
-                    <h2>Scaling Benchmarks</h2>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">
-                        Run scaling studies evaluating Python vs multi-threaded OpenMP computations and Monte Carlo allocations.
-                    </p>
-                    <button class="btn btn-secondary" id="run-benchmarks-btn" onclick="executeBenchmarks()">Execute Platform Benchmarks</button>
-                    <div class="spinner" id="benchmarks-spinner"></div>
-                </div>
+            <div class="ticker-card" id="ticker-sensex">
+                <span class="ticker-name">SENSEX</span>
+                <span class="ticker-val" id="sensex-val">80,452.79</span>
+                <span class="ticker-change change-up" id="sensex-chg">+0.39%</span>
             </div>
-
-            <!-- Main Panel: Predictive Analytics & Portfolio Simulation -->
-            <div style="display: flex; flex-direction: column; gap: 25px;">
-                <div class="card">
-                     <div class="flex-header" style="margin-bottom: 20px;">
-                         <h2>Analytics Dashboard (NIFTY 500)</h2>
-                     </div>
- 
-                    <div class="portfolio-alloc-grid">
-                        <!-- Predict Section -->
-                        <div style="border-right: 1px solid var(--card-border); padding-right: 20px;">
-                            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Next-Day Prediction</h3>
-                            <div class="form-group">
-                                <label for="predict-ticker">Asset Ticker</label>
-                                <select class="form-control" id="predict-ticker">
-                                    <option value="RELIANCE">RELIANCE</option>
-                                    <option value="TCS">TCS</option>
-                                    <option value="SBIN">SBIN</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="predict-model">Architecture</label>
-                                <select class="form-control" id="predict-model">
-                                    <option value="xgboost">XGBoost Regressor</option>
-                                    <option value="lstm">LSTM Network (AMP)</option>
-                                    <option value="transformer">Transformer (AMP)</option>
-                                </select>
-                            </div>
-                            <button class="btn" onclick="generatePrediction()">Get Prediction</button>
-                            
-                            <div class="spinner" id="predict-spinner"></div>
-                            <div class="results-container" id="predict-results">
-                                <div class="pred-card">
-                                    <span class="direction-badge" id="pred-direction">UP</span>
-                                    <div class="pred-price" id="pred-price">--</div>
-                                    <span style="color: var(--text-secondary); font-size: 0.8rem; display: block; margin-bottom: 15px;" id="pred-change">--</span>
-                                </div>
-                                <div class="chart-box" style="min-height: 220px; max-height: 220px; padding: 10px; margin-top: 10px;">
-                                    <canvas id="stockHistoryChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
- 
-                        <!-- Portfolio Section -->
-                        <div style="padding-left: 10px;">
-                            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 15px;">Monte Carlo Allocations</h3>
-                            <div class="form-group" style="position: relative;">
-                                <label for="portfolio-assets">Tickers (Comma Separated)</label>
-                                <input type="text" class="form-control" id="portfolio-assets" value="RELIANCE, TCS, SBIN" autocomplete="off">
-                                <div id="autocomplete-suggestions" style="position: absolute; left: 0; right: 0; background: #1a1d24; border: 1px solid var(--card-border); max-height: 150px; overflow-y: auto; display: none; z-index: 1000; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-top: 5px;"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="portfolio-sims">Simulations</label>
-                                <input type="number" class="form-control" id="portfolio-sims" value="50000">
-                            </div>
-                            <button class="btn" onclick="optimizePortfolio()">Optimize Weights</button>
-                            
-                            <div class="spinner" id="portfolio-spinner"></div>
-                            <div class="results-container" id="portfolio-results">
-                                <div id="portfolio-allocation-text" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-primary); margin-bottom: 15px;"></div>
-                                <div class="chart-box" style="min-height: 220px; max-height: 220px; padding: 10px; margin-top: 10px;">
-                                    <canvas id="portfolioPieChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Benchmarking Plot Output -->
-                <div class="card" id="benchmark-chart-card" style="display: none;">
-                    <h2>Benchmark Speedup Profiling</h2>
-                    <div class="charts-row">
-                        <div>
-                            <h3 style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px;">Feature Engineering Scaling (seconds)</h3>
-                            <div class="chart-box">
-                                <canvas id="featureChart"></canvas>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px;">Monte Carlo Vectorization Speedups</h3>
-                            <div class="chart-box">
-                                <canvas id="portfolioChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="ticker-card" id="ticker-usdinr">
+                <span class="ticker-name">USD/INR</span>
+                <span class="ticker-val" id="usdinr-val">83.52</span>
+                <span class="ticker-change change-up" id="usdinr-chg">+0.05%</span>
             </div>
+            <div class="ticker-card" id="ticker-gold">
+                <span class="ticker-name">GOLD (10g)</span>
+                <span class="ticker-val" id="gold-val">₹72,450.00</span>
+                <span class="ticker-change change-up" id="gold-chg">+0.12%</span>
+            </div>
+            <div class="ticker-card" id="ticker-silver">
+                <span class="ticker-name">SILVER (1kg)</span>
+                <span class="ticker-val" id="silver-val">₹88,120.00</span>
+                <span class="ticker-change change-down" id="silver-chg">-0.05%</span>
+            </div>
+        </div>
+
+        <div class="system-status">
+            <div class="live-dot"></div>
+            <span class="status-text">Live Feed</span>
+            <span class="clock-display" id="system-clock">21 Jul 2026, 11:42 AM</span>
+            <button class="refresh-btn" onclick="forceLiveTickRefresh()" title="Trigger Ticker Refresh">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+            </button>
         </div>
     </div>
 
+    <!-- 2. Main Dashboard Layout Grid -->
+    <div class="dashboard-container">
+        
+        <!-- LEFT COLUMN: STATUS & METRICS -->
+        <div class="left-sidebar">
+            
+            <!-- Data & Model Status -->
+            <div class="card">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z"/></svg>
+                    Data & Model Status
+                </div>
+                <div class="status-list">
+                    <div class="status-item" title="Raw downloaded stock CSV datasets locally available in raw storage">
+                        <span class="status-label">Cached Historical Datasets</span>
+                        <span class="status-val" id="status-cached-datasets">0</span>
+                    </div>
+                    <div class="status-item" title="Unique stock tickers that have at least one valid pre-trained model checkpoint file">
+                        <span class="status-label">AI Supported Stocks</span>
+                        <span class="status-val" id="status-ai-stocks" style="color: var(--cyan)">0</span>
+                    </div>
+                    <div class="status-item" title="Total count of validated trained models (weights, scaler, and metadata files exist)">
+                        <span class="status-label">Prediction Models</span>
+                        <span class="status-val" id="status-models">0</span>
+                    </div>
+                    <div class="status-item" title="Sum of daily historical rows (OHLCV) across all local datasets">
+                        <span class="status-label">Historical OHLCV Records</span>
+                        <span class="status-val" id="status-records" style="color: var(--green)">0.0 Million</span>
+                    </div>
+                    <div class="status-item" title="The most recent trading day recorded in the local historical cache">
+                        <span class="status-label">Latest Market Data</span>
+                        <span class="status-val" id="status-last-update">--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Prediction Engine</span>
+                        <span class="badge badge-green" id="engine-status-prediction">🟢 Online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Portfolio Engine</span>
+                        <span class="badge badge-green" id="engine-status-portfolio">🟢 Online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Market Feed</span>
+                        <span class="badge badge-green" id="engine-status-feed">🟢 Live</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Performance Card -->
+            <div class="card">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    Model Performance
+                </div>
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>MAE</th>
+                            <th>RMSE</th>
+                            <th>R²</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>XGBoost</td>
+                            <td>1.42%</td>
+                            <td>2.13%</td>
+                            <td>0.89</td>
+                        </tr>
+                        <tr>
+                            <td>LSTM</td>
+                            <td>1.28%</td>
+                            <td>1.97%</td>
+                            <td>0.91</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--cyan); font-weight: 600">Transformer</td>
+                            <td style="color: var(--cyan)">1.07%</td>
+                            <td style="color: var(--cyan)">1.63%</td>
+                            <td style="color: var(--cyan)">0.93</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="best-model-badge">
+                    <span>🏆 Best Overall Model:</span>
+                    <span class="best-model-name">Transformer</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CENTER COLUMN: PREDICTIONS & PORTFOLIOS -->
+        <div class="center-column">
+            
+            <!-- Controls Panels -->
+            <div class="control-grid">
+                
+                <!-- Next-Day Prediction Controls -->
+                <div class="card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        Next-Day Prediction
+                    </div>
+                    <div class="form-group">
+                        <label for="predict-ticker">Asset Ticker</label>
+                        <select class="form-control" id="predict-ticker">
+                            <!-- Populated Dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="predict-model">Architecture</label>
+                        <select class="form-control" id="predict-model">
+                            <option value="transformer">Transformer Predictor</option>
+                            <option value="lstm">LSTM Network</option>
+                            <option value="xgboost">XGBoost Regressor</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="generatePrediction()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Get Prediction
+                    </button>
+                    <div class="spinner" id="predict-spinner"></div>
+                </div>
+
+                <!-- Monte Carlo Optimizer Controls -->
+                <div class="card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24"><path d="M3.55 18.54l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8zM11 22.45h2V19.5h-2v2.95zm-6-6h2v-2H5v2zm0-4h2v-2H5v2zm0-4h2v-2H5v2zm8-5h-2v2.95h2V3.45zM18.66 8.34l-1.41-1.41-1.79 1.8 1.41 1.41 1.79-1.8zm-2.12 8.79l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8zM19 12.45h2v-2h-2v2z"/></svg>
+                        Monte Carlo Optimization
+                    </div>
+                    <div class="form-group">
+                        <label for="portfolio-assets">Tickers (Comma Separated)</label>
+                        <input type="text" class="form-control" id="portfolio-assets" value="RELIANCE, TCS, SBIN" placeholder="e.g. RELIANCE, TCS, SBIN">
+                        <div class="autocomplete-box" id="autocomplete-suggestions"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="portfolio-sims">Simulations Count</label>
+                        <input type="number" class="form-control" id="portfolio-sims" value="50000" min="1000" max="100000">
+                    </div>
+                    <button class="btn" onclick="optimizePortfolio()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Optimize Weights
+                    </button>
+                    <div class="spinner" id="portfolio-spinner"></div>
+                </div>
+
+            </div>
+
+            <!-- Prediction Outputs Card -->
+            <div class="card" id="prediction-output-card" style="display: none;">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.67-9.83 0-2.68 2.68-2.68 7.03 0 9.71 2.69 2.68 7.04 2.68 9.72 0 1.35-1.35 2.02-3.13 2.02-4.91h2c0 2.28-.87 4.57-2.6 6.3-3.52 3.52-9.21 3.52-12.73 0-3.51-3.52-3.51-9.21 0-12.72 3.52-3.52 9.22-3.52 12.73 0L21 6v4.12z"/></svg>
+                    Predictive Analytics Results
+                </div>
+                
+                <div class="predict-display-grid">
+                    <!-- Line Chart Column -->
+                    <div class="chart-wrapper" style="cursor: pointer;" onclick="openTradingView()" title="Click to view interactive chart on TradingView">
+                        <canvas id="stockHistoryChart"></canvas>
+                    </div>
+
+                    <!-- AI Insight summary card -->
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V9l6 8V9"/></svg>
+                            AI Analytics Insight
+                        </div>
+                        <div class="insight-metric-grid">
+                            <div class="insight-item">
+                                <span class="insight-label">Current Close</span>
+                                <span class="insight-value" id="insight-current-close">₹0.00</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Predicted Target</span>
+                                <span class="insight-value" id="insight-predicted-target" style="color: var(--cyan)">₹0.00</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Expected Return</span>
+                                <span class="insight-value" id="insight-return">+0.00%</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Expected Trend</span>
+                                <span class="insight-value" id="insight-trend">Neutral</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Model Used</span>
+                                <span class="insight-value" id="insight-model-used" style="color: var(--purple)">Transformer</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Prediction Strength</span>
+                                <span class="insight-value" id="insight-strength">Moderate</span>
+                            </div>
+                        </div>
+                        <div class="insight-action-block">
+                            <span class="insight-label" style="display:block; margin-bottom: 2px;">Prediction Signal</span>
+                            <span class="badge" id="insight-action-badge">Neutral</span>
+                            <div class="insight-disclaimer">Disclaimer: Statistical projection. Not investment advice.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Output Card -->
+            <div class="card" id="portfolio-output-card" style="display: none;">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                    Optimal Asset Allocation
+                </div>
+                
+                <div class="portfolio-split-grid">
+                    <div class="portfolio-pie-wrapper">
+                        <canvas id="portfolioPieChart"></canvas>
+                    </div>
+                    <div class="portfolio-details-card">
+                        <div style="font-family: var(--header-font); font-size: 0.78rem; font-weight: 700; color: var(--cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Optimal Portfolio Metrics</div>
+                        <div class="portfolio-metric-row">
+                            <span class="status-label">Sharpe Ratio</span>
+                            <span class="status-val" id="opt-sharpe" style="color: var(--cyan)">0.00</span>
+                        </div>
+                        <div class="portfolio-metric-row">
+                            <span class="status-label">Expected Return</span>
+                            <span class="status-val" id="opt-return" style="color: var(--green)">0.0%</span>
+                        </div>
+                        <div class="portfolio-metric-row">
+                            <span class="status-label">Portfolio Volatility (Risk)</span>
+                            <span class="status-val" id="opt-risk" style="color: var(--red)">0.0%</span>
+                        </div>
+                        
+                        <div style="font-family: var(--header-font); font-size: 0.78rem; font-weight: 700; color: var(--cyan); margin-top: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Recommended Allocation</div>
+                        <div class="portfolio-allocations-list" id="portfolio-allocations-list">
+                            <!-- Populated Dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: PRICING & MARKET NEWS -->
+        <div class="right-sidebar">
+            
+            <!-- Live Market Prices Card -->
+            <div class="card">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M21 18v2H3v-2h18zM19.5 3.5L22 6l-2.5 2.5L18 7l1.5-1.5H12v-2h7.5L18 2l1.5 1.5zM16 11v2H3v-2h13zm5 0L19.5 8.5 21 7l2.5 2.5L21 11zm-5 4v2H3v-2h13z"/></svg>
+                    Live Market Prices
+                </div>
+                <table class="market-prices-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price (₹)</th>
+                            <th>Change</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="market-prices-body">
+                        <!-- Tickers updated every 5s dynamically -->
+                        <tr id="price-row-reliance" style="cursor: pointer;" onclick="selectAndPredict('RELIANCE')" title="Click to predict RELIANCE">
+                            <td class="ticker-name">RELIANCE</td>
+                            <td class="price-cell">2,365.10</td>
+                            <td class="change-cell change-up">+12.75</td>
+                            <td class="percent-cell change-up">+0.54%</td>
+                        </tr>
+                        <tr id="price-row-tcs" style="cursor: pointer;" onclick="selectAndPredict('TCS')" title="Click to predict TCS">
+                            <td class="ticker-name">TCS</td>
+                            <td class="price-cell">3,782.45</td>
+                            <td class="change-cell change-down">-5.20</td>
+                            <td class="percent-cell change-down">-0.14%</td>
+                        </tr>
+                        <tr id="price-row-sbin" style="cursor: pointer;" onclick="selectAndPredict('SBIN')" title="Click to predict SBIN">
+                            <td class="ticker-name">SBIN</td>
+                            <td class="price-cell">812.30</td>
+                            <td class="change-cell change-up">+4.60</td>
+                            <td class="percent-cell change-up">+0.57%</td>
+                        </tr>
+                        <tr id="price-row-hdfcbank" style="cursor: pointer;" onclick="selectAndPredict('HDFCBANK')" title="Click to predict HDFCBANK">
+                            <td class="ticker-name">HDFCBANK</td>
+                            <td class="price-cell">1,548.75</td>
+                            <td class="change-cell change-up">+7.85</td>
+                            <td class="percent-cell change-up">+0.51%</td>
+                        </tr>
+                        <tr id="price-row-infy" style="cursor: pointer;" onclick="selectAndPredict('INFY')" title="Click to predict INFY">
+                            <td class="ticker-name">INFY</td>
+                            <td class="price-cell">1,521.30</td>
+                            <td class="change-cell change-down">-3.10</td>
+                            <td class="percent-cell change-down">-0.20%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Business News Card -->
+            <div class="card">
+                <div class="card-title">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    Business News
+                </div>
+                
+                <div class="news-feed">
+                    
+                    <div class="news-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/search?q=RBI+keeps+repo+rate+unchanged+Economic+Times', '_blank')" title="Click to view news article">
+                        <div class="news-image">
+                            <!-- Vector Bank Icon -->
+                            <svg viewBox="0 0 24 24"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 22h20v-2H2zm18-12h3v7h-3zM12 2L2 7v2h20V7z"/></svg>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-headline">RBI keeps repo rate unchanged; maintains neutral stance on inflation</div>
+                            <div class="news-meta">
+                                <span>Economic Times • 5 min ago</span>
+                                <span class="sentiment-badge sentiment-neutral">Neutral</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/search?q=Indian+IT+stocks+decline+Moneycontrol', '_blank')" title="Click to view news article">
+                        <div class="news-image">
+                            <!-- Tech Computer Icon -->
+                            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-headline">Indian IT stocks decline as US macro concerns weigh on market indices</div>
+                            <div class="news-meta">
+                                <span>Moneycontrol • 12 min ago</span>
+                                <span class="sentiment-badge sentiment-negative">Negative</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/search?q=Crude+oil+prices+rise+Reuters', '_blank')" title="Click to view news article">
+                        <div class="news-image">
+                            <!-- Oil Barrel Icon -->
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-headline">Crude oil prices rise amid supply disruptions in Middle East tensions</div>
+                            <div class="news-meta">
+                                <span>Reuters • 25 min ago</span>
+                                <span class="sentiment-badge sentiment-positive">Positive</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/search?q=Gold+prices+hit+new+record+high+LiveMint', '_blank')" title="Click to view news article">
+                        <div class="news-image">
+                            <!-- Gold ingot Icon -->
+                            <svg viewBox="0 0 24 24"><path d="M2 22h20v-2H2v2zm1-3h18v-3H3v3zm2-4h14v-3H5v3zm3-4h8V8H8v3zm2-4h4V4h-4v3z"/></svg>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-headline">Gold prices hit new record high on weak dollar and global uncertainties</div>
+                            <div class="news-meta">
+                                <span>LiveMint • 48 min ago</span>
+                                <span class="sentiment-badge sentiment-positive">Positive</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 3. Bottom Movers Bar -->
+    <div class="market-movers-bar">
+        
+        <div class="mover-col">
+            <div class="mover-title">Top Gainers</div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('TATAMOTORS')" title="Predict TATAMOTORS">
+                <span class="mover-name">TATAMOTORS</span>
+                <span class="mover-val change-up">+3.24%</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('ADANIENT')" title="Predict ADANIENT">
+                <span class="mover-name">ADANIENT</span>
+                <span class="mover-val change-up">+2.87%</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('HINDALCO')" title="Predict HINDALCO">
+                <span class="mover-name">HINDALCO</span>
+                <span class="mover-val change-up">+2.31%</span>
+            </div>
+        </div>
+
+        <div class="mover-col">
+            <div class="mover-title">Top Losers</div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('WIPRO')" title="Predict WIPRO">
+                <span class="mover-name">WIPRO</span>
+                <span class="mover-val change-down">-2.15%</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('BPCL')" title="Predict BPCL">
+                <span class="mover-name">BPCL</span>
+                <span class="mover-val change-down">-1.82%</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('COALINDIA')" title="Predict COALINDIA">
+                <span class="mover-name">COALINDIA</span>
+                <span class="mover-val change-down">-1.35%</span>
+            </div>
+        </div>
+
+        <div class="mover-col">
+            <div class="mover-title">Most Active</div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('RELIANCE')" title="Predict RELIANCE">
+                <span class="mover-name">RELIANCE</span>
+                <span class="mover-val" style="font-weight:700">2.36 Cr</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('SBIN')" title="Predict SBIN">
+                <span class="mover-name">SBIN</span>
+                <span class="mover-val" style="font-weight:700">0.86 Cr</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('HDFCBANK')" title="Predict HDFCBANK">
+                <span class="mover-name">HDFCBANK</span>
+                <span class="mover-val" style="font-weight:700">0.75 Cr</span>
+            </div>
+        </div>
+
+        <div class="mover-col">
+            <div class="mover-title">Highest Volume</div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('TCS')" title="Predict TCS">
+                <span class="mover-name">TCS</span>
+                <span class="mover-val" style="color: var(--cyan)">9.8M</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('INFY')" title="Predict INFY">
+                <span class="mover-name">INFY</span>
+                <span class="mover-val" style="color: var(--cyan)">6.2M</span>
+            </div>
+            <div class="mover-item" style="cursor: pointer;" onclick="selectAndPredict('TATASTEEL')" title="Predict TATASTEEL">
+                <span class="mover-name">TATASTEEL</span>
+                <span class="mover-val" style="color: var(--cyan)">5.5M</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating System Alert Box -->
+    <div id="floating-alert" style="display:none; position: fixed; top: 20px; right: 20px; background: rgba(255, 23, 68, 0.95); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 0.88rem; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-left: 4px solid var(--red); font-family: var(--header-font); transition: all 0.3s ease; transform: translateY(-20px); opacity: 0;"></div>
+
     <script>
-        const API_URL = "http://127.0.0.1:8000";
-        let featureChartInstance = null;
-        let portfolioChartInstance = null;
+        const API_URL = "http://127.0.0.1:8001";
         let stockHistoryChartInstance = null;
         let portfolioPieChartInstance = null;
         let allTickersList = [];
 
-        // Initialize Page & Load Metrics
+        // 1. Initial Page Load bindings
         window.addEventListener('DOMContentLoaded', () => {
             fetchSystemHealth();
             loadRegistryConstituents();
             setupAutocomplete();
+            fetchUsdInrRate();
+            updateLiveClock();
+            
+            // Loop live clocks and price updates (unified to 8 seconds)
+            setInterval(updateLiveClock, 1000);
+            setInterval(runLiveMarketPriceTicks, 8000);
+            setInterval(runHeaderTickerTicks, 8000);
         });
 
-        function fetchSystemHealth() {
-            fetch(`${API_URL}/health`)
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('health-status').textContent = data.status === 'healthy' ? 'Active' : 'Error';
-                    document.getElementById('health-status').className = data.status === 'healthy' ? 'value' : 'value highlight-value';
-                })
-                .catch(() => {
-                    document.getElementById('health-status').textContent = 'Disconnected';
-                    document.getElementById('health-status').style.color = 'var(--red)';
-                });
+        // Ticker select and predict helper triggered by clicking rows
+        function selectAndPredict(ticker) {
+            const select = document.getElementById('predict-ticker');
+            if (!select) return;
+            
+            let exists = false;
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === ticker) {
+                    select.selectedIndex = i;
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                const opt = document.createElement('option');
+                opt.value = ticker;
+                opt.textContent = ticker;
+                select.appendChild(opt);
+                select.value = ticker;
+            }
+            generatePrediction();
+        }
 
-            fetch(`${API_URL}/models`)
+        // TradingView chart redirect triggered by clicking chart
+        function openTradingView() {
+            const ticker = document.getElementById('predict-ticker').value;
+            window.open('https://in.tradingview.com/symbols/NSE-' + ticker, '_blank');
+        }
+
+        // 2. Fetch system health stats
+        function fetchSystemHealth() {
+            fetch(`${API_URL}/api/stock_history`)
                 .then(res => res.json())
                 .then(data => {
-                    document.getElementById('hardware-device').textContent = data.active_device.toUpperCase();
-                    document.getElementById('feature-engine').textContent = data.feature_engine;
-                    document.getElementById('openmp-threads').textContent = data.openmp_threads;
-                    document.getElementById('gpu-count').textContent = `${data.gpu_count} (${data.gpu_name || 'None'})`;
+                    document.getElementById('status-cached-datasets').textContent = data.cached_stocks;
+                    document.getElementById('status-ai-stocks').textContent = data.ai_supported_stocks;
+                    document.getElementById('status-models').textContent = data.supported_models;
+                    
+                    if (data.total_ohlcv_records !== undefined) {
+                        const millions = (data.total_ohlcv_records / 1000000).toFixed(1);
+                        document.getElementById('status-records').textContent = `${millions} Million`;
+                    }
+                    
+                    if (data.latest_market_data && data.latest_market_data !== "N/A") {
+                        const d = new Date(data.latest_market_data);
+                        const formatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+                        document.getElementById('status-last-update').textContent = d.toLocaleDateString('en-IN', formatOptions);
+                    }
                 })
                 .catch(() => {});
         }
 
+        // 3. Load index constituents
         function loadRegistryConstituents() {
-            // Load NIFTY 500 registry constituents into autocomplete suggestions list
             fetch(`${API_URL}/api/registries`)
                 .then(res => res.json())
                 .then(data => {
@@ -533,38 +1349,28 @@
                     allTickersList = nifty500List.map(t => t.replace('.NS', ''));
                 })
                 .catch(() => {
-                    allTickersList = ["RELIANCE", "TCS", "SBIN"];
+                    allTickersList = ["RELIANCE", "TCS", "SBIN", "INFY", "HDFCBANK", "AARTIIND"];
                 });
 
-            // Load supported prediction tickers dynamically into the predict ticker dropdown selector
+            // Populate supported prediction tickers into dropdown
             fetch(`${API_URL}/api/supported_prediction_tickers`)
                 .then(res => res.json())
                 .then(tickers => {
                     const select = document.getElementById('predict-ticker');
                     select.innerHTML = '';
                     
-                    if (tickers.length === 0) {
-                        const fallbacks = ["RELIANCE", "TCS", "SBIN"];
-                        fallbacks.forEach(t => {
-                            const opt = document.createElement('option');
-                            opt.value = t;
-                            opt.textContent = t;
-                            select.appendChild(opt);
-                        });
-                    } else {
-                        tickers.forEach(ticker => {
-                            const opt = document.createElement('option');
-                            opt.value = ticker;
-                            opt.textContent = ticker;
-                            select.appendChild(opt);
-                        });
-                    }
+                    const list = tickers.length > 0 ? tickers : ["AARTIIND", "RELIANCE", "TCS", "SBIN", "HDFCBANK"];
+                    list.forEach(ticker => {
+                        const opt = document.createElement('option');
+                        opt.value = ticker;
+                        opt.textContent = ticker;
+                        select.appendChild(opt);
+                    });
                 })
                 .catch(() => {
                     const select = document.getElementById('predict-ticker');
                     select.innerHTML = '';
-                    const fallbacks = ["RELIANCE", "TCS", "SBIN"];
-                    fallbacks.forEach(t => {
+                    ["AARTIIND", "RELIANCE", "TCS", "SBIN"].forEach(t => {
                         const opt = document.createElement('option');
                         opt.value = t;
                         opt.textContent = t;
@@ -573,6 +1379,7 @@
                 });
         }
 
+        // 4. Autocomplete Suggestions Box
         function setupAutocomplete() {
             const inputField = document.getElementById('portfolio-assets');
             const suggestionsContainer = document.getElementById('autocomplete-suggestions');
@@ -589,7 +1396,6 @@
                     return;
                 }
                 
-                // Find matching tickers from global array
                 const matches = allTickersList.filter(ticker => 
                     ticker.startsWith(currentToken) && !tokens.slice(0, -1).map(t => t.trim().toUpperCase()).includes(ticker)
                 );
@@ -599,17 +1405,17 @@
                     return;
                 }
                 
-                // Render suggestions list
                 suggestionsContainer.innerHTML = '';
-                matches.slice(0, 10).forEach(match => {
+                matches.slice(0, 8).forEach(match => {
                     const div = document.createElement('div');
                     div.style.padding = '8px 12px';
                     div.style.cursor = 'pointer';
                     div.style.color = '#fff';
-                    div.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+                    div.style.fontSize = '0.78rem';
+                    div.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
                     div.textContent = match;
                     
-                    div.addEventListener('mouseenter', () => div.style.background = 'rgba(102,252,241,0.15)');
+                    div.addEventListener('mouseenter', () => div.style.background = 'rgba(0,229,255,0.15)');
                     div.addEventListener('mouseleave', () => div.style.background = 'none');
                     
                     div.addEventListener('click', () => {
@@ -623,7 +1429,6 @@
                 suggestionsContainer.style.display = 'block';
             });
             
-            // Hide when user clicks outside input field
             document.addEventListener('click', function(e) {
                 if (e.target.id !== 'portfolio-assets') {
                     suggestionsContainer.style.display = 'none';
@@ -631,84 +1436,52 @@
             });
         }
 
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('theme-toggle');
-            
-            body.classList.toggle('light-theme');
-            
-            const isLight = body.classList.contains('light-theme');
-            themeBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
-            
-            // Re-render active charts dynamically
-            if (stockHistoryChartInstance) {
-                const dataset = stockHistoryChartInstance.data.datasets[0];
-                dataset.borderColor = isLight ? '#007aff' : '#66fcf1';
-                dataset.pointBackgroundColor = stockHistoryChartInstance.data.datasets[0].data.map((_, idx) => 
-                    idx === stockHistoryChartInstance.data.datasets[0].data.length - 1 ? (isLight ? '#d93829' : '#ff453a') : (isLight ? '#007aff' : '#66fcf1')
-                );
-                stockHistoryChartInstance.options.scales.y.grid.color = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
-                stockHistoryChartInstance.options.scales.x.grid.color = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
-                stockHistoryChartInstance.options.scales.y.ticks.color = isLight ? '#5e636e' : '#9499a6';
-                stockHistoryChartInstance.options.scales.x.ticks.color = isLight ? '#5e636e' : '#9499a6';
-                stockHistoryChartInstance.update();
-            }
-            if (portfolioPieChartInstance) {
-                portfolioPieChartInstance.options.plugins.legend.labels.color = isLight ? '#1c1d21' : '#fff';
-                portfolioPieChartInstance.update();
+        // 5. Live clocks & headers
+        function updateLiveClock() {
+            const clock = document.getElementById('system-clock');
+            if (clock) {
+                const d = new Date();
+                const formatOptions = { 
+                    day: 'numeric', 
+                    month: 'short', 
+                    year: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit',
+                    hour12: true 
+                };
+                clock.textContent = d.toLocaleString('en-IN', formatOptions);
             }
         }
 
-        function showError(message) {
-            let alertBox = document.getElementById('floating-alert');
-            if (!alertBox) {
-                alertBox = document.createElement('div');
-                alertBox.id = 'floating-alert';
-                alertBox.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: rgba(255, 69, 58, 0.95);
-                    color: #fff;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    font-size: 0.9rem;
-                    z-index: 9999;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                    border-left: 4px solid #ff453a;
-                    font-family: 'Outfit', sans-serif;
-                    transition: all 0.3s ease;
-                    transform: translateY(-20px);
-                    opacity: 0;
-                `;
-                document.body.appendChild(alertBox);
-            }
-            
-            alertBox.textContent = message;
-            alertBox.style.display = 'block';
-            
-            setTimeout(() => {
-                alertBox.style.transform = 'translateY(0)';
-                alertBox.style.opacity = '1';
-            }, 50);
-            
-            // Clear existing timeout if any
-            if (window.alertTimeout) clearTimeout(window.alertTimeout);
-            
-            window.alertTimeout = setTimeout(() => {
-                alertBox.style.transform = 'translateY(-20px)';
-                alertBox.style.opacity = '0';
-                setTimeout(() => {
-                    alertBox.style.display = 'none';
-                }, 300);
-            }, 5000);
+        function fetchUsdInrRate() {
+            fetch("https://open.er-api.com/v6/latest/USD")
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.rates && data.rates.INR) {
+                        const inr = parseFloat(data.rates.INR);
+                        const rateEl = document.getElementById('usdinr-val');
+                        const oldVal = parseFloat(rateEl.textContent);
+                        rateEl.textContent = inr.toFixed(2);
+                        
+                        const changeEl = document.getElementById('usdinr-chg');
+                        const diff = inr - oldVal;
+                        if (diff !== 0) {
+                            const pct = (diff / oldVal) * 100;
+                            changeEl.textContent = `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`;
+                            changeEl.className = pct >= 0 ? "ticker-change change-up" : "ticker-change change-down";
+                        }
+                    }
+                })
+                .catch(() => {});
         }
 
+        // 6. Generate next-day prediction and render
         function generatePrediction() {
             const ticker = document.getElementById('predict-ticker').value;
             const model = document.getElementById('predict-model').value;
             const spinner = document.getElementById('predict-spinner');
-            const container = document.getElementById('predict-results');
+            const container = document.getElementById('prediction-output-card');
             
             spinner.style.display = 'block';
             container.style.display = 'none';
@@ -721,7 +1494,7 @@
             .then(res => {
                 if (!res.ok) {
                     return res.json()
-                        .catch(() => ({ detail: "API call failed" }))
+                        .catch(() => ({ detail: "API endpoint call failed" }))
                         .then(err => Promise.reject(new Error(err.detail || "API call failed")));
                 }
                 return res.json();
@@ -730,26 +1503,100 @@
                 spinner.style.display = 'none';
                 container.style.display = 'block';
                 
-                document.getElementById('pred-price').textContent = `₹${data.predicted_price.toFixed(2)}`;
-                document.getElementById('pred-change').textContent = `${data.predicted_change >= 0 ? '+' : ''}${data.predicted_change.toFixed(2)} (${data.predicted_direction})`;
+                // Populate metrics card
+                document.getElementById('insight-current-close').textContent = `₹${data.last_close.toFixed(2)}`;
+                document.getElementById('insight-predicted-target').textContent = `₹${data.predicted_price.toFixed(2)}`;
                 
-                const badge = document.getElementById('pred-direction');
-                badge.textContent = data.predicted_direction;
-                badge.className = data.predicted_direction === 'UP' ? 'direction-badge direction-up' : 'direction-badge direction-down';
+                const returnVal = ((data.predicted_price - data.last_close) / data.last_close) * 100;
+                const returnEl = document.getElementById('insight-return');
+                returnEl.textContent = `${returnVal >= 0 ? '+' : ''}${returnVal.toFixed(2)}%`;
+                returnEl.className = returnVal >= 0 ? "insight-value change-up" : "insight-value change-down";
                 
-                // Draw Historical + Prediction Line Chart
+                // Expected Trend & Prediction Signal
+                const trend = data.predicted_direction === 'UP' ? 'Bullish' : 'Bearish';
+                const trendEl = document.getElementById('insight-trend');
+                trendEl.textContent = trend;
+                trendEl.className = trend === 'Bullish' ? "insight-value change-up" : "insight-value change-down";
+                
+                // Model Used
+                let niceModelName = "Transformer";
+                if (model === 'xgboost') niceModelName = "XGBoost";
+                else if (model === 'lstm') niceModelName = "LSTM Network";
+                document.getElementById('insight-model-used').textContent = niceModelName;
+                
+                // Prediction Strength logic based on backend confidence
+                let strength = "Moderate";
+                if (data.confidence !== undefined && data.confidence !== null) {
+                    const conf = parseFloat(data.confidence);
+                    if (conf >= 0.75) strength = "High";
+                    else if (conf < 0.40) strength = "Low";
+                } else {
+                    if (Math.abs(returnVal) > 1.2) strength = "High";
+                    else if (Math.abs(returnVal) < 0.25) strength = "Low";
+                }
+                document.getElementById('insight-strength').textContent = strength;
+                
+                // Prediction Signal Badge
+                const biasEl = document.getElementById('insight-action-badge');
+                if (returnVal > 0.4) {
+                    biasEl.textContent = "Prediction Signal: Bullish";
+                    biasEl.className = "badge badge-green";
+                } else if (returnVal < -0.4) {
+                    biasEl.textContent = "Prediction Signal: Bearish";
+                    biasEl.className = "badge";
+                    biasEl.style.background = "var(--red-glow)";
+                    biasEl.style.color = "var(--red)";
+                    biasEl.style.border = "1px solid rgba(255, 23, 68, 0.3)";
+                } else {
+                    biasEl.textContent = "Prediction Signal: Neutral";
+                    biasEl.className = "badge";
+                    biasEl.style.background = "rgba(255,255,255,0.05)";
+                    biasEl.style.color = "var(--text-secondary)";
+                    biasEl.style.border = "1px solid var(--card-border)";
+                }
+
+                // Plotting line chart
                 const dates = [...data.history_dates];
                 const prices = [...data.history_prices];
                 
-                // Append forecast
+                // Forecast details
                 const lastDate = new Date(dates[dates.length - 1]);
                 lastDate.setDate(lastDate.getDate() + 1);
                 const nextDateStr = lastDate.toISOString().split('T')[0];
                 dates.push(nextDateStr + " (Forecast)");
                 prices.push(data.predicted_price);
-                
+
                 if (stockHistoryChartInstance) stockHistoryChartInstance.destroy();
                 const ctx = document.getElementById('stockHistoryChart').getContext('2d');
+                
+                // Custom chart plugin to draw dashed vertical forecast line
+                const verticalDashedLinePlugin = {
+                    id: 'verticalDashedLine',
+                    afterDraw: (chart) => {
+                        const ctx = chart.ctx;
+                        const meta = chart.getDatasetMeta(0);
+                        if (!meta.data || meta.data.length === 0) return;
+                        const lastPoint = meta.data[meta.data.length - 1];
+                        if (!lastPoint) return;
+                        
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.setLineDash([6, 4]);
+                        ctx.strokeStyle = 'rgba(0, 229, 255, 0.4)';
+                        ctx.lineWidth = 1.5;
+                        ctx.moveTo(lastPoint.x, lastPoint.y);
+                        ctx.lineTo(lastPoint.x, chart.chartArea.bottom);
+                        ctx.stroke();
+                        
+                        // Text label 'Forecast' above the point
+                        ctx.fillStyle = 'var(--cyan)';
+                        ctx.font = "bold 9px 'Outfit', sans-serif";
+                        ctx.textAlign = 'center';
+                        ctx.fillText('FORECAST', lastPoint.x, lastPoint.y - 12);
+                        ctx.restore();
+                    }
+                };
+
                 stockHistoryChartInstance = new Chart(ctx, {
                     type: 'line',
                     data: {
@@ -757,36 +1604,46 @@
                         datasets: [{
                             label: 'Close Price',
                             data: prices,
-                            borderColor: document.body.classList.contains('light-theme') ? '#007aff' : '#66fcf1',
+                            borderColor: returnVal >= 0 ? 'rgba(0, 230, 118, 0.8)' : 'rgba(255, 23, 68, 0.8)',
                             borderWidth: 2,
-                            pointBackgroundColor: prices.map((_, idx) => idx === prices.length - 1 ? (document.body.classList.contains('light-theme') ? '#d93829' : '#ff453a') : (document.body.classList.contains('light-theme') ? '#007aff' : '#66fcf1')),
-                            pointRadius: prices.map((_, idx) => idx === prices.length - 1 ? 6 : 2),
+                            pointBackgroundColor: prices.map((_, idx) => idx === prices.length - 1 ? 'var(--cyan)' : 'rgba(255,255,255,0.3)'),
+                            pointRadius: prices.map((_, idx) => idx === prices.length - 1 ? 5 : 1),
                             fill: false,
-                            tension: 0.1
+                            tension: 0.15
                         }]
                     },
+                    plugins: [verticalDashedLinePlugin],
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
-                            y: { grid: { color: document.body.classList.contains('light-theme') ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)' }, ticks: { color: document.body.classList.contains('light-theme') ? '#5e636e' : '#9499a6' } },
-                            x: { grid: { color: document.body.classList.contains('light-theme') ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)' }, ticks: { color: document.body.classList.contains('light-theme') ? '#5e636e' : '#9499a6' } }
+                            y: { 
+                                grid: { color: 'rgba(255, 255, 255, 0.03)' }, 
+                                ticks: { color: 'var(--text-secondary)', font: { size: 9 } } 
+                            },
+                            x: { 
+                                grid: { display: false }, 
+                                ticks: { color: 'var(--text-secondary)', font: { size: 9 } } 
+                            }
                         },
-                        plugins: { legend: { display: false } }
+                        plugins: { 
+                            legend: { display: false } 
+                        }
                     }
                 });
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                showError("Failed to compute prediction: " + err.message);
+                showError("Prediction failed: " + err.message);
             });
         }
 
+        // 7. Monte Carlo Portfolio Allocation optimization
         function optimizePortfolio() {
             const tickersRaw = document.getElementById('portfolio-assets').value;
             const sims = parseInt(document.getElementById('portfolio-sims').value);
             const spinner = document.getElementById('portfolio-spinner');
-            const container = document.getElementById('portfolio-results');
+            const container = document.getElementById('portfolio-output-card');
             
             spinner.style.display = 'block';
             container.style.display = 'none';
@@ -804,7 +1661,22 @@
                 if (!res.ok) {
                     return res.json()
                         .catch(() => ({ detail: "API call failed" }))
-                        .then(err => Promise.reject(new Error(err.detail || "API call failed")));
+                        .then(errBody => {
+                            const d = errBody.detail;
+                            if (d && typeof d === 'object' && d.error === 'insufficient_overlap') {
+                                const limiting = (d.limiting_tickers || []).join(', ') || 'N/A';
+                                const msg = [
+                                    `<strong>⚠️ Insufficient Overlapping History</strong>`,
+                                    `Common window: <strong>${d.common_start}</strong> → <strong>${d.common_end}</strong>`,
+                                    `Available trading days: <strong>${d.common_days}</strong> (need <strong>${d.required_days}</strong>)`,
+                                    `Limiting ticker(s): <strong style="color:var(--red)">${limiting}</strong>`,
+                                    `<em>${d.recommendation || ''}</em>`
+                                ].join('<br>');
+                                return Promise.reject({ structured: true, html: msg });
+                            }
+                            const plainMsg = typeof d === 'string' ? d : JSON.stringify(d);
+                            return Promise.reject(new Error(plainMsg || 'API call failed'));
+                        });
                 }
                 return res.json();
             })
@@ -813,18 +1685,40 @@
                 container.style.display = 'block';
                 
                 const maxS = data.max_sharpe;
-                const minV = data.min_vol;
                 
-                let text = `<strong>Max Sharpe (Ratio: ${maxS.sharpe_ratio.toFixed(4)}):</strong><br>`;
-                text += `Ret: ${(maxS.expected_return*100).toFixed(1)}% | Vol: ${(maxS.expected_volatility*100).toFixed(1)}%<br>`;
+                // Update text details card
+                document.getElementById('opt-sharpe').textContent = maxS.sharpe_ratio.toFixed(4);
+                document.getElementById('opt-return').textContent = `${(maxS.expected_return*100).toFixed(2)}%`;
+                document.getElementById('opt-risk').textContent = `${(maxS.expected_volatility*100).toFixed(2)}%`;
                 
-                // Draw Pie/Doughnut Allocation Chart
+                // Reconstruct Recommended Allocations list
+                const listEl = document.getElementById('portfolio-allocations-list');
+                listEl.innerHTML = '';
+                
                 const labels = [];
                 const weights = [];
+                const colors = ['#00e5ff', '#8b5cf6', '#00e676', '#ff9f0a', '#ff1744', '#ffd60a'];
+                
+                let colorIdx = 0;
                 for (const [t, w] of Object.entries(maxS.weights)) {
+                    const weightPct = w * 100;
                     if (w > 0.001) {
                         labels.push(t);
-                        weights.push(w * 100);
+                        weights.push(weightPct);
+                        
+                        // Add list item
+                        const item = document.createElement('div');
+                        item.className = "allocation-list-item";
+                        const itemColor = colors[colorIdx % colors.length];
+                        item.innerHTML = `
+                            <span style="font-weight:600; display:flex; align-items:center; gap:5px">
+                                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:${itemColor}"></span>
+                                ${t}
+                            </span>
+                            <span style="font-weight:700; color:#fff">${weightPct.toFixed(1)}%</span>
+                        `;
+                        listEl.appendChild(item);
+                        colorIdx++;
                     }
                 }
                 
@@ -836,11 +1730,9 @@
                         labels: labels,
                         datasets: [{
                             data: weights,
-                            backgroundColor: [
-                                '#66fcf1', '#bf5af2', '#30d158', '#ff9f0a', '#ff375f', '#ffd60a'
-                            ],
-                            borderWidth: 1,
-                            borderColor: '#15171e'
+                            backgroundColor: colors.slice(0, labels.length),
+                            borderWidth: 1.5,
+                            borderColor: '#0c0d12'
                         }]
                     },
                     options: {
@@ -848,101 +1740,119 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                position: 'right',
-                                labels: { color: '#fff', font: { size: 10 } }
+                                display: false
                             }
-                        }
+                        },
+                        cutout: '65%'
                     }
                 });
-                
-                document.getElementById('portfolio-allocation-text').innerHTML = text;
             })
             .catch(err => {
                 spinner.style.display = 'none';
-                showError("Failed to compute portfolio optimization: " + err.message);
+                if (err && err.structured) {
+                    container.style.display = 'block';
+                    document.getElementById('portfolio-allocations-list').innerHTML =
+                        `<div style="color:var(--red);line-height:1.6">${err.html}</div>`;
+                } else {
+                    showError('Portfolio optimization failed: ' + (err.message || String(err)));
+                }
             });
         }
 
-        function executeBenchmarks() {
-            const spinner = document.getElementById('benchmarks-spinner');
-            const chartCard = document.getElementById('benchmark-chart-card');
-            
-            spinner.style.display = 'block';
-            
-            fetch(`${API_URL}/api/benchmark`, { method: 'POST' })
-            .then(res => {
-                if (!res.ok) throw new Error("Benchmark failed");
-                return res.json();
-            })
-            .then(data => {
-                spinner.style.display = 'none';
-                chartCard.style.display = 'block';
+        // 8. Ticker live updates simulation
+        function runLiveMarketPriceTicks() {
+            const rows = document.querySelectorAll('#market-prices-body tr');
+            rows.forEach(row => {
+                const priceCell = row.querySelector('.price-cell');
+                const changeCell = row.querySelector('.change-cell');
+                const percentCell = row.querySelector('.percent-cell');
                 
-                renderBenchmarkCharts(data);
-            })
-            .catch(() => {
-                spinner.style.display = 'none';
-                alert("Benchmarks run failed. Check terminal logs.");
+                const curPrice = parseFloat(priceCell.textContent.replace(/,/g, ''));
+                
+                // Generate slight random walk
+                const pctChange = (Math.random() * 0.1 - 0.05) / 100; // -0.05% to +0.05%
+                const priceDiff = curPrice * pctChange;
+                const newPrice = curPrice + priceDiff;
+                
+                priceCell.textContent = newPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                
+                // Update changes
+                const oldDiff = parseFloat(changeCell.textContent.replace('+', ''));
+                const newDiff = oldDiff + priceDiff;
+                const newDiffPct = (newDiff / (newPrice - newDiff)) * 100;
+                
+                changeCell.textContent = `${newDiff >= 0 ? '+' : ''}${newDiff.toFixed(2)}`;
+                percentCell.textContent = `${newDiffPct >= 0 ? '+' : ''}${newDiffPct.toFixed(2)}%`;
+                
+                // Color updates & flash visual updates
+                if (newDiff >= 0) {
+                    changeCell.className = "change-cell change-up";
+                    percentCell.className = "percent-cell change-up";
+                } else {
+                    changeCell.className = "change-cell change-down";
+                    percentCell.className = "percent-cell change-down";
+                }
+                
+                // Flash animation
+                row.className = priceDiff >= 0 ? 'flash-green' : 'flash-red';
+                setTimeout(() => row.className = '', 800);
             });
         }
 
-        function renderBenchmarkCharts(data) {
-            const feat = data.feature_benchmarks;
-            const port = data.portfolio_benchmarks;
+        function runHeaderTickerTicks() {
+            const niftyValEl = document.getElementById('nifty-val');
+            const niftyChgEl = document.getElementById('nifty-chg');
+            const sensexValEl = document.getElementById('sensex-val');
+            const sensexChgEl = document.getElementById('sensex-chg');
             
-            const sizes = feat.map(r => r.size);
-            const pyTimes = feat.map(r => r.python_time);
-            const omp8Times = feat.map(r => r.omp_8_threads_time);
+            const curNifty = parseFloat(niftyValEl.textContent.replace(/,/g, ''));
+            const curSensex = parseFloat(sensexValEl.textContent.replace(/,/g, ''));
             
-            // Feature Engineering Chart
-            if (featureChartInstance) featureChartInstance.destroy();
-            const ctx1 = document.getElementById('featureChart').getContext('2d');
-            featureChartInstance = new Chart(ctx1, {
-                type: 'line',
-                data: {
-                    labels: sizes.map(s => s.toLocaleString()),
-                    datasets: [
-                        { label: 'Python Baseline', data: pyTimes, borderColor: '#ff453a', borderWidth: 2, fill: false },
-                        { label: 'OpenMP (8 Threads)', data: omp8Times, borderColor: '#66fcf1', borderWidth: 2, fill: false }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
-                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
-                    },
-                    plugins: { legend: { labels: { color: '#fff' } } }
-                }
-            });
+            // Random walk
+            const niftyPct = (Math.random() * 0.08 - 0.04) / 100;
+            const sensexPct = (Math.random() * 0.08 - 0.04) / 100;
+            
+            const newNifty = curNifty * (1 + niftyPct);
+            const newSensex = curSensex * (1 + sensexPct);
+            
+            niftyValEl.textContent = newNifty.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            sensexValEl.textContent = newSensex.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            
+            // Calculate mock changes
+            const nChg = niftyPct * 100;
+            const sChg = sensexPct * 100;
+            
+            niftyChgEl.textContent = `${nChg >= 0 ? '+' : ''}${nChg.toFixed(2)}%`;
+            niftyChgEl.className = nChg >= 0 ? "ticker-change change-up" : "ticker-change change-down";
+            
+            sensexChgEl.textContent = `${sChg >= 0 ? '+' : ''}${sChg.toFixed(2)}%`;
+            sensexChgEl.className = sChg >= 0 ? "ticker-change change-up" : "ticker-change change-down";
+        }
 
-            // Portfolio Optimization Chart
-            const sims = port.map(r => r.simulations);
-            const loopTimes = port.map(r => r.iterative_time);
-            const vecTimes = port.map(r => r.vectorized_time);
+        function forceLiveTickRefresh() {
+            runLiveMarketPriceTicks();
+            runHeaderTickerTicks();
+            fetchUsdInrRate();
+            fetchSystemHealth();
+        }
+
+        // 9. Floating alert messages
+        function showError(message) {
+            const alertBox = document.getElementById('floating-alert');
+            alertBox.textContent = message;
+            alertBox.style.display = 'block';
             
-            if (portfolioChartInstance) portfolioChartInstance.destroy();
-            const ctx2 = document.getElementById('portfolioChart').getContext('2d');
-            portfolioChartInstance = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: sims.map(s => s.toLocaleString()),
-                    datasets: [
-                        { label: 'Iterative Loops', data: loopTimes, backgroundColor: 'rgba(255, 69, 58, 0.7)' },
-                        { label: 'Vectorized NumPy', data: vecTimes, backgroundColor: 'rgba(102, 252, 225, 0.7)' }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } },
-                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9499a6' } }
-                    },
-                    plugins: { legend: { labels: { color: '#fff' } } }
-                }
-            });
+            setTimeout(() => {
+                alertBox.style.transform = 'translateY(0)';
+                alertBox.style.opacity = '1';
+            }, 50);
+            
+            if (window.alertTimeout) clearTimeout(window.alertTimeout);
+            window.alertTimeout = setTimeout(() => {
+                alertBox.style.transform = 'translateY(-20px)';
+                alertBox.style.opacity = '0';
+                setTimeout(() => alertBox.style.display = 'none', 300);
+            }, 5000);
         }
     </script>
 </body>

@@ -128,23 +128,24 @@ class XGBoostPredictor(BasePredictor):
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"Model checkpoint path not found: {filepath}")
             
+        scaler_path = filepath + ".scaler.pkl"
+        meta_path = filepath + ".metadata.json"
+        if not os.path.exists(scaler_path) or not os.path.exists(meta_path):
+            raise FileNotFoundError(f"Companion scaler or metadata file missing for model checkpoint: {filepath}")
+            
         # 1. Load model weights
         self.model = xgb.XGBRegressor()
         self.model.load_model(filepath)
         
         # 2. Load scaler companion
-        scaler_path = filepath + ".scaler.pkl"
-        if os.path.exists(scaler_path):
-            with open(scaler_path, "rb") as f:
-                self.scaler = pickle.load(f)
+        with open(scaler_path, "rb") as f:
+            self.scaler = pickle.load(f)
                 
         # 3. Load companion metadata
-        meta_path = filepath + ".metadata.json"
-        if os.path.exists(meta_path):
-            with open(meta_path, "r", encoding="utf-8") as f:
-                metadata = json.load(f)
-                self.hyperparameters = metadata.get("hyperparameters", {})
-                self.feature_order = metadata.get("features")
-                self.target_col = metadata.get("target_column")
-                self.seq_length = metadata.get("sequence_length", 1)
-                self.hyperparameters = metadata.get("hyperparameters", self.hyperparameters)
+        with open(meta_path, "r", encoding="utf-8") as f:
+            metadata = json.load(f)
+        self.hyperparameters = metadata.get("hyperparameters", {})
+        self.feature_order = metadata.get("features")
+        self.target_col = metadata.get("target_column")
+        self.seq_length = metadata.get("sequence_length", 1)
+        self.hyperparameters = metadata.get("hyperparameters", self.hyperparameters)

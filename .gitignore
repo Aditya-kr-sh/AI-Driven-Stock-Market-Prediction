@@ -42,11 +42,15 @@ data/nifty100/*
 data/nifty200/*
 data/nifty500/*
 data/predictions/*
+data/stocks/*
+data/raw/*
 !data/nifty50/.gitkeep
 !data/nifty100/.gitkeep
 !data/nifty200/.gitkeep
 !data/nifty500/.gitkeep
 !data/predictions/.gitkeep
+!data/stocks/.gitkeep
+!data/raw/.gitkeep
 
 # Node / Frontend
 node_modules/

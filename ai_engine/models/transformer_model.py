@@ -218,20 +218,23 @@ class TransformerPredictor(BasePredictor):
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"Model checkpoint path not found: {filepath}")
             
-        # 1. Load metadata companion first to reconstruct network dimensions
+        scaler_path = filepath + ".scaler.pkl"
         meta_path = filepath + ".metadata.json"
-        if os.path.exists(meta_path):
-            with open(meta_path, "r", encoding="utf-8") as f:
-                metadata = json.load(f)
-                hparams = metadata.get("hyperparameters", {})
-                self.input_dim = hparams.get("input_dim")
-                self.d_model = hparams.get("d_model", 64)
-                self.nhead = hparams.get("nhead", 4)
-                self.num_layers = hparams.get("num_layers", 2)
-                self.dropout = hparams.get("dropout", 0.2)
-                self.seq_length = metadata.get("sequence_length", 1)
-                self.feature_order = metadata.get("features")
-                self.target_col = metadata.get("target_column")
+        if not os.path.exists(scaler_path) or not os.path.exists(meta_path):
+            raise FileNotFoundError(f"Companion scaler or metadata file missing for model checkpoint: {filepath}")
+            
+        # 1. Load metadata companion first to reconstruct network dimensions
+        with open(meta_path, "r", encoding="utf-8") as f:
+            metadata = json.load(f)
+        hparams = metadata.get("hyperparameters", {})
+        self.input_dim = hparams.get("input_dim")
+        self.d_model = hparams.get("d_model", 64)
+        self.nhead = hparams.get("nhead", 4)
+        self.num_layers = hparams.get("num_layers", 2)
+        self.dropout = hparams.get("dropout", 0.2)
+        self.seq_length = metadata.get("sequence_length", 1)
+        self.feature_order = metadata.get("features")
+        self.target_col = metadata.get("target_column")
                 
         if self.input_dim is None:
             raise ValueError("Could not reconstruct Transformer network. input_dim missing in metadata.")
@@ -249,7 +252,5 @@ class TransformerPredictor(BasePredictor):
         self.model.load_state_dict(torch.load(filepath, map_location=self.device))
         
         # 4. Load scaler companion
-        scaler_path = filepath + ".scaler.pkl"
-        if os.path.exists(scaler_path):
-            with open(scaler_path, "rb") as f:
-                self.scaler = pickle.load(f)
+        with open(scaler_path, "rb") as f:
+            self.scaler = pickle.load(f)
